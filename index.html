@@ -2235,116 +2235,113 @@
   }
 
   /* ============================= */
-  /* P2: BEFORE/AFTER (#13)        */
+  /* BEFORE / AFTER PROOF          */
   /* ============================= */
   .proof{
-    background:var(--bg);
-    overflow:hidden;
+    background:#080808;
+    padding:56px 20px;
+    border-bottom:none;
+    display:flex;flex-direction:column;align-items:center;gap:18px;
   }
-  .proof-grid{
+  .proof .section-tag{margin:0 0 4px}
+  .proof-headline{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:900;
+    font-size:clamp(28px,6vw,44px);
+    letter-spacing:.02em;
+    color:#fff;
+    text-transform:uppercase;
+    text-align:center;
+    margin:0;line-height:1;
+  }
+  .proof-card{
+    width:100%;max-width:620px;
+    background:#0D0D0D;
+    border:1px solid #1F1F1F;
+    border-radius:12px;
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:0;
-    margin-top:60px;
-    border:1px solid var(--rule);
+    position:relative;overflow:hidden;
+    max-height:280px;
   }
-  .proof-side{
-    padding:60px 40px;
-    text-align:center;
-    position:relative;
-  }
-  .proof-side:first-child{
-    border-right:1px solid var(--rule);
-    background:rgba(244,241,234,.03);
-  }
-  .proof-label{
-    font-family:'JetBrains Mono',monospace;
-    font-size:10px;
-    letter-spacing:.2em;
-    text-transform:uppercase;
-    color:var(--muted);
-    margin-bottom:20px;
-  }
-  .proof-visual{
-    height:220px;
-    position:relative;
-    margin-bottom:20px;
-    border-radius:4px;
-    overflow:hidden;
-    background:
-      repeating-linear-gradient(0deg,transparent,transparent 7px,#1a1a1a 7px,#1a1a1a 8px),
-      repeating-linear-gradient(90deg,transparent,transparent 7px,#0f0f0f 7px,#0f0f0f 8px),
-      #080808;
-  }
-  .mol{
+  .proof-card::before{
+    content:'';
     position:absolute;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:3px;
+    top:14%;bottom:14%;left:50%;
+    width:1px;
+    background:rgba(184,255,87,.3);
   }
-  .mol svg{display:block;}
-  .mol-label{
-    font-family:'JetBrains Mono',monospace;
-    font-size:9px;
-    letter-spacing:.05em;
+  .proof-half{
+    padding:18px 14px;
+    display:flex;flex-direction:column;align-items:center;gap:12px;
+    min-width:0;
+  }
+  .proof-half-label{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:900;font-size:11px;
+    color:#B0B0B0;letter-spacing:.18em;
+    text-transform:uppercase;
+  }
+  .proof-half.after .proof-half-label{color:#B8FF57}
+  .proof-mols{
+    display:flex;flex-direction:column;gap:10px;
+    align-items:center;flex:1;justify-content:center;
+    width:100%;
+  }
+  .proof-mol{
+    display:flex;align-items:center;gap:10px;
+    position:relative;
+  }
+  .proof-hex{
+    width:30px;height:26px;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .proof-hex svg{width:100%;height:100%;display:block}
+  .proof-mol-label{
+    font-family:'DM Sans',sans-serif;
+    font-weight:600;font-size:11px;
+    letter-spacing:.04em;
     color:#d4c05a;
     white-space:nowrap;
   }
-  .mol-label.dimmed{color:#555;opacity:.7;}
-  .mol.floating{animation:mol-float 4s ease-in-out infinite;}
-  .mol.floating:nth-child(2){animation-delay:.8s;}
-  .mol.floating:nth-child(3){animation-delay:1.6s;}
-  .mol.floating:nth-child(4){animation-delay:2.4s;}
-  @keyframes mol-float{
-    0%,100%{transform:translateY(0)}
-    50%{transform:translateY(-4px)}
+  .proof-half.after .proof-mol-label{color:#B8FF57}
+  .proof-half.after .proof-hex{
+    animation:proof-pulse 2s ease-in-out infinite;
   }
-  .stink-lines{
-    position:absolute;
-    top:-28px;
-    left:50%;
-    transform:translateX(-50%);
-    opacity:.35;
-    animation:stink-rise 3s ease-in-out infinite;
+  .proof-half.after .proof-mol:nth-child(2) .proof-hex{animation-delay:.3s}
+  .proof-half.after .proof-mol:nth-child(3) .proof-hex{animation-delay:.6s}
+  @keyframes proof-pulse{
+    0%,100%{filter:drop-shadow(0 0 3px #B8FF57)}
+    50%{filter:drop-shadow(0 0 6px #B8FF57) drop-shadow(0 0 10px rgba(184,255,87,.35))}
   }
-  .mol.floating:nth-child(2) .stink-lines{animation-delay:.8s;}
-  .mol.floating:nth-child(3) .stink-lines{animation-delay:1.6s;}
-  .mol.floating:nth-child(4) .stink-lines{animation-delay:2.4s;}
-  @keyframes stink-rise{
-    0%{transform:translateX(-50%) translateY(0);opacity:.35;}
-    100%{transform:translateX(-50%) translateY(-14px);opacity:0;}
+  .proof-escape{
+    position:absolute;left:-12px;top:-10px;
+    width:10px;height:14px;
+    opacity:.6;
+    animation:proof-escape 2.2s ease-in-out infinite;
   }
-  .zinc-hex{
-    animation:zinc-pulse 2s ease-in-out infinite;
-  }
-  .zinc-hex:nth-of-type(2){animation-delay:.4s;}
-  .zinc-hex:nth-of-type(3){animation-delay:.8s;}
-  .zinc-hex:nth-of-type(4){animation-delay:1.2s;}
-  @keyframes zinc-pulse{
-    0%,100%{filter:drop-shadow(0 0 3px #b8ff57);}
-    50%{filter:drop-shadow(0 0 8px #b8ff57) drop-shadow(0 0 14px rgba(184,255,87,.4));}
+  .proof-half.before .proof-mol:nth-child(2) .proof-escape{animation-delay:.6s}
+  .proof-half.before .proof-mol:nth-child(3) .proof-escape{animation-delay:1.2s}
+  @keyframes proof-escape{
+    0%{transform:translateY(4px);opacity:.6}
+    100%{transform:translateY(-10px);opacity:0}
   }
   .proof-caption{
-    font-family:'Fraunces',serif;
-    font-weight:900;
-    font-size:20px;
-    letter-spacing:-.01em;
-    line-height:1.2;
+    font-family:'DM Sans',sans-serif;
+    font-weight:400;font-size:14px;
+    color:#A0A0A0;text-align:center;
+    margin:0;max-width:520px;line-height:1.5;
   }
-  .proof-footer{
-    text-align:center;
-    margin-top:40px;
-    font-family:'Fraunces',serif;
-    font-style:italic;
-    font-size:clamp(16px,2vw,22px);
-    color:var(--muted);
-    line-height:1.4;
+  @media(min-width:720px){
+    .proof{padding:80px 40px;gap:26px}
+    .proof-card{max-height:260px}
+    .proof-half{padding:22px 20px;gap:14px}
+    .proof-hex{width:34px;height:30px}
+    .proof-mol-label{font-size:12px}
   }
-  @media(max-width:720px){
-    .proof-grid{grid-template-columns:1fr}
-    .proof-side:first-child{border-right:none;border-bottom:1px solid var(--rule)}
-    .proof-side{padding:40px 24px}
+  @media(prefers-reduced-motion:reduce){
+    .proof-half.after .proof-hex,
+    .proof-escape{animation:none}
   }
 
   /* ============================= */
@@ -2861,138 +2858,76 @@
   </ol>
 </section>
 
-<!-- BEFORE / AFTER PROOF (P2 #13) -->
+<!-- BEFORE / AFTER PROOF — compact card -->
 <section class="proof">
   <div class="section-tag">The proof</div>
-  <div class="proof-grid">
+  <h2 class="proof-headline">Captured at the fiber level.</h2>
 
-    <!-- BEFORE side -->
-    <div class="proof-side">
-      <div class="proof-label">Before</div>
-      <div class="proof-visual">
+  <div class="proof-card" aria-label="Before and after comparison">
 
-        <!-- H₂S -->
-        <div class="mol floating" style="left:12%;top:18%;">
-          <div class="stink-lines">
-            <svg width="22" height="28" viewBox="0 0 22 28" fill="none">
-              <path d="M4 28 Q7 20 4 12 Q1 4 4 0" stroke="#d4c05a" stroke-width="1.2" stroke-dasharray="3 3"/>
-              <path d="M11 28 Q14 20 11 14 Q8 6 11 0" stroke="#d4c05a" stroke-width="1.2" stroke-dasharray="3 3"/>
-              <path d="M18 28 Q21 20 18 12 Q15 4 18 0" stroke="#d4c05a" stroke-width="1.2" stroke-dasharray="3 3"/>
-            </svg>
-          </div>
-          <svg width="32" height="28" viewBox="0 0 32 28">
-            <polygon points="16,1 29,8 29,22 16,29 3,22 3,8" fill="none" stroke="#d4c05a" stroke-width="1.5"/>
+    <div class="proof-half before">
+      <span class="proof-half-label">Before</span>
+      <div class="proof-mols">
+        <div class="proof-mol">
+          <svg class="proof-escape" viewBox="0 0 10 14" aria-hidden="true">
+            <path d="M3 14 Q5 8 3 4 Q1 0 3 0" stroke="#d4c05a" stroke-width="1" fill="none" stroke-dasharray="2 2"/>
+            <path d="M7 14 Q9 8 7 4 Q5 0 7 0" stroke="#d4c05a" stroke-width="1" fill="none" stroke-dasharray="2 2"/>
           </svg>
-          <span class="mol-label">H₂S</span>
-        </div>
-
-        <!-- NH₃ -->
-        <div class="mol floating" style="left:38%;top:10%;">
-          <div class="stink-lines">
-            <svg width="22" height="28" viewBox="0 0 22 28" fill="none">
-              <path d="M4 28 Q7 20 4 12 Q1 4 4 0" stroke="#d4c05a" stroke-width="1.2" stroke-dasharray="3 3"/>
-              <path d="M11 28 Q14 20 11 14 Q8 6 11 0" stroke="#d4c05a" stroke-width="1.2" stroke-dasharray="3 3"/>
-            </svg>
+          <div class="proof-hex" aria-hidden="true">
+            <svg viewBox="0 0 32 28"><polygon points="16,1 29,8 29,22 16,29 3,22 3,8" fill="none" stroke="#d4c05a" stroke-width="1.5"/></svg>
           </div>
-          <svg width="28" height="28" viewBox="0 0 28 28">
-            <circle cx="14" cy="14" r="11" fill="none" stroke="#d4c05a" stroke-width="1.5"/>
-            <circle cx="14" cy="14" r="5" fill="#d4c05a" opacity=".25"/>
-          </svg>
-          <span class="mol-label">NH₃</span>
+          <span class="proof-mol-label">H₂S</span>
         </div>
-
-        <!-- C₅H₁₀O₂ -->
-        <div class="mol floating" style="left:63%;top:22%;">
-          <div class="stink-lines">
-            <svg width="22" height="28" viewBox="0 0 22 28" fill="none">
-              <path d="M4 28 Q7 20 4 12 Q1 4 4 0" stroke="#d4c05a" stroke-width="1.2" stroke-dasharray="3 3"/>
-              <path d="M11 28 Q14 20 11 14 Q8 6 11 0" stroke="#d4c05a" stroke-width="1.2" stroke-dasharray="3 3"/>
-              <path d="M18 28 Q21 20 18 12 Q15 4 18 0" stroke="#d4c05a" stroke-width="1.2" stroke-dasharray="3 3"/>
-            </svg>
+        <div class="proof-mol">
+          <svg class="proof-escape" viewBox="0 0 10 14" aria-hidden="true">
+            <path d="M3 14 Q5 8 3 4 Q1 0 3 0" stroke="#d4c05a" stroke-width="1" fill="none" stroke-dasharray="2 2"/>
+            <path d="M7 14 Q9 8 7 4 Q5 0 7 0" stroke="#d4c05a" stroke-width="1" fill="none" stroke-dasharray="2 2"/>
+          </svg>
+          <div class="proof-hex" aria-hidden="true">
+            <svg viewBox="0 0 32 28"><polygon points="16,1 29,8 29,22 16,29 3,22 3,8" fill="none" stroke="#d4c05a" stroke-width="1.5"/></svg>
           </div>
-          <svg width="32" height="28" viewBox="0 0 32 28">
-            <polygon points="16,1 29,8 29,22 16,29 3,22 3,8" fill="none" stroke="#d4c05a" stroke-width="1.5"/>
-            <circle cx="16" cy="15" r="4" fill="#d4c05a" opacity=".2"/>
-          </svg>
-          <span class="mol-label">C₅H₁₀O₂</span>
+          <span class="proof-mol-label">NH₃</span>
         </div>
-
-        <!-- CH₃SH -->
-        <div class="mol floating" style="left:82%;top:12%;">
-          <div class="stink-lines">
-            <svg width="18" height="28" viewBox="0 0 18 28" fill="none">
-              <path d="M4 28 Q7 20 4 12 Q1 4 4 0" stroke="#d4c05a" stroke-width="1.2" stroke-dasharray="3 3"/>
-              <path d="M12 28 Q15 20 12 12 Q9 4 12 0" stroke="#d4c05a" stroke-width="1.2" stroke-dasharray="3 3"/>
-            </svg>
+        <div class="proof-mol">
+          <svg class="proof-escape" viewBox="0 0 10 14" aria-hidden="true">
+            <path d="M3 14 Q5 8 3 4 Q1 0 3 0" stroke="#d4c05a" stroke-width="1" fill="none" stroke-dasharray="2 2"/>
+            <path d="M7 14 Q9 8 7 4 Q5 0 7 0" stroke="#d4c05a" stroke-width="1" fill="none" stroke-dasharray="2 2"/>
+          </svg>
+          <div class="proof-hex" aria-hidden="true">
+            <svg viewBox="0 0 32 28"><polygon points="16,1 29,8 29,22 16,29 3,22 3,8" fill="none" stroke="#d4c05a" stroke-width="1.5"/></svg>
           </div>
-          <svg width="28" height="28" viewBox="0 0 28 28">
-            <circle cx="14" cy="14" r="11" fill="none" stroke="#d4c05a" stroke-width="1.5"/>
-          </svg>
-          <span class="mol-label">CH₃SH</span>
+          <span class="proof-mol-label">CH₃SH</span>
         </div>
-
       </div>
-      <div class="proof-caption">Odor molecules escaping fabric fibers</div>
     </div>
 
-    <!-- AFTER side -->
-    <div class="proof-side">
-      <div class="proof-label">After ODORSTRIKE</div>
-      <div class="proof-visual">
-
-        <!-- Zinc hex 1 — top-left fiber crossing -->
-        <div style="position:absolute;left:8%;top:16%;display:flex;flex-direction:column;align-items:center;gap:3px;">
-          <svg class="zinc-hex" width="38" height="34" viewBox="0 0 38 34">
-            <polygon points="19,1 35,10 35,28 19,37 3,28 3,10" fill="rgba(184,255,87,.12)" stroke="#b8ff57" stroke-width="1.8"/>
-            <!-- trapped NH₃ inside -->
-            <circle cx="19" cy="18" r="5" fill="#555" opacity=".4"/>
-            <text x="19" y="22" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="6" fill="#555" opacity=".6">NH₃</text>
-          </svg>
+    <div class="proof-half after">
+      <span class="proof-half-label">After</span>
+      <div class="proof-mols">
+        <div class="proof-mol">
+          <div class="proof-hex" aria-hidden="true">
+            <svg viewBox="0 0 32 28"><polygon points="16,1 29,8 29,22 16,29 3,22 3,8" fill="rgba(184,255,87,.15)" stroke="#B8FF57" stroke-width="1.5"/></svg>
+          </div>
+          <span class="proof-mol-label">H₂S</span>
         </div>
-
-        <!-- Zinc hex 2 — top-center fiber crossing -->
-        <div style="position:absolute;left:36%;top:8%;display:flex;flex-direction:column;align-items:center;gap:3px;">
-          <svg class="zinc-hex" width="38" height="34" viewBox="0 0 38 34">
-            <polygon points="19,1 35,10 35,28 19,37 3,28 3,10" fill="rgba(184,255,87,.12)" stroke="#b8ff57" stroke-width="1.8"/>
-            <!-- trapped H₂S inside -->
-            <polygon points="19,9 27,14 27,24 19,29 11,24 11,14" fill="#555" opacity=".3"/>
-            <text x="19" y="23" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="6" fill="#555" opacity=".6">H₂S</text>
-          </svg>
+        <div class="proof-mol">
+          <div class="proof-hex" aria-hidden="true">
+            <svg viewBox="0 0 32 28"><polygon points="16,1 29,8 29,22 16,29 3,22 3,8" fill="rgba(184,255,87,.15)" stroke="#B8FF57" stroke-width="1.5"/></svg>
+          </div>
+          <span class="proof-mol-label">NH₃</span>
         </div>
-
-        <!-- Zinc hex 3 — center-right fiber crossing -->
-        <div style="position:absolute;left:61%;top:20%;display:flex;flex-direction:column;align-items:center;gap:3px;">
-          <svg class="zinc-hex" width="44" height="38" viewBox="0 0 44 38">
-            <polygon points="22,1 41,11 41,31 22,41 3,31 3,11" fill="rgba(184,255,87,.12)" stroke="#b8ff57" stroke-width="1.8"/>
-            <!-- trapped C₅H₁₀O₂ -->
-            <circle cx="22" cy="21" r="7" fill="#555" opacity=".3"/>
-            <text x="22" y="25" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="5.5" fill="#555" opacity=".6">C₅H₁₀O₂</text>
-          </svg>
+        <div class="proof-mol">
+          <div class="proof-hex" aria-hidden="true">
+            <svg viewBox="0 0 32 28"><polygon points="16,1 29,8 29,22 16,29 3,22 3,8" fill="rgba(184,255,87,.15)" stroke="#B8FF57" stroke-width="1.5"/></svg>
+          </div>
+          <span class="proof-mol-label">CH₃SH</span>
         </div>
-
-        <!-- Zinc hex 4 — top-right -->
-        <div style="position:absolute;left:80%;top:10%;display:flex;flex-direction:column;align-items:center;gap:3px;">
-          <svg class="zinc-hex" width="38" height="34" viewBox="0 0 38 34">
-            <polygon points="19,1 35,10 35,28 19,37 3,28 3,10" fill="rgba(184,255,87,.12)" stroke="#b8ff57" stroke-width="1.8"/>
-            <!-- trapped CH₃SH -->
-            <circle cx="19" cy="18" r="5" fill="#555" opacity=".4"/>
-            <text x="19" y="22" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="5.5" fill="#555" opacity=".6">CH₃SH</text>
-          </svg>
-        </div>
-
-        <!-- Zinc hex 5 — lower-center -->
-        <div style="position:absolute;left:46%;top:52%;display:flex;flex-direction:column;align-items:center;gap:3px;">
-          <svg class="zinc-hex" width="38" height="34" viewBox="0 0 38 34">
-            <polygon points="19,1 35,10 35,28 19,37 3,28 3,10" fill="rgba(184,255,87,.12)" stroke="#b8ff57" stroke-width="1.8"/>
-          </svg>
-        </div>
-
       </div>
-      <div class="proof-caption">Captured at the fiber level. Neutralized.</div>
     </div>
 
   </div>
-  <p class="proof-footer">Zinc ricinoleate bonds to odor molecules inside the fabric. No masking. No perfume. Just capture.</p>
+
+  <p class="proof-caption">Odor molecules trapped. Neutralized. Gone.</p>
 </section>
 
 <!-- HOW TO USE -->
