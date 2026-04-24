@@ -334,6 +334,22 @@
   .cat-pill.active,
   .cat-pill:hover,
   .cat-pill:focus-visible{border-color:#B8FF57;color:#B8FF57;outline:none}
+  .cat-pill.soon{
+    border-color:#2a2a2a;color:#888;
+    cursor:default;
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .cat-pill.soon:hover{border-color:#2a2a2a;color:#888}
+  .cat-pill-badge{
+    display:inline-block;
+    padding:2px 6px;
+    background:rgba(184,255,87,.12);
+    border:1px solid rgba(184,255,87,.3);
+    color:#B8FF57;
+    border-radius:3px;
+    font-size:9px;letter-spacing:.08em;
+    line-height:1;
+  }
 
   /* Hero */
   .hero{
@@ -2479,13 +2495,15 @@
   </button>
 </nav>
 
-<!-- CATEGORY PILLS -->
-<div class="cat-pills" id="catPills" role="navigation" aria-label="Page sections">
-  <a href="#buy" class="cat-pill active" data-target="buy">ODORSTRIKE</a>
-  <a href="#how-to-use" class="cat-pill" data-target="how-to-use">How It Works</a>
-  <a href="#science" class="cat-pill" data-target="science">Science</a>
+<!-- UTILITY PILLS -->
+<div class="cat-pills" id="catPills" role="navigation" aria-label="Shop shortcuts">
+  <a href="#buy" class="cat-pill active" data-target="buy">Shop</a>
+  <span class="cat-pill soon" aria-disabled="true" role="button" tabindex="-1">
+    Bundles
+    <span class="cat-pill-badge">Soon</span>
+  </span>
+  <a href="https://wa.me/919392974031?text=Hi%2C%20I%27d%20like%20to%20track%20my%20order." class="cat-pill" target="_blank" rel="noopener">Track order</a>
   <a href="#reviews" class="cat-pill" data-target="reviews">Reviews</a>
-  <a href="#faq" class="cat-pill" data-target="faq">FAQ</a>
 </div>
 
 <!-- MOBILE MENU (P3 #16) -->
@@ -2496,11 +2514,12 @@
   </button>
   <div class="menu-wordmark" aria-hidden="true">SMELLOFF</div>
   <div class="menu-items" role="navigation" aria-label="Site navigation">
-    <a href="#science" class="menu-item" style="--i:0" onclick="closeNav()">Science</a>
-    <a href="#buy"     class="menu-item" style="--i:1" onclick="closeNav()">Pricing</a>
-    <a href="#faq"     class="menu-item" style="--i:2" onclick="closeNav()">FAQ</a>
-    <a href="#reviews" class="menu-item" style="--i:3" onclick="closeNav()">Reviews</a>
-    <a href="/blog"    class="menu-item" style="--i:4" onclick="closeNav()">Blogs</a>
+    <a href="#buy"         class="menu-item" style="--i:0" onclick="closeNav()">ODORSTRIKE</a>
+    <a href="#how-to-use"  class="menu-item" style="--i:1" onclick="closeNav()">How it works</a>
+    <a href="#science"     class="menu-item" style="--i:2" onclick="closeNav()">Science</a>
+    <a href="#reviews"     class="menu-item" style="--i:3" onclick="closeNav()">Reviews</a>
+    <a href="#faq"         class="menu-item" style="--i:4" onclick="closeNav()">FAQ</a>
+    <a href="/blog"        class="menu-item" style="--i:5" onclick="closeNav()">Blogs</a>
   </div>
   <div class="menu-utility">
     <a href="https://instagram.com/smell0ff" target="_blank" rel="noopener">Instagram @smell0ff</a>
