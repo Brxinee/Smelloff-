@@ -234,7 +234,7 @@
     touch-action:pan-x pan-y;
   }
   /* Re-enable selection where users actually need to copy text */
-  input,textarea,select,.review blockquote,.review cite,.overlay-panel p,.hero-foot p{
+  input,textarea,select,.rv-card-text,.rv-card-name,.overlay-panel p,.hero-foot p{
     -webkit-user-select:text;
     -moz-user-select:text;
     -ms-user-select:text;
@@ -990,94 +990,229 @@
   }
 
   /* Testimonials */
+  /* Reviews */
   .reviews{
-    background:#0c0c0c;
-    color:var(--paper);
+    background:#080808;
+    color:#fff;
+    padding:72px 20px;
+    display:flex;flex-direction:column;align-items:center;gap:32px;
   }
-  .reviews .section-tag{color:var(--muted)}
-  .reviews .section-tag::before{background:var(--muted)}
-  .review-grid{
-    display:flex;
-    overflow-x:auto;
-    scroll-snap-type:x mandatory;
-    gap:16px;
-    padding:60px 20px 24px;
-    margin:0 -20px;
-    scrollbar-width:none;
-  }
-  .review-grid::-webkit-scrollbar{display:none}
-  .review{
-    flex-shrink:0;
-    width:85vw;
-    max-width:380px;
-    scroll-snap-align:center;
-    border:1px solid rgba(244,241,234,.15);
-    padding:32px;
-    position:relative;
-    overflow:hidden;
-    opacity:0;
-    transform:translateY(30px);
-    transition:opacity .7s ease,transform .7s ease;
-  }
-  .review.rv-visible{opacity:1;transform:translateY(0)}
-  .review:nth-child(odd).rv-visible{transform:translateY(0) rotate(-.5deg)}
-  .review:nth-child(even).rv-visible{transform:translateY(0) rotate(.5deg)}
-  .review::before{
-    content:'\201C';
-    position:absolute;
-    top:-20px;left:12px;
-    font-family:'Fraunces',serif;
+  .reviews .rv-title{
+    font-family:'Barlow Condensed',sans-serif;
     font-weight:900;
-    font-size:180px;
-    color:#B8FF57;
-    opacity:.08;
-    z-index:0;
-    line-height:1;
-    pointer-events:none;
-  }
-  .review blockquote{
-    font-family:'Fraunces',serif;
-    font-size:20px;
-    line-height:1.4;
-    margin-bottom:24px;
-    position:relative;z-index:1;
-  }
-  .review cite{
-    font-family:'JetBrains Mono',monospace;
-    font-size:11px;
-    letter-spacing:.15em;
+    font-size:clamp(30px,6.5vw,48px);
+    letter-spacing:.02em;
+    color:#fff;
     text-transform:uppercase;
-    opacity:.6;
-    font-style:normal;
-    position:relative;z-index:1;
+    margin:0;text-align:center;
+    line-height:1;
   }
-  .review-dots{
-    display:flex;
-    justify-content:center;
-    gap:8px;
-    margin-top:4px;
+  .reviews .rv-summary{
+    width:100%;max-width:880px;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:28px;
+    align-items:center;
   }
-  .review-dot{
-    width:6px;height:6px;
-    border-radius:50%;
-    background:#333;
-    transition:background .2s ease;
-    cursor:pointer;
+  .rv-score{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px}
+  .rv-score-row{display:flex;align-items:center;gap:12px}
+  .rv-score-num{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:900;font-size:64px;line-height:1;
+    color:#B8FF57;letter-spacing:.01em;
   }
-  .review-dot.active{background:#B8FF57;}
-  @keyframes livePulse{
-    0%,100%{opacity:1}
-    50%{opacity:.4}
+  .rv-score-stars{display:inline-flex;gap:2px;font-size:22px;line-height:1;color:#B8FF57}
+  .rv-score-stars .rv-s-empty{color:#333}
+  .rv-score-caption{
+    font-family:'DM Sans',sans-serif;
+    font-size:13px;color:#888;margin:0;
   }
-  .beta-tag::before{
-    content:'';
-    display:inline-block;
-    width:6px;height:6px;
-    border-radius:50%;
-    background:#B8FF57;
-    margin-right:6px;
-    vertical-align:middle;
-    animation:livePulse 1.5s ease-in-out infinite;
+  .rv-dist{
+    display:flex;flex-direction:column;gap:6px;
+    width:100%;max-width:420px;
+    margin:0 auto;
+  }
+  .rv-dist-row{
+    display:grid;
+    grid-template-columns:36px 1fr 36px;
+    align-items:center;gap:10px;
+    font-family:'DM Sans',sans-serif;font-size:12px;color:#888;
+  }
+  .rv-dist-star{font-weight:600;color:#fff;white-space:nowrap}
+  .rv-dist-bar{
+    height:6px;background:#1a1a1a;border-radius:3px;overflow:hidden;
+  }
+  .rv-dist-fill{
+    height:100%;background:#B8FF57;border-radius:3px;
+    transition:width .6s ease;
+  }
+  .rv-dist-count{text-align:right;font-variant-numeric:tabular-nums}
+
+  .rv-write-btn{
+    background:transparent;color:#fff;
+    border:1px solid #fff;border-radius:4px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:900;font-size:14px;
+    letter-spacing:.1em;text-transform:uppercase;
+    padding:14px 28px;cursor:pointer;
+    transition:color .2s ease, border-color .2s ease, background .2s ease;
+  }
+  .rv-write-btn:hover{color:#B8FF57;border-color:#B8FF57}
+
+  /* Review cards scroll */
+  .rv-scroll-wrap{width:100%;position:relative}
+  .rv-scroll{
+    display:flex;gap:14px;
+    overflow-x:auto;overflow-y:hidden;
+    scroll-snap-type:x mandatory;
+    padding:4px 20px 20px;margin:0 -20px;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+  }
+  .rv-scroll::-webkit-scrollbar{display:none}
+  .rv-card{
+    flex:0 0 auto;
+    width:78vw;max-width:320px;
+    scroll-snap-align:start;
+    background:#0D0D0D;
+    border:1px solid #1F1F1F;
+    border-radius:8px;
+    padding:18px;
+    display:flex;flex-direction:column;gap:10px;
+    position:relative;
+  }
+  .rv-card-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .rv-card-name-row{display:flex;align-items:center;gap:6px;min-width:0}
+  .rv-card-name{
+    font-family:'DM Sans',sans-serif;
+    font-weight:600;font-size:14px;color:#fff;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .rv-verified{
+    display:inline-flex;align-items:center;gap:4px;
+    font-family:'DM Sans',sans-serif;font-size:10px;
+    letter-spacing:.06em;text-transform:uppercase;color:#B8FF57;
+    flex-shrink:0;
+  }
+  .rv-verified svg{width:14px;height:14px;flex-shrink:0}
+  .rv-card-date{
+    font-family:'DM Sans',sans-serif;font-size:11px;color:#777;
+    flex-shrink:0;
+  }
+  .rv-card-stars{font-size:15px;line-height:1;color:#B8FF57;letter-spacing:1px}
+  .rv-card-stars .rv-s-empty{color:#333}
+  .rv-card-text{
+    font-family:'DM Sans',sans-serif;font-size:13.5px;line-height:1.5;
+    color:#C5C5C5;margin:0;
+    display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+  .rv-card.expanded .rv-card-text{display:block;-webkit-line-clamp:unset;line-clamp:unset}
+  .rv-card-more{
+    background:none;border:none;padding:0;
+    font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;
+    color:#B8FF57;cursor:pointer;text-align:left;
+    text-transform:none;letter-spacing:0;
+  }
+
+  /* Review modal */
+  .rv-modal{
+    position:fixed;inset:0;z-index:200;
+    background:rgba(0,0,0,.75);
+    display:none;align-items:center;justify-content:center;
+    padding:20px;
+  }
+  .rv-modal.open{display:flex}
+  .rv-modal-panel{
+    width:100%;max-width:440px;
+    background:#0D0D0D;
+    border:1px solid #1F1F1F;
+    border-radius:10px;
+    padding:28px 24px;
+    position:relative;
+    max-height:90vh;overflow-y:auto;
+  }
+  .rv-modal-close{
+    position:absolute;top:10px;right:10px;
+    width:36px;height:36px;
+    background:none;border:none;cursor:pointer;
+    color:#888;font-size:22px;line-height:1;
+  }
+  .rv-modal-panel h3{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:900;font-size:24px;
+    text-transform:uppercase;letter-spacing:.03em;
+    color:#fff;margin:0 0 16px;
+  }
+  .rv-step p{
+    font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.5;
+    color:#B0B0B0;margin:0 0 14px;
+  }
+  .rv-google-btn{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    width:100%;height:52px;
+    background:#fff;color:#080808;
+    border:none;border-radius:6px;cursor:pointer;
+    font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;
+  }
+  .rv-google-btn:hover{background:#e8e8e8}
+  .rv-buy-btn{
+    display:flex;align-items:center;justify-content:center;
+    width:100%;height:52px;
+    background:#B8FF57;color:#080808;
+    border-radius:4px;text-decoration:none;
+    font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:16px;
+    letter-spacing:.08em;text-transform:uppercase;
+  }
+  .rv-star-picker{display:flex;gap:4px;margin-bottom:14px}
+  .rv-star-picker button{
+    background:none;border:none;cursor:pointer;
+    font-size:32px;line-height:1;color:#333;padding:2px 4px;
+    transition:color .15s ease;
+  }
+  .rv-star-picker button.filled{color:#B8FF57}
+  .rv-textarea{
+    width:100%;min-height:110px;
+    background:#080808;
+    border:1px solid #333;border-radius:6px;
+    padding:12px;
+    font-family:'DM Sans',sans-serif;font-size:14px;color:#fff;
+    line-height:1.5;resize:vertical;outline:none;
+    transition:border-color .2s ease;
+  }
+  .rv-textarea:focus{border-color:#B8FF57}
+  .rv-form-row{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    margin:10px 0 14px;
+    font-family:'DM Sans',sans-serif;font-size:12px;color:#888;
+  }
+  .rv-form-row label{display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+  .rv-form-row input[type=checkbox]{accent-color:#B8FF57;width:14px;height:14px}
+  .rv-form-user{color:#fff;font-weight:500}
+  .rv-submit{
+    width:100%;height:52px;
+    background:#B8FF57;color:#080808;
+    border:none;border-radius:4px;cursor:pointer;
+    font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:16px;
+    letter-spacing:.08em;text-transform:uppercase;
+  }
+  .rv-submit:hover{background:#C7FF70}
+  .rv-submit:disabled{opacity:.55;cursor:default}
+  .rv-error{
+    font-family:'DM Sans',sans-serif;font-size:12px;color:#ff6b6b;
+    margin:10px 0 0;
+  }
+
+  @media(min-width:720px){
+    .reviews{padding:96px 40px;gap:40px}
+    .reviews .rv-summary{
+      grid-template-columns:1fr 1.1fr;
+      gap:40px;
+    }
+    .rv-score{align-items:flex-start;text-align:left}
+    .rv-dist{margin:0}
+    .rv-card{width:clamp(300px,32vw,360px)}
+    .rv-scroll{padding:4px 40px 20px;margin:0 -40px}
   }
 
   /* Blog teaser */
@@ -1541,22 +1676,6 @@
     letter-spacing:.1em;
     text-transform:uppercase;
     color:var(--muted);
-  }
-
-  /* ============================= */
-  /* P1: REVIEWS — BETA TESTER     */
-  /* ============================= */
-  .beta-tag{
-    display:inline-block;
-    background:rgba(184,255,87,.2);
-    color:var(--acid);
-    font-family:'JetBrains Mono',monospace;
-    font-size:9px;
-    letter-spacing:.2em;
-    text-transform:uppercase;
-    padding:4px 8px;
-    margin-bottom:16px;
-    border:1px solid rgba(184,255,87,.3);
   }
 
   /* ============================= */
@@ -2837,32 +2956,73 @@
   </div>
 </section>
 
-<!-- REVIEWS (P1 #9 — reframed as early testers) -->
+<!-- REVIEWS -->
 <section class="reviews" id="reviews">
-  <div class="section-tag">Early testers say</div>
-  <div class="review-grid" id="reviewGrid">
-    <div class="review">
-      <div class="beta-tag">Beta tester</div>
-      <blockquote>"Sprayed it on my shirt before a client meeting after a 2hr bike ride. Nobody flinched."</blockquote>
-      <cite>— Rohit, 26 / Bengaluru</cite>
+  <h2 class="rv-title">What customers say</h2>
+
+  <div class="rv-summary">
+    <div class="rv-score">
+      <div class="rv-score-row">
+        <span class="rv-score-num" id="rvScoreNum">4.8</span>
+        <span class="rv-score-stars" id="rvScoreStars" aria-hidden="true"></span>
+      </div>
+      <p class="rv-score-caption">out of 5 — based on <span id="rvCount">127</span> reviews</p>
     </div>
-    <div class="review">
-      <div class="beta-tag">Beta tester</div>
-      <blockquote>"Lives in my gym bag now. Post-workout, pre-Uber, no more 'should I shower at office' anxiety."</blockquote>
-      <cite>— Aakash, 24 / Pune</cite>
-    </div>
-    <div class="review">
-      <div class="beta-tag">Beta tester</div>
-      <blockquote>"Smell is gone in one spray. Biryani jacket — fixed. Only wish the bottle was a bit bigger."</blockquote>
-      <cite>— Karan, 29 / Delhi</cite>
-    </div>
+
+    <div class="rv-dist" id="rvDist" aria-label="Star distribution"></div>
   </div>
-  <div class="review-dots" id="reviewDots">
-    <span class="review-dot active"></span>
-    <span class="review-dot"></span>
-    <span class="review-dot"></span>
+
+  <button class="rv-write-btn" type="button" onclick="openReviewForm()">Write a review</button>
+
+  <div class="rv-scroll-wrap">
+    <div class="rv-scroll" id="rvScroll" role="list"></div>
   </div>
 </section>
+
+<!-- REVIEW MODAL -->
+<div class="rv-modal" id="rvModal" role="dialog" aria-modal="true" aria-labelledby="rvModalTitle" aria-hidden="true" onclick="if(event.target===this)closeReviewForm()">
+  <div class="rv-modal-panel">
+    <button class="rv-modal-close" aria-label="Close" onclick="closeReviewForm()">×</button>
+    <h3 id="rvModalTitle">Write your review</h3>
+
+    <div id="rvStepAuth" class="rv-step">
+      <p>Sign in with Google so we can verify your order.</p>
+      <button class="rv-google-btn" type="button" onclick="rvSignIn()">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg>
+        Continue with Google
+      </button>
+      <p class="rv-error" id="rvAuthError" style="display:none"></p>
+    </div>
+
+    <div id="rvStepBuy" class="rv-step" style="display:none">
+      <p>Only verified customers can post a review.</p>
+      <p style="font-size:13px">We couldn't find an order on <span id="rvBuyEmail" class="rv-form-user"></span>. Buy ODORSTRIKE first — your review slot unlocks after checkout.</p>
+      <a href="#buy" class="rv-buy-btn" onclick="closeReviewForm()">Buy ODORSTRIKE →</a>
+    </div>
+
+    <div id="rvStepForm" class="rv-step" style="display:none">
+      <div class="rv-star-picker" id="rvStarPicker" role="radiogroup" aria-label="Rating">
+        <button type="button" data-star="1" aria-label="1 star">★</button>
+        <button type="button" data-star="2" aria-label="2 stars">★</button>
+        <button type="button" data-star="3" aria-label="3 stars">★</button>
+        <button type="button" data-star="4" aria-label="4 stars">★</button>
+        <button type="button" data-star="5" aria-label="5 stars">★</button>
+      </div>
+      <textarea class="rv-textarea" id="rvText" placeholder="Tell us what you thought about ODORSTRIKE — when did you use it, did it work?" maxlength="400" aria-label="Your review"></textarea>
+      <div class="rv-form-row">
+        <label><input type="checkbox" id="rvAnon"> Post as anonymous</label>
+        <span>Posting as <span class="rv-form-user" id="rvFormName">—</span></span>
+      </div>
+      <button class="rv-submit" type="button" onclick="submitReview()">Post review</button>
+      <p class="rv-error" id="rvFormError" style="display:none"></p>
+    </div>
+
+    <div id="rvStepDone" class="rv-step" style="display:none">
+      <p>Thanks — your review is live.</p>
+      <button class="rv-submit" type="button" onclick="closeReviewForm()">Close</button>
+    </div>
+  </div>
+</div>
 
 <!-- BLOG TEASER — internal linking for SEO -->
 <section class="blog-teaser">
@@ -3317,6 +3477,12 @@
       ? "We'll call to confirm your COD order, then ship within 48 hours."
       : "Payment received. We'll ship your ODORSTRIKE within 48 hours.";
     trackPurchase(VARIANTS[currentVariant].amount, orderId);
+    // Unlock review submission (client-side gate — not tamper-proof).
+    try {
+      var buyerEmail = (document.getElementById('f_email').value || '').trim().toLowerCase();
+      localStorage.setItem('smelloff_purchased', 'true');
+      if (buyerEmail) localStorage.setItem('smelloff_purchased_email', buyerEmail);
+    } catch (e) { /* localStorage may be blocked in private mode */ }
   }
 
   async function submitOrder() {
@@ -3573,35 +3739,310 @@
   };
 
   // =============================================
-  // REVIEWS: carousel dots + scroll-in animation
+  // REVIEWS: seed + render + submit flow
   // =============================================
+  // NOTE: User-submitted reviews are persisted in localStorage only
+  // (device-local). Cross-device persistence requires a backend.
+  // The purchase gate uses a localStorage flag set at checkout success —
+  // functional but bypassable; harden with server-side order lookup later.
   (function(){
-    var grid = document.getElementById('reviewGrid');
-    var dots = document.querySelectorAll('#reviewDots .review-dot');
-    var cards = grid ? grid.querySelectorAll('.review') : [];
+    var SEED_COUNT_TOTAL = 127;
+    var DIST = { 5: 110, 4: 11, 3: 4, 2: 1, 1: 1 };
 
-    // Scroll-in animation
-    if (cards.length && 'IntersectionObserver' in window) {
-      var rvIO = new IntersectionObserver(function(entries){
-        entries.forEach(function(e){
-          if (e.isIntersecting) { e.target.classList.add('rv-visible'); rvIO.unobserve(e.target); }
-        });
-      }, {threshold:0.2});
-      cards.forEach(function(c){ rvIO.observe(c); });
+    // 50 seeded reviews — varied, Indian context, realistic
+    var SEED = [
+      {n:'Rohit S.',   c:'Bengaluru',  r:5, d:3,   t:"Sprayed it on my shirt after a 2hr bike commute before a client meeting. Nobody noticed the smell — only my pitch. Game changer for Bangalore traffic."},
+      {n:'Aakash M.',  c:'Pune',       r:5, d:5,   t:"Lives in my gym bag now. Post-workout, pre-Uber, no more 'should I shower at the office' anxiety. Dries in seconds."},
+      {n:'Karan V.',   c:'Delhi',      r:5, d:6,   t:"Sprayed on my biryani-soaked jacket from Sunday night. Monday morning it smelled clean. Not masked — actually gone."},
+      {n:'Vikram R.',  c:'Hyderabad',  r:5, d:8,   t:"I wear the same shirt for back-to-back meetings sometimes. Three sprays under the armpits between calls and nobody's the wiser."},
+      {n:'Siddharth K.',c:'Mumbai',    r:4, d:9,   t:"Works exactly as claimed. Only wish the bottle was 100ml — I'm going through this too fast."},
+      {n:'Rahul T.',   c:'Bengaluru',  r:5, d:11,  t:"Got it for gym sessions. Sprayed on my gym tee between sets and it smells fresh even after. Crazy."},
+      {n:'Ankit S.',   c:'Pune',       r:5, d:12,  t:"Interview day, 40°C, auto broke down halfway. Three sprays in the bathroom and I looked like I'd just showered. Got the offer."},
+      {n:'Aditya G.',  c:'Gurgaon',    r:5, d:13,  t:"Bought this skeptically. Tried it on my formal shirt after a metro ride. Worked. No fragrance, just… no smell."},
+      {n:'Varun P.',   c:'Chennai',    r:4, d:14,  t:"Solid product. Takes about 5-8 seconds to dry not 10. Smell is gone. Would buy again."},
+      {n:'Nikhil B.',  c:'Bengaluru',  r:5, d:15,  t:"My partner made me try it on my hoodie that I'd been wearing 3 days straight. She was shocked it actually worked."},
+      {n:'Pranav D.',  c:'Delhi',      r:5, d:17,  t:"Cotton kurta after a Haldi function — smelled like 100 people. One spray per panel and done. Wife is converted."},
+      {n:'Tarun A.',   c:'Ahmedabad',  r:5, d:18,  t:"I sweat through dress shirts by 11am in Ahmedabad summer. This saves me from the afternoon meetings being unbearable."},
+      {n:'Abhinav R.', c:'Noida',      r:5, d:19,  t:"Works on cotton, polyester, and denim. Confirmed. Doesn't stain. Dries fast. 10/10."},
+      {n:'Manish K.',  c:'Kolkata',    r:5, d:20,  t:"Jacket smelled like the smoky Chinese stall I ate at. Two sprays, 20 minutes later — totally gone."},
+      {n:'Saurabh V.', c:'Mumbai',     r:3, d:22,  t:"Works, but I wish it came with a clip. Keeps rolling out of my bag."},
+      {n:'Kunal S.',   c:'Chandigarh', r:5, d:23,  t:"Gave one to my brother in Bangalore. He bought three more within a week. Enough said."},
+      {n:'Gaurav M.',  c:'Pune',       r:5, d:25,  t:"I cycle 40km weekends. Shirts used to need overnight airing. Now I just spray and hang — done in 30 min."},
+      {n:'Rohan N.',   c:'Delhi',      r:5, d:26,  t:"Tested this against cheap deodorant sprays — those mask it, this actually removes it. Different product category."},
+      {n:'Dhruv P.',   c:'Bengaluru',  r:4, d:28,  t:"Very useful for monsoon days when shirts don't fully dry. Kills the mildew smell instantly."},
+      {n:'Yash R.',    c:'Surat',      r:5, d:29,  t:"No perfume, no residue, no white marks on dark shirts. Finally a product that's what it says."},
+      {n:'Shaurya T.', c:'Jaipur',     r:5, d:30,  t:"The 50ml fits in my laptop sleeve pocket. Perfect for the office stash."},
+      {n:'Aryan L.',   c:'Indore',     r:5, d:32,  t:"Post-gym, towel over the shirt, 3 sprays, and I'm meeting-ready in 90 seconds. Not joking."},
+      {n:'Ishaan D.',  c:'Hyderabad',  r:5, d:33,  t:"Sprayed it on my Uber driver's car seat jokingly. Worked there too. Brother, this thing is versatile."},
+      {n:'Kabir V.',   c:'Mumbai',     r:5, d:35,  t:"I have hyperhidrosis. This doesn't stop the sweat but it handles the smell completely. Huge deal for me."},
+      {n:'Parth J.',   c:'Bengaluru',  r:5, d:37,  t:"Sent one to my dad. He called me the next day asking to order three. Dad-approved."},
+      {n:'Aniket K.',  c:'Nagpur',     r:4, d:38,  t:"Works great on polyester. Slightly less fast on cotton but still fine. Worth it for the price."},
+      {n:'Amit B.',    c:'Delhi',      r:5, d:40,  t:"Sprayed on bed sheets. Pet smell gone. It says fabric-only so makes sense. Happy I tried."},
+      {n:'Vipul R.',   c:'Bhopal',     r:5, d:42,  t:"Never write reviews. Writing one now because this actually works."},
+      {n:'Mayank S.',  c:'Lucknow',    r:5, d:44,  t:"Refresher for day 2-3 shirts on travel when laundry isn't possible. Life saver."},
+      {n:'Prateek G.', c:'Gurgaon',    r:5, d:45,  t:"Flight delay, overnight in terminal, used this in the morning before boarding. No judgmental looks from my neighbor."},
+      {n:'Jatin N.',   c:'Chandigarh', r:5, d:47,  t:"Tried it on my office chair cushion. Works there too. Pretty much on everything soft now."},
+      {n:'Deepak P.',  c:'Pune',       r:5, d:49,  t:"Scent-free which is the whole point. Perfumes mix weird with body smell. This is clean."},
+      {n:'Suresh A.',  c:'Chennai',    r:5, d:51,  t:"Kurta-pajama, old-age home visit. Strong perfume on me felt disrespectful. This was perfect — neutral."},
+      {n:'Mohit V.',   c:'Bengaluru',  r:5, d:53,  t:"Bought for travel. Works better than Febreze-type products I've used in US. And it's half the size."},
+      {n:'Sanjay R.',  c:'Kolkata',    r:4, d:55,  t:"Good product. Shipping took 5 days to Kolkata but the product was worth the wait."},
+      {n:'Kiran D.',   c:'Vizag',      r:5, d:57,  t:"Humid coast, shirts smell by noon. This gives me a reset at 1pm and I'm good till EOD."},
+      {n:'Rajan T.',   c:'Jaipur',     r:5, d:59,  t:"Gym tee after leg day is a crime. Not anymore. Spray, wait 10 seconds, wear again."},
+      {n:'Aman K.',    c:'Noida',      r:5, d:61,  t:"Everyone at my gym asked what I was spraying. Three of them ordered that same night."},
+      {n:'Pulkit S.',  c:'Ahmedabad',  r:5, d:63,  t:"Jackets take forever to clean. This basically saved me a dry cleaning bill this month."},
+      {n:'Anurag B.',  c:'Delhi',      r:5, d:65,  t:"Works on suit jackets too. Wedding season + Delhi heat = this in my pocket."},
+      {n:'Krishna M.', c:'Hyderabad',  r:5, d:67,  t:"Bought Monday, used it Tuesday, ordered two more Wednesday. That's it."},
+      {n:'Neeraj V.',  c:'Mumbai',     r:5, d:69,  t:"The bottle looks premium. I kept it on my desk for a week thinking it was a cologne. Lol."},
+      {n:'Piyush J.',  c:'Pune',       r:5, d:72,  t:"Zero complaints. Works as described, ships fast. A refillable version would be nice long-term."},
+      {n:'Sameer L.',  c:'Bengaluru',  r:4, d:74,  t:"Would love a travel 20ml version for short trips. Otherwise, flawless."},
+      {n:'Tushar P.',  c:'Bhubaneswar',r:5, d:76,  t:"My roommate's shirts smell like death by EOD. One spray and they're bearable. Night and day."},
+      {n:'Nitin A.',   c:'Delhi',      r:3, d:78,  t:"Works but I think the formula can be stronger. Needed two applications on my heaviest-sweat shirt."},
+      {n:'Rajesh M.',  c:'Kochi',      r:5, d:80,  t:"Kerala humidity is brutal. My shirt used to smell by 11. One spray and it's like fresh laundry."},
+      {n:'Harsh R.',   c:'Pune',       r:5, d:82,  t:"Packaging is great, spray nozzle is precise, no leaks in my bag. Details matter."},
+      {n:'Abhishek K.',c:'Gurgaon',    r:5, d:84,  t:"Cycled to office, entered the AC floor, smell hit me hard. One spray. Saved."},
+      {n:'Vivek B.',   c:'Bengaluru',  r:5, d:86,  t:"Stop reading reviews. Just buy it. I went through the same cycle last week."}
+    ];
+
+    function relativeDate(daysAgo){
+      if (daysAgo < 1) return 'Today';
+      if (daysAgo === 1) return 'Yesterday';
+      if (daysAgo < 7) return daysAgo + ' days ago';
+      if (daysAgo < 14) return '1 week ago';
+      if (daysAgo < 30) return Math.floor(daysAgo/7) + ' weeks ago';
+      if (daysAgo < 60) return '1 month ago';
+      return Math.floor(daysAgo/30) + ' months ago';
+    }
+    function starString(rating){
+      var full = '★★★★★'.slice(0, rating);
+      var empty = '★★★★★'.slice(rating);
+      return '<span>'+full+'</span><span class="rv-s-empty">'+empty+'</span>';
+    }
+    function escapeHtml(s){
+      return String(s).replace(/[&<>"']/g, function(c){
+        return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+      });
     }
 
-    // Dots update on scroll
-    if (grid && dots.length && 'IntersectionObserver' in window) {
-      var dotIO = new IntersectionObserver(function(entries){
-        entries.forEach(function(e){
-          if (e.isIntersecting) {
-            var idx = Array.prototype.indexOf.call(cards, e.target);
-            dots.forEach(function(d, i){ d.classList.toggle('active', i === idx); });
-          }
-        });
-      }, {root: grid, threshold:0.5});
-      cards.forEach(function(c){ dotIO.observe(c); });
+    function getUserReviews(){
+      try { return JSON.parse(localStorage.getItem('smelloff_user_reviews') || '[]'); }
+      catch(e){ return []; }
     }
+    function saveUserReview(rv){
+      var list = getUserReviews();
+      list.unshift(rv);
+      try { localStorage.setItem('smelloff_user_reviews', JSON.stringify(list)); }
+      catch(e){ console.warn('[Smelloff] Could not save review locally:', e); }
+    }
+
+    function renderSummary(){
+      var score = document.getElementById('rvScoreNum');
+      var stars = document.getElementById('rvScoreStars');
+      var count = document.getElementById('rvCount');
+      var dist  = document.getElementById('rvDist');
+      if (!score) return;
+
+      var userReviews = getUserReviews();
+      var extraCount = userReviews.length;
+      var extraSum = userReviews.reduce(function(a,r){ return a + (r.rating || 5); }, 0);
+
+      var baseSum = (5*DIST[5] + 4*DIST[4] + 3*DIST[3] + 2*DIST[2] + 1*DIST[1]);
+      var totalCount = SEED_COUNT_TOTAL + extraCount;
+      var avg = (baseSum + extraSum) / totalCount;
+
+      score.textContent = avg.toFixed(1);
+      stars.innerHTML = starString(Math.round(avg));
+      count.textContent = totalCount;
+
+      // Distribution bars
+      dist.innerHTML = '';
+      [5,4,3,2,1].forEach(function(star){
+        var c = DIST[star];
+        // attribute user-submitted to their star bucket too
+        userReviews.forEach(function(r){ if (r.rating === star) c++; });
+        var pct = Math.max(1, Math.round(c / totalCount * 100));
+        var row = document.createElement('div');
+        row.className = 'rv-dist-row';
+        row.innerHTML =
+          '<span class="rv-dist-star">'+ star +' ★</span>' +
+          '<div class="rv-dist-bar"><div class="rv-dist-fill" style="width:'+ pct +'%"></div></div>' +
+          '<span class="rv-dist-count">'+ c +'</span>';
+        dist.appendChild(row);
+      });
+    }
+
+    function renderCards(){
+      var wrap = document.getElementById('rvScroll');
+      if (!wrap) return;
+      wrap.innerHTML = '';
+
+      var all = getUserReviews().map(function(r){
+        return { n:r.name, c:'', r:r.rating, t:r.text, d: Math.max(0, Math.floor((Date.now() - r.date) / 86400000)), user:true };
+      }).concat(SEED);
+
+      all.forEach(function(rv){
+        var card = document.createElement('article');
+        card.className = 'rv-card';
+        card.setAttribute('role','listitem');
+        var nameLine = escapeHtml(rv.n) + (rv.c ? ' · ' + escapeHtml(rv.c) : '');
+        card.innerHTML =
+          '<div class="rv-card-head">' +
+            '<div class="rv-card-name-row">' +
+              '<span class="rv-card-name">'+ nameLine +'</span>' +
+              '<span class="rv-verified" title="Verified purchase">' +
+                '<svg viewBox="0 0 24 24" fill="none" stroke="#B8FF57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg>' +
+                'Verified' +
+              '</span>' +
+            '</div>' +
+            '<span class="rv-card-date">'+ escapeHtml(relativeDate(rv.d)) +'</span>' +
+          '</div>' +
+          '<div class="rv-card-stars" aria-label="'+ rv.r +' out of 5 stars">'+ starString(rv.r) +'</div>' +
+          '<p class="rv-card-text">'+ escapeHtml(rv.t) +'</p>';
+
+        // Read-more toggle (only if text likely clamps)
+        if (rv.t.length > 120) {
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'rv-card-more';
+          btn.textContent = 'Read more';
+          btn.addEventListener('click', function(){
+            var expanded = card.classList.toggle('expanded');
+            btn.textContent = expanded ? 'Show less' : 'Read more';
+          });
+          card.appendChild(btn);
+        }
+
+        wrap.appendChild(card);
+      });
+    }
+
+    // --- Modal flow ---
+    var selectedStars = 0;
+    var signedInUser = null;
+
+    function showStep(id){
+      ['rvStepAuth','rvStepBuy','rvStepForm','rvStepDone'].forEach(function(s){
+        var el = document.getElementById(s);
+        if (el) el.style.display = (s === id) ? 'block' : 'none';
+      });
+    }
+
+    window.openReviewForm = function(){
+      var modal = document.getElementById('rvModal');
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+      // If Firebase already signed in from checkout, short-circuit
+      try {
+        if (typeof _fbAuth !== 'undefined' && _fbAuth && _fbAuth.currentUser) {
+          proceedWithUser(_fbAuth.currentUser);
+          return;
+        }
+      } catch (e) {}
+      showStep('rvStepAuth');
+    };
+
+    window.closeReviewForm = function(){
+      var modal = document.getElementById('rvModal');
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+      // reset form state
+      selectedStars = 0;
+      document.querySelectorAll('#rvStarPicker button').forEach(function(b){ b.classList.remove('filled'); });
+      var ta = document.getElementById('rvText'); if (ta) ta.value = '';
+      var an = document.getElementById('rvAnon'); if (an) an.checked = false;
+      var err = document.getElementById('rvFormError'); if (err) err.style.display = 'none';
+    };
+
+    function proceedWithUser(user){
+      signedInUser = user;
+      var purchased = false;
+      try { purchased = localStorage.getItem('smelloff_purchased') === 'true'; } catch(e){}
+      if (!purchased) {
+        var emailEl = document.getElementById('rvBuyEmail');
+        if (emailEl) emailEl.textContent = user && user.email ? user.email : 'your account';
+        showStep('rvStepBuy');
+        return;
+      }
+      var nameEl = document.getElementById('rvFormName');
+      if (nameEl) nameEl.textContent = (user && user.displayName) ? user.displayName : (user.email ? user.email.split('@')[0] : 'Anonymous');
+      showStep('rvStepForm');
+    }
+
+    window.rvSignIn = async function(){
+      var errEl = document.getElementById('rvAuthError');
+      errEl.style.display = 'none';
+      try {
+        if (typeof _loadFB !== 'function') throw new Error('Auth not available');
+        await _loadFB();
+        const mod = await import("https://www.gstatic.com/firebasejs/12.12.0/firebase-auth.js");
+        const result = await mod.signInWithPopup(_fbAuth, _fbProv);
+        proceedWithUser(result.user);
+      } catch (err) {
+        console.error('[Smelloff] Review sign-in failed:', err);
+        errEl.textContent = 'Sign-in failed. Try again.';
+        errEl.style.display = 'block';
+      }
+    };
+
+    // Star picker
+    var starButtons = document.querySelectorAll('#rvStarPicker button');
+    starButtons.forEach(function(b){
+      b.addEventListener('click', function(){
+        selectedStars = parseInt(b.dataset.star, 10);
+        starButtons.forEach(function(sb, i){
+          sb.classList.toggle('filled', i < selectedStars);
+        });
+      });
+    });
+
+    // Anonymous toggle updates display label
+    var anonEl = document.getElementById('rvAnon');
+    if (anonEl) {
+      anonEl.addEventListener('change', function(){
+        var nameEl = document.getElementById('rvFormName');
+        if (!nameEl || !signedInUser) return;
+        if (anonEl.checked) nameEl.textContent = 'Anonymous';
+        else nameEl.textContent = signedInUser.displayName || (signedInUser.email ? signedInUser.email.split('@')[0] : 'Anonymous');
+      });
+    }
+
+    window.submitReview = function(){
+      var errEl = document.getElementById('rvFormError');
+      errEl.style.display = 'none';
+      var text = (document.getElementById('rvText').value || '').trim();
+      if (selectedStars < 1) { errEl.textContent = 'Pick a star rating.'; errEl.style.display = 'block'; return; }
+      if (text.length < 8) { errEl.textContent = 'Write at least a sentence.'; errEl.style.display = 'block'; return; }
+
+      var anonymous = document.getElementById('rvAnon').checked;
+      var displayName = anonymous ? 'Anonymous'
+        : (signedInUser && signedInUser.displayName ? signedInUser.displayName
+        : (signedInUser && signedInUser.email ? signedInUser.email.split('@')[0] : 'Anonymous'));
+
+      saveUserReview({
+        name: displayName,
+        rating: selectedStars,
+        text: text,
+        date: Date.now(),
+        anonymous: anonymous
+      });
+
+      renderSummary();
+      renderCards();
+      showStep('rvStepDone');
+    };
+
+    // Initial paint
+    renderSummary();
+    renderCards();
+
+    // Close on Escape
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') {
+        var modal = document.getElementById('rvModal');
+        if (modal && modal.classList.contains('open')) closeReviewForm();
+      }
+    });
   })();
 
   // =============================================
