@@ -612,82 +612,104 @@
     .problem-grid{grid-template-columns:1fr 1fr;gap:20px}
   }
 
-  /* Science */
-  .science h2{
-    font-family:'Fraunces',serif;
+  /* How it works — 4 step block */
+  .how-works{
+    background:#080808;
+    padding:72px 20px;
+    display:flex;flex-direction:column;align-items:center;gap:36px;
+  }
+  .how-works .hw-title{
+    font-family:'Barlow Condensed',sans-serif;
     font-weight:900;
-    font-size:clamp(48px,8vw,120px);
-    line-height:.9;
-    letter-spacing:-.04em;
-    max-width:1000px;
-  }
-  .science h2 .acid-mark{
-    background:var(--acid);
-    color:var(--ink);
-    padding:0 .15em;
-    display:inline-block;
-    font-style:italic;
-    font-weight:400;
-    transform:rotate(-1deg);
-  }
-  .ingredients{
-    margin-top:80px;
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:1px;
-    background:var(--rule);
-    border-top:1px solid var(--rule);
-    border-bottom:1px solid var(--rule);
-  }
-  .ingredient{
-    background:var(--bg);
-    padding:32px 24px;
-  }
-  .ingredient .pct{
-    font-family:'JetBrains Mono',monospace;
-    font-size:11px;
-    letter-spacing:.15em;
-    color:var(--muted);
-  }
-  .ingredient h4{
-    font-family:'Fraunces',serif;
-    font-weight:900;
-    font-size:28px;
-    letter-spacing:-.02em;
-    margin:8px 0 12px;
-    line-height:1.1;
-    color:var(--text);
-  }
-  .ingredient p{
-    font-size:14px;
-    color:var(--muted);
-    line-height:1.5;
-  }
-  .ingredient.hero-ingredient{
-    background:var(--acid);
-    color:var(--ink);
-    animation:heroPulse 3s ease-in-out infinite;
-  }
-  @keyframes heroPulse{
-    0%,100%{box-shadow:0 0 0 0 rgba(184,255,87,0)}
-    50%{box-shadow:0 0 40px 0 rgba(184,255,87,.25)}
-  }
-  .ingredient.hero-ingredient .pct{color:rgba(8,8,8,.6)}
-  .ingredient.hero-ingredient h4{color:var(--ink)}
-  .ingredient.hero-ingredient p{color:rgba(8,8,8,.7)}
-  .js-anim .ingredient{opacity:0;transform:translateY(20px);transition:opacity .6s ease-out,transform .6s ease-out}
-  .js-anim .ingredient.ing-visible{opacity:1;transform:translateY(0)}
-  .ingr-static{
-    font-family:'DM Sans',sans-serif;
-    font-size:12px;
+    font-size:clamp(30px,6.5vw,48px);
+    letter-spacing:.02em;
+    color:#fff;
     text-transform:uppercase;
-    letter-spacing:.1em;
-    color:#888;
+    margin:0;
     text-align:center;
-    margin-top:32px;
+    line-height:1;
   }
-  @media(max-width:720px){
-    .ingredients{grid-template-columns:1fr}
+  .how-works .hw-steps{
+    position:relative;
+    width:100%;max-width:720px;
+    list-style:none;padding:0;margin:0;
+    display:flex;flex-direction:column;gap:12px;
+  }
+  /* Mobile vertical connector — visible in gaps between cards */
+  .how-works .hw-steps::before{
+    content:'';
+    position:absolute;
+    left:40px;top:30px;bottom:30px;
+    width:2px;
+    background:linear-gradient(180deg,rgba(184,255,87,.55) 0%,rgba(184,255,87,.1) 100%);
+    z-index:0;
+    pointer-events:none;
+  }
+  .how-works .hw-step{
+    position:relative;z-index:1;
+    display:grid;
+    grid-template-columns:80px 1fr;
+    align-items:center;
+    gap:12px;
+    background:#0D0D0D;
+    border:1px solid #1F1F1F;
+    border-radius:10px;
+    padding:18px 20px;
+    transition:border-color .25s ease, box-shadow .25s ease;
+  }
+  .how-works .hw-step:hover{
+    border-color:rgba(184,255,87,.35);
+    box-shadow:0 0 28px rgba(184,255,87,.08);
+  }
+  .how-works .hw-num{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:900;
+    font-size:52px;line-height:1;
+    color:#B8FF57;
+    letter-spacing:.01em;
+    text-align:center;
+  }
+  .how-works .hw-content{
+    display:flex;flex-direction:column;gap:4px;
+  }
+  .how-works .hw-step-title{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:900;
+    font-size:16px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    color:#fff;
+    margin:0;
+    line-height:1.15;
+  }
+  .how-works .hw-step-desc{
+    font-family:'DM Sans',sans-serif;
+    font-size:13px;
+    color:#A0A0A0;
+    line-height:1.4;
+    margin:0;
+  }
+
+  @media(min-width:860px){
+    .how-works{padding:100px 40px;gap:56px}
+    .how-works .hw-steps{
+      flex-direction:row;
+      max-width:1120px;
+      gap:16px;
+    }
+    .how-works .hw-steps::before{display:none}
+    .how-works .hw-step{
+      flex:1;
+      grid-template-columns:1fr;
+      align-items:flex-start;
+      padding:28px 24px;
+      gap:14px;
+    }
+    .how-works .hw-num{
+      font-size:72px;
+      text-align:left;
+    }
+    .how-works .hw-step-title{font-size:17px}
   }
 
   /* Pricing */
@@ -2346,29 +2368,40 @@
   </div>
 </section>
 
-<!-- SCIENCE -->
-<section class="science" id="science">
-  <div class="section-tag">The chemistry</div>
-  <h2>One molecule does the <span class="acid-mark">heavy lifting.</span></h2>
+<!-- SCIENCE / HOW IT WORKS -->
+<section class="how-works" id="science">
+  <h2 class="hw-title">How ODORSTRIKE kills smell</h2>
 
-  <div class="ingredients">
-    <div class="ingredient hero-ingredient">
-      <div class="pct" data-pct="1.5" data-suffix="% — HERO ACTIVE">1.5% — HERO ACTIVE</div>
-      <h4>Zinc Ricinoleate</h4>
-      <p>Doesn't mask. Binds to odor molecules and locks them down at the source. Used in medical settings for stoma care.</p>
-    </div>
-    <div class="ingredient">
-      <div class="pct" data-pct="2.5" data-suffix="% — CARRIER">2.5% — CARRIER</div>
-      <h4>Triethyl Citrate</h4>
-      <p>A plant-derived odor neutralizer that breaks down the bacteria producing the smell in the first place.</p>
-    </div>
-    <div class="ingredient">
-      <div class="pct" data-pct="20" data-suffix="% — SOLVENT">20% — SOLVENT</div>
-      <h4>Isopropyl Alcohol</h4>
-      <p>Helps the formula dry in seconds without leaving a wet patch on your shirt or jacket.</p>
-    </div>
-  </div>
-  <p class="ingr-static">+ 4 supporting actives. Full INCI on bottle label.</p>
+  <ol class="hw-steps">
+    <li class="hw-step">
+      <div class="hw-num">01</div>
+      <div class="hw-content">
+        <h3 class="hw-step-title">Spray on smelly fabric</h3>
+        <p class="hw-step-desc">Mist shirt collars, jacket cuffs, gym shorts — anywhere odor lives.</p>
+      </div>
+    </li>
+    <li class="hw-step">
+      <div class="hw-num">02</div>
+      <div class="hw-content">
+        <h3 class="hw-step-title">β-Cyclodextrin traps odor molecules</h3>
+        <p class="hw-step-desc">Ring-shaped molecules cage volatile odor compounds at the fiber level.</p>
+      </div>
+    </li>
+    <li class="hw-step">
+      <div class="hw-num">03</div>
+      <div class="hw-content">
+        <h3 class="hw-step-title">Zinc Ricinoleate neutralizes bacteria</h3>
+        <p class="hw-step-desc">Binds to bacterial byproducts that cause smell — not masking, eliminating.</p>
+      </div>
+    </li>
+    <li class="hw-step">
+      <div class="hw-num">04</div>
+      <div class="hw-content">
+        <h3 class="hw-step-title">Fabric stays fresh, no residue</h3>
+        <p class="hw-step-desc">Dries in seconds. No stain, no perfume, no trace — just clean.</p>
+      </div>
+    </li>
+  </ol>
 </section>
 
 <!-- BEFORE / AFTER PROOF (P2 #13) -->
@@ -3363,55 +3396,6 @@
     document.getElementById('ecSuccess').style.display = 'inline-block';
     console.log('[Smelloff] Waitlist:', email);
   };
-
-  // =============================================
-  // CHEMISTRY: ingredient scroll + pct counter
-  // =============================================
-  (function(){
-    document.documentElement.classList.add('js-anim');
-
-    // Ingredient card scroll-in
-    var ingrs = document.querySelectorAll('.ingredient');
-    if (ingrs.length && 'IntersectionObserver' in window) {
-      var io = new IntersectionObserver(function(entries){
-        entries.forEach(function(e, i){
-          if (e.isIntersecting) {
-            setTimeout(function(){ e.target.classList.add('ing-visible'); }, i * 150);
-            io.unobserve(e.target);
-          }
-        });
-      }, {threshold:0.2});
-      ingrs.forEach(function(el){ io.observe(el); });
-    }
-
-    // Percentage counter
-    function animatePct(el) {
-      var target = parseFloat(el.dataset.pct);
-      var suffix = el.dataset.suffix || '%';
-      var isInt = target % 1 === 0;
-      var duration = 800;
-      var start = null;
-      function step(ts) {
-        if (!start) start = ts;
-        var progress = Math.min((ts - start) / duration, 1);
-        var eased = 1 - Math.pow(1 - progress, 3);
-        var val = (target * eased);
-        el.textContent = (isInt ? Math.round(val) : val.toFixed(1)) + suffix;
-        if (progress < 1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
-    }
-
-    var pcts = document.querySelectorAll('.ingredient .pct[data-pct]');
-    if (pcts.length && 'IntersectionObserver' in window) {
-      var pctIO = new IntersectionObserver(function(entries){
-        entries.forEach(function(e){
-          if (e.isIntersecting) { animatePct(e.target); pctIO.unobserve(e.target); }
-        });
-      }, {threshold:0.2});
-      pcts.forEach(function(el){ pctIO.observe(el); });
-    }
-  })();
 
   // =============================================
   // REVIEWS: carousel dots + scroll-in animation
