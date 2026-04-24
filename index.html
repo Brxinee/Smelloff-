@@ -3746,10 +3746,8 @@
   // The purchase gate uses a localStorage flag set at checkout success —
   // functional but bypassable; harden with server-side order lookup later.
   (function(){
-    var SEED_COUNT_TOTAL = 127;
-    var DIST = { 5: 110, 4: 11, 3: 4, 2: 1, 1: 1 };
-
-    // 50 seeded reviews — varied, Indian context, realistic
+    // 127 seeded reviews — varied ratings, Indian names/cities, realistic
+    // Stats (avg + distribution) are computed from this array, not hardcoded.
     var SEED = [
       {n:'Rohit S.',   c:'Bengaluru',  r:5, d:3,   t:"Sprayed it on my shirt after a 2hr bike commute before a client meeting. Nobody noticed the smell — only my pitch. Game changer for Bangalore traffic."},
       {n:'Aakash M.',  c:'Pune',       r:5, d:5,   t:"Lives in my gym bag now. Post-workout, pre-Uber, no more 'should I shower at the office' anxiety. Dries in seconds."},
@@ -3800,7 +3798,94 @@
       {n:'Rajesh M.',  c:'Kochi',      r:5, d:80,  t:"Kerala humidity is brutal. My shirt used to smell by 11. One spray and it's like fresh laundry."},
       {n:'Harsh R.',   c:'Pune',       r:5, d:82,  t:"Packaging is great, spray nozzle is precise, no leaks in my bag. Details matter."},
       {n:'Abhishek K.',c:'Gurgaon',    r:5, d:84,  t:"Cycled to office, entered the AC floor, smell hit me hard. One spray. Saved."},
-      {n:'Vivek B.',   c:'Bengaluru',  r:5, d:86,  t:"Stop reading reviews. Just buy it. I went through the same cycle last week."}
+      {n:'Vivek B.',   c:'Bengaluru',  r:5, d:86,  t:"Stop reading reviews. Just buy it. I went through the same cycle last week."},
+
+      // 4★ batch
+      {n:'Rohit N.',   c:'Hyderabad',  r:4, d:4,   t:"Works. Nozzle sometimes sputters on the first press — shake and retry."},
+      {n:'Aditya R.',  c:'Delhi',      r:4, d:10,  t:"Product is good. Shipping took 4 days, bit slow from Hyderabad to Delhi."},
+      {n:'Harshad P.', c:'Ahmedabad',  r:4, d:16,  t:"Does what it says. 10ml more would justify the 199 MRP better."},
+      {n:'Nikunj B.',  c:'Indore',     r:4, d:21,  t:"Noticeable difference in smell. One star off because the cap gets loose with use."},
+      {n:'Srinivas K.',c:'Chennai',    r:4, d:34,  t:"Great on cotton, less noticeable on polyester blend. Still using it though."},
+      {n:'Amogh T.',   c:'Bengaluru',  r:4, d:48,  t:"Solid product, fair price. A refillable option would be cool for repeat buyers."},
+
+      // 3★ batch
+      {n:'Devesh R.',  c:'Patna',      r:3, d:41,  t:"Works for light sweat. Heavy workout shirts — one spray isn't enough. Needs a stronger version for Indian intensity."},
+
+      // 2★ batch
+      {n:'Rohit P.',   c:'Mumbai',     r:2, d:52,  t:"Expected more. My gym shirt still smells faintly after drying. Works better on office shirts but not 100% even there."},
+      {n:'Anurag S.',  c:'Delhi',      r:2, d:66,  t:"Bottle arrived with a slight leak — half-used by the time I opened it. Support was helpful but replacement shipping took another week."},
+
+      // 1★ batch
+      {n:'Mayur D.',   c:'Surat',      r:1, d:24,  t:"Delivery took 10 days. When it came, the spray nozzle was uneven. Support replied but the whole experience was disappointing."},
+
+      // remaining 5★ to reach 127
+      {n:'Aakash J.',  c:'Bengaluru',  r:5, d:2,   t:"Three bike commutes this week, zero smell complaints. Paying for this again."},
+      {n:'Aman R.',    c:'Mumbai',     r:5, d:3,   t:"Bottle fits in my jeans pocket. Between meetings, quick spray, nobody can tell."},
+      {n:'Arjun M.',   c:'Pune',       r:5, d:8,   t:"Gym shirt smelled like a locker. Sprayed. 30 seconds later, back to normal."},
+      {n:'Ashish T.',  c:'Noida',      r:5, d:9,   t:"Delivered in 2 days. Worked on day 1. Ordered a second one."},
+      {n:'Bharat K.',  c:'Kolkata',    r:5, d:11,  t:"Long flights + 3-day-same-shirt travel kit essential."},
+      {n:'Chirag D.',  c:'Ahmedabad',  r:5, d:12,  t:"Heavy sweat shirts had pit stains AND smell. Smell is gone in one spray — stain's another problem."},
+      {n:'Darshan S.', c:'Bengaluru',  r:5, d:13,  t:"Worked in monsoon when nothing else did. Mildew-y shirts smell clean."},
+      {n:'Devansh P.', c:'Jaipur',     r:5, d:14,  t:"Uber driver complimented my shirt. Never happened before."},
+      {n:'Dinesh R.',  c:'Chennai',    r:5, d:15,  t:"Polyester office shirts, 11pm shift. Used daily — half the bottle left after 3 weeks."},
+      {n:'Gagan B.',   c:'Chandigarh', r:5, d:17,  t:"Minimal packaging, maximum result. I respect the restraint."},
+      {n:'Gaurang V.', c:'Surat',      r:5, d:18,  t:"My wife used it on my drinking-night shirt. Called it a miracle."},
+      {n:'Hardik L.',  c:'Rajkot',     r:5, d:19,  t:"No alcohol smell, no fabric spots. Must-have for formal wear."},
+      {n:'Harshit N.', c:'Gwalior',    r:5, d:20,  t:"My 65-year old dad uses it on his kurta after his evening walk. Works for everything."},
+      {n:'Himanshu M.',c:'Faridabad',  r:5, d:22,  t:"Bought 3. Gifted 2. Used my own for a month. Customer for life."},
+      {n:'Ishan B.',   c:'Dehradun',   r:5, d:23,  t:"Jacket I hadn't dry-cleaned in 6 months. Wore it to a meeting yesterday. Fine."},
+      {n:'Jigar P.',   c:'Vadodara',   r:5, d:26,  t:"Trek clothes after 3 days. Sprayed, wore again. No mountain judgment."},
+      {n:'Kartik S.',  c:'Mumbai',     r:5, d:27,  t:"This and my toothbrush — non-negotiable travel items."},
+      {n:'Keshav R.',  c:'Bengaluru',  r:5, d:28,  t:"Summer + AC office + 9hr day used to mean an 8pm shower just to feel normal. Not anymore."},
+      {n:'Kshitij V.', c:'Noida',      r:5, d:29,  t:"Auto stalled in Gurgaon traffic, sweated through my shirt. 2 sprays in the washroom, meeting went fine."},
+      {n:'Lakshman J.',c:'Mysuru',     r:5, d:30,  t:"Very subtle. No 'obvious deodorant' smell. Respectful of other people in the room."},
+      {n:'Mihir T.',   c:'Pune',       r:5, d:31,  t:"The zinc ricinoleate angle caught my eye (I'm a chemist). Works because it binds the thiols, not perfume over them."},
+      {n:'Mohak A.',   c:'Delhi',      r:5, d:32,  t:"Girlfriend can't tell when I've used it. Which is the whole point."},
+      {n:'Naman P.',   c:'Bengaluru',  r:5, d:33,  t:"Bike gloves + inside of helmet pads. Fixed my helmet smell problem too."},
+      {n:'Naveen S.',  c:'Hyderabad',  r:5, d:35,  t:"3 sprays per shirt is enough. Don't overdo it. Works great."},
+      {n:'Nishant B.', c:'Gurgaon',    r:5, d:36,  t:"Sprayed on my airpods case. Yes, it works there too."},
+      {n:'Omkar M.',   c:'Bengaluru',  r:5, d:37,  t:"12hr workday + metro + 40°C, entered a party smelling OK. Past self would not believe."},
+      {n:'Pawan D.',   c:'Kanpur',     r:5, d:38,  t:"Mom was skeptical, now she sprays my cricket kit for me. Wholesome."},
+      {n:'Pranshu A.', c:'Chandigarh', r:5, d:39,  t:"Very targeted product. Does ONE thing, does it well. I appreciate that."},
+      {n:'Purav L.',   c:'Thane',      r:5, d:40,  t:"Delivery in 36hrs to Thane. Impressive for a new brand."},
+      {n:'Rachit K.',  c:'Ahmedabad',  r:5, d:42,  t:"Client asked 'what cologne is that?'. I said none. He laughed. Best compliment."},
+      {n:'Raghav N.',  c:'Noida',      r:5, d:43,  t:"Formal shirts survive the metro now. Worth every rupee."},
+      {n:'Rakesh V.',  c:'Bhopal',     r:5, d:44,  t:"Actually removes smell. Not fragrance-over-smell. Important difference."},
+      {n:'Rishi T.',   c:'Delhi',      r:5, d:45,  t:"Suit smelt like a smoky bar last weekend. Monday's deposition I went in confident. Judge didn't sniff."},
+      {n:'Saahil P.',  c:'Mumbai',     r:5, d:47,  t:"Small bottle but lasts surprisingly long. Will order on repeat."},
+      {n:'Sahil K.',   c:'Jaipur',     r:5, d:49,  t:"Family function, I was the sweaty one. 2 sprays on the kurta, back to presentable."},
+      {n:'Sandeep R.', c:'Pune',       r:5, d:50,  t:"Gym owner handed a bottle to a customer mid-workout for a laugh. Worked."},
+      {n:'Saumya V.',  c:'Delhi',      r:5, d:51,  t:"Writing as a woman who bought it for her husband. Now I use it on my own work clothes."},
+      {n:'Shantanu T.',c:'Bengaluru',  r:5, d:53,  t:"Exam-day armpit panic is real. This fixes it. Thank you."},
+      {n:'Shaurya N.', c:'Surat',      r:5, d:54,  t:"Fabric-safe claim holds. No discoloration on my white cotton shirts."},
+      {n:'Shivam A.',  c:'Kolkata',    r:5, d:55,  t:"I was that sweaty Uber passenger. Not anymore."},
+      {n:'Siddharth N.',c:'Vizag',     r:5, d:56,  t:"Coast humidity is brutal. This helps. A lot."},
+      {n:'Smit B.',    c:'Ahmedabad',  r:5, d:57,  t:"Bought 3. Kept 1. Sold 2 to office colleagues at cost."},
+      {n:'Sohrab D.',  c:'Mumbai',     r:5, d:58,  t:"Worth the ₹159. Would pay ₹250."},
+      {n:'Sourabh G.', c:'Bhopal',     r:5, d:59,  t:"My sister doesn't let me near her clothes anymore because I 'waste the spray'. That's a sign it works."},
+      {n:'Subham T.',  c:'Bhubaneswar',r:5, d:60,  t:"Post-Durga Puja, crowded pandals — clothes absorb everything. This resets them."},
+      {n:'Sumit V.',   c:'Lucknow',    r:5, d:61,  t:"Doesn't stink. Doesn't smell like anything. Pure absence of smell."},
+      {n:'Suraj P.',   c:'Indore',     r:5, d:62,  t:"Tried Febreze before, didn't like the scent. This has none. Better."},
+      {n:'Surbhit K.', c:'Delhi',      r:5, d:63,  t:"Use it on my car seats too. AC car + sweaty drivers = old seats. Fixed."},
+      {n:'Tejas L.',   c:'Pune',       r:5, d:64,  t:"Fast delivery, product genuinely works. Good brand."},
+      {n:'Tanmay R.',  c:'Bengaluru',  r:5, d:65,  t:"First Indian product that feels like it was made for Indian conditions. Finally."},
+      {n:'Tanveer A.', c:'Hyderabad',  r:5, d:67,  t:"Sprayed on my old college jacket — 10 year old smell. Gone."},
+      {n:'Ujjwal S.',  c:'Delhi',      r:5, d:68,  t:"Packaging premium, product works. An Indian product I'm proud of."},
+      {n:'Vaibhav M.', c:'Noida',      r:5, d:69,  t:"Saved me at a wedding. Mom said 'you don't smell, how?' I just smiled."},
+      {n:'Varad N.',   c:'Mumbai',     r:5, d:70,  t:"Gym bag, laundry bag, day bag. Lives in all three."},
+      {n:'Varun J.',   c:'Chennai',    r:5, d:71,  t:"Two-sprays-and-done product. Not complicated."},
+      {n:'Vedant P.',  c:'Pune',       r:5, d:72,  t:"Used on my wool jacket. Didn't damage the wool. Handled the sweat smell. Both checks."},
+      {n:'Vibhor K.',  c:'Gurgaon',    r:5, d:73,  t:"I sweat like a fountain. This works. Period."},
+      {n:'Vikrant D.', c:'Surat',      r:5, d:74,  t:"Packing it for the Everest trek. Curious how it handles -10°C spray."},
+      {n:'Vinay T.',   c:'Bengaluru',  r:5, d:75,  t:"Feels like a startup that cares about product quality. Rare."},
+      {n:'Virendra A.',c:'Mumbai',     r:5, d:76,  t:"Wife bought it thinking it was perfume. Now she wants her own for yoga clothes."},
+      {n:'Yash G.',    c:'Delhi',      r:5, d:77,  t:"Formal kurta, pooja smoke, wedding. 2 sprays each time. 4 wears, 1 dry clean avoided."},
+      {n:'Yogesh P.',  c:'Pune',       r:5, d:78,  t:"Fast dry, no wet patch, no white mark. All boxes checked."},
+      {n:'Zaid R.',    c:'Kolkata',    r:5, d:79,  t:"Stressed meeting, stressed sweat, sprayed on the way in. Recovered."},
+      {n:'Zoya M.',    c:'Mumbai',     r:5, d:80,  t:"Bought for partner, kept one for myself. Work blazers stink less now."},
+      {n:'Ayush M.',   c:'Hyderabad',  r:5, d:83,  t:"Tested on my gym tee (worst-case). It passed."},
+      {n:'Imran S.',   c:'Bengaluru',  r:5, d:88,  t:"Wore the same linen kurta 3 days running (stitched yesterday). Sprayed. Fresh."},
+      {n:'Jitesh A.',  c:'Nashik',     r:5, d:89,  t:"Makes my laundry cycle shorter. Wear, refresh, re-wear. Won back time."}
     ];
 
     function relativeDate(daysAgo){
@@ -3834,6 +3919,14 @@
       catch(e){ console.warn('[Smelloff] Could not save review locally:', e); }
     }
 
+    // Stats derived from SEED itself (single source of truth)
+    var _stats = (function(){
+      var d = {1:0, 2:0, 3:0, 4:0, 5:0};
+      var s = 0;
+      SEED.forEach(function(r){ d[r.r]++; s += r.r; });
+      return { dist: d, sum: s, count: SEED.length };
+    })();
+
     function renderSummary(){
       var score = document.getElementById('rvScoreNum');
       var stars = document.getElementById('rvScoreStars');
@@ -3842,23 +3935,21 @@
       if (!score) return;
 
       var userReviews = getUserReviews();
-      var extraCount = userReviews.length;
       var extraSum = userReviews.reduce(function(a,r){ return a + (r.rating || 5); }, 0);
-
-      var baseSum = (5*DIST[5] + 4*DIST[4] + 3*DIST[3] + 2*DIST[2] + 1*DIST[1]);
-      var totalCount = SEED_COUNT_TOTAL + extraCount;
-      var avg = (baseSum + extraSum) / totalCount;
+      var totalCount = _stats.count + userReviews.length;
+      var avg = (_stats.sum + extraSum) / totalCount;
 
       score.textContent = avg.toFixed(1);
       stars.innerHTML = starString(Math.round(avg));
       count.textContent = totalCount;
 
-      // Distribution bars
+      // Distribution bars (seed + user-submitted)
+      var bucket = { 5:_stats.dist[5], 4:_stats.dist[4], 3:_stats.dist[3], 2:_stats.dist[2], 1:_stats.dist[1] };
+      userReviews.forEach(function(r){ if (bucket[r.rating] !== undefined) bucket[r.rating]++; });
+
       dist.innerHTML = '';
       [5,4,3,2,1].forEach(function(star){
-        var c = DIST[star];
-        // attribute user-submitted to their star bucket too
-        userReviews.forEach(function(r){ if (r.rating === star) c++; });
+        var c = bucket[star];
         var pct = Math.max(1, Math.round(c / totalCount * 100));
         var row = document.createElement('div');
         row.className = 'rv-dist-row';
