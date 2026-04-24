@@ -179,7 +179,7 @@
     META_PIXEL_ID: "1455100092891684",
     SHEETS_ENDPOINT: "https://script.google.com/macros/s/AKfycbxwCrRUS3jhQUEfD-MbI2uV9jUw0S986cfI0OTrjEcUacbS0ynhUQlTzmJfjZvq1IWCBQ/exec",
     WHATSAPP: "919392974031",
-    PRICES: { solo: 179, duo: 299, trio: 429 }
+    PRICES: { solo: 179, duo: 299 }
   };
 </script>
 
@@ -3486,7 +3486,7 @@
       </div>
       <div class="summary" style="border-top:2px solid var(--rule);">
         <span>Total</span>
-        <span class="amt" id="checkoutTotal">₹238</span>
+        <span class="amt" id="checkoutTotal">₹258</span>
       </div>
 
       <!-- Auth -->
@@ -3597,8 +3597,7 @@
   const CFG = window.SMELLOFF_CONFIG;
   const VARIANTS = {
     solo: { title: 'ODORSTRIKE Solo',  units: '1 × 50ml', amount: CFG.PRICES.solo },
-    duo:  { title: 'ODORSTRIKE Duo',   units: '2 × 50ml', amount: CFG.PRICES.duo },
-    trio: { title: 'ODORSTRIKE Trio',  units: '3 × 50ml', amount: CFG.PRICES.trio }
+    duo:  { title: 'ODORSTRIKE 2-Pack',units: '2 × 50ml', amount: CFG.PRICES.duo }
   };
 
   let currentVariant = 'solo';
@@ -4452,8 +4451,7 @@
     const STORAGE_KEY = 'smelloff_cart';
     const PRODUCTS = {
       solo: { id: 'solo', name: 'ODORSTRIKE 50ml',   price: 179, variant: 'solo' },
-      duo:  { id: 'duo',  name: 'ODORSTRIKE 2-Pack', price: 299, variant: 'duo'  },
-      trio: { id: 'trio', name: 'ODORSTRIKE 3-Pack', price: 429, variant: 'trio' }
+      duo:  { id: 'duo',  name: 'ODORSTRIKE 2-Pack', price: 299, variant: 'duo'  }
     };
 
     let cart = load();
