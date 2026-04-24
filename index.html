@@ -259,7 +259,8 @@
   /* Nav */
   nav{
     position:fixed;top:0;left:0;right:0;
-    height:56px;padding:0 16px;
+    height:calc(56px + env(safe-area-inset-top, 0px));
+    padding:env(safe-area-inset-top, 0px) 16px 0;
     display:grid;
     grid-template-columns:40px 1fr 40px;
     align-items:center;
@@ -315,7 +316,9 @@
 
   /* Category pills row */
   .cat-pills{
-    position:fixed;top:56px;left:0;right:0;z-index:49;
+    position:fixed;
+    top:calc(56px + env(safe-area-inset-top, 0px));
+    left:0;right:0;z-index:49;
     background:#080808;
     border-bottom:1px solid #1a1a1a;
     display:flex;gap:8px;
@@ -364,7 +367,7 @@
   .hero{
     position:relative;
     min-height:85vh;
-    padding:128px 20px 40px;
+    padding:calc(128px + env(safe-area-inset-top, 0px)) 20px 40px;
     display:flex;align-items:center;
     overflow:hidden;
     background:#080808;
@@ -530,7 +533,7 @@
 
   /* Desktop: copy left / bottle right */
   @media(min-width:860px){
-    .hero{padding:140px 40px 64px;min-height:90vh}
+    .hero{padding:calc(140px + env(safe-area-inset-top, 0px)) 40px 64px;min-height:90vh}
     .hero-inner{
       grid-template-columns:1.1fr .9fr;
       grid-template-areas:
@@ -1170,7 +1173,7 @@
     position:fixed;inset:0;z-index:200;
     background:rgba(0,0,0,.75);
     display:none;align-items:center;justify-content:center;
-    padding:20px;
+    padding:calc(20px + env(safe-area-inset-top, 0px)) 20px calc(20px + env(safe-area-inset-bottom, 0px));
   }
   .rv-modal.open{display:flex}
   .rv-modal-panel{
@@ -1585,9 +1588,10 @@
   /* BOTTOM strip */
   .sf-bottom{
     border-top:1px solid rgba(184,255,87,.2);
-    /* Extra bottom padding on mobile so the sticky buy bar
-       (64px tall, position:fixed) doesn't hide the copyright. */
-    padding:16px 20px calc(16px + 72px);
+    /* Extra bottom padding on mobile so the sticky buy bar (64px,
+       position:fixed) doesn't hide the copyright. Also accounts for
+       iOS home-indicator safe area. */
+    padding:16px 20px calc(16px + 72px + env(safe-area-inset-bottom, 0px));
     max-width:1120px;margin:0 auto;
     display:flex;justify-content:space-between;gap:10px;
     font-family:'DM Sans',sans-serif;font-size:11px;
@@ -1622,7 +1626,7 @@
     align-items:flex-start;
     justify-content:center;
     overflow-y:auto;
-    padding:24px 16px 32px;
+    padding:24px 16px calc(32px + env(safe-area-inset-bottom, 0px));
   }
   .overlay.active{display:flex}
   .overlay-panel{
@@ -1727,6 +1731,10 @@
   .overlay input::placeholder{color:#555}
   .overlay .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
   .overlay .row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+  @media(max-width:380px){
+    .overlay .row{grid-template-columns:1fr}
+    .overlay .row-3{grid-template-columns:1fr 1fr}
+  }
   .overlay .pay-toggle{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -1848,8 +1856,8 @@
   .mobile-bar{
     position:fixed;bottom:0;left:0;right:0;
     z-index:60;
-    height:64px;
-    padding:0 14px;
+    height:calc(64px + env(safe-area-inset-bottom, 0px));
+    padding:0 14px env(safe-area-inset-bottom, 0px);
     background:#080808;
     border-top:1px solid #1F1F1F;
     display:flex;align-items:center;gap:12px;
@@ -1908,7 +1916,7 @@
   .cart-drawer.open{transform:translateX(0)}
   .cd-head{
     display:flex;align-items:center;justify-content:space-between;
-    padding:20px;
+    padding:calc(20px + env(safe-area-inset-top, 0px)) 20px 20px;
     border-bottom:1px solid #1F1F1F;
   }
   .cd-head h3{
@@ -2022,7 +2030,7 @@
   .cd-remove:hover{color:#ff6b6b}
   .cd-foot{
     border-top:1px solid #1F1F1F;
-    padding:16px 20px 20px;
+    padding:16px 20px calc(20px + env(safe-area-inset-bottom, 0px));
     display:flex;flex-direction:column;gap:12px;
   }
   .cd-subtotal{
@@ -2616,7 +2624,9 @@
 
   /* Close button */
   .menu-close{
-    position:absolute;top:20px;right:24px;
+    position:absolute;
+    top:calc(20px + env(safe-area-inset-top, 0px));
+    right:24px;
     width:44px;height:44px;
     background:none;border:none;cursor:pointer;
     display:flex;align-items:center;justify-content:center;
@@ -2640,7 +2650,8 @@
 
   /* Menu tagline */
   .menu-tagline{
-    position:absolute;top:28px;left:28px;
+    position:absolute;
+    top:calc(28px + env(safe-area-inset-top, 0px));left:28px;
     font-family:'DM Sans',sans-serif;font-size:12px;
     color:#777;letter-spacing:.04em;
     z-index:1;max-width:240px;line-height:1.4;
@@ -2649,7 +2660,8 @@
   /* Nav items — compact numbered list */
   .menu-items{
     display:flex;flex-direction:column;gap:0;
-    margin-top:96px;padding:0 28px;
+    margin-top:calc(96px + env(safe-area-inset-top, 0px));
+    padding:0 28px;
     position:relative;z-index:1;
   }
   .menu-item{
@@ -2702,7 +2714,9 @@
 
   /* Utility row — circled social buttons */
   .menu-utility{
-    position:absolute;bottom:88px;left:28px;right:28px;
+    position:absolute;
+    bottom:calc(88px + env(safe-area-inset-bottom, 0px));
+    left:28px;right:28px;
     display:flex;align-items:center;gap:10px;
     z-index:1;
   }
@@ -2727,11 +2741,12 @@
   /* Sticky buy CTA */
   .menu-buy-cta{
     position:absolute;bottom:0;left:0;right:0;
-    height:56px;
+    height:calc(56px + env(safe-area-inset-bottom, 0px));
+    padding:0 20px env(safe-area-inset-bottom, 0px);
     background:#B8FF57;color:#080808;border:none;cursor:pointer;
     font-family:'Barlow Condensed',sans-serif;font-weight:900;
     font-size:15px;text-transform:uppercase;letter-spacing:.1em;
-    padding:0 20px;text-align:center;z-index:1;
+    text-align:center;z-index:1;
     display:flex;align-items:center;justify-content:center;
   }
   .menu-buy-cta:hover{background:#C7FF70}
