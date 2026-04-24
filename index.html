@@ -3773,14 +3773,25 @@
   let currentVariant = 'solo';
   let payMethod = 'prepaid';
 
-  // Transactional email client (Resend via /api/send-email)
+  // Transactional email client (Resend via /api/send-email).
+  // keepalive: true so the request survives page navigation (e.g. UPI redirect).
   const SmelloffEmail = {
     send: function(type, to, data) {
       return fetch('/api/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type: type, to: to, data: data || {} })
-      }).then(function(r){ return r.ok ? r.json() : r.json().then(function(e){ throw new Error(e.error || 'send failed'); }); });
+        body: JSON.stringify({ type: type, to: to, data: data || {} }),
+        keepalive: true
+      }).then(function(r){
+        return r.json().then(function(j){
+          if (!r.ok) {
+            console.error('[Smelloff] Email send failed:', r.status, j);
+            throw new Error(j.error || ('HTTP ' + r.status));
+          }
+          console.log('[Smelloff] Email sent:', type, '→', to, j.id);
+          return j;
+        });
+      });
     }
   };
   window.SmelloffEmail = SmelloffEmail;
@@ -3985,15 +3996,16 @@
         amount: String(order.total),
         address: [order.address, order.city, order.state, order.pincode].filter(Boolean).join(', '),
         paymentMethod: 'UPI (' + CFG.UPI_ID + ')'
-      }).catch(console.error);
+      }).catch(function(e){ console.error('Order email failed:', e); });
     }
 
     const upiLink = buildUpiLink(total, orderId);
+    showUpiSuccess(orderId, total, upiLink);
     const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
     if (isMobile) {
-      window.location.href = upiLink;
+      // Defer one tick so the fetch(keepalive) is flushed before the UPI redirect.
+      setTimeout(function(){ window.location.href = upiLink; }, 150);
     }
-    showUpiSuccess(orderId, total, upiLink);
   }
 
   function buildUpiLink(amount, orderId) {

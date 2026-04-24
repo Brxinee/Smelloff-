@@ -18,8 +18,17 @@ const TEMPLATES = {
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+const ALLOWED_ORIGINS = new Set([
+  'https://smelloff.in',
+  'https://www.smelloff.in',
+]);
+
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://smelloff.in');
+  const origin = req.headers.origin;
+  if (origin && ALLOWED_ORIGINS.has(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Vary', 'Origin');
+  }
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
