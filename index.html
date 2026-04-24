@@ -1366,36 +1366,50 @@
     .xs-card{width:clamp(240px,22vw,280px)}
   }
 
-  /* Final CTA */
+  /* Final CTA — compact acid-green band */
   .final{
-    padding:160px 32px;
+    padding:48px 20px;
     text-align:center;
-    background:var(--acid);
+    background:#B8FF57;
+    border-bottom:none;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:20px;
   }
-  .final h2{
-    font-family:'Fraunces',serif;
+  .final-title{
+    font-family:'Barlow Condensed',sans-serif;
     font-weight:900;
-    font-style:italic;
-    font-size:clamp(56px,10vw,160px);
-    line-height:.85;
-    letter-spacing:-.04em;
-    margin-bottom:48px;
-    color:var(--ink);
-  }
-  .final button{
-    padding:24px 48px;
-    background:var(--ink);
-    color:var(--acid);
-    border:none;
-    font-family:'JetBrains Mono',monospace;
-    font-size:14px;
-    letter-spacing:.2em;
+    font-size:clamp(36px,8vw,72px);
+    letter-spacing:-.02em;
+    line-height:.95;
     text-transform:uppercase;
-    cursor:pointer;
-    transition:transform .2s;
-    font-weight:500;
+    color:#080808;
+    margin:0;
   }
-  .final button:hover{transform:scale(1.05)}
+  .final-cta{
+    display:inline-flex;align-items:center;justify-content:center;
+    height:56px;
+    padding:0 32px;
+    width:100%;max-width:360px;
+    background:#080808;color:#B8FF57;
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:900;font-size:16px;
+    letter-spacing:.08em;text-transform:uppercase;
+    text-decoration:none;
+    border:none;border-radius:4px;
+    cursor:pointer;
+    transition:background .15s ease, transform .15s ease;
+  }
+  .final-cta:hover{background:#1a1a1a}
+  .final-cta:active{transform:scale(.985)}
+  .final-meta{
+    font-family:'DM Sans',sans-serif;
+    font-size:12px;color:#080808;
+    margin:0;letter-spacing:.02em;
+    opacity:.8;
+  }
+  @media(min-width:720px){
+    .final{padding:72px 40px;gap:28px}
+  }
 
   /* Footer — brand band + link cols + bottom strip */
   .site-footer{
@@ -3372,10 +3386,11 @@
   </div>
 </section>
 
-<!-- FINAL CTA -->
+<!-- FINAL CTA — compact band -->
 <section class="final">
-  <h2>Stop the smell.<br>Before anyone notices.</h2>
-  <button onclick="openCheckout('solo')">Get ODORSTRIKE Fabric Odor Spray — ₹159</button>
+  <h2 class="final-title">Stop the smell.<br>Before anyone notices.</h2>
+  <a href="#buy" class="final-cta" onclick="event.preventDefault();addToCart('solo')">Get ODORSTRIKE — ₹179</a>
+  <p class="final-meta">Launch price · Ships in 48hr</p>
 </section>
 
 <footer class="site-footer">
@@ -3445,7 +3460,7 @@
 
   <!-- BOTTOM strip -->
   <div class="sf-bottom">
-    <span>© 2026 SMELLOFF · Made in Hyderabad</span>
+    <span>&copy; 2026 SMELLOFF &middot; All rights reserved &middot; Made in Hyderabad</span>
     <span>MFG: Jogdhande Nikhil Patil, Sanathnagar, Erragadda, Hyderabad</span>
   </div>
 </footer>
