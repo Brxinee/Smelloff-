@@ -5537,9 +5537,12 @@
   (function(){
     const bar = document.getElementById('mobileBar');
     if (!bar) return;
+    var threshold = window.innerHeight * 0.30;
+    window.addEventListener('resize', function(){
+      threshold = window.innerHeight * 0.30;
+    }, {passive:true});
     let ticking = false;
     function update(){
-      var threshold = window.innerHeight * 0.30;
       var overlay = document.getElementById('checkoutOverlay');
       var overlayOpen = overlay && overlay.classList.contains('active');
       var show = !overlayOpen && window.scrollY > threshold;
