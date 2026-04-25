@@ -625,6 +625,36 @@
     .hero-price .hp-now{font-size:56px}
   }
 
+  /* Social proof bar — directly under hero */
+  .sp-bar{
+    background:#111;
+    padding:20px 20px;
+    border-bottom:1px solid #1a1a1a;
+    display:flex;flex-direction:column;align-items:center;gap:14px;
+    text-align:center;
+  }
+  .sp-stats{
+    display:flex;flex-direction:column;align-items:center;gap:10px;
+    width:100%;
+  }
+  .sp-stat{
+    font-family:'DM Sans',sans-serif;font-weight:600;
+    font-size:14px;color:#fff;letter-spacing:.02em;
+    display:inline-flex;align-items:center;gap:6px;
+  }
+  .sp-star{color:#B8FF57}
+  .sp-quote{
+    font-family:'DM Sans',sans-serif;font-style:italic;
+    font-size:14px;color:#BBB;line-height:1.5;
+    max-width:640px;margin:0 auto;
+  }
+  @media(min-width:720px){
+    .sp-bar{padding:22px 32px;flex-direction:column;gap:14px}
+    .sp-stats{flex-direction:row;gap:36px}
+    .sp-stat{font-size:15px}
+    .sp-quote{font-size:14.5px}
+  }
+
   /* Marquee — single compact strip */
   .marquee{
     height:36px;
@@ -3267,6 +3297,16 @@
     <span>Kills odor in 8 seconds</span>
     <span>Made in Hyderabad</span>
   </div>
+</div>
+
+<!-- SOCIAL PROOF BAR -->
+<div class="sp-bar" aria-label="Social proof">
+  <div class="sp-stats">
+    <span class="sp-stat"><span class="sp-star">★</span> 4.8 / 5</span>
+    <span class="sp-stat">127+ verified buyers</span>
+    <span class="sp-stat">Made in Hyderabad 🇮🇳</span>
+  </div>
+  <p class="sp-quote">"Sprayed it on my shirt before a meeting. Nobody knew I'd been in traffic for an hour." — Karthik, Hyderabad</p>
 </div>
 
 <!-- PROBLEM — compact -->
