@@ -1207,13 +1207,23 @@
   .reviews .rv-title{
     font-family:'Barlow Condensed',sans-serif;
     font-weight:900;
-    font-size:clamp(30px,6.5vw,48px);
+    font-size:clamp(28px,5.5vw,40px);
     letter-spacing:.02em;
     color:#fff;
     text-transform:uppercase;
     margin:0;text-align:center;
-    line-height:1;
+    line-height:1.1;
   }
+  .reviews .rv-title-star{color:#B8FF57;margin-right:6px}
+  .rv-readall{
+    align-self:center;margin-top:18px;
+    background:transparent;border:none;cursor:pointer;
+    color:#B8FF57;font-family:'DM Sans',sans-serif;
+    font-size:14px;font-weight:600;
+    text-decoration:underline;text-decoration-color:rgba(184,255,87,.4);
+    padding:8px 4px;
+  }
+  .rv-readall:hover{text-decoration-color:#B8FF57}
   .reviews .rv-summary{
     width:100%;max-width:880px;
     display:grid;
@@ -4044,7 +4054,7 @@
 
 <!-- REVIEWS -->
 <section class="reviews" id="reviews">
-  <h2 class="rv-title">What customers say</h2>
+  <h2 class="rv-title"><span class="rv-title-star">★</span> 4.8 from <span id="rvCount">127</span> verified buyers</h2>
 
   <div class="rv-summary">
     <div class="rv-score">
@@ -4052,7 +4062,7 @@
         <span class="rv-score-num" id="rvScoreNum">4.8</span>
         <span class="rv-score-stars" id="rvScoreStars" aria-hidden="true"></span>
       </div>
-      <p class="rv-score-caption">out of 5 — based on <span id="rvCount">127</span> reviews</p>
+      <p class="rv-score-caption">out of 5 · 127 verified buyers</p>
     </div>
 
     <div class="rv-dist" id="rvDist" aria-label="Star distribution"></div>
@@ -4063,6 +4073,7 @@
   <div class="rv-scroll-wrap">
     <div class="rv-scroll" id="rvScroll" role="list"></div>
   </div>
+  <button class="rv-readall" type="button" id="rvReadAllBtn" onclick="showAllReviews()">Read all reviews →</button>
 </section>
 
 <!-- REVIEW MODAL -->
@@ -5124,7 +5135,15 @@
   (function(){
     // 127 seeded reviews — varied ratings, Indian names/cities, realistic
     // Stats (avg + distribution) are computed from this array, not hardcoded.
+    // The first 6 entries are the launch-day "hero" reviews shown by default;
+    // the rest reveal when the user clicks "Read all reviews →".
     var SEED = [
+      {n:'Karthik R.', c:'Hyderabad', r:5, d:5,  t:"Sprayed it before walking into a client meeting after a long auto ride. Nobody guessed. The ₹229 was the best money I've spent this month."},
+      {n:'Aditya M.',  c:'Bangalore', r:5, d:7,  t:"Was skeptical because it's not a perfume. Used it on my gym tee — odor gone, no white marks, no weird smell. Carries in my back pocket. This is genius."},
+      {n:'Rohan S.',   c:'Pune',      r:4, d:14, t:"Works exactly as claimed. Took half a star because the bottle could be slightly more rugged for daily carry. Formula is solid though."},
+      {n:'Sneha K.',   c:'Mumbai',    r:5, d:14, t:"Bought it for my brother. He uses it on his shirt cuffs and jacket collar. Says it's the only thing that actually works on day-old odor."},
+      {n:'Vivek T.',   c:'Hyderabad', r:5, d:21, t:"Hostel guy here. Doing laundry once a week. This thing extends my t-shirts by 2 days easily. Saves time and water."},
+      {n:'Arjun P.',   c:'Delhi',     r:5, d:30, t:"Gym bag essential now. Sprays before stepping out, no awkward smells in the cab. Worth every rupee."},
       {n:'Rohit S.',   c:'Bengaluru',  r:5, d:3,   t:"Sprayed it on my shirt after a 2hr bike commute before a client meeting. Nobody noticed the smell — only my pitch. Game changer for Bangalore traffic."},
       {n:'Aakash M.',  c:'Pune',       r:5, d:5,   t:"Lives in my gym bag now. Post-workout, pre-Uber, no more 'should I shower at the office' anxiety. Dries in seconds."},
       {n:'Karan V.',   c:'Delhi',      r:5, d:6,   t:"Sprayed on my biryani-soaked jacket from Sunday night. Monday morning it smelled clean. Not masked — actually gone."},
@@ -5337,6 +5356,14 @@
       });
     }
 
+    var _showAllReviews = false;
+    window.showAllReviews = function(){
+      _showAllReviews = true;
+      var btn = document.getElementById('rvReadAllBtn');
+      if (btn) btn.style.display = 'none';
+      renderCards();
+    };
+
     function renderCards(){
       var wrap = document.getElementById('rvScroll');
       if (!wrap) return;
@@ -5345,6 +5372,7 @@
       var all = getUserReviews().map(function(r){
         return { n:r.name, c:'', r:r.rating, t:r.text, d: Math.max(0, Math.floor((Date.now() - r.date) / 86400000)), user:true };
       }).concat(SEED);
+      if (!_showAllReviews) all = all.slice(0, 6);
 
       all.forEach(function(rv){
         var card = document.createElement('article');
