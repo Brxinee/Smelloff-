@@ -1037,11 +1037,21 @@
   }
   .product-card .pc-risk-item{
     color:#A0A0A0;
-    display:flex;align-items:center;gap:4px;
+    display:flex;align-items:center;gap:6px;
     white-space:nowrap;
     overflow:hidden;text-overflow:ellipsis;
   }
   .product-card .pc-risk-sep{display:none}
+  .product-card .pc-risk-icon{
+    width:18px;height:18px;flex-shrink:0;
+    /* Tint black silhouette → acid green (#B8FF57) */
+    filter:brightness(0) saturate(100%) invert(91%) sepia(58%) saturate(560%) hue-rotate(8deg) brightness(102%) contrast(101%);
+  }
+  .product-card .pc-upi-badge{
+    height:14px;width:auto;
+    vertical-align:-3px;margin-right:2px;
+    filter:brightness(2.2) contrast(1.1);
+  }
   @media(min-width:520px){
     .product-card .pc-risk{
       grid-template-columns:repeat(4,auto);
@@ -1592,18 +1602,18 @@
   .sf-socials{display:flex;gap:14px;margin-top:6px}
   .sf-socials a{
     width:44px;height:44px;border-radius:50%;
-    border:1px solid #3a3a3a;background:rgba(255,255,255,.03);
-    color:#C5C5C5;
+    background:transparent;
     display:flex;align-items:center;justify-content:center;
     text-decoration:none;
-    transition:border-color .2s, background .2s, color .2s, transform .15s;
+    transition:transform .15s ease, opacity .15s ease;
   }
   .sf-socials a:hover,
   .sf-socials a:focus-visible{
-    border-color:#B8FF57;background:#B8FF57;color:#080808;
-    outline:none;transform:translateY(-1px);
+    outline:none;transform:translateY(-2px) scale(1.06);
   }
-  .sf-socials svg{width:20px;height:20px;fill:currentColor}
+  .sf-social-img{
+    width:36px;height:36px;display:block;
+  }
 
   /* MIDDLE: link columns */
   .sf-links{
@@ -1914,6 +1924,34 @@
   .overlay .pay-opt.active::before{
     border-color:#B8FF57;
     background:radial-gradient(circle,#B8FF57 0 4px,transparent 4px);
+  }
+  .overlay .pay-opt-icon{
+    flex-shrink:0;display:block;
+  }
+  .overlay .pay-opt-icon.pay-opt-upi{
+    height:18px;width:auto;
+    filter:brightness(2.2) contrast(1.1);
+  }
+  .overlay .pay-opt-icon.pay-opt-cod{
+    width:22px;height:22px;
+    filter:invert(1) opacity(.85);
+  }
+  .overlay .pay-opt.active .pay-opt-icon.pay-opt-cod{
+    filter:brightness(0) saturate(100%) invert(91%) sepia(58%) saturate(560%) hue-rotate(8deg);
+  }
+  .overlay .upi-panel-head{
+    display:flex;align-items:center;gap:10px;
+    margin:-6px 0 12px;
+    padding-bottom:10px;
+    border-bottom:1px solid #1F1F1F;
+  }
+  .overlay .upi-panel-logo{
+    height:22px;width:auto;
+    filter:brightness(2.2) contrast(1.1);
+  }
+  .overlay .upi-panel-title{
+    font-family:'DM Sans',sans-serif;font-size:12px;
+    color:#888;font-weight:500;line-height:1.3;
   }
   .overlay .submit-btn{
     width:100%;height:56px;
@@ -3295,17 +3333,16 @@
     z-index:1;
   }
   .menu-utility a{
-    width:40px;height:40px;
-    border:1px solid #2a2a2a;border-radius:50%;
-    color:#888;
+    width:42px;height:42px;
+    border-radius:50%;
+    background:transparent;
     display:flex;align-items:center;justify-content:center;
     text-decoration:none;
-    transition:border-color .2s, background .2s, color .2s;
+    transition:transform .15s ease;
   }
-  .menu-utility a:hover{
-    border-color:#B8FF57;background:#B8FF57;color:#080808;
-  }
+  .menu-utility a:hover{transform:translateY(-2px) scale(1.06)}
   .menu-utility a svg{width:16px;height:16px;fill:currentColor}
+  .menu-social-img{width:34px;height:34px;display:block}
   .menu-utility-label{
     font-family:'DM Sans',sans-serif;font-size:11px;
     color:#888;letter-spacing:.08em;
@@ -3402,13 +3439,13 @@
   </div>
   <div class="menu-utility" aria-label="Social links">
     <a href="https://instagram.com/smell0ff" target="_blank" rel="noopener" aria-label="Instagram">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 1.2.06 1.9.25 2.4.43.6.23 1 .5 1.5 1s.77.9 1 1.5c.18.5.37 1.2.43 2.4.07 1.2.07 1.6.07 4.8s0 3.6-.07 4.8c-.06 1.2-.25 1.9-.43 2.4-.23.6-.5 1-1 1.5s-.9.77-1.5 1c-.5.18-1.2.37-2.4.43-1.2.07-1.6.07-4.8.07s-3.6 0-4.8-.07c-1.2-.06-1.9-.25-2.4-.43-.6-.23-1-.5-1.5-1s-.77-.9-1-1.5c-.18-.5-.37-1.2-.43-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.8c.06-1.2.25-1.9.43-2.4.23-.6.5-1 1-1.5s.9-.77 1.5-1c.5-.18 1.2-.37 2.4-.43C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.15 0-3.5 0-4.74.07-1.1.05-1.7.23-2.1.38-.5.2-.87.44-1.25.82s-.62.75-.82 1.25c-.15.4-.33 1-.38 2.1C2.64 8.5 2.6 8.85 2.6 12s0 3.5.07 4.74c.05 1.1.23 1.7.38 2.1.2.5.44.87.82 1.25s.75.62 1.25.82c.4.15 1 .33 2.1.38 1.24.07 1.6.07 4.74.07s3.5 0 4.74-.07c1.1-.05 1.7-.23 2.1-.38.5-.2.87-.44 1.25-.82s.62-.75.82-1.25c.15-.4.33-1 .38-2.1.07-1.24.07-1.6.07-4.74s0-3.5-.07-4.74c-.05-1.1-.23-1.7-.38-2.1-.2-.5-.44-.87-.82-1.25s-.75-.62-1.25-.82c-.4-.15-1-.33-2.1-.38C15.5 4 15.15 4 12 4zm0 3.1a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8zm0 1.8a3.1 3.1 0 1 0 0 6.2 3.1 3.1 0 0 0 0-6.2zm5.1-2.25a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3z"/></svg>
+      <img src="/assets/icon-instagram.png" alt="" class="menu-social-img">
     </a>
     <a href="mailto:smelloffsupport@gmail.com" aria-label="Email">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 2v.5l8 5 8-5V6H4zm16 2.7-7.5 4.7a1 1 0 0 1-1 0L4 8.7V18h16V8.7z"/></svg>
+      <img src="/assets/icon-email.png" alt="" class="menu-social-img">
     </a>
     <a href="https://wa.me/919392974031" target="_blank" rel="noopener" aria-label="WhatsApp">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5A10 10 0 0 0 3.8 16.3L2 22l5.8-1.8a10 10 0 0 0 12.7-16.7zM12 20.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3.4 1 1-3.3-.2-.3a8.2 8.2 0 1 1 7 3.9zm4.7-6.1c-.3-.1-1.6-.8-1.8-.9-.2-.1-.4-.1-.6.1-.2.2-.7.9-.8 1-.2.2-.3.2-.5.1-.3-.1-1.1-.4-2-1.2-.8-.7-1.3-1.5-1.4-1.8-.2-.3 0-.4.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1 2.7 1.2 2.9.1.2 2 3 4.7 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.6-.7 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3z"/></svg>
+      <img src="/assets/icon-whatsapp.png" alt="" class="menu-social-img">
     </a>
     <span class="menu-utility-label">@smell0ff</span>
   </div>
@@ -3810,15 +3847,12 @@
       <button class="pc-cta" id="pcCta" onclick="buyBoxAdd()">ADD TO CART — ₹229</button>
 
       <div class="pc-risk">
-        <span class="pc-risk-item">✓ 7-day money-back</span>
-        <span class="pc-risk-sep">·</span>
-        <span class="pc-risk-item">✓ Free shipping</span>
-        <span class="pc-risk-sep">·</span>
-        <span class="pc-risk-item">✓ COD available</span>
-        <span class="pc-risk-sep">·</span>
-        <span class="pc-risk-item">✓ Ships in 48hr</span>
+        <span class="pc-risk-item"><img src="/assets/icon-shield.png" alt="" class="pc-risk-icon"> 7-day money-back</span>
+        <span class="pc-risk-item"><img src="/assets/icon-free-shipping.png" alt="" class="pc-risk-icon"> Free shipping</span>
+        <span class="pc-risk-item"><img src="/assets/icon-cod.png" alt="" class="pc-risk-icon"> COD available</span>
+        <span class="pc-risk-item"><img src="/assets/icon-ship.png" alt="" class="pc-risk-icon"> Ships in 48hr</span>
       </div>
-      <p class="pc-secure">🔒 Secure checkout · UPI / COD · No card stored</p>
+      <p class="pc-secure"><img src="/assets/upi.png" alt="UPI" class="pc-upi-badge"> Secure checkout · UPI / COD · No card stored</p>
     </div>
   </article>
 </section>
@@ -4100,13 +4134,13 @@
 
       <div class="sf-socials" aria-label="Social links">
         <a href="https://instagram.com/smell0ff" target="_blank" rel="noopener" aria-label="Instagram @smell0ff">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 1.2.06 1.9.25 2.4.43.6.23 1 .5 1.5 1s.77.9 1 1.5c.18.5.37 1.2.43 2.4.07 1.2.07 1.6.07 4.8s0 3.6-.07 4.8c-.06 1.2-.25 1.9-.43 2.4-.23.6-.5 1-1 1.5s-.9.77-1.5 1c-.5.18-1.2.37-2.4.43-1.2.07-1.6.07-4.8.07s-3.6 0-4.8-.07c-1.2-.06-1.9-.25-2.4-.43-.6-.23-1-.5-1.5-1s-.77-.9-1-1.5c-.18-.5-.37-1.2-.43-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.8c.06-1.2.25-1.9.43-2.4.23-.6.5-1 1-1.5s.9-.77 1.5-1c.5-.18 1.2-.37 2.4-.43C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.15 0-3.5 0-4.74.07-1.1.05-1.7.23-2.1.38-.5.2-.87.44-1.25.82s-.62.75-.82 1.25c-.15.4-.33 1-.38 2.1C2.64 8.5 2.6 8.85 2.6 12s0 3.5.07 4.74c.05 1.1.23 1.7.38 2.1.2.5.44.87.82 1.25s.75.62 1.25.82c.4.15 1 .33 2.1.38 1.24.07 1.6.07 4.74.07s3.5 0 4.74-.07c1.1-.05 1.7-.23 2.1-.38.5-.2.87-.44 1.25-.82s.62-.75.82-1.25c.15-.4.33-1 .38-2.1.07-1.24.07-1.6.07-4.74s0-3.5-.07-4.74c-.05-1.1-.23-1.7-.38-2.1-.2-.5-.44-.87-.82-1.25s-.75-.62-1.25-.82c-.4-.15-1-.33-2.1-.38C15.5 4 15.15 4 12 4zm0 3.1a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8zm0 1.8a3.1 3.1 0 1 0 0 6.2 3.1 3.1 0 0 0 0-6.2zm5.1-2.25a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3z"/></svg>
+          <img src="/assets/icon-instagram.png" alt="" class="sf-social-img">
         </a>
         <a href="mailto:smelloffsupport@gmail.com" aria-label="Email">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 2v.5l8 5 8-5V6H4zm16 2.7-7.5 4.7a1 1 0 0 1-1 0L4 8.7V18h16V8.7z"/></svg>
+          <img src="/assets/icon-email.png" alt="" class="sf-social-img">
         </a>
         <a href="https://wa.me/919392974031" target="_blank" rel="noopener" aria-label="WhatsApp">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5A10 10 0 0 0 3.8 16.3L2 22l5.8-1.8a10 10 0 0 0 12.7-16.7zM12 20.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3.4 1 1-3.3-.2-.3a8.2 8.2 0 1 1 7 3.9zm4.7-6.1c-.3-.1-1.6-.8-1.8-.9-.2-.1-.4-.1-.6.1-.2.2-.7.9-.8 1-.2.2-.3.2-.5.1-.3-.1-1.1-.4-2-1.2-.8-.7-1.3-1.5-1.4-1.8-.2-.3 0-.4.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1 2.7 1.2 2.9.1.2 2 3 4.7 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.6-.7 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3z"/></svg>
+          <img src="/assets/icon-whatsapp.png" alt="" class="sf-social-img">
         </a>
       </div>
     </div>
@@ -4218,12 +4252,22 @@
 
       <label>Payment method</label>
       <div class="pay-toggle">
-        <div class="pay-opt active" data-method="prepaid" onclick="selectPay('prepaid')" tabindex="0" role="button" onkeydown="if(event.key==='Enter')selectPay('prepaid')">Pay via UPI</div>
-        <div class="pay-opt" data-method="cod" onclick="selectPay('cod')" tabindex="0" role="button" onkeydown="if(event.key==='Enter')selectPay('cod')">Cash on Delivery</div>
+        <div class="pay-opt active" data-method="prepaid" onclick="selectPay('prepaid')" tabindex="0" role="button" onkeydown="if(event.key==='Enter')selectPay('prepaid')">
+          <img src="/assets/upi.png" alt="" class="pay-opt-icon pay-opt-upi">
+          <span>Pay via UPI</span>
+        </div>
+        <div class="pay-opt" data-method="cod" onclick="selectPay('cod')" tabindex="0" role="button" onkeydown="if(event.key==='Enter')selectPay('cod')">
+          <img src="/assets/icon-cod.png" alt="" class="pay-opt-icon pay-opt-cod">
+          <span>Cash on Delivery</span>
+        </div>
       </div>
 
       <!-- UPI panel (shown when prepaid selected) -->
       <div id="upiPayPanel" class="pay-panel">
+        <div class="upi-panel-head">
+          <img src="/assets/upi.png" alt="UPI" class="upi-panel-logo">
+          <span class="upi-panel-title">Any UPI app — GPay, PhonePe, Paytm, BHIM</span>
+        </div>
         <div class="upi-inline">
           <div class="upi-inline-row">
             <span class="upi-inline-lbl">UPI ID</span>
