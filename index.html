@@ -3462,7 +3462,7 @@
 <div class="cat-pills" id="catPills" role="navigation" aria-label="Shop shortcuts">
   <a href="#buy" class="cat-pill active" data-target="buy">Shop</a>
   <a href="#stock-up" class="cat-pill" data-target="stock-up">Bundles</a>
-  <a href="https://wa.me/919392974031?text=Hi%2C%20I%27d%20like%20to%20track%20my%20order." class="cat-pill" target="_blank" rel="noopener">Track order</a>
+  <a href="https://wa.me/919392974031?text=Hi%20Smelloff%2C%20I%27d%20like%20to%20track%20my%20order.%0AOrder%20ID%3A%20" class="cat-pill" target="_blank" rel="noopener">Track order</a>
   <a href="#reviews" class="cat-pill" data-target="reviews">Reviews</a>
 </div>
 
@@ -3489,7 +3489,7 @@
     <a href="mailto:smelloffsupport@gmail.com" aria-label="Email">
       <img src="/assets/icon-email.png" alt="" class="menu-social-img" width="34" height="34" loading="lazy" decoding="async">
     </a>
-    <a href="https://wa.me/919392974031" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <a href="https://wa.me/919392974031?text=Hi%20Smelloff%21%20I%20have%20a%20question%20about%20ODORSTRIKE." target="_blank" rel="noopener" aria-label="WhatsApp">
       <img src="/assets/icon-whatsapp.png" alt="" class="menu-social-img" width="34" height="34" loading="lazy" decoding="async">
     </a>
     <span class="menu-utility-label">@smell0ff</span>
@@ -4194,7 +4194,7 @@
         <a href="mailto:smelloffsupport@gmail.com" aria-label="Email">
           <img src="/assets/icon-email.png" alt="" class="sf-social-img" width="36" height="36" loading="lazy" decoding="async">
         </a>
-        <a href="https://wa.me/919392974031" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <a href="https://wa.me/919392974031?text=Hi%20Smelloff%21%20I%20have%20a%20question%20about%20ODORSTRIKE." target="_blank" rel="noopener" aria-label="WhatsApp">
           <img src="/assets/icon-whatsapp.png" alt="" class="sf-social-img" width="36" height="36" loading="lazy" decoding="async">
         </a>
       </div>
@@ -4342,7 +4342,7 @@
           After paying, send screenshot + UTR to WhatsApp.
           Our team dispatches within 48 hours of confirmation.
         </p>
-        <a class="wa-link" href="https://wa.me/919392974031?text=Hi%2C%20I%20paid%20for%20ODORSTRIKE.%20UTR%3A%20" target="_blank" rel="noopener">WhatsApp us your UTR →</a>
+        <a class="wa-link" href="https://wa.me/919392974031?text=Hi%20Smelloff%2C%20I%20just%20paid%20for%20my%20ODORSTRIKE%20order.%0AUTR%3A%20" target="_blank" rel="noopener">WhatsApp us your UTR →</a>
       </div>
 
       <!-- COD panel (shown when cod selected) -->
@@ -4351,7 +4351,7 @@
       </div>
 
       <div id="checkoutError" style="display:none" class="error-msg"></div>
-      <a href="https://wa.me/919392974031?text=Hi%2C%20I%20need%20help%20with%20my%20ODORSTRIKE%20order." class="wa-fallback" id="waFallback" style="display:none" target="_blank" rel="noopener">WhatsApp us for help →</a>
+      <a href="https://wa.me/919392974031?text=Hi%20Smelloff%2C%20I%20tried%20to%20place%20an%20order%20on%20the%20website%20but%20it%20failed.%20Can%20you%20help%3F" class="wa-fallback" id="waFallback" style="display:none" target="_blank" rel="noopener">WhatsApp us for help →</a>
 
       <button class="submit-btn" id="submitBtn" onclick="submitOrder()">
         <span id="submitText">OPEN UPI APP · ₹229</span>
@@ -4365,7 +4365,7 @@
       <p id="successMsg">Our team ships your ODORSTRIKE within 48 hours.</p>
       <div class="order-id" id="orderIdDisplay"></div>
 
-      <p class="success-reassure">Check your phone — we just sent a WhatsApp confirmation.</p>
+      <p class="success-reassure">Check your email — we just sent your order confirmation.</p>
 
       <!-- Optional UPI block (shown only when UPI was the chosen method) -->
       <div id="upiBlock" class="upi-block" style="display:none;text-align:left">
@@ -4400,12 +4400,12 @@
 
         <div class="upi-help">
           <strong>After paying:</strong> send the payment screenshot + UTR to
-          <a href="https://wa.me/919392974031" target="_blank" rel="noopener">WhatsApp</a>
+          <a id="waSuccessUtrLink" href="https://wa.me/919392974031" target="_blank" rel="noopener">WhatsApp</a>
           or reply to your order email. Our team dispatches within 48 hours of payment confirmation.
         </div>
       </div>
 
-      <p style="font-size:12px;margin-top:14px">Questions? WhatsApp <a href="https://wa.me/919392974031" style="color:var(--acid);font-weight:500">+91 93929 74031</a></p>
+      <p style="font-size:12px;margin-top:14px">Questions? WhatsApp <a id="waSuccessQuestionsLink" href="https://wa.me/919392974031" style="color:var(--acid);font-weight:500">+91 93929 74031</a></p>
       <button class="submit-btn" onclick="closeCheckout()">Close</button>
     </div>
   </div>
@@ -4685,6 +4685,26 @@
     document.getElementById('successMsg').textContent = method === 'cod'
       ? "Our team will call to confirm your COD order, then ship within 48 hours."
       : "Payment received. Our team ships your ODORSTRIKE within 48 hours.";
+
+    // Inject order ID into success-screen WhatsApp templates so when the
+    // customer taps the link, the merchant knows exactly which order.
+    var amount = VARIANTS[currentVariant].amount;
+    var utrLink = document.getElementById('waSuccessUtrLink');
+    if (utrLink) {
+      utrLink.href = 'https://wa.me/919392974031?text=' + encodeURIComponent(
+        'Hi Smelloff, I paid for my ODORSTRIKE order.\n' +
+        'Order ID: ' + orderId + '\n' +
+        'Amount: ₹' + amount + '\n' +
+        'UTR: '
+      );
+    }
+    var qLink = document.getElementById('waSuccessQuestionsLink');
+    if (qLink) {
+      qLink.href = 'https://wa.me/919392974031?text=' + encodeURIComponent(
+        'Hi Smelloff, I have a question about my order.\nOrder ID: ' + orderId
+      );
+    }
+
     trackPurchase(VARIANTS[currentVariant].amount, orderId);
     // Unlock review submission (client-side gate — not tamper-proof).
     try {
