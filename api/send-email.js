@@ -72,12 +72,21 @@ export default async function handler(req, res) {
       });
     }
 
+    // Gmail's bulk-sender rules (Feb 2024) require List-Unsubscribe and
+    // one-click List-Unsubscribe-Post headers even on transactional mail
+    // for domains without strong reputation. Adding them improves the
+    // chance the message lands in Inbox rather than Spam.
     const result = await resend.emails.send({
       from: FROM,
       to,
       replyTo: REPLY_TO,
       subject,
       html,
+      headers: {
+        'List-Unsubscribe': '<mailto:support@smelloff.in?subject=unsubscribe>, <https://www.smelloff.in/unsubscribe>',
+        'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
+        'X-Entity-Ref-ID': `smelloff-${Date.now()}`,
+      },
     });
 
     if (result.error) {
