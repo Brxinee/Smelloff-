@@ -4260,6 +4260,9 @@
 
       <!-- Optional UPI block (shown only when UPI was the chosen method) -->
       <div id="upiBlock" class="upi-block" style="display:none;text-align:left">
+        <div class="qr-wrap">
+          <img id="upiQR" class="upi-qr" alt="UPI QR code — scan to pay" src="" loading="lazy">
+        </div>
         <div class="upi-row">
           <span class="lbl">UPI ID</span>
           <span class="val" id="upiIdShow">9392974031-3@ybl</span>
@@ -4274,6 +4277,17 @@
         </div>
 
         <a id="upiOpenBtn" class="upi-cta" href="#">Open UPI app</a>
+
+        <div class="upi-timer" id="upiTimer" aria-live="polite">
+          <span class="t-lbl">Time left to pay</span>
+          <span class="t-val" id="upiTimerVal">10:00</span>
+        </div>
+
+        <button type="button" id="upiRetry" class="upi-retry" onclick="resetUpiTimer()">Restart payment session</button>
+
+        <div class="upi-policy-link">
+          Payment issue? <a href="#" onclick="openPaymentFailedOverlay();return false;">See our Payment Failed Policy</a>
+        </div>
 
         <div class="upi-help">
           <strong>After paying:</strong> send the payment screenshot + UTR to
@@ -4415,6 +4429,8 @@
     document.body.style.overflow = '';
     const upiBlock = document.getElementById('upiBlock');
     if (upiBlock) upiBlock.style.display = 'none';
+    // Stop UPI countdown if it was running
+    if (typeof stopUpiTimer === 'function') stopUpiTimer();
     // Re-enable sticky buy bar on mobile
     var mb = document.getElementById('mobileBar');
     if (mb) mb.style.display = '';
@@ -4694,10 +4710,10 @@
     s.style.display = 'block';
     document.getElementById('successTag').textContent = 'Order placed';
     document.getElementById('successHeading').textContent = 'Pay ₹' + total + ' via UPI';
-    document.getElementById('successMsg').textContent = 'Tap "Open UPI app" below — amount is pre-filled. After paying, send screenshot + UTR to WhatsApp. Our team ships within 48hr of payment.';
+    document.getElementById('successMsg').textContent = 'Scan the QR or tap "Open UPI app" — amount is pre-filled. After paying, send screenshot + UTR to WhatsApp.';
     document.getElementById('orderIdDisplay').textContent = orderId;
 
-    // Populate UPI block (no QR, no timer — order persists)
+    // Populate UPI block (with QR + countdown)
     document.getElementById('upiBlock').style.display = 'block';
     document.getElementById('upiIdShow').textContent = CFG.UPI_ID;
     document.getElementById('upiAmountShow').textContent = '₹' + total;
@@ -4705,6 +4721,17 @@
     const openBtn = document.getElementById('upiOpenBtn');
     openBtn.href = upiLink;
     openBtn.textContent = 'Open UPI app · ₹' + total;
+
+    // QR for the UPI deep link (any UPI app reads this)
+    const qrSrc = 'https://api.qrserver.com/v1/create-qr-code/?size=400x400&margin=8&data=' + encodeURIComponent(upiLink);
+    const qrImg = document.getElementById('upiQR');
+    if (qrImg) {
+      qrImg.style.display = '';
+      qrImg.src = qrSrc;
+      qrImg.onerror = function(){ qrImg.style.display = 'none'; };
+    }
+
+    startUpiTimer();
 
     trackPurchase(VARIANTS[currentVariant].amount, orderId);
     try {
@@ -4714,6 +4741,47 @@
       if (typeof window.clearCart === 'function') window.clearCart();
     } catch (e) {}
   }
+
+  // ==============================
+  // UPI PAYMENT TIMER (10 minutes)
+  // ==============================
+  let _upiTimerInterval = null;
+  const UPI_TIMER_SECONDS = 10 * 60;
+
+  function startUpiTimer() {
+    stopUpiTimer();
+    const el = document.getElementById('upiTimer');
+    const val = document.getElementById('upiTimerVal');
+    const retry = document.getElementById('upiRetry');
+    if (!el || !val) return;
+    el.classList.remove('expired','warn');
+    if (retry) retry.classList.remove('show');
+    let remaining = UPI_TIMER_SECONDS;
+    paintUpiTimer(remaining);
+    _upiTimerInterval = setInterval(function(){
+      remaining -= 1;
+      if (remaining <= 0) {
+        paintUpiTimer(0);
+        el.classList.add('expired');
+        val.textContent = 'EXPIRED';
+        if (retry) retry.classList.add('show');
+        stopUpiTimer();
+        return;
+      }
+      paintUpiTimer(remaining);
+      el.classList.toggle('warn', remaining <= 120);
+    }, 1000);
+  }
+  function paintUpiTimer(remaining) {
+    const m = Math.floor(remaining / 60);
+    const s = remaining % 60;
+    const t = document.getElementById('upiTimerVal');
+    if (t) t.textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  }
+  function stopUpiTimer() {
+    if (_upiTimerInterval) { clearInterval(_upiTimerInterval); _upiTimerInterval = null; }
+  }
+  window.resetUpiTimer = function(){ startUpiTimer(); };
 
   // ==============================
   // PINCODE → CITY/STATE AUTOFILL (checkout)
