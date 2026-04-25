@@ -46,7 +46,7 @@ export default async function handler(req, res) {
 
   try {
     const body = req.body || {};
-    const { to, type, data = {}, subject: rawSubject, html: rawHtml } = body;
+    const { to, type, data = {} } = body;
 
     if (!to) {
       return res.status(400).json({ error: 'Missing "to"' });
@@ -55,22 +55,14 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Invalid email address' });
     }
 
-    let subject, html;
-
-    if (type) {
-      const builder = TEMPLATES[type];
-      if (!builder) {
-        return res.status(400).json({ error: `Unknown template: ${type}` });
-      }
-      ({ subject, html } = builder(data));
-    } else if (rawSubject && rawHtml) {
-      subject = String(rawSubject);
-      html = String(rawHtml);
-    } else {
-      return res.status(400).json({
-        error: 'Provide either "type" (template) or both "subject" and "html"',
-      });
+    if (!type) {
+      return res.status(400).json({ error: 'Missing "type" (template)' });
     }
+    const builder = TEMPLATES[type];
+    if (!builder) {
+      return res.status(400).json({ error: `Unknown template: ${type}` });
+    }
+    const { subject, html } = builder(data);
 
     const result = await resend.emails.send({
       from: FROM,
