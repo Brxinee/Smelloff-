@@ -1432,135 +1432,7 @@
     .rv-scroll{padding:4px 40px 20px;margin:0 -40px}
   }
 
-  /* Goes well with — cross-sell strip */
-  .xsell{
-    background:#080808;
-    padding:48px 0 60px;
-    display:flex;flex-direction:column;gap:22px;
-  }
-  .xsell .xs-title{
-    font-family:'Barlow Condensed',sans-serif;
-    font-weight:900;
-    font-size:clamp(26px,5.5vw,40px);
-    letter-spacing:.03em;
-    color:#fff;
-    text-transform:uppercase;
-    margin:0;line-height:1;
-    padding:0 20px;
-  }
-  .xsell .xs-scroll{
-    display:flex;gap:14px;
-    overflow-x:auto;overflow-y:hidden;
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:none;
-    padding:4px 20px 8px;
-    scroll-snap-type:x mandatory;
-  }
-  .xsell .xs-scroll::-webkit-scrollbar{display:none}
-  .xs-card{
-    flex:0 0 auto;
-    width:70vw;max-width:280px;
-    scroll-snap-align:start;
-    background:#0D0D0D;
-    border:1px solid #1F1F1F;
-    border-radius:8px;
-    overflow:hidden;
-    display:flex;flex-direction:column;
-  }
-  .xs-media{
-    position:relative;
-    aspect-ratio:1;
-    background:radial-gradient(circle at center,#141414 0%,#050505 100%);
-    display:flex;align-items:center;justify-content:center;overflow:hidden;
-  }
-  .xs-media::before{
-    content:'';position:absolute;
-    top:50%;left:50%;width:70%;aspect-ratio:1;
-    transform:translate(-50%,-50%);
-    background:radial-gradient(circle,rgba(184,255,87,.1),transparent 65%);
-    pointer-events:none;
-  }
-  .xs-tag{
-    position:absolute;top:10px;left:10px;z-index:2;
-    background:#B8FF57;color:#080808;
-    font-family:'Barlow Condensed',sans-serif;
-    font-weight:900;font-size:10px;
-    letter-spacing:.1em;text-transform:uppercase;
-    padding:4px 8px;border-radius:3px;line-height:1;
-  }
-  .xs-tag.xs-tag-soon{
-    background:transparent;color:#888;
-    border:1px solid #333;
-  }
-  .xs-image{
-    position:relative;z-index:1;
-    display:flex;align-items:center;justify-content:center;gap:6px;
-  }
-  .xs-image .hb-bottle{
-    height:68%;
-    animation:none;
-    filter:drop-shadow(0 10px 18px rgba(0,0,0,.6));
-  }
-  .xs-image-duo{gap:8px}
-  .xs-image-duo .hb-bottle{height:60%}
-  .xs-placeholder{
-    width:60%;aspect-ratio:1;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .xs-placeholder svg{
-    width:70%;height:70%;
-    stroke:#B8FF57;fill:none;stroke-width:1.5;
-    stroke-linecap:round;stroke-linejoin:round;
-    opacity:.85;
-  }
-  .xs-body{
-    padding:14px 14px 16px;
-    display:flex;flex-direction:column;gap:8px;
-  }
-  .xs-card-title{
-    font-family:'Barlow Condensed',sans-serif;
-    font-weight:900;font-size:16px;
-    text-transform:uppercase;letter-spacing:.03em;
-    color:#fff;margin:0;line-height:1.15;
-  }
-  .xs-sub{
-    font-family:'DM Sans',sans-serif;font-size:12px;
-    color:#888;margin:0;line-height:1.4;
-  }
-  .xs-price{
-    display:flex;align-items:baseline;gap:8px;
-  }
-  .xs-now{
-    font-family:'Barlow Condensed',sans-serif;
-    font-weight:900;font-size:22px;line-height:1;
-    color:#fff;letter-spacing:.01em;
-  }
-  .xs-was{
-    font-family:'DM Sans',sans-serif;font-size:12px;
-    color:#777;text-decoration:line-through;
-  }
-  .xs-cta{
-    width:100%;height:40px;
-    background:#B8FF57;color:#080808;
-    font-family:'Barlow Condensed',sans-serif;
-    font-weight:900;font-size:13px;
-    letter-spacing:.08em;text-transform:uppercase;
-    border:none;border-radius:4px;cursor:pointer;
-    margin-top:4px;
-    transition:background .15s ease;
-  }
-  .xs-cta:hover{background:#C7FF70}
-  .xs-cta:disabled{
-    background:transparent;color:#666;
-    border:1px solid #2a2a2a;cursor:default;
-  }
-
-  @media(min-width:860px){
-    .xsell{padding:72px 0 80px;gap:32px}
-    .xsell .xs-title{padding:0 40px}
-    .xsell .xs-scroll{padding:4px 40px 12px;gap:18px}
-    .xs-card{width:clamp(240px,22vw,280px)}
-  }
+  /* (Cross-sell strip CSS removed — replaced by .stockup section) */
 
   /* Final CTA — dark band with diagonal accent */
   .final{
@@ -3536,10 +3408,7 @@
 <!-- UTILITY PILLS -->
 <div class="cat-pills" id="catPills" role="navigation" aria-label="Shop shortcuts">
   <a href="#buy" class="cat-pill active" data-target="buy">Shop</a>
-  <span class="cat-pill soon" aria-disabled="true" role="button" tabindex="-1">
-    Bundles
-    <span class="cat-pill-badge">Soon</span>
-  </span>
+  <a href="#stock-up" class="cat-pill" data-target="stock-up">Bundles</a>
   <a href="https://wa.me/919392974031?text=Hi%2C%20I%27d%20like%20to%20track%20my%20order." class="cat-pill" target="_blank" rel="noopener">Track order</a>
   <a href="#reviews" class="cat-pill" data-target="reviews">Reviews</a>
 </div>
@@ -4111,8 +3980,8 @@
 
     <div id="rvStepBuy" class="rv-step" style="display:none">
       <p>Only verified customers can post a review.</p>
-      <p style="font-size:13px">We couldn't find an order on <span id="rvBuyEmail" class="rv-form-user"></span>. Buy ODORSTRIKE first — your review slot unlocks after checkout.</p>
-      <a href="#buy" class="rv-buy-btn" onclick="closeReviewForm()">Buy ODORSTRIKE →</a>
+      <p style="font-size:13px">We couldn't find an order on <span id="rvBuyEmail" class="rv-form-user"></span>. Add ODORSTRIKE first — your review slot unlocks after checkout.</p>
+      <a href="#buy" class="rv-buy-btn" onclick="closeReviewForm()">Add ODORSTRIKE — ₹229 →</a>
     </div>
 
     <div id="rvStepForm" class="rv-step" style="display:none">
@@ -4301,7 +4170,7 @@
       </button>
       <ul class="sf-col-list">
         <li><a href="#buy">ODORSTRIKE</a></li>
-        <li><a href="#buy">Bundles</a></li>
+        <li><a href="#stock-up">Bundles</a></li>
       </ul>
     </div>
     <div class="sf-col">
