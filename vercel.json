@@ -1,14 +1,6 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
-  "rewrites": [
-    { "source": "/privacy", "destination": "/policies/privacy.html" },
-    { "source": "/terms", "destination": "/policies/terms.html" },
-    { "source": "/returns", "destination": "/policies/returns.html" },
-    { "source": "/refund", "destination": "/policies/refund.html" },
-    { "source": "/shipping", "destination": "/policies/shipping.html" },
-    { "source": "/payment-failed", "destination": "/policies/payment-failed.html" }
-  ],
   "redirects": [
     {
       "source": "/(.+)/",
