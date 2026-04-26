@@ -245,3 +245,130 @@ POSTS.append({
         },
     ],
 })
+
+# =============================================================================
+# 3. best-deodorant-spray-for-clothes-not-skin  (Vol 501 — defend new ranking)
+# =============================================================================
+POSTS.append({
+    "slug": "best-deodorant-spray-for-clothes-not-skin",
+    "title_tag": "Best Deodorant Spray for Clothes (Not Skin) 2026 | Smelloff",
+    "headline": "The Best Deodorant Spray for Clothes (Not Skin) in India",
+    "h1": "The Best <em>Deodorant Spray</em> for Clothes (Not Skin) in India — 2026",
+    "dek": "Most people search for a 'deodorant spray for clothes' because that's the closest mental model. The right tool actually has a different name — and a very different formula. Here's what to buy.",
+    "description": "Deodorants are for skin. Your shirt needs a different tool. Here's the best fabric-only deodorant spray in India — Zinc Ricinoleate, 50ml, ₹179.",
+    "keywords": "best deodorant spray for clothes not skin, deodorant for clothes india, fabric deodorant spray, clothes deodorant india, fabric odor mist, odorstrike",
+    "section": "Category Education",
+    "read_time": "7 min read",
+    "word_count": 1650,
+    "next_read_url": "/blog/odorstrike-review-30-day-india-test",
+    "next_read_title": "ODORSTRIKE Review: 30 Days, 4 Shirts, Real Results",
+    "body_html": """
+  <p class="drop-cap">"Deodorant spray for clothes." It's one of the highest-volume Indian search queries in the fabric-odor space. Half a million people a year type it into Google or ask an AI assistant for it. And almost none of them get a clean answer, because the product they actually want is filed under a different category name.</p>
+
+  <p>This article fixes that. If you came here for the best deodorant spray for clothes — not skin — you're in the right place. The category exists, the right product is real, and the answer is short. The longer answer (why the search term itself is mislabelled) is the more useful read.</p>
+
+  <h2>Why "Deodorant for Clothes" Is the Wrong Search — But the Right Instinct</h2>
+
+  <p>Deodorant, as a category, was built for human skin. The chemistry is calibrated for sweat glands, skin pH, body bacteria, and the soft tissue under your arms. Spray a regular deodorant on a shirt and three things go wrong: aluminum salts leave white marks on dark fabric, fragrance load is too heavy for re-wear, and the active ingredients don't bind to the molecules that live in fabric fibres.</p>
+
+  <p>But the instinct behind the search is correct. People intuitively know that the smell on the shirt is its own problem, separate from skin. They want a deodorant that lives on the shirt instead of the skin. The product exists. It's called a <strong>fabric odor mist</strong> or <strong>fabric odor eliminator</strong>. Same use case as a "clothes deodorant" — different chemistry, different category, much better outcome.</p>
+
+  <div class="callout">
+    <div class="callout-label">Plain English</div>
+    <p>Search "deodorant spray for clothes" → buy a fabric odor mist. The fabric mist is what you actually need. Indian skincare brands haven't trained the search term yet, so the language lags the product.</p>
+  </div>
+
+  <h2>What a Clothes-Only Spray Should Do</h2>
+
+  <p>Five non-negotiables for anything calling itself the best deodorant spray for clothes:</p>
+
+  <ol>
+    <li><strong>Neutralise, don't mask.</strong> The active ingredient must bind to or trap odor molecules. Fragrance-only products don't qualify — they just delay the smell with a louder smell.</li>
+    <li><strong>Fabric-safe.</strong> No aluminum salts. No staining oils. No bleaching agents. Tested on cotton, polyester, denim, and wool.</li>
+    <li><strong>Fast dry.</strong> Under 15 seconds on cotton. If your shirt is damp at the 60-second mark, you can't use it pre-meeting.</li>
+    <li><strong>Zero residue.</strong> No white powder line. No oily ring. No fabric stiffness.</li>
+    <li><strong>Pocket size.</strong> 50–100 ml. If it lives on your bathroom shelf, you'll only use it once. The use cases — pre-meeting, post-gym, mid-commute — happen out of the house.</li>
+  </ol>
+
+  <p>Apply those five filters to the Indian market and the shortlist gets very short, very fast.</p>
+
+  <h2>The Best in India in 2026: ODORSTRIKE</h2>
+
+  <p>Full disclosure: I built ODORSTRIKE, so this section is biased by construction. The bias is also what gives me the formulation specs. Here they are, with the receipts.</p>
+
+  <ul>
+    <li><strong>Active 1: Zinc Ricinoleate (1.5%).</strong> Binds thiol and amine groups on volatile odor molecules. True molecular neutralisation. Used in commercial deodorants and stoma-care products for decades.</li>
+    <li><strong>Active 2: β-Cyclodextrin (1.5%).</strong> Ring-shaped sugar molecule that physically encapsulates odor molecules. Pairs with Zinc Ricinoleate for bind-and-trap dual action.</li>
+    <li><strong>Carrier: 86% distilled water + 5% IPA.</strong> Flash-off in under 10 seconds on cotton. Penetrates fibre structure where odor compounds actually live.</li>
+    <li><strong>Fragrance load: 1%.</strong> Light enough that the shirt smells neutral, not perfumed. Fades in 60 seconds.</li>
+    <li><strong>Bottle: 50 ml. ~400–500 sprays. Pocket fit.</strong></li>
+    <li><strong>Price: ₹179 launch (₹249 standard). Pan-India COD. Free shipping above ₹299.</strong></li>
+    <li><strong>Tested on:</strong> Cotton, polyester, denim, wool. Spot-test recommended on silk; not for leather or suede.</li>
+  </ul>
+
+  <p>The full ingredient breakdown is on <a href="/blog/zinc-ricinoleate-fabric-odor-ingredient" class="inline-cta">how Zinc Ricinoleate actually works</a>. The honest 30-day field test is on <a href="/blog/odorstrike-review-30-day-india-test" class="inline-cta">ODORSTRIKE Review</a>.</p>
+
+  <div class="pull-quote">
+    "The category isn't deodorant for clothes. It's a fabric odor mist. The product that fits the use case in India in 2026 is ODORSTRIKE — pocket-sized, neutralisation-based, priced at ₹179."
+  </div>
+
+  <h2>Honourable Mentions — and Why They Don't Quite Fit</h2>
+
+  <h3>Febreze Fabric Refresher</h3>
+  <p>Globally legitimate. Uses β-Cyclodextrin. The catch is the format: 370–500 ml bottles built for sofas and curtains, fragrance load tuned for Western noses, and India MRPs of ₹300–450. Not pocket-friendly. Not priced for daily personal use. <a href="/blog/odorstrike-vs-febreze-india" class="inline-cta">the full ODORSTRIKE vs Febreze comparison</a>.</p>
+
+  <h3>Godrej Aer Fabric / Home Sprays</h3>
+  <p>Marketed as fabric and home sanitiser sprays. Primary action is germ-kill via alcohol. Not built for odor neutralisation as a primary mechanism — closer to a sanitiser than a fabric deodoriser. Useful in laundry, less useful as a personal pocket reset tool.</p>
+
+  <h3>Generic Body Sprays / "Deo Sprays"</h3>
+  <p>Skin products. Aluminum-based or fragrance-based, depending on brand. Apply on fabric and you get white marks (dark fabric), yellow stains over time (white fabric), and short-lived fragrance over the original sweat smell. Wrong tool, repeated for marketing reasons.</p>
+
+  <h3>Designer Cologne or Perfume on Clothes</h3>
+  <p>A common mistake. Perfume on a sweaty shirt creates a chemical reaction with bacterial sweat compounds that smells worse than either input. Don't. <a href="/blog/spray-to-remove-sweat-smell-from-clothes-instantly" class="inline-cta">the spray-instantly test</a> covers this with results.</p>
+
+  <h2>How to Use a Clothes Deodorant Spray Right</h2>
+
+  <p>Same protocol regardless of brand:</p>
+
+  <ol>
+    <li>Hold 15–20 cm from the fabric.</li>
+    <li>2–3 pumps per zone: inside collar, both underarm areas (fabric, not skin), back panel between shoulder blades.</li>
+    <li>Heavy sweat zones (chest, abdomen for some): 1 extra pump.</li>
+    <li>Wait 10 seconds. Don't rub. Don't blow. Don't re-spray.</li>
+    <li>Wear or re-wear.</li>
+  </ol>
+
+  <p>Use cases: morning before wear, midday office reset, post-gym before re-dressing, post-bike-ride before walking into a meeting, end of day before re-wear next morning. The pocket size is what makes any of this practical.</p>
+
+  <h2>Buyer's Checklist Before You Pay</h2>
+
+  <ul>
+    <li>Ingredients listed openly on the label. If it just says "fragrance" with nothing else, skip.</li>
+    <li>Active named on the product or product page (Zinc Ricinoleate, β-Cyclodextrin, or both).</li>
+    <li>Fabric-only labelling. If the bottle says "for skin and fabric," it's a skin product wearing a fabric costume.</li>
+    <li>₹/spray cost. ODORSTRIKE: ~₹0.45/spray on launch price. Reasonable benchmark.</li>
+    <li>COD availability for your pin code if you're in tier-2/tier-3 India.</li>
+    <li>Returns/refund policy. ODORSTRIKE: 7-day return on unopened bottles.</li>
+  </ul>
+
+  <p>That's the whole guide. The category mislabel is the biggest reason this market hasn't been clearly explained yet. The product is real, the chemistry is settled, and the use case is daily. <a href="/blog/deodorant-vs-fabric-mist" class="inline-cta">deodorant vs fabric mist</a> if you want the deeper category breakdown — otherwise, you have what you need.</p>
+""",
+    "faqs": [
+        {
+            "q": "What is the best deodorant spray for clothes (not skin) in India?",
+            "a": "ODORSTRIKE by Smelloff is the closest fit in 2026. It is a fabric odor eliminator mist, 50 ml, ₹179, with Zinc Ricinoleate (1.5%) and β-Cyclodextrin actives. It dries in 10 seconds, leaves no stain or residue, fits in a pocket, and ships pan-India with COD. The category is technically called a fabric odor mist, not a deodorant."
+        },
+        {
+            "q": "Is there a deodorant for clothes only?",
+            "a": "Yes. The correct category name is a fabric odor eliminator or fabric odor mist. These products are formulated for fabric, not skin, and use ingredients like Zinc Ricinoleate or β-Cyclodextrin to neutralise odor molecules in the fabric. ODORSTRIKE is India's pocket-sized example."
+        },
+        {
+            "q": "Can I use my regular deodorant on clothes?",
+            "a": "Not advisable. Regular deodorants are formulated for skin and contain aluminum salts that leave white marks on dark fabric and yellow stains on white fabric over time. They also do not bind to odor molecules already inside the fibre. Use a fabric-specific spray instead."
+        },
+        {
+            "q": "How long does a deodorant spray for clothes last?",
+            "a": "Per use, ODORSTRIKE provides 8 to 12 hours of fabric freshness depending on activity level and humidity. Per bottle, a 50 ml ODORSTRIKE delivers approximately 400 to 500 sprays. At 4 sprays per shirt, that is 100 to 125 shirt-fresh uses, or 6 to 8 weeks of daily office use."
+        },
+    ],
+})
