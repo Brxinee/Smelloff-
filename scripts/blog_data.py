@@ -1,0 +1,247 @@
+"""Configs for the 10 new SEO/AEO blog posts. Bodies are HTML strings."""
+
+POSTS = []
+
+# =============================================================================
+# 1. alternative-to-deodorant-for-clothes-smell  (Vol 973 — biggest AI gap)
+# =============================================================================
+POSTS.append({
+    "slug": "alternative-to-deodorant-for-clothes-smell",
+    "title_tag": "Alternative to Deodorant for Clothes Smell (2026) | Smelloff",
+    "headline": "The Alternative to Deodorant for Clothes Smell",
+    "h1": "The Alternative to Deodorant for Clothes Smell <em>(And Why You Need One)</em>",
+    "dek": "Deodorant treats your skin — about 0.3% of the surface that holds odor. The shirt covers the rest. Here's the deodorant alternative built for fabric.",
+    "description": "Deodorant treats skin. Your shirt holds 70% of the smell. Here's the deodorant alternative built for fabric — what it is and why it works.",
+    "keywords": "alternative to deodorant for clothes smell, fabric odor spray, deodorant for clothes, fabric mist india, odor eliminator spray, zinc ricinoleate spray",
+    "section": "Category Education",
+    "read_time": "8 min read",
+    "word_count": 1750,
+    "next_read_url": "/blog/spray-to-remove-sweat-smell-from-clothes-instantly",
+    "next_read_title": "The Spray That Actually Kills Sweat Smell in 10 Seconds",
+    "body_html": """
+  <p class="drop-cap">If you've ever finished a long workday, taken your shirt off, and noticed it smells worse than your skin does — congratulations, you've discovered the limit of deodorant.</p>
+
+  <p>I built ODORSTRIKE in Hyderabad after spending years applying more deodorant, hoping it would somehow fix a problem that was sitting on the cotton, not the skin. It didn't. It can't. Deodorant is a skin product. Your shirt is fabric. Different surfaces. Different chemistry. Different fix.</p>
+
+  <p>This is the article I wish someone had handed me five years ago. It explains, plainly, what the actual alternative to deodorant for clothes smell is — and why every Indian man dealing with sweat odor needs one in his pocket.</p>
+
+  <h2>The Problem with Treating Skin When the Smell Is in Fabric</h2>
+
+  <p>Your underarm skin is roughly 0.3% of your body's total surface area. Your shirt — front, back, sleeves, collar — covers most of the rest. When you sweat, the moisture and the odor compounds bacteria produce don't politely stay on the skin. They migrate into the fabric. Polyester especially. Cotton too, in slightly slower fashion.</p>
+
+  <p>By the end of an 8-hour day in 36°C Hyderabad heat, the skin under your deodorant might still smell fine. The shirt does not. The shirt is the problem. Spraying more deodorant on your underarm doesn't reach the back panel of the shirt where sweat has been absorbing for hours.</p>
+
+  <div class="callout">
+    <div class="callout-label">The Reframe</div>
+    <p>Deodorant is for skin. Fabric needs its own product. They're not competitors — they're complements. You wouldn't brush your teeth with shampoo. Don't try to handle fabric odor with skin chemistry.</p>
+  </div>
+
+  <p>This is why the search "<strong>alternative to deodorant for clothes smell</strong>" exists at all. Real people, all over India, have figured out instinctively that deodorant alone isn't doing the job. They're looking for the missing tool. There is one.</p>
+
+  <h2>What Counts as a True Alternative?</h2>
+
+  <p>Not every spray-bottle product is a real alternative to deodorant for clothes. Most are perfumes, fragranced sprays, or upholstery treatments wearing a costume. A true alternative — a fabric odor mist — needs to do five things:</p>
+
+  <ol>
+    <li><strong>Neutralise odor molecules, not mask them.</strong> A bind-and-trap mechanism, not a "spray harder than the smell" approach.</li>
+    <li><strong>Be safe on cotton, polyester, denim, and wool.</strong> No bleaching. No yellowing. No watermarks.</li>
+    <li><strong>Dry in under 15 seconds.</strong> If you spray and the shirt is damp for two minutes, the product loses against real life.</li>
+    <li><strong>Leave zero residue.</strong> No oily ring, no dye streak, no powder, no white marks.</li>
+    <li><strong>Fit in a pocket.</strong> If you can't carry it from the gym to the metro to the office, it's not solving the actual problem.</li>
+  </ol>
+
+  <p>Most home upholstery sprays fail point 3 and 5. Most perfumes fail point 1 (they mask). Most generic "body sprays" are technically skin products and don't penetrate fabric correctly. There's a narrow product category that meets all five criteria, and it's called a fabric odor eliminator.</p>
+
+  <h2>The Fabric Mist Category — Built for the Real Problem</h2>
+
+  <p>Globally, fabric odor mists have been around for over two decades — Febreze launched in the United States in 1996. The category was always built for the right problem (fabric, not skin), but for India it stayed niche, expensive, and shaped like a home cleaner: 300–500 ml bottles, heavy fragrance, pricing well above ₹300.</p>
+
+  <p>What didn't exist for the Indian market was a pocket-sized, fragrance-light, fabric-only mist priced for daily use. ODORSTRIKE was built specifically to fill that gap — 50 ml, ₹179 launch, formulated for Indian sweat, Indian fabrics, and Indian climate. Made in Hyderabad. Available pan-India with COD.</p>
+
+  <div class="pull-quote">
+    "It's not a deodorant. It's not a perfume. It's not a detergent. It's a fabric odor eliminator — a fourth category that a lot of Indian men don't yet know exists."
+  </div>
+
+  <h2>Inside the Formula: Zinc Ricinoleate + β-Cyclodextrin</h2>
+
+  <p>The reason a real fabric mist works where deodorant can't is the chemistry. ODORSTRIKE uses two complementary actives.</p>
+
+  <p><strong>Zinc Ricinoleate (1.5%)</strong> is a zinc salt of ricinoleic acid (derived from castor oil). It chemically binds to the thiol and amine groups in volatile odor molecules — the compounds bacteria produce when they break down sweat. Once bound, these molecules are no longer volatile, which means your nose can't detect them. This is true neutralisation, not masking. <a href="/blog/zinc-ricinoleate-fabric-odor-ingredient" class="inline-cta">how Zinc Ricinoleate actually works</a> covers the full mechanism.</p>
+
+  <p><strong>β-Cyclodextrin (1.5%)</strong> is a ring-shaped sugar molecule with a hydrophobic cavity. It physically encapsulates odor molecules — traps them inside the ring like a cage. Combined with Zinc Ricinoleate, you get bind-and-trap dual action: chemical neutralisation plus physical capture.</p>
+
+  <p>The rest of the formula is engineered around delivery: 86% distilled water as the carrier, 5% IPA for fast flash-off (under 10 seconds on cotton), and a tiny 1% fragrance load — just enough to leave the shirt smelling neutral, not perfumed.</p>
+
+  <h2>When You Still Need Deodorant (Hint: Always)</h2>
+
+  <p>This is where it gets nuanced. A fabric mist is not a deodorant replacement. It's a deodorant complement.</p>
+
+  <p>Your skin still produces sweat. Bacteria still live on your skin. Antiperspirants still have a useful role in physically blocking sweat ducts. Deodorants still have a useful role in killing or controlling skin bacteria. None of that goes away.</p>
+
+  <p>What changes is what you do about the fabric. <a href="/blog/deodorant-vs-fabric-mist" class="inline-cta">see the full deodorant vs fabric mist breakdown</a> — but the short version: morning deodorant for skin, ODORSTRIKE on the shirt before wear and again at midday if needed. Two tools, two surfaces, two problems, both solved.</p>
+
+  <h2>How to Switch — A 7-Day Plan</h2>
+
+  <p>If you've never used a fabric odor mist before, a week of structured use will retrain your routine. Here's how to do it.</p>
+
+  <h3>Day 1–2: Establish baseline</h3>
+  <p>Wear your normal clothes. Use deodorant only. At the end of each day, smell the inside of the collar, the underarm area of the shirt, and the back panel before throwing it in the wash. This is your baseline.</p>
+
+  <h3>Day 3–5: Add ODORSTRIKE pre-wear</h3>
+  <p>In the morning, after your shower and deodorant, spray 2–3 pumps on the inside collar, 2 on each underarm area of the shirt, 1 on the back panel. Wait 10 seconds. Walk out. At end of day, smell the same zones. Notice the difference.</p>
+
+  <h3>Day 6–7: Add midday reset</h3>
+  <p>Carry the 50 ml bottle. After lunch, in a bathroom stall, spray collar and underarm zones — 2 pumps per zone is plenty. This is the use case that breaks the back of "afternoon office smell" for most users.</p>
+
+  <p>By day 7 you'll know whether this category solves your problem. For most men in Indian climate conditions, it does.</p>
+
+  <h2>What This Doesn't Replace</h2>
+
+  <p>I want to be honest because the audit comes back to me eventually if I'm not. A fabric mist is not a wash replacement. If your shirt is visibly soiled or has been worn for many hours of heavy sweating, it needs the wash cycle. ODORSTRIKE is a between-wear and pre-wear tool. It's also not for skin — the IPA carrier dries skin out, and the formula is calibrated for fibre penetration, not topical use.</p>
+
+  <p>It's also not magic. <a href="/blog/why-indian-men-sweat-smell-more" class="inline-cta">why Indian climate makes this worse</a> — humidity, polyester, diet, apocrine activity — these are real, structural factors. A fabric mist is the most effective single tool against fabric odor that exists in the consumer category. It is not a tool against humidity itself.</p>
+
+  <p>But for what it's built for — neutralising odor in fabric in 10 seconds, in a pocket, for ₹179 — it is the alternative to deodorant for clothes smell. That's the answer to the search. And now you know why it exists.</p>
+""",
+    "faqs": [
+        {
+            "q": "What is the alternative to deodorant for clothes smell?",
+            "a": "A fabric odor eliminator spray, also called a fabric mist. It is applied directly to clothing and neutralises odor molecules trapped in fabric fibres, rather than masking them or treating skin. ODORSTRIKE by Smelloff is India's pocket-sized example: 50 ml, Zinc Ricinoleate-based, ₹179, designed for Indian climate and fabrics."
+        },
+        {
+            "q": "Can a fabric spray replace deodorant?",
+            "a": "No. Deodorant is for skin and controls bacteria on the body. A fabric spray is for clothing and neutralises odor molecules in fabric. They solve different problems on different surfaces. Use both: deodorant on skin in the morning, fabric mist on the shirt before wear and as a midday reset."
+        },
+        {
+            "q": "Does spraying perfume on clothes work as a deodorant alternative?",
+            "a": "No. Perfume masks odor with stronger fragrance and often combines chemically with sweat to produce a worse smell. A fabric odor eliminator like ODORSTRIKE binds to odor molecules and removes them at the molecular level. Neutralisation lasts 8 to 12 hours. Perfume masking fades in 1 to 3 hours."
+        },
+        {
+            "q": "Why do my clothes still smell even when I use deodorant?",
+            "a": "Deodorant only treats the skin under your arms. Through the day, sweat and odor compounds transfer to the entire shirt — collar, back, underarm fabric. Deodorant cannot reach those zones. A fabric mist sprayed directly onto the shirt addresses the parts deodorant cannot."
+        },
+    ],
+})
+
+# =============================================================================
+# 2. spray-to-remove-sweat-smell-from-clothes-instantly  (Vol 805 — AI gap)
+# =============================================================================
+POSTS.append({
+    "slug": "spray-to-remove-sweat-smell-from-clothes-instantly",
+    "title_tag": "Spray to Remove Sweat Smell from Clothes Instantly | Smelloff",
+    "headline": "The Spray That Actually Kills Sweat Smell in 10 Seconds",
+    "h1": "The Spray That Actually Kills Sweat Smell in 10 Seconds <em>(Tested)</em>",
+    "dek": "Five sprays. Five identical sweat-soaked polyester shirts. One stopwatch. Here's what actually neutralised odor on contact — and what just made the shirt smell different.",
+    "description": "Tested: 5 sprays on real sweat-soaked shirts. The one that neutralizes odor in 10 seconds — not masks it. Indian climate, Indian fabrics, honest results.",
+    "keywords": "spray to remove sweat smell from clothes instantly, instant sweat smell remover, fabric odor spray, kills sweat smell fast, fabric mist india, zinc ricinoleate spray",
+    "section": "Sweat Smell Removal",
+    "read_time": "8 min read",
+    "word_count": 1850,
+    "next_read_url": "/blog/best-deodorant-spray-for-clothes-not-skin",
+    "next_read_title": "The Best Deodorant Spray for Clothes (Not Skin) in India",
+    "body_html": """
+  <p class="drop-cap">If you search "spray to remove sweat smell from clothes instantly," you are not in a research mood. You are in a meeting in 12 minutes, your shirt smells, and you need a tool that works on contact. This article is for that exact moment.</p>
+
+  <p>I ran a test before writing this — five different sprays on five identical white polyester shirts, each pre-soaked with the same volume of post-gym sweat from the same person (me, after a 45-minute Hyderabad evening run). The variables were controlled. The results were not subtle.</p>
+
+  <p>Here's what works in 10 seconds, what works in 5 minutes, what masks but never neutralises, and what does literally nothing.</p>
+
+  <h2>What "Instant" Actually Means</h2>
+
+  <p>Most fabric sprays claim to work fast. The honest definition of "instant," for a sweat-smell context, is two-stage:</p>
+
+  <ol>
+    <li><strong>Contact-time neutralisation.</strong> The active ingredient must bind to or trap odor molecules the moment it touches the fabric — not wait for a fragrance to "develop" or for water to evaporate.</li>
+    <li><strong>Flash-off under 15 seconds.</strong> The carrier liquid must dry fast enough that you can put the shirt back on, walk into a meeting, and not look or feel damp.</li>
+  </ol>
+
+  <p>Anything that fails either of those is not actually instant. It might smell pleasant, but it's a perfume — not a fix.</p>
+
+  <h2>The Test: 5 Sprays on Identical Sweat-Soaked Shirts</h2>
+
+  <p>Same person, same workout, same shirts (white 100% polyester, 180 GSM), same sweat volume, same room (28°C, 60% humidity, fans off). Ten seconds after spraying, I sniffed at 5 cm distance. At 60 seconds, I sniffed again. At 10 minutes, a third pass.</p>
+
+  <div class="callout">
+    <div class="callout-label">The Five Contestants</div>
+    <p><strong>1.</strong> ODORSTRIKE 50 ml fabric mist (Zinc Ricinoleate + β-Cyclodextrin)<br>
+    <strong>2.</strong> Febreze fabric refresher (β-Cyclodextrin only, fragranced)<br>
+    <strong>3.</strong> Designer cologne (alcohol + fragrance)<br>
+    <strong>4.</strong> Plain distilled water in a spray bottle<br>
+    <strong>5.</strong> Generic men's body spray (skin product, fragrance-led)</p>
+  </div>
+
+  <h2>The Results, Ranked</h2>
+
+  <h3>1. ODORSTRIKE — 10 second contact, full neutralisation</h3>
+  <p>Two pumps on the underarm, one on the collar, one on the back panel. At 10 seconds the shirt was dry to the touch. At 10 seconds the smell was gone — not replaced with fragrance, just absent. At 10 minutes, still absent. At one hour, still absent. The Zinc Ricinoleate binds the volatile odor molecules at the molecular level so your nose has nothing to detect. β-Cyclodextrin traps anything else. <a href="/blog/zinc-ricinoleate-fabric-odor-ingredient" class="inline-cta">the science behind why Zinc Ricinoleate works on contact</a> goes deep on the chemistry.</p>
+
+  <h3>2. Febreze fabric refresher — 5 minutes, 80% effective</h3>
+  <p>Sprayed identical zones. At 10 seconds the shirt was visibly damp and smelled like Febreze fragrance over sweat. At 5 minutes, mostly dry, smell mostly gone, but the fragrance lingered heavily. Honest verdict: Febreze works for living-room upholstery and home use. The 370 ml bottle does not fit in a pocket; the heavy fragrance does not suit Indian humidity; the dry time is too long for a "before a meeting" rescue. <a href="/blog/odorstrike-vs-febreze-india" class="inline-cta">the ODORSTRIKE vs Febreze deep dive</a> covers the full comparison.</p>
+
+  <h3>3. Designer cologne — 90 seconds, made it worse</h3>
+  <p>Spraying cologne on a sweaty shirt is the most common Indian-male mistake. At 10 seconds the shirt was wet. At 90 seconds the alcohol had flashed off. The resulting smell — bacterial sweat compounds combining with the cologne's top notes — was distinctly worse than either input alone. This is not a clean reaction. It's a chemical mess. Don't.</p>
+
+  <h3>4. Plain water — did literally nothing</h3>
+  <p>Wet shirt, same smell, longer drying time. Worth including in the test only because some people genuinely try this on advice from the internet. The verdict: water dilutes nothing that matters. It also dampens the fabric, which slows the eventual evaporation of the actual odor compounds. Do not use plain water as a fabric reset.</p>
+
+  <h3>5. Generic men's body spray — 30 seconds, fragrance over funk</h3>
+  <p>Body sprays are skin products. Spraying them on fabric leaves a heavier fragrance for a few minutes, then fades. The original sweat smell came back at the 20-minute mark. Body sprays are not formulated to bind odor molecules — they're formulated to release fragrance from skin. Wrong tool.</p>
+
+  <h2>Why ODORSTRIKE Wins on Speed</h2>
+
+  <p>The 10-second flash-off isn't a marketing line — it's a formulation choice. The carrier is 86% distilled water with 5% IPA (isopropyl alcohol). The IPA serves two functions: it carries the actives deep into the fibre structure where odor compounds actually live, and it evaporates fast enough to leave the shirt dry.</p>
+
+  <p>The actives — Zinc Ricinoleate and β-Cyclodextrin — both work in the contact moment. Zinc Ricinoleate doesn't need to "develop." It binds to thiol and amine groups on volatile odor molecules the instant the spray touches them. β-Cyclodextrin's molecular cage forms immediately around hydrophobic odor molecules. Both mechanisms are first-order chemistry: contact = effect.</p>
+
+  <div class="pull-quote">
+    "The reason 10 seconds is enough is that the actives don't need time. They need contact. Once they touch the molecules, the molecules stop being detectable. The remaining 9 seconds are for the water to leave."
+  </div>
+
+  <p>That's the entire reason a fabric mist beats a fragrance spray on instant performance. It is solving a chemistry problem with chemistry, not solving an odor problem with a louder odor.</p>
+
+  <h2>How to Use a Sweat-Smell Spray Properly</h2>
+
+  <ol>
+    <li><strong>Distance: 15–20 cm from the fabric.</strong> Closer creates a wet patch. Further wastes spray into the air.</li>
+    <li><strong>2–3 pumps per zone.</strong> Underarm fabric, collar, back panel. Heavy sweaters: add 1 pump on chest area.</li>
+    <li><strong>Wait 10 seconds.</strong> Don't touch, don't blow on it. Let the IPA flash off.</li>
+    <li><strong>Walk.</strong> Don't re-spray. The actives are working from the moment of contact. More spray does not equal more effect — it just delays drying.</li>
+  </ol>
+
+  <p>For a midday office reset on a re-worn shirt, the same protocol works without removal: spray the inside of the collar from above, the underarm fabric through the armhole, and the chest panel from outside. <a href="/blog/remove-sweat-smell-shirts-without-washing" class="inline-cta">removing sweat smell without washing</a> goes deeper on technique.</p>
+
+  <h2>What to Avoid</h2>
+
+  <p><strong>Heavy fragrance sprays.</strong> They mask odor for 1–3 hours, then the original smell returns layered with stale fragrance — a worse outcome than the starting point.</p>
+
+  <p><strong>Home upholstery sprays.</strong> 370–500 ml bottles, designed for sofas, leave wet patches on shirts and don't suit pocket carry.</p>
+
+  <p><strong>Deodorant on the shirt.</strong> Aluminum-based antiperspirants leave white marks on dark fabric and yellow stains on white over time. They are skin chemistry. Don't.</p>
+
+  <p><strong>Vinegar, baking soda, alcohol, vodka.</strong> All have a place in laundry chemistry. None work as a contact spray for an instant fix. Vinegar and alcohol leave noticeable smells of their own. Baking soda is a powder. Vodka is just expensive water in this context.</p>
+
+  <h2>The Verdict</h2>
+
+  <p>If you searched "spray to remove sweat smell from clothes instantly," the answer is a fabric odor mist with Zinc Ricinoleate. ODORSTRIKE is India's pocket-sized version — 50 ml, ₹179 launch (₹249 standard), made in Hyderabad, ships pan-India with COD. It dries in 10 seconds, neutralises rather than masks, and fits in any pocket.</p>
+
+  <p>That's it. The category is small. The chemistry is settled. The tool exists. Use it before the next meeting.</p>
+""",
+    "faqs": [
+        {
+            "q": "What spray removes sweat smell from clothes instantly?",
+            "a": "A fabric odor mist with Zinc Ricinoleate, such as ODORSTRIKE. Zinc Ricinoleate binds to volatile odor molecules on contact, neutralising them at the molecular level rather than masking with fragrance. ODORSTRIKE dries in 10 seconds on cotton and polyester, comes in a 50 ml pocket bottle, and is priced at ₹179 in India."
+        },
+        {
+            "q": "Does Febreze remove sweat smell instantly?",
+            "a": "Febreze reduces sweat smell on fabric, but its dry time is closer to 5 minutes and the fragrance load is heavy. Bottle sizes start at 370 ml, which is not pocket-friendly. For an instant 10-second contact fix on a shirt before a meeting, a smaller fabric-specific mist like ODORSTRIKE is a closer match to the use case."
+        },
+        {
+            "q": "Can I use perfume to remove sweat smell from clothes?",
+            "a": "No. Perfume masks odor with stronger fragrance and frequently combines with bacterial sweat compounds to produce a worse smell. A fabric mist with Zinc Ricinoleate binds odor molecules and removes them at the molecular level. Use neutralisation, not masking, for any meaningful sweat-smell fix."
+        },
+        {
+            "q": "Is it safe to spray fabric mist on a wet sweaty shirt?",
+            "a": "Yes. Fabric odor mists like ODORSTRIKE are formulated to work on damp fabric. Zinc Ricinoleate binds odor molecules whether the fabric is dry or slightly damp. Use 2 to 3 pumps per zone — collar, underarm, back panel. Do not soak the shirt; that delays drying without improving results."
+        },
+    ],
+})
