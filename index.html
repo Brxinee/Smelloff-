@@ -2194,7 +2194,8 @@
   .policy-overlay .po-eyebrow::before{
     content:'';width:18px;height:1.5px;background:var(--acid);
   }
-  .policy-overlay .po-main h1{
+  .policy-overlay .po-main h1,
+  .policy-overlay .po-main #pfTitle{
     font-family:'Barlow Condensed',sans-serif;
     font-weight:900;
     font-size:clamp(36px,7vw,56px);
@@ -2239,7 +2240,8 @@
   }
   @media(min-width:720px){
     .policy-overlay .po-main{padding:64px 40px 96px}
-    .policy-overlay .po-main h1{font-size:clamp(48px,6vw,64px)}
+    .policy-overlay .po-main h1,
+    .policy-overlay .po-main #pfTitle{font-size:clamp(48px,6vw,64px)}
     .policy-overlay .po-main h2{font-size:22px}
   }
 
@@ -4413,7 +4415,7 @@
   </nav>
   <main class="po-main">
     <div class="po-eyebrow">Policy · Payment Failed</div>
-    <h1 id="pfTitle">Payment Failed / Failed Transaction Policy</h1>
+    <h2 id="pfTitle">Payment Failed / Failed Transaction Policy</h2>
 
     <p>At Smelloff, we currently accept payments via UPI (direct transfer to our UPI ID and QR code). Since payments are processed manually, here's what happens if something goes wrong:</p>
 
