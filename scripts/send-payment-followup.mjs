@@ -1,7 +1,7 @@
 // scripts/send-payment-followup.mjs
 //
 // Send the UPI payment follow-up email to a customer using Resend.
-// Reads the HTML template from /payment-followup-email.html, replaces
+// Reads the HTML template from /emails/payment-followup-email.html, replaces
 // {{variables}} with values from the order, and sends via Resend's API.
 //
 // Usage (one-off, from project root):
@@ -17,7 +17,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const TEMPLATE_PATH = resolve(__dirname, '..', 'payment-followup-email.html');
+const TEMPLATE_PATH = resolve(__dirname, '..', 'emails', 'payment-followup-email.html');
 
 const FROM = 'ODORSTRIKE <orders@smelloff.in>';
 const REPLY_TO = 'smelloffsupport@gmail.com';
