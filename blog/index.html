@@ -189,11 +189,12 @@
     .b-card.featured .b-thumb-headline{font-size:40px}
   }
 
-  /* Trending marquee (auto-scroll horizontal loop) */
+  /* Trending marquee — JS-driven, swipeable */
   .b-marquee{
     border-top:1px solid #1a1a1a;border-bottom:1px solid #1a1a1a;
-    background:#0A0A0A;padding:24px 0;overflow:hidden;
-    position:relative;
+    background:#080808;padding:24px 0;
+    position:relative;overflow:hidden;
+    user-select:none;
   }
   .b-marquee-label{
     max-width:1120px;margin:0 auto 14px;padding:0 20px;
@@ -201,54 +202,75 @@
     letter-spacing:.22em;text-transform:uppercase;color:#B8FF57;
     display:flex;align-items:center;gap:10px;
   }
-  .b-marquee-label::before{content:'';width:6px;height:6px;border-radius:50%;
-    background:#B8FF57;box-shadow:0 0 10px #B8FF57;animation:b-pulse 1.6s ease-in-out infinite}
+  .b-marquee-label::before{
+    content:'';width:6px;height:6px;border-radius:50%;
+    background:#B8FF57;box-shadow:0 0 10px #B8FF57;
+    animation:b-pulse 1.6s ease-in-out infinite;
+  }
   @keyframes b-pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  .b-marquee-viewport{
+    overflow:hidden;cursor:grab;
+    touch-action:pan-y;
+  }
+  .b-marquee-viewport.dragging{cursor:grabbing}
   .b-marquee-track{
     display:flex;gap:14px;width:max-content;
-    animation:b-scroll 36s linear infinite;
     will-change:transform;
-  }
-  .b-marquee:hover .b-marquee-track{animation-play-state:paused}
-  @keyframes b-scroll{
-    from{transform:translateX(0)}
-    to{transform:translateX(-50%)}
-  }
-  @media(prefers-reduced-motion:reduce){
-    .b-marquee-track{animation:none}
+    transform:translate3d(0,0,0);
+    padding:0 20px;
   }
   .b-mc{
     flex-shrink:0;width:280px;
-    background:#0D0D0D;border:1px solid #1F1F1F;border-radius:10px;
+    background:#080808;border:1px solid #1F1F1F;border-radius:10px;
     text-decoration:none;color:#E8E8E8;
     overflow:hidden;display:flex;flex-direction:column;
     transition:border-color .2s ease,transform .2s ease;
   }
-  .b-mc:hover{border-color:rgba(184,255,87,.4);transform:translateY(-2px)}
+  .b-mc:hover{border-color:rgba(184,255,87,.6);transform:translateY(-2px)}
+  /* Thumbnail base — matte black with brand-palette accents only */
   .b-mc-thumb{
-    aspect-ratio:5/3;padding:12px 14px;
-    display:flex;flex-direction:column;justify-content:space-between;
+    aspect-ratio:5/3;padding:14px 16px;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    text-align:center;gap:10px;
     position:relative;overflow:hidden;
+    background:#080808;
   }
-  .b-mc-thumb::before{content:'';position:absolute;inset:0;
-    background:radial-gradient(circle at 80% 20%,rgba(255,255,255,.08) 0%,transparent 40%);
-    pointer-events:none}
+  /* Variant 1: top + bottom acid stripes */
+  .b-mc-thumb.v1{border-top:4px solid #B8FF57;border-bottom:4px solid #B8FF57}
+  /* Variant 2: bold acid corner triangle */
+  .b-mc-thumb.v2::before{
+    content:'';position:absolute;top:0;right:0;
+    width:0;height:0;
+    border-style:solid;border-width:0 64px 64px 0;
+    border-color:transparent #B8FF57 transparent transparent;
+    z-index:0;
+  }
+  /* Variant 3: thick acid left bar */
+  .b-mc-thumb.v3{border-left:8px solid #B8FF57}
+  /* Variant 4: acid frame outline */
+  .b-mc-thumb.v4::before{
+    content:'';position:absolute;inset:10px;
+    border:2px solid #B8FF57;border-radius:4px;
+    pointer-events:none;
+  }
   .b-mc-cat{
-    position:relative;z-index:2;align-self:flex-start;
-    font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:9px;
-    letter-spacing:.2em;text-transform:uppercase;color:#080808;
-    background:#fff;padding:4px 8px;border-radius:3px;
+    position:relative;z-index:2;
+    font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:10px;
+    letter-spacing:.22em;text-transform:uppercase;color:#080808;
+    background:#B8FF57;padding:4px 10px;border-radius:2px;
   }
   .b-mc-headline{
     position:relative;z-index:2;
-    font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:18px;
+    font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:20px;
     line-height:1;letter-spacing:.005em;text-transform:uppercase;color:#fff;
+    max-width:90%;
   }
   .b-mc-meta{
     padding:12px 14px;
     font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:11px;
     letter-spacing:.16em;text-transform:uppercase;color:#B8FF57;
     display:flex;align-items:center;gap:6px;
+    border-top:1px solid #1a1a1a;
   }
   .b-mc-meta::after{content:'→';transition:transform .2s ease}
   .b-mc:hover .b-mc-meta::after{transform:translateX(3px)}
@@ -271,42 +293,163 @@
 
 <section class="b-marquee" aria-label="Trending guides">
   <div class="b-marquee-label">Trending now</div>
-  <div class="b-marquee-track">
-    <a class="b-mc" href="/blog/best-fabric-odor-spray-india-2026-body-odor">
-      <div class="b-mc-thumb b-thumb-1"><span class="b-mc-cat">Buyer's Guide</span><span class="b-mc-headline">Best fabric odor spray for body odor</span></div>
-      <div class="b-mc-meta">Read the ranking</div>
-    </a>
-    <a class="b-mc" href="/blog/where-to-buy-odorstrike-india">
-      <div class="b-mc-thumb b-thumb-3"><span class="b-mc-cat">Where to buy</span><span class="b-mc-headline">Where to buy ODORSTRIKE in India</span></div>
-      <div class="b-mc-meta">Stockist guide</div>
-    </a>
-    <a class="b-mc" href="/blog/odorstrike-review-30-day-india-test">
-      <div class="b-mc-thumb b-thumb-4"><span class="b-mc-cat">Reviews</span><span class="b-mc-headline">ODORSTRIKE 30-day India test</span></div>
-      <div class="b-mc-meta">Read the review</div>
-    </a>
-    <a class="b-mc" href="/blog/fix-shirt-odor-before-meeting">
-      <div class="b-mc-thumb b-thumb-3"><span class="b-mc-cat">Pre-Meeting</span><span class="b-mc-headline">Fix shirt odor in 60 seconds</span></div>
-      <div class="b-mc-meta">Read the fix</div>
-    </a>
-    <!-- duplicates for seamless loop (must mirror the 4 above) -->
-    <a class="b-mc" href="/blog/best-fabric-odor-spray-india-2026-body-odor" aria-hidden="true" tabindex="-1">
-      <div class="b-mc-thumb b-thumb-1"><span class="b-mc-cat">Buyer's Guide</span><span class="b-mc-headline">Best fabric odor spray for body odor</span></div>
-      <div class="b-mc-meta">Read the ranking</div>
-    </a>
-    <a class="b-mc" href="/blog/where-to-buy-odorstrike-india" aria-hidden="true" tabindex="-1">
-      <div class="b-mc-thumb b-thumb-3"><span class="b-mc-cat">Where to buy</span><span class="b-mc-headline">Where to buy ODORSTRIKE in India</span></div>
-      <div class="b-mc-meta">Stockist guide</div>
-    </a>
-    <a class="b-mc" href="/blog/odorstrike-review-30-day-india-test" aria-hidden="true" tabindex="-1">
-      <div class="b-mc-thumb b-thumb-4"><span class="b-mc-cat">Reviews</span><span class="b-mc-headline">ODORSTRIKE 30-day India test</span></div>
-      <div class="b-mc-meta">Read the review</div>
-    </a>
-    <a class="b-mc" href="/blog/fix-shirt-odor-before-meeting" aria-hidden="true" tabindex="-1">
-      <div class="b-mc-thumb b-thumb-3"><span class="b-mc-cat">Pre-Meeting</span><span class="b-mc-headline">Fix shirt odor in 60 seconds</span></div>
-      <div class="b-mc-meta">Read the fix</div>
-    </a>
+  <div class="b-marquee-viewport" id="marqueeVp">
+    <div class="b-marquee-track" id="marqueeTrack">
+      <a class="b-mc" href="/blog/best-fabric-odor-spray-india-2026-body-odor">
+        <div class="b-mc-thumb v1"><span class="b-mc-cat">Buyer's Guide</span><span class="b-mc-headline">Best fabric odor spray for body odor</span></div>
+        <div class="b-mc-meta">Read the ranking</div>
+      </a>
+      <a class="b-mc" href="/blog/where-to-buy-odorstrike-india">
+        <div class="b-mc-thumb v2"><span class="b-mc-cat">Where to buy</span><span class="b-mc-headline">Where to buy ODORSTRIKE in India</span></div>
+        <div class="b-mc-meta">Stockist guide</div>
+      </a>
+      <a class="b-mc" href="/blog/odorstrike-review-30-day-india-test">
+        <div class="b-mc-thumb v3"><span class="b-mc-cat">Reviews</span><span class="b-mc-headline">ODORSTRIKE 30-day India test</span></div>
+        <div class="b-mc-meta">Read the review</div>
+      </a>
+      <a class="b-mc" href="/blog/fix-shirt-odor-before-meeting">
+        <div class="b-mc-thumb v4"><span class="b-mc-cat">Pre-Meeting</span><span class="b-mc-headline">Fix shirt odor in 60 seconds</span></div>
+        <div class="b-mc-meta">Read the fix</div>
+      </a>
+      <!-- duplicates for seamless loop (mirror the 4 above) -->
+      <a class="b-mc" href="/blog/best-fabric-odor-spray-india-2026-body-odor" aria-hidden="true" tabindex="-1">
+        <div class="b-mc-thumb v1"><span class="b-mc-cat">Buyer's Guide</span><span class="b-mc-headline">Best fabric odor spray for body odor</span></div>
+        <div class="b-mc-meta">Read the ranking</div>
+      </a>
+      <a class="b-mc" href="/blog/where-to-buy-odorstrike-india" aria-hidden="true" tabindex="-1">
+        <div class="b-mc-thumb v2"><span class="b-mc-cat">Where to buy</span><span class="b-mc-headline">Where to buy ODORSTRIKE in India</span></div>
+        <div class="b-mc-meta">Stockist guide</div>
+      </a>
+      <a class="b-mc" href="/blog/odorstrike-review-30-day-india-test" aria-hidden="true" tabindex="-1">
+        <div class="b-mc-thumb v3"><span class="b-mc-cat">Reviews</span><span class="b-mc-headline">ODORSTRIKE 30-day India test</span></div>
+        <div class="b-mc-meta">Read the review</div>
+      </a>
+      <a class="b-mc" href="/blog/fix-shirt-odor-before-meeting" aria-hidden="true" tabindex="-1">
+        <div class="b-mc-thumb v4"><span class="b-mc-cat">Pre-Meeting</span><span class="b-mc-headline">Fix shirt odor in 60 seconds</span></div>
+        <div class="b-mc-meta">Read the fix</div>
+      </a>
+    </div>
   </div>
 </section>
+
+<script>
+(function(){
+  var vp = document.getElementById('marqueeVp');
+  var track = document.getElementById('marqueeTrack');
+  if(!vp || !track) return;
+
+  var pos = 0;            // current translateX in px (negative = scrolled left)
+  var halfW = 0;          // width of one set (track has 2 sets)
+  var dragging = false;
+  var dragStartX = 0;
+  var dragStartPos = 0;
+  var lastMoveX = 0;
+  var lastMoveT = 0;
+  var velocity = 0;       // px/ms from drag
+  var dragMoved = false;
+  var resumeT = 0;
+  var paused = false;
+  var lastFrame = 0;
+  var SPEED = 0.04;       // px/ms ~ 40 px/sec auto-scroll
+  var DECAY = 0.92;       // velocity decay per frame after release
+
+  function measure(){
+    halfW = track.scrollWidth / 2;
+  }
+  measure();
+  window.addEventListener('resize', measure);
+  // Re-measure once fonts/images settle
+  setTimeout(measure, 600);
+
+  function setX(x){
+    // Normalize to [-halfW, 0]
+    if(halfW > 0){
+      while(x <= -halfW) x += halfW;
+      while(x > 0) x -= halfW;
+    }
+    pos = x;
+    track.style.transform = 'translate3d(' + x + 'px,0,0)';
+  }
+  setX(0);
+
+  function tick(t){
+    if(!lastFrame) lastFrame = t;
+    var dt = t - lastFrame;
+    lastFrame = t;
+    if(!dragging && !paused){
+      if(Math.abs(velocity) > 0.005){
+        // Glide from drag release
+        setX(pos + velocity * dt);
+        velocity *= Math.pow(DECAY, dt / 16.7);
+      } else {
+        velocity = 0;
+        setX(pos - SPEED * dt);
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  function onDown(e){
+    dragging = true;
+    dragMoved = false;
+    velocity = 0;
+    dragStartX = e.clientX;
+    dragStartPos = pos;
+    lastMoveX = e.clientX;
+    lastMoveT = performance.now();
+    vp.classList.add('dragging');
+    try { vp.setPointerCapture(e.pointerId); } catch(_) {}
+  }
+  function onMove(e){
+    if(!dragging) return;
+    var dx = e.clientX - dragStartX;
+    if(Math.abs(dx) > 4) dragMoved = true;
+    setX(dragStartPos + dx);
+    var now = performance.now();
+    var dt = now - lastMoveT;
+    if(dt > 0) velocity = (e.clientX - lastMoveX) / dt;
+    lastMoveX = e.clientX;
+    lastMoveT = now;
+  }
+  function onUp(e){
+    if(!dragging) return;
+    dragging = false;
+    vp.classList.remove('dragging');
+    try { vp.releasePointerCapture(e.pointerId); } catch(_) {}
+    // If we actually dragged, swallow the click that follows
+    if(dragMoved){
+      var swallow = function(ev){
+        ev.preventDefault();
+        ev.stopPropagation();
+        vp.removeEventListener('click', swallow, true);
+      };
+      vp.addEventListener('click', swallow, true);
+      setTimeout(function(){ vp.removeEventListener('click', swallow, true); }, 50);
+    }
+  }
+  vp.addEventListener('pointerdown', onDown);
+  vp.addEventListener('pointermove', onMove);
+  vp.addEventListener('pointerup', onUp);
+  vp.addEventListener('pointercancel', onUp);
+  vp.addEventListener('pointerleave', function(e){ if(dragging) onUp(e); });
+
+  // Pause auto-scroll when hovered (desktop), resume on leave
+  vp.addEventListener('mouseenter', function(){ paused = true; });
+  vp.addEventListener('mouseleave', function(){ paused = false; });
+
+  // Pause when tab hidden so we don't pile up RAF deltas
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden){ paused = true; lastFrame = 0; }
+    else { paused = false; lastFrame = 0; }
+  });
+
+  // Respect reduced-motion: stop auto-scroll, leave drag interactive
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    SPEED = 0;
+  }
+})();
+</script>
 
 <section class="b-posts">
   <div class="b-posts-head">All posts · <span>29 articles</span></div>
