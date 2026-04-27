@@ -3,6 +3,14 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/(.+)\\.html",
+      "has": [
+        { "type": "host", "value": "smelloff.in" }
+      ],
+      "destination": "https://www.smelloff.in/$1",
+      "permanent": true
+    },
+    {
       "source": "/(.+)/",
       "has": [
         { "type": "host", "value": "smelloff.in" }
