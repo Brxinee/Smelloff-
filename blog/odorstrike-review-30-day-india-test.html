@@ -257,6 +257,24 @@
     .post-popular{margin:56px -32px 8px}
     .post-pc{width:280px}
   }
+
+  /* Back-to-top floating button */
+  .to-top{
+    position:fixed;
+    right:20px;bottom:var(--toTopBottom,24px);
+    width:48px;height:48px;
+    background:#080808;color:#B8FF57;
+    border:1px solid #B8FF57;border-radius:50%;
+    font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:22px;
+    line-height:1;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    opacity:0;pointer-events:none;transform:translateY(8px);
+    transition:opacity .25s ease,transform .25s ease,background .15s ease,color .15s ease;
+    z-index:60;
+    box-shadow:0 4px 16px rgba(0,0,0,.45);
+  }
+  .to-top.show{opacity:1;pointer-events:auto;transform:translateY(0)}
+  .to-top:hover{background:#B8FF57;color:#080808}
 </style>
 </head>
 <body>
@@ -532,5 +550,31 @@
   if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ SPEED = 0; }
 })();
 </script>
+<button class="to-top" id="toTopBtn" type="button" aria-label="Scroll to top"><span aria-hidden="true">&uarr;</span></button>
+
+<script>
+(function(){
+  var btn = document.getElementById('toTopBtn');
+  if(!btn) return;
+  var threshold = 320;
+  var ticking = false;
+  function update(){
+    if((window.pageYOffset || document.documentElement.scrollTop) > threshold){
+      btn.classList.add('show');
+    } else {
+      btn.classList.remove('show');
+    }
+    ticking = false;
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ requestAnimationFrame(update); ticking = true; }
+  }, { passive: true });
+  btn.addEventListener('click', function(){
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  update();
+})();
+</script>
+
 </body>
 </html>
