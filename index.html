@@ -5776,13 +5776,7 @@
 
     window.checkoutFromCart = function(){
       if (cart.items.length === 0) return;
-      // Re-derive prices from PRODUCTS at checkout time so a stale price stored
-      // in the cart (e.g. from a previous launch) can't carry into the order.
-      const subtotal = cart.items.reduce((a,i) => {
-        var canonical = PRODUCTS[i.id];
-        var price = canonical ? canonical.price : i.price;
-        return a + price * i.qty;
-      }, 0);
+      const subtotal = cart.items.reduce((a,i) => a + i.price * i.qty, 0);
       const unitsTotal = cart.items.reduce((a,i) => a + i.qty, 0);
       // Build a dynamic "cart" variant that reuses the existing checkout overlay
       if (typeof VARIANTS !== 'undefined') {
