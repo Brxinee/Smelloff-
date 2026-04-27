@@ -2074,6 +2074,63 @@
   }
   @keyframes spin{to{transform:rotate(360deg)}}
 
+  /* Order processing — glowing bouncing dot */
+  .loading-screen{
+    display:none;
+    text-align:center;
+    padding:80px 20px 60px;
+  }
+  .loading-screen.active{display:block}
+  .glow-dot-wrap{
+    height:60px;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    margin:0 auto 28px;
+  }
+  .glow-dot{
+    width:18px;height:18px;
+    background:var(--acid);
+    border-radius:50%;
+    animation:glowBounce 1s ease-in-out infinite;
+    box-shadow:
+      0 0 12px rgba(184,255,87,.9),
+      0 0 28px rgba(184,255,87,.55),
+      0 0 50px rgba(184,255,87,.3);
+  }
+  @keyframes glowBounce{
+    0%,100%{
+      transform:translateY(0) scale(1);
+      box-shadow:
+        0 0 12px rgba(184,255,87,.9),
+        0 0 28px rgba(184,255,87,.55),
+        0 0 50px rgba(184,255,87,.3);
+    }
+    50%{
+      transform:translateY(-32px) scale(1.12);
+      box-shadow:
+        0 0 18px rgba(184,255,87,1),
+        0 0 40px rgba(184,255,87,.75),
+        0 0 70px rgba(184,255,87,.45);
+    }
+  }
+  .loading-screen .ls-label{
+    font-size:13px;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+    color:var(--acid);
+    font-weight:700;
+  }
+  .loading-screen .ls-sub{
+    font-size:13px;
+    color:rgba(255,255,255,.6);
+    margin-top:10px;
+    letter-spacing:.5px;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .glow-dot{animation:none}
+  }
+
   /* ============================= */
   /* UPI PAYMENT BLOCK (QR + TIMER)*/
   /* ============================= */
@@ -4441,6 +4498,13 @@
       </button>
     </div>
 
+    <!-- Order processing loader (glowing bouncing dot) -->
+    <div id="loadingScreen" class="loading-screen" aria-live="polite">
+      <div class="glow-dot-wrap"><div class="glow-dot" aria-hidden="true"></div></div>
+      <div class="ls-label" id="loadingLabel">Placing your order…</div>
+      <div class="ls-sub" id="loadingSub">Hang tight</div>
+    </div>
+
     <!-- Success state -->
     <div id="successScreen" class="success-screen" style="display:none">
       <div class="overlay-tag" id="successTag">Order confirmed</div>
@@ -4608,6 +4672,8 @@
     document.getElementById('submitText').textContent = (payMethod === 'cod' ? 'PLACE COD ORDER · ₹' : 'OPEN UPI APP · ₹') + total;
     document.getElementById('checkoutForm').style.display = 'block';
     document.getElementById('successScreen').style.display = 'none';
+    var lsEl = document.getElementById('loadingScreen');
+    if (lsEl) lsEl.classList.remove('active');
     document.getElementById('checkoutOverlay').classList.add('active');
     document.body.style.overflow = 'hidden';
     // Hide sticky buy bar while overlay is open
@@ -4619,6 +4685,8 @@
   function closeCheckout() {
     document.getElementById('checkoutOverlay').classList.remove('active');
     document.body.style.overflow = '';
+    var lsEl = document.getElementById('loadingScreen');
+    if (lsEl) lsEl.classList.remove('active');
     const upiBlock = document.getElementById('upiBlock');
     if (upiBlock) upiBlock.style.display = 'none';
     // Stop UPI countdown if it was running
@@ -4775,7 +4843,23 @@
     }
   }
 
+  function showLoadingScreen(label, sub) {
+    document.getElementById('checkoutForm').style.display = 'none';
+    document.getElementById('successScreen').style.display = 'none';
+    var ls = document.getElementById('loadingScreen');
+    if (!ls) return;
+    if (label) document.getElementById('loadingLabel').textContent = label;
+    if (sub) document.getElementById('loadingSub').textContent = sub;
+    ls.classList.add('active');
+  }
+
+  function hideLoadingScreen() {
+    var ls = document.getElementById('loadingScreen');
+    if (ls) ls.classList.remove('active');
+  }
+
   function showSuccess(orderId, method) {
+    hideLoadingScreen();
     document.getElementById('checkoutForm').style.display = 'none';
     document.getElementById('successScreen').style.display = 'block';
     document.getElementById('successTag').textContent = 'Order confirmed';
@@ -4840,10 +4924,11 @@
           paymentMethod: 'Cash on Delivery'
         }).catch(console.error);
       }
+      showLoadingScreen('Placing your order…', 'Confirming with our team');
       setTimeout(() => {
         btn.disabled = false;
         showSuccess(orderId, 'cod');
-      }, 600);
+      }, 2400);
       return;
     }
 
@@ -4861,12 +4946,16 @@
     }
 
     const upiLink = buildUpiLink(total, orderId);
-    showUpiSuccess(orderId, total, upiLink);
-    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-    if (isMobile) {
-      // Defer one tick so the fetch(keepalive) is flushed before the UPI redirect.
-      setTimeout(function(){ window.location.href = upiLink; }, 150);
-    }
+    showLoadingScreen('Confirming payment…', 'Securing your UPI session');
+    setTimeout(function() {
+      btn.disabled = false;
+      showUpiSuccess(orderId, total, upiLink);
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      if (isMobile) {
+        // Defer one tick so the success screen renders before the UPI redirect.
+        setTimeout(function(){ window.location.href = upiLink; }, 150);
+      }
+    }, 2400);
   }
 
   // Copy UPI ID to clipboard with brief "Copied ✓" confirmation
@@ -4903,6 +4992,7 @@
   }
 
   function showUpiSuccess(orderId, total, upiLink) {
+    hideLoadingScreen();
     document.getElementById('checkoutForm').style.display = 'none';
     const s = document.getElementById('successScreen');
     s.style.display = 'block';
