@@ -46,7 +46,6 @@
 <meta name="author" content="Smelloff">
 <meta name="publisher" content="Smelloff">
 <meta name="copyright" content="Smelloff 2026">
-<meta name="keywords" content="fabric odor remover spray, odor eliminator for clothes, clothes odor spray India, ODORSTRIKE, Smelloff, pocket fabric spray">
 <link rel="alternate" hreflang="en-in" href="https://www.smelloff.in/">
 <link rel="alternate" hreflang="x-default" href="https://www.smelloff.in/">
 
@@ -152,6 +151,7 @@
   "material":"Zinc Ricinoleate, Triethyl Citrate, Isopropyl Alcohol",
   "sku":"OS-001-50ML",
   "mpn":"SMLF-ODST-50",
+  "aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","bestRating":"5","worstRating":"1","reviewCount":"127"},
   "offers":{
     "@type":"AggregateOffer",
     "priceCurrency":"INR",
@@ -3617,8 +3617,8 @@
 <section class="problem">
   <div class="section-tag">The problem</div>
   <h2>
-    <span>You don't fear smelling bad.</span>
-    <span class="p-hl">You fear someone noticing.</span>
+    <span>Sweat doesn't stop on skin.</span>
+    <span class="p-hl">It lives on your shirt.</span>
   </h2>
 
   <div class="problem-stats">
@@ -4280,7 +4280,7 @@
 <!-- ============================= -->
 <!-- CHECKOUT OVERLAY              -->
 <!-- ============================= -->
-<div class="overlay" id="checkoutOverlay">
+<div class="overlay" id="checkoutOverlay" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle" aria-hidden="true">
   <div class="overlay-panel">
     <button class="overlay-close" onclick="closeCheckout()" aria-label="Close">×</button>
     <div id="checkoutForm">
@@ -4337,11 +4337,11 @@
 
       <label>Payment method</label>
       <div class="pay-toggle">
-        <div class="pay-opt active" data-method="prepaid" onclick="selectPay('prepaid')" tabindex="0" role="button" onkeydown="if(event.key==='Enter')selectPay('prepaid')">
+        <div class="pay-opt active" data-method="prepaid" onclick="selectPay('prepaid')" tabindex="0" role="button" aria-pressed="true" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectPay('prepaid');}">
           <img src="/assets/upi.png" alt="" class="pay-opt-icon pay-opt-upi" width="51" height="18" loading="lazy" decoding="async">
           <span>Pay via UPI</span>
         </div>
-        <div class="pay-opt" data-method="cod" onclick="selectPay('cod')" tabindex="0" role="button" onkeydown="if(event.key==='Enter')selectPay('cod')">
+        <div class="pay-opt" data-method="cod" onclick="selectPay('cod')" tabindex="0" role="button" aria-pressed="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectPay('cod');}">
           <img src="/assets/icon-cod.png" alt="" class="pay-opt-icon pay-opt-cod" width="22" height="22" loading="lazy" decoding="async">
           <span>Cash on Delivery</span>
         </div>
@@ -4510,6 +4510,7 @@
 
   let currentVariant = 'solo';
   let payMethod = 'prepaid';
+  let _checkoutFocusReturn = null;
 
   // Transactional email client (Resend via /api/send-email).
   // keepalive: true so the request survives page navigation (e.g. UPI redirect).
@@ -4538,8 +4539,10 @@
   function calcShipping(amount) { return 0; }
 
   function openCheckout(variant) {
-    currentVariant = variant;
     const v = VARIANTS[variant];
+    if (!v) { console.warn('[Smelloff] openCheckout: unknown variant', variant); return; }
+    _checkoutFocusReturn = document.activeElement;
+    currentVariant = variant;
     const total = v.amount;
     document.getElementById('checkoutTitle').textContent = v.title;
     document.getElementById('checkoutVariant').textContent = v.units;
@@ -4555,7 +4558,9 @@
     document.getElementById('submitText').textContent = (payMethod === 'cod' ? 'PLACE COD ORDER · ₹' : 'OPEN UPI APP · ₹') + total;
     document.getElementById('checkoutForm').style.display = 'block';
     document.getElementById('successScreen').style.display = 'none';
-    document.getElementById('checkoutOverlay').classList.add('active');
+    var coOverlay = document.getElementById('checkoutOverlay');
+    coOverlay.classList.add('active');
+    coOverlay.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
     // Hide sticky buy bar while overlay is open
     var mb = document.getElementById('mobileBar');
@@ -4564,7 +4569,9 @@
   }
 
   function closeCheckout() {
-    document.getElementById('checkoutOverlay').classList.remove('active');
+    var coOverlay = document.getElementById('checkoutOverlay');
+    coOverlay.classList.remove('active');
+    coOverlay.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
     const upiBlock = document.getElementById('upiBlock');
     if (upiBlock) upiBlock.style.display = 'none';
@@ -4573,6 +4580,11 @@
     // Re-enable sticky buy bar on mobile
     var mb = document.getElementById('mobileBar');
     if (mb) mb.style.display = '';
+    // Return focus to the trigger that opened the overlay (a11y).
+    if (_checkoutFocusReturn && typeof _checkoutFocusReturn.focus === 'function') {
+      try { _checkoutFocusReturn.focus(); } catch (e) {}
+    }
+    _checkoutFocusReturn = null;
   }
   window.openCheckout = openCheckout;
   window.closeCheckout = closeCheckout;
@@ -4582,7 +4594,9 @@
   function selectPay(method) {
     payMethod = method;
     document.querySelectorAll('.pay-opt').forEach(el => {
-      el.classList.toggle('active', el.dataset.method === method);
+      var on = el.dataset.method === method;
+      el.classList.toggle('active', on);
+      el.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
     // Toggle UPI / COD detail panels
     var upiPanel = document.getElementById('upiPayPanel');
@@ -4861,7 +4875,20 @@
 
     startUpiTimer();
 
-    trackPurchase(VARIANTS[currentVariant].amount, orderId);
+    // UPI is a deferred payment — don't fire Purchase yet. We fire it when
+    // the user confirms intent to pay (taps "Open UPI app" or the UTR-WhatsApp
+    // link). Until then, this is just an unfulfilled checkout.
+    var openBtnEl = document.getElementById('upiOpenBtn');
+    var utrLinkEl = document.getElementById('waSuccessUtrLink');
+    var _purchaseFired = false;
+    function fireUpiPurchaseOnce(){
+      if (_purchaseFired) return;
+      _purchaseFired = true;
+      trackPurchase(VARIANTS[currentVariant].amount, orderId);
+    }
+    if (openBtnEl) openBtnEl.addEventListener('click', fireUpiPurchaseOnce, { once: true });
+    if (utrLinkEl) utrLinkEl.addEventListener('click', fireUpiPurchaseOnce, { once: true });
+
     try {
       const buyerEmail = (document.getElementById('f_email').value || '').trim().toLowerCase();
       localStorage.setItem('smelloff_purchased', 'true');
@@ -4921,11 +4948,16 @@
     var city = document.getElementById('f_city');
     var st   = document.getElementById('f_state');
     if (!pin || !city || !st) return;
-    var inflight = null;
+    var lastLookedUp = '';
+    var lookupController = null;
 
     async function lookup(value){
+      // Cancel any in-flight request so we always honour the latest 6-digit value.
+      if (lookupController) try { lookupController.abort(); } catch(_){}
+      lookupController = (typeof AbortController !== 'undefined') ? new AbortController() : null;
       try{
-        var res = await fetch('https://api.postalpincode.in/pincode/' + encodeURIComponent(value));
+        var res = await fetch('https://api.postalpincode.in/pincode/' + encodeURIComponent(value),
+          lookupController ? { signal: lookupController.signal } : undefined);
         if (!res.ok) return;
         var json = await res.json();
         var entry = json && json[0];
@@ -4934,6 +4966,7 @@
         if (po.District) { city.value = po.District; flash(city); }
         if (po.State)    { st.value   = po.State;    flash(st);   }
       } catch(e){
+        if (e && e.name === 'AbortError') return;
         console.warn('[Smelloff] Pincode lookup failed:', e);
       }
     }
@@ -4943,10 +4976,9 @@
     }
     pin.addEventListener('input', function(){
       var v = (pin.value || '').trim();
-      if (v.length === 6 && /^\d{6}$/.test(v)) {
-        if (inflight) return;
-        inflight = true;
-        lookup(v).finally(function(){ inflight = null; });
+      if (v.length === 6 && /^\d{6}$/.test(v) && v !== lastLookedUp) {
+        lastLookedUp = v;
+        lookup(v);
       }
     });
   })();
@@ -4971,13 +5003,6 @@
       window.scrollTo(0, _pfPrevScroll);
     }
   };
-  // ESC key closes the policy overlay (without dismissing the underlying checkout)
-  document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape' && document.getElementById('paymentFailedOverlay').classList.contains('active')) {
-      window.closePaymentFailedOverlay();
-    }
-  });
-
   // Close on overlay click (outside panel)
   document.getElementById('checkoutOverlay').addEventListener('click', (e) => {
     if (e.target.id === 'checkoutOverlay') closeCheckout();
@@ -5118,12 +5143,19 @@
     setTimeout(function() { first.focus(); }, 520);
   }
 
-  // Escape key — close overlay + nav
+  // Single Escape handler — closes whichever overlay is on top.
+  // Order matters: dismiss the *most recently opened* layer first.
   document.addEventListener('keydown', function(e){
-    if(e.key==='Escape'){
-      closeCheckout();
-      if(document.body.classList.contains('nav-open')) closeNav();
-    }
+    if (e.key !== 'Escape') return;
+    var pf   = document.getElementById('paymentFailedOverlay');
+    var rv   = document.getElementById('rvModal');
+    var cart = document.getElementById('cartDrawer');
+    var co   = document.getElementById('checkoutOverlay');
+    if (pf && pf.classList.contains('active')) { window.closePaymentFailedOverlay(); return; }
+    if (rv && rv.classList.contains('open'))   { window.closeReviewForm();           return; }
+    if (cart && cart.classList.contains('open')){ window.closeCartDrawer();          return; }
+    if (co && co.classList.contains('active')) { closeCheckout();                    return; }
+    if (document.body.classList.contains('nav-open')) closeNav();
   });
 
   // Android back button — close nav if open
@@ -5131,10 +5163,18 @@
     if(document.body.classList.contains('nav-open')) closeNav();
   });
 
-  // Clear red border on input focus
-  document.querySelectorAll('.overlay input, .overlay textarea').forEach(function(input){
-    input.addEventListener('focus',function(){this.style.borderColor='';});
-  });
+  // Clear red border as soon as the user focuses OR types — listener delegated
+  // to the overlay container so we don't accumulate listeners on every reopen.
+  (function(){
+    var overlay = document.getElementById('checkoutOverlay');
+    if (!overlay) return;
+    function clear(e){
+      var t = e.target;
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA')) t.style.borderColor = '';
+    }
+    overlay.addEventListener('focusin', clear);
+    overlay.addEventListener('input', clear);
+  })();
 
   // Waitlist email capture (P2 #15)
   // Footer column accordion (mobile only — CSS forces open on desktop)
@@ -5533,14 +5573,7 @@
     // Initial paint
     renderSummary();
     renderCards();
-
-    // Close on Escape
-    document.addEventListener('keydown', function(e){
-      if (e.key === 'Escape') {
-        var modal = document.getElementById('rvModal');
-        if (modal && modal.classList.contains('open')) closeReviewForm();
-      }
-    });
+    // ESC handling lives in the single global keydown listener above.
   })();
 
   // =============================================
@@ -5743,7 +5776,13 @@
 
     window.checkoutFromCart = function(){
       if (cart.items.length === 0) return;
-      const subtotal = cart.items.reduce((a,i) => a + i.price * i.qty, 0);
+      // Re-derive prices from PRODUCTS at checkout time so a stale price stored
+      // in the cart (e.g. from a previous launch) can't carry into the order.
+      const subtotal = cart.items.reduce((a,i) => {
+        var canonical = PRODUCTS[i.id];
+        var price = canonical ? canonical.price : i.price;
+        return a + price * i.qty;
+      }, 0);
       const unitsTotal = cart.items.reduce((a,i) => a + i.qty, 0);
       // Build a dynamic "cart" variant that reuses the existing checkout overlay
       if (typeof VARIANTS !== 'undefined') {
@@ -5762,13 +5801,7 @@
       if (typeof openCheckout === 'function') openCheckout('cart');
     };
 
-    // Escape to close
-    document.addEventListener('keydown', function(e){
-      if (e.key === 'Escape' && document.getElementById('cartDrawer').classList.contains('open')) {
-        closeCartDrawer();
-      }
-    });
-
+    // ESC handling lives in the single global keydown listener above.
     renderBadge();
   })();
 </script>
