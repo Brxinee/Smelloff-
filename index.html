@@ -3560,74 +3560,6 @@
   .skip-link:focus{top:0}
   *:focus-visible{outline:2px solid var(--acid);outline-offset:2px}
   .pay-opt:focus-visible{outline:2px solid var(--acid);outline-offset:2px}
-
-  /* Case-study testimonials — above verified reviews engine */
-  .case-studies{
-    background:#080808;
-    color:#fff;
-    padding:72px 20px;
-    display:flex;flex-direction:column;align-items:center;gap:32px;
-    border-bottom:1px solid var(--rule);
-  }
-  .case-studies .cs-grid{
-    width:100%;max-width:880px;
-    display:grid;
-    grid-template-columns:1fr;
-    gap:16px;
-  }
-  .cs-card{
-    background:#0F0F0F;
-    border:1px solid rgba(184,255,87,.15);
-    border-radius:12px;
-    padding:24px;
-    display:flex;flex-direction:column;gap:10px;
-  }
-  .cs-name{
-    font-family:'Barlow Condensed',sans-serif;
-    font-weight:900;
-    font-size:18px;
-    line-height:1.2;
-    letter-spacing:.02em;
-    color:#fff;
-    margin:0;
-  }
-  .cs-loc{
-    font-family:'DM Sans',sans-serif;
-    font-size:13px;
-    line-height:1.4;
-    color:#9A9A9A;
-    margin:0;
-  }
-  .cs-quote{
-    font-family:'DM Sans',sans-serif;
-    font-size:16px;
-    line-height:1.55;
-    color:#E8E8E8;
-    margin:6px 0 0;
-    padding:0;
-    border:none;
-    font-style:normal;
-    quotes:none;
-  }
-  .cs-quote::before,.cs-quote::after{content:none}
-  .cs-tag{
-    display:inline-block;
-    margin-top:8px;
-    font-family:'DM Sans',sans-serif;
-    font-size:12px;
-    letter-spacing:.05em;
-    text-transform:uppercase;
-    color:#B8FF57;
-    align-self:flex-start;
-  }
-  @media(min-width:768px){
-    .case-studies{padding:96px 40px}
-    .case-studies .cs-grid{
-      grid-template-columns:1fr 1fr;
-      gap:20px;
-    }
-    .cs-quote{font-size:17px}
-  }
 </style>
 </head>
 <body>
@@ -4175,37 +4107,6 @@
     </article>
   </div>
   <p class="stockup-fine">Free shipping on every pack. COD available. 7-day returns if you're not impressed.</p>
-</section>
-
-<!-- TESTIMONIALS — case-study cards (sits above verified reviews engine) -->
-<section class="case-studies" aria-labelledby="csHeading">
-  <h2 id="csHeading" class="sr-only">Customer stories</h2>
-  <div class="cs-grid">
-    <article class="cs-card">
-      <p class="cs-name">Vikas, 26 · Software Engineer</p>
-      <p class="cs-loc">HSR Layout, Bangalore</p>
-      <blockquote class="cs-quote">One washing machine. 22 PG tenants. My Saturday slot is 6 AM and I miss it half the time. By Wednesday, my skip-level was asking why the AC seemed broken in our meeting room. It wasn't the AC. ODORSTRIKE bought back the dignity PG life takes.</blockquote>
-      <span class="cs-tag">Use case: PG / re-wear</span>
-    </article>
-    <article class="cs-card">
-      <p class="cs-name">Sandeep, 31 · Senior Dev</p>
-      <p class="cs-loc">Hitech City, Hyderabad</p>
-      <blockquote class="cs-quote">35-min bike commute. Office AC at 18°C. By 5 PM the shirt is a science experiment — not because of the morning, because of the bacteria the AC dried but didn't kill. Three sprays post-lunch. My teammate stopped opening the cabin window.</blockquote>
-      <span class="cs-tag">Use case: Office / AC-sweat paradox</span>
-    </article>
-    <article class="cs-card">
-      <p class="cs-name">Mahesh, 27 · Sales Exec</p>
-      <p class="cs-loc">Madhapur → Charminar</p>
-      <blockquote class="cs-quote">18 km one-way on the Activa. Helmet on. Three smells by 3 PM — morning sweat, mid-day heat, post-lunch biriyani. Tried backup shirts (forgot them). Tried Uber (₹500/day). One bottle in the bike box. ₹4 a spray. Done.</blockquote>
-      <span class="cs-tag">Use case: Bike commute</span>
-    </article>
-    <article class="cs-card">
-      <p class="cs-name">Suresh, 24 · Delivery Rider</p>
-      <p class="cs-loc">Hyderabad</p>
-      <blockquote class="cs-quote">32 deliveries a day. Same shirt 12 hours. Customer rating dropped from 4.8 to 4.5 — comments started saying 'smell.' Sprayed before shift, again at lunch. 30 days later: 4.9 rating. Tip frequency 2x.</blockquote>
-      <span class="cs-tag">Use case: Gig work / customer-facing</span>
-    </article>
-  </div>
 </section>
 
 <!-- REVIEWS -->
