@@ -280,6 +280,12 @@
     --muted:#9a958d;
     --bg:#080808;
     --text:#f4f1ea;
+    /* GROOMR aesthetic tokens */
+    --smoke:#111111;
+    --soot:#1a1a1a;
+    --bone:#f5f5f5;
+    --hairline:rgba(255,255,255,0.08);
+    --grid-faint:rgba(184,255,87,0.06);
   }
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
   html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -3554,6 +3560,57 @@
   .skip-link:focus{top:0}
   *:focus-visible{outline:2px solid var(--acid);outline-offset:2px}
   .pay-opt:focus-visible{outline:2px solid var(--acid);outline-offset:2px}
+
+  /* ─── GROOMR aesthetic utilities ─── */
+  .hairline{border:1px solid var(--hairline)}
+  .hairline-b{border-bottom:1px solid var(--hairline)}
+  .hairline-t{border-top:1px solid var(--hairline)}
+
+  /* scanline texture overlay (apply to a position:relative wrapper) */
+  .scanlines{position:relative}
+  .scanlines::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 2px,
+      rgba(255,255,255,0.015) 3px
+    );
+    pointer-events:none;
+    z-index:1;
+  }
+
+  /* acid-glow text */
+  .acid-glow{text-shadow:0 0 30px rgba(184,255,87,0.45)}
+
+  /* corner crosshairs — 4 L-shaped 16px markers in acid green */
+  .crosshairs{position:relative}
+  .crosshairs::before{
+    content:"";
+    position:absolute;
+    inset:12px;
+    pointer-events:none;
+    z-index:2;
+    background:
+      linear-gradient(var(--acid),var(--acid)) top left   / 1px 16px no-repeat,
+      linear-gradient(var(--acid),var(--acid)) top left   / 16px 1px no-repeat,
+      linear-gradient(var(--acid),var(--acid)) top right  / 1px 16px no-repeat,
+      linear-gradient(var(--acid),var(--acid)) top right  / 16px 1px no-repeat,
+      linear-gradient(var(--acid),var(--acid)) bottom left  / 1px 16px no-repeat,
+      linear-gradient(var(--acid),var(--acid)) bottom left  / 16px 1px no-repeat,
+      linear-gradient(var(--acid),var(--acid)) bottom right / 1px 16px no-repeat,
+      linear-gradient(var(--acid),var(--acid)) bottom right / 16px 1px no-repeat;
+    opacity:.6;
+  }
+
+  /* film-grain dot lattice background */
+  .film-grain{
+    background-color:var(--bg);
+    background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,0.025) 1px,transparent 0);
+    background-size:3px 3px;
+  }
 </style>
 </head>
 <body>
