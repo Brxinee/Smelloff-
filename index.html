@@ -248,8 +248,8 @@
 <!-- Fonts: non-render-blocking -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@900&family=Fraunces:opsz,wght@9..144,900&family=JetBrains+Mono:wght@400&family=Inter+Tight:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@900&family=Fraunces:opsz,wght@9..144,900&family=JetBrains+Mono:wght@400&family=Inter+Tight:wght@400;500&display=swap"></noscript>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,900&family=JetBrains+Mono:wght@400&family=Inter+Tight:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,900&family=JetBrains+Mono:wght@400&family=Inter+Tight:wght@400;500&display=swap"></noscript>
 
 <!-- Favicon -->
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -501,12 +501,13 @@
     width:100%;max-width:1180px;margin:0 auto;
     display:grid;
     grid-template-columns:1fr;
-    grid-template-areas:"text" "bottle" "action";
+    grid-template-areas:"text" "bottle" "action" "stats";
     gap:24px;
   }
   .hero-text{grid-area:text;display:flex;flex-direction:column;gap:14px}
   .hero-bottle{grid-area:bottle;display:flex;justify-content:center;align-items:center}
   .hero-action{grid-area:action;display:flex;flex-direction:column;gap:14px}
+  .hero-stats{grid-area:stats}
 
   .hero-wordmark{
     font-family:'Barlow Condensed',sans-serif;
@@ -537,6 +538,67 @@
     transition:opacity .15s ease;
   }
   .hero-howlink:hover{text-decoration:underline}
+
+  /* GROOMR hero overlays */
+  .hero .hero-fx{
+    position:absolute;inset:0;
+    z-index:2;
+    pointer-events:none;
+  }
+  .hero-numeral{
+    position:absolute;
+    top:calc(72px + env(safe-area-inset-top, 0px));
+    left:-6px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:900;
+    font-size:clamp(180px,22vw,320px);
+    line-height:.85;
+    letter-spacing:-.04em;
+    color:var(--soot);
+    z-index:0;
+    pointer-events:none;
+    user-select:none;
+  }
+  .hero-kicker{
+    display:flex;flex-wrap:wrap;align-items:center;
+    column-gap:8px;row-gap:4px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:700;
+    font-size:11px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--acid);
+    line-height:1.4;
+    margin-bottom:2px;
+  }
+  .hero-kicker .hk-sep{opacity:.5}
+
+  .hero-stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    border-top:1px solid var(--hairline);
+    padding-top:16px;
+    margin-top:8px;
+  }
+  .hs-stat-num{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:900;
+    font-size:clamp(20px,5vw,28px);
+    line-height:1;
+    color:#fff;
+    text-transform:uppercase;
+    letter-spacing:0;
+  }
+  .hs-stat-label{
+    font-family:'DM Sans',sans-serif;
+    font-weight:500;
+    font-size:11px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:rgba(255,255,255,0.4);
+    margin-top:6px;
+  }
 
   .hero-headline{
     font-family:'Barlow Condensed',sans-serif;
@@ -677,7 +739,8 @@
       grid-template-columns:1.1fr .9fr;
       grid-template-areas:
         "text   bottle"
-        "action bottle";
+        "action bottle"
+        "stats  stats";
       gap:28px 56px;
       align-items:center;
     }
@@ -3586,9 +3649,10 @@
   /* acid-glow text */
   .acid-glow{text-shadow:0 0 30px rgba(184,255,87,0.45)}
 
-  /* corner crosshairs — 4 L-shaped 16px markers in acid green */
+  /* corner crosshairs — 4 L-shaped 16px markers in acid green
+     (uses ::after so it can coexist with .scanlines::before on the same wrapper) */
   .crosshairs{position:relative}
-  .crosshairs::before{
+  .crosshairs::after{
     content:"";
     position:absolute;
     inset:12px;
@@ -3715,6 +3779,8 @@
 
 <!-- HERO -->
 <header class="hero">
+  <div class="hero-numeral" aria-hidden="true">01</div>
+  <div class="hero-fx scanlines crosshairs" aria-hidden="true"></div>
   <div class="hero-skeleton" aria-hidden="true">
     <div class="hs-inner">
       <div class="hs-text">
@@ -3731,6 +3797,13 @@
   </div>
   <div class="hero-inner">
     <div class="hero-text">
+      <div class="hero-kicker" aria-hidden="true">
+        <span>[ FABRIC ODOR KILLER ]</span>
+        <span class="hk-sep" aria-hidden="true">·</span>
+        <span>[ 50ML POCKET SPRAY ]</span>
+        <span class="hk-sep" aria-hidden="true">·</span>
+        <span>[ HYDERABAD MFG ]</span>
+      </div>
       <div class="hero-wordmark">SMELLOFF</div>
       <div class="hero-category">India's first pocket fabric odor killer</div>
       <h1 class="hero-headline">
@@ -3764,6 +3837,21 @@
       <p class="hero-launch">Launch price · Limited to first 500 customers</p>
       <a href="#buy" class="hero-cta" onclick="event.preventDefault();addToCart('solo')">ADD TO CART — ₹229</a>
       <a href="#when-to-use" class="hero-howlink">How it works ↓</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hs-stat">
+        <div class="hs-stat-num">24HR HOLD</div>
+        <div class="hs-stat-label">Duration</div>
+      </div>
+      <div class="hs-stat">
+        <div class="hs-stat-num">ZINC POWERED</div>
+        <div class="hs-stat-label">Active</div>
+      </div>
+      <div class="hs-stat">
+        <div class="hs-stat-num">NO ALUMINIUM</div>
+        <div class="hs-stat-label">Formula</div>
+      </div>
     </div>
   </div>
 </header>
