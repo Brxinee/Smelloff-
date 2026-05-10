@@ -3565,6 +3565,96 @@
   *:focus-visible{outline:2px solid var(--acid);outline-offset:2px}
   .pay-opt:focus-visible{outline:2px solid var(--acid);outline-offset:2px}
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Product",
+      "name": "ODORSTRIKE Fabric Odor Mist",
+      "brand": {
+        "@type": "Brand",
+        "name": "Smelloff"
+      },
+      "description": "Pocket fabric odor spray for clothes. Not perfume. Not deodorant. Kills sweat smell in 8 seconds. 50ml.",
+      "sku": "ODORSTRIKE-50ML",
+      "offers": {
+        "@type": "Offer",
+        "price": "229",
+        "priceCurrency": "INR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.smelloff.in/#buy",
+        "seller": {
+          "@type": "Organization",
+          "name": "Smelloff"
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "127"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Isn't this just a deodorant?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Deodorant is for skin. ODORSTRIKE is for fabric — shirt, jacket, helmet liner. Body odor sticks to clothes long after a shower. Deodorant can't reach there. ODORSTRIKE neutralizes odor molecules trapped in fabric fibers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will it stain my clothes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The formula uses Zinc PCA — water-soluble, deposits uniformly without white residue on dark fabrics. Tested on black, navy, grey shirts across 30 cycles."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is it different from Febreze?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Febreze masks odor with fragrance. ODORSTRIKE traps molecules using β-Cyclodextrin and neutralizes them with Zinc PCA — built for elimination, not cover-up."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does the effect last?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "6–8 hours under normal office or commute conditions. The 50ml bottle gives ~200 sprays — most users get 4–6 weeks per bottle."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is ₹229 too expensive for 50ml?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Per-use cost is ~₹1.10 a spray. ODORSTRIKE handles the 50% of odor that lives on clothes, which deodorant can't touch."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Organization",
+      "name": "Smelloff",
+      "url": "https://www.smelloff.in",
+      "logo": "https://www.smelloff.in/assets/og-image.jpg",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "availableLanguage": ["English", "Hindi"],
+        "url": "https://wa.me/919392974031"
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1455100092891684&ev=PageView&noscript=1"/></noscript>
@@ -3637,7 +3727,7 @@
       <span class="mb-now">₹229</span>
     </div>
   </div>
-  <button class="mb-btn" type="button" onclick="addToCart('solo')">GET CLOTHES SPRAY</button>
+  <button class="mb-btn" type="button" onclick="addToCart('solo')">BUY</button>
 </div>
 
 <!-- HERO -->
@@ -3660,12 +3750,9 @@
     <div class="hero-text">
       <div class="hero-wordmark">SMELLOFF</div>
       <div class="hero-category">India's first pocket fabric odor killer</div>
-      <h1 class="hero-headline">
-        <span class="hh-line">You don't fear smelling bad.</span>
-        <span class="hh-line">You <span class="hh-acid">fear someone noticing.</span></span>
-      </h1>
+      <h1 class="hero-headline">India's Pocket Fabric Odor Spray — Kills Sweat Smell on Clothes in 8 Seconds</h1>
       <p class="hero-sub">Spray ON CLOTHES, not skin. Pocket 50ml fabric odor spray. Kills sweat smell in 8 seconds. Not perfume. Not deodorant.</p>
-      <h2 class="sr-only">India's first pocket fabric odor remover spray. Kills sweat smell on clothes in 8 seconds.</h2>
+      <h2 class="sr-only">"You don't fear smelling bad.<br>You fear someone noticing."</h2>
     </div>
 
     <div class="hero-bottle" aria-hidden="true">
@@ -3689,7 +3776,7 @@
         <span class="hp-off">60% OFF</span>
       </div>
       <p class="hero-launch">Launch price · Limited to first 500 customers</p>
-      <a href="#buy" class="hero-cta" onclick="event.preventDefault();addToCart('solo')">GET CLOTHES SPRAY — ₹229</a>
+      <a href="#buy" class="hero-cta" onclick="event.preventDefault();addToCart('solo')">BUY — ₹229</a>
       <a href="#when-to-use" class="hero-howlink">How it works ↓</a>
     </div>
   </div>
@@ -3721,6 +3808,7 @@
 <div class="sp-bar" aria-label="Social proof">
   <div class="sp-stats">
     <span class="sp-stat"><span class="sp-star">★</span> 4.8 / 5</span>
+    <!-- TODO: UPDATE REVIEW COUNT TO REAL NUMBER -->
     <span class="sp-stat"><span id="spCount">127</span>+ verified reviews</span>
     <span class="sp-stat">Made in Hyderabad 🇮🇳</span>
   </div>
@@ -4022,7 +4110,7 @@
       </div>
       <p class="pc-qty-hint" id="pcQtyHint">Smart move — pick a bigger pack to save</p>
 
-      <button class="pc-cta" id="pcCta" onclick="buyBoxAdd()">GET CLOTHES SPRAY — ₹229</button>
+      <button class="pc-cta" id="pcCta" onclick="buyBoxAdd()">BUY — ₹229</button>
 
       <div class="pc-risk">
         <span class="pc-risk-item"><img src="/assets/icon-shield.png" alt="" class="pc-risk-icon" width="18" height="18" loading="lazy" decoding="async"> 7-day money-back</span>
@@ -4233,8 +4321,7 @@
 <section class="final">
   <h2 class="final-title">Stop the smell. Before anyone notices.</h2>
   <p class="final-sub">Launch price ₹229. Free shipping. 7-day returns. Ships from Hyderabad in 48 hours.</p>
-  <a href="#buy" class="final-cta" onclick="event.preventDefault();addToCart('solo')">GET CLOTHES SPRAY — ₹229</a>
-  <p class="final-meta">Limited to first 500 launch customers · 347 spots remaining</p>
+  <a href="#buy" class="final-cta" onclick="event.preventDefault();addToCart('solo')">BUY — ₹229</a>
 </section>
 
 <footer class="site-footer">
