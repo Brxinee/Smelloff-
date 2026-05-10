@@ -369,7 +369,7 @@
   }
 
   /* Category pills row */
-  .cat-pills{
+  .cat-pills{display:none;
     position:fixed;
     top:calc(56px + env(safe-area-inset-top, 0px));
     left:0;right:0;z-index:49;
@@ -474,7 +474,7 @@
   /* Hero */
   .hero{
     position:relative;
-    min-height:85vh;
+    min-height:100svh;
     padding:calc(128px + env(safe-area-inset-top, 0px)) 20px 40px;
     display:flex;align-items:center;
     overflow:hidden;
@@ -516,43 +516,13 @@
     color:#B8FF57;line-height:1.2;
     margin-bottom:4px;
   }
-  .hero-launch{
-    font-family:'DM Sans',sans-serif;
-    font-size:12px;color:#888;margin:0;
-    letter-spacing:.02em;
-  }
-  .hero-howlink{
-    align-self:center;
-    font-family:'DM Sans',sans-serif;
-    font-size:14px;color:#B8FF57;
-    text-decoration:none;
-    padding:6px 4px;
-    transition:opacity .15s ease;
-  }
-  .hero-howlink:hover{text-decoration:underline}
+  .hero-launch{display:none}
+  
 
-  .hero-headline{
-    font-family:'Barlow Condensed',sans-serif;
-    font-weight:900;
-    font-size:clamp(30px,8.5vw,68px);
-    line-height:.98;
-    letter-spacing:.005em;
-    text-transform:uppercase;
-    color:#fff;
-    margin:0;
-  }
-  .hero-headline .hh-line{display:block}
-  .hero-headline .hh-acid{color:#B8FF57}
+  .hero-headline{margin:0;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:52px;line-height:1.05;letter-spacing:-.01em;color:#fff;animation:heroFadeUp .6s ease-out both}
+  .hero-headline .green{color:#B8FF57}
 
-  .hero-sub{
-    font-family:'DM Sans',sans-serif;
-    font-weight:400;
-    font-size:16px;
-    line-height:1.45;
-    color:#B0B0B0;
-    max-width:520px;
-    margin:0;
-  }
+  .hero-sub{margin:0;color:#B8FF57;font-size:14px;line-height:1.45;font-weight:500;letter-spacing:.01em}
 
   .hero-warning{
     display:inline-flex;align-items:center;
@@ -586,29 +556,12 @@
   }
 
   .hero-cta{
-    display:flex;align-items:center;justify-content:center;
-    width:100%;height:56px;
-    background:#B8FF57;color:#080808;
-    font-family:'Barlow Condensed',sans-serif;
-    font-weight:900;font-size:18px;
-    letter-spacing:.06em;text-transform:uppercase;
-    text-decoration:none;
-    border:none;border-radius:4px;
-    cursor:pointer;
-    transition:transform .15s ease, background .15s ease;
+    height:58px;display:inline-flex;align-items:center;justify-content:center;width:100%;border-radius:4px;background:#B8FF57;color:#080808;font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;padding:18px 32px;border:none;cursor:pointer;transition:background .15s ease,opacity .2s ease;animation:heroFadeUp .6s ease-out .2s both;
   }
-  .hero-cta:hover{background:#C7FF70}
-  .hero-cta:active{transform:scale(.985)}
+  .hero-cta:hover{background:#fff}
+  
 
-  .hero-trust{
-    display:flex;align-items:center;gap:8px;flex-wrap:wrap;
-    font-family:'DM Sans',sans-serif;
-    font-size:13px;font-weight:500;
-    color:#888;
-    padding-top:6px;
-  }
-  .hero-trust .ht-item{display:inline-flex;align-items:center;gap:4px;color:#888}
-  .hero-trust .ht-sep{color:#333}
+  .hero-trust{font-size:12px;color:#888;margin-top:12px}
 
   /* CSS bottle */
   .hb-bottle{
@@ -665,6 +618,7 @@
     font-size:8px;letter-spacing:.25em;
     color:rgba(255,255,255,.4);
   }
+  @keyframes heroFadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
   @keyframes hero-float{
     0%,100%{transform:translateY(-6px)}
     50%{transform:translateY(6px)}
@@ -688,7 +642,7 @@
     .hero-action{gap:18px}
     .hb-bottle{height:clamp(280px,40vh,420px)}
     .hero-cta{width:auto;min-width:320px;padding:0 40px;align-self:flex-start}
-    .hero-headline{font-size:clamp(40px,5.6vw,76px)}
+    .hero-headline{font-size:80px}
     .hero-price .hp-now{font-size:56px}
   }
 
@@ -1032,22 +986,8 @@
   .product-card .pc-price{
     display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
   }
-  .product-card .pc-now{
-    font-family:'Barlow Condensed',sans-serif;
-    font-weight:900;font-size:28px;line-height:1;
-    color:#fff;letter-spacing:.01em;
-  }
-  .product-card .pc-was{
-    font-family:'DM Sans',sans-serif;
-    font-size:13px;color:#777;
-    text-decoration:line-through;
-  }
-  .product-card .pc-off{
-    font-family:'Barlow Condensed',sans-serif;
-    font-weight:900;font-size:11px;
-    color:#B8FF57;letter-spacing:.08em;
-    text-transform:uppercase;
-  }
+  .product-card .price-main{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:48px;color:#fff}
+  .product-card .price-label{font-size:14px;color:#B8FF57;letter-spacing:.1em;text-transform:uppercase}
   .product-card .pc-cta{
     width:100%;height:56px;
     background:#B8FF57;color:#080808;
@@ -1070,8 +1010,7 @@
   }
   .product-card .pc-rating:hover{opacity:.8}
   .product-card .pc-now{font-size:36px;color:#B8FF57}
-  .product-card .pc-was{font-size:16px}
-  .product-card .pc-save{
+    .product-card .pc-save{
     font-family:'DM Sans',sans-serif;font-size:12px;
     color:#888;margin:-4px 0 0;line-height:1;
   }
@@ -1079,41 +1018,17 @@
     display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
     margin-top:6px;
   }
-  .product-card .pc-qty-btn{
-    height:42px;
-    background:#080808;border:1px solid #2a2a2a;border-radius:4px;
-    color:#fff;cursor:pointer;
-    font-family:'Barlow Condensed',sans-serif;
-    font-weight:900;font-size:16px;
-    letter-spacing:.04em;
-    transition:all .15s ease;
-  }
-  .product-card .pc-qty-btn:hover{border-color:#444}
-  .product-card .pc-qty-btn.active{
-    border-color:#B8FF57;color:#B8FF57;
-    background:rgba(184,255,87,.06);
-  }
+  .product-card .pc-qty-btn{flex:1;border:1.5px solid #333;background:#101010;color:#d5d5d5;border-radius:8px;padding:12px 16px;font-weight:700;cursor:pointer;text-align:left;position:relative}
+  .product-card .pc-qty-btn:hover{border-color:#555}
+  .product-card .pc-qty-btn.active{border-color:#B8FF57;background:rgba(184,255,87,.1);color:#fff}
+  .product-card .pc-qty-btn .pc-badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#B8FF57;color:#080808;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;letter-spacing:.06em}
   .product-card .pc-qty-hint{
     font-family:'DM Sans',sans-serif;font-size:12px;
     color:#B8FF57;margin:-4px 0 0;line-height:1.3;
     min-height:16px;
   }
-  .product-card .pc-risk{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8px 14px;
-    font-family:'DM Sans',sans-serif;font-size:13px;
-    color:#A0A0A0;line-height:1.3;
-    margin-top:18px;
-    padding-top:16px;
-    border-top:1px solid #1F1F1F;
-  }
-  .product-card .pc-risk-item{
-    color:#A0A0A0;
-    display:flex;align-items:center;gap:6px;
-    white-space:nowrap;
-    overflow:hidden;text-overflow:ellipsis;
-  }
+  .product-card .pc-risk{margin-top:2px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;font-size:11px;color:#888}
+  .product-card .pc-risk-item{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;white-space:normal}
   .product-card .pc-risk-sep{display:none}
   .product-card .pc-risk-icon{
     width:18px;height:18px;flex-shrink:0;
@@ -3170,7 +3085,6 @@
       margin-right:10px;
     }
     .compare-cell.row-h::before{display:none}
-    .compare-cell.os.body{border-left:none;border-top:1px solid rgba(184,255,87,.4)}
   }
 
   /* ============================= */
@@ -3565,6 +3479,96 @@
   *:focus-visible{outline:2px solid var(--acid);outline-offset:2px}
   .pay-opt:focus-visible{outline:2px solid var(--acid);outline-offset:2px}
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Product",
+      "name": "ODORSTRIKE Fabric Odor Mist",
+      "brand": {
+        "@type": "Brand",
+        "name": "Smelloff"
+      },
+      "description": "Pocket fabric odor spray for clothes. Not perfume. Not deodorant. Kills sweat smell in 8 seconds. 50ml.",
+      "sku": "ODORSTRIKE-50ML",
+      "offers": {
+        "@type": "Offer",
+        "price": "229",
+        "priceCurrency": "INR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.smelloff.in/#buy",
+        "seller": {
+          "@type": "Organization",
+          "name": "Smelloff"
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "127"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Isn't this just a deodorant?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Deodorant is for skin. ODORSTRIKE is for fabric — shirt, jacket, helmet liner. Body odor sticks to clothes long after a shower. Deodorant can't reach there. ODORSTRIKE neutralizes odor molecules trapped in fabric fibers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will it stain my clothes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The formula uses Zinc PCA — water-soluble, deposits uniformly without white residue on dark fabrics. Tested on black, navy, grey shirts across 30 cycles."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is it different from Febreze?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Febreze masks odor with fragrance. ODORSTRIKE traps molecules using β-Cyclodextrin and neutralizes them with Zinc PCA — built for elimination, not cover-up."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does the effect last?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "6–8 hours under normal office or commute conditions. The 50ml bottle gives ~200 sprays — most users get 4–6 weeks per bottle."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is ₹229 too expensive for 50ml?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Per-use cost is ~₹1.10 a spray. ODORSTRIKE handles the 50% of odor that lives on clothes, which deodorant can't touch."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Organization",
+      "name": "Smelloff",
+      "url": "https://www.smelloff.in",
+      "logo": "https://www.smelloff.in/assets/og-image.jpg",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "availableLanguage": ["English", "Hindi"],
+        "url": "https://wa.me/919392974031"
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1455100092891684&ev=PageView&noscript=1"/></noscript>
@@ -3637,7 +3641,7 @@
       <span class="mb-now">₹229</span>
     </div>
   </div>
-  <button class="mb-btn" type="button" onclick="addToCart('solo')">GET CLOTHES SPRAY</button>
+  <button class="mb-btn" type="button" onclick="addToCart('solo')">BUY</button>
 </div>
 
 <!-- HERO -->
@@ -3660,12 +3664,9 @@
     <div class="hero-text">
       <div class="hero-wordmark">SMELLOFF</div>
       <div class="hero-category">India's first pocket fabric odor killer</div>
-      <h1 class="hero-headline">
-        <span class="hh-line">You don't fear smelling bad.</span>
-        <span class="hh-line">You <span class="hh-acid">fear someone noticing.</span></span>
-      </h1>
-      <p class="hero-sub">Spray ON CLOTHES, not skin. Pocket 50ml fabric odor spray. Kills sweat smell in 8 seconds. Not perfume. Not deodorant.</p>
-      <h2 class="sr-only">India's first pocket fabric odor remover spray. Kills sweat smell on clothes in 8 seconds.</h2>
+      <h1 class="hero-headline">India's Pocket Fabric Odor Spray — <span class="green">Kills Sweat Smell</span> on Clothes in 8 Seconds</h1>
+      <p class="hero-sub">Not perfume. Not deodorant. Spray on clothes.</p>
+      <h2 class="sr-only">"You don't fear smelling bad.<br>You fear someone noticing."</h2>
     </div>
 
     <div class="hero-bottle" aria-hidden="true">
@@ -3688,9 +3689,8 @@
         <span class="hp-now">₹229</span>
         <span class="hp-off">60% OFF</span>
       </div>
-      <p class="hero-launch">Launch price · Limited to first 500 customers</p>
+      <p class="hero-trust">Free shipping · COD · Ships 48hr · 7-day returns</p>
       <a href="#buy" class="hero-cta" onclick="event.preventDefault();addToCart('solo')">GET CLOTHES SPRAY — ₹229</a>
-      <a href="#when-to-use" class="hero-howlink">How it works ↓</a>
     </div>
   </div>
 </header>
@@ -3721,6 +3721,7 @@
 <div class="sp-bar" aria-label="Social proof">
   <div class="sp-stats">
     <span class="sp-stat"><span class="sp-star">★</span> 4.8 / 5</span>
+    <!-- TODO: UPDATE REVIEW COUNT TO REAL NUMBER -->
     <span class="sp-stat"><span id="spCount">127</span>+ verified reviews</span>
     <span class="sp-stat">Made in Hyderabad 🇮🇳</span>
   </div>
@@ -4009,26 +4010,25 @@
         <span><span id="pcReviewCount">127</span> verified reviews</span>
       </a>
       <div class="pc-price">
-        <span class="pc-was">₹579</span>
-        <span class="pc-now">₹229</span>
-        <span class="pc-off">60% OFF</span>
+        <span class="price-main" id="pcPriceMain">₹229</span>
+        <span class="price-label">launch price</span>
       </div>
       <p class="pc-save">You save ₹350</p>
 
       <div class="pc-qty-row" role="radiogroup" aria-label="Quantity">
-        <button class="pc-qty-btn active" type="button" data-qty="1" onclick="selectQty(1)">1</button>
-        <button class="pc-qty-btn" type="button" data-qty="2" onclick="selectQty(2)">2</button>
-        <button class="pc-qty-btn" type="button" data-qty="3" onclick="selectQty(3)">3</button>
+        <button class="pc-qty-btn active" type="button" data-qty="1" onclick="selectQty(1)">1 × 50ml · ₹229</button>
+        <button class="pc-qty-btn" type="button" data-qty="2" onclick="selectQty(2)"><span class="pc-badge">MOST POPULAR</span>2 × 50ml · ₹399  Save ₹59</button>
+        <button class="pc-qty-btn" type="button" data-qty="3" onclick="selectQty(3)"><span class="pc-badge">BEST VALUE</span>3 × 50ml · ₹549  Save ₹138</button>
       </div>
       <p class="pc-qty-hint" id="pcQtyHint">Smart move — pick a bigger pack to save</p>
 
       <button class="pc-cta" id="pcCta" onclick="buyBoxAdd()">GET CLOTHES SPRAY — ₹229</button>
 
       <div class="pc-risk">
-        <span class="pc-risk-item"><img src="/assets/icon-shield.png" alt="" class="pc-risk-icon" width="18" height="18" loading="lazy" decoding="async"> 7-day money-back</span>
-        <span class="pc-risk-item"><img src="/assets/icon-free-shipping.png" alt="" class="pc-risk-icon" width="18" height="18" loading="lazy" decoding="async"> Free shipping</span>
-        <span class="pc-risk-item"><img src="/assets/icon-cod.png" alt="" class="pc-risk-icon" width="18" height="18" loading="lazy" decoding="async"> COD available</span>
-        <span class="pc-risk-item"><img src="/assets/icon-ship.png" alt="" class="pc-risk-icon" width="18" height="18" loading="lazy" decoding="async"> Ships in 48hr</span>
+        <span class="pc-risk-item"><img src="/assets/icon-shield.png" alt="" class="pc-risk-icon" width="18" height="18" loading="lazy" decoding="async"><span>7-day money-back</span></span>
+        <span class="pc-risk-item"><img src="/assets/icon-free-shipping.png" alt="" class="pc-risk-icon" width="18" height="18" loading="lazy" decoding="async"><span>Free shipping</span></span>
+        <span class="pc-risk-item"><span class="pc-risk-icon" aria-hidden="true">☎</span><span>COD available</span></span>
+        <span class="pc-risk-item"><img src="/assets/icon-ship.png" alt="" class="pc-risk-icon" width="18" height="18" loading="lazy" decoding="async"><span>Ships in 48hr</span></span>
       </div>
       <p class="pc-secure"><img src="/assets/upi.png" alt="UPI" class="pc-upi-badge" width="40" height="14" loading="lazy" decoding="async"> Secure checkout · UPI / COD · No card stored</p>
     </div>
@@ -4234,7 +4234,6 @@
   <h2 class="final-title">Stop the smell. Before anyone notices.</h2>
   <p class="final-sub">Launch price ₹229. Free shipping. 7-day returns. Ships from Hyderabad in 48 hours.</p>
   <a href="#buy" class="final-cta" onclick="event.preventDefault();addToCart('solo')">GET CLOTHES SPRAY — ₹229</a>
-  <p class="final-meta">Limited to first 500 launch customers · 347 spots remaining</p>
 </section>
 
 <footer class="site-footer">
@@ -5109,19 +5108,9 @@
     });
     var variant = qty === 3 ? 'trio' : qty === 2 ? 'duo' : 'solo';
     var price = (window.SMELLOFF_CONFIG && window.SMELLOFF_CONFIG.PRICES[variant]) || (qty === 3 ? 549 : qty === 2 ? 399 : 229);
-    var mrp   = (window.SMELLOFF_CONFIG && window.SMELLOFF_CONFIG.MRP[variant])    || (qty === 3 ? 1399 : qty === 2 ? 999 : 579);
-    var save  = mrp - price;
-    var off   = Math.round((save / mrp) * 100);
-
     var card = document.querySelector('.product-card') || document;
-    var was  = card.querySelector('.pc-was');
-    var now  = card.querySelector('.pc-now');
-    var offEl = card.querySelector('.pc-off');
-    var saveEl = card.querySelector('.pc-save');
-    if (was)   was.textContent   = '₹' + mrp;
-    if (now)   now.textContent   = '₹' + price;
-    if (offEl) offEl.textContent = off + '% OFF';
-    if (saveEl) saveEl.textContent = 'You save ₹' + save;
+    var now  = card.querySelector('#pcPriceMain');
+    if (now) now.textContent = '₹' + price;
 
     var cta = document.getElementById('pcCta');
     var hint = document.getElementById('pcQtyHint');
