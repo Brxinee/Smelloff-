@@ -232,3 +232,44 @@ Also add semantic variants:
 - Add FAQ schema for deodorant vs fabric spray + stain safety + duration.
 - Publish 3 blog posts first: #1, #3, #2 (highest intent order).
 - Build 2 landing pages first: `/fabric-odor-spray-india`, `/deodorant-vs-fabric-spray`.
+
+---
+
+## Add-on: Ready-to-publish rewrite copy (homepage)
+
+### SEO Title
+Fabric Odor Spray India for Clothes | ODORSTRIKE by Smelloff
+
+### Meta Description
+Remove sweat smell from shirts in seconds. ODORSTRIKE is a pocket fabric odor eliminator spray for clothes in India—made for gym, commute, and office.
+
+### H1
+Fabric Odor Remover Spray for Clothes in India
+
+### Hero Subcopy (2 lines)
+Not perfume. Not body deodorant. ODORSTRIKE is a clothes odor remover spray built to eliminate sweat smell at the fabric level.
+
+Carry it in your pocket and remove sweat smell from shirt collars, underarms, and jackets in seconds.
+
+### Comparison block copy (deodorant vs fabric spray)
+#### Deodorant vs Fabric Spray: What’s the Difference?
+Deodorant is made for skin. Fabric spray is made for clothes.
+If your shirt smells after commute, gym, or long office hours, deodorant won’t fix trapped odor molecules inside fabric fibers.
+ODORSTRIKE is a fabric odor spray India users can apply directly on clothes to neutralize odor without adding heavy perfume.
+
+### Use-case block copy
+#### Gym Clothes Odor Spray Use Case
+Post-workout and no time to wash? Spray ODORSTRIKE on your T-shirt and hoodie to cut sweat smell fast.
+
+#### Office/Commute Use Case
+Before meetings, remove sweat smell from shirt fabric in seconds—no changing required.
+
+### FAQ copy starters
+#### Does this work as a sweat smell remover for clothes?
+Yes. ODORSTRIKE is designed to neutralize sweat odor trapped in clothing fibers.
+
+#### Is ODORSTRIKE a deodorant?
+No. It is not a skin deodorant. It is an odor eliminator for clothes India users can spray on fabric.
+
+#### Will it stain clothes?
+It is designed for fabric-safe use with no sticky residue when used as directed.
