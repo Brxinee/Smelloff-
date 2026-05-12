@@ -461,7 +461,7 @@
   /* Hero */
   .hero{
     position:relative;
-    min-height:85vh;
+    min-height:100svh;
     padding:calc(128px + env(safe-area-inset-top, 0px)) 20px 40px;
     display:flex;align-items:center;
     overflow:hidden;
@@ -521,24 +521,42 @@
   .hero-headline{
     font-family:'Barlow Condensed',sans-serif;
     font-weight:900;
-    font-size:clamp(30px,8.5vw,68px);
-    line-height:.98;
+    font-size:clamp(52px,8.5vw,80px);
+    line-height:1.05;
     letter-spacing:.005em;
     text-transform:uppercase;
     color:#fff;
     margin:0;
+    animation:heroFadeUp 0.6s ease-out both;
   }
   .hero-headline .hh-line{display:block}
   .hero-headline .hh-acid{color:#B8FF57}
+  .hero-headline .green{color:#B8FF57}
+
+  @keyframes heroFadeUp{
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .hero-headline,.hero-cta{animation:none}
+  }
 
   .hero-sub{
     font-family:'DM Sans',sans-serif;
     font-weight:400;
-    font-size:16px;
+    font-size:14px;
     line-height:1.45;
-    color:#B0B0B0;
+    color:#B8FF57;
     max-width:520px;
     margin:0;
+  }
+
+  .hero-trust-bar{
+    font-family:'DM Sans',sans-serif;
+    font-size:12px;
+    color:#888;
+    margin:12px 0 0;
+    letter-spacing:.02em;
   }
 
   .hero-warning{
@@ -577,14 +595,16 @@
     width:100%;height:56px;
     background:#B8FF57;color:#080808;
     font-family:'Barlow Condensed',sans-serif;
-    font-weight:900;font-size:18px;
-    letter-spacing:.06em;text-transform:uppercase;
+    font-weight:700;font-size:18px;
+    letter-spacing:.05em;text-transform:uppercase;
     text-decoration:none;
     border:none;border-radius:4px;
     cursor:pointer;
     transition:transform .15s ease, background .15s ease;
+    padding:18px 32px;
+    animation:heroFadeUp 0.6s ease-out 0.2s both;
   }
-  .hero-cta:hover{background:#C7FF70}
+  .hero-cta:hover{background:#ffffff;transition:background .15s}
   .hero-cta:active{transform:scale(.985)}
 
   .hero-trust{
@@ -662,7 +682,7 @@
 
   /* Desktop: copy left / bottle right */
   @media(min-width:860px){
-    .hero{padding:calc(140px + env(safe-area-inset-top, 0px)) 40px 64px;min-height:90vh}
+    .hero{padding:calc(140px + env(safe-area-inset-top, 0px)) 40px 64px;min-height:100svh}
     .hero-inner{
       grid-template-columns:1.1fr .9fr;
       grid-template-areas:
@@ -674,9 +694,8 @@
     .hero-text{gap:20px}
     .hero-action{gap:18px}
     .hb-bottle{height:clamp(280px,40vh,420px)}
-    .hero-cta{width:auto;min-width:320px;padding:0 40px;align-self:flex-start}
-    .hero-headline{font-size:clamp(40px,5.6vw,76px)}
-    .hero-price .hp-now{font-size:56px}
+    .hero-cta{width:auto;min-width:320px;padding:18px 40px;align-self:flex-start}
+    .hero-headline{font-size:clamp(52px,5.6vw,80px)}
   }
 
   /* Social proof bar — directly under hero */
@@ -1122,6 +1141,79 @@
   .product-card .pc-secure{
     font-family:'DM Sans',sans-serif;font-size:11px;
     color:#666;margin:0;text-align:center;line-height:1.3;
+  }
+
+  /* Product card redesign — price + pack selector */
+  .price-main{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:900;font-size:48px;line-height:1;
+    color:#fff;letter-spacing:.01em;
+  }
+  .price-label{
+    font-family:'DM Sans',sans-serif;
+    font-size:14px;color:#B8FF57;
+    text-transform:uppercase;letter-spacing:.1em;
+    display:inline-block;margin-left:8px;vertical-align:middle;
+  }
+  .pc-price-row{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px}
+
+  .pc-pack-selector{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    gap:8px;margin-top:6px;
+  }
+  .pc-pack-card{
+    position:relative;
+    border:1.5px solid #333;border-radius:8px;
+    padding:12px 8px;cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;gap:4px;
+    transition:border-color .15s ease, background .15s ease;
+    text-align:center;
+  }
+  .pc-pack-card:hover{border-color:#555}
+  .pc-pack-card.active{
+    border-color:#B8FF57;
+    background:rgba(184,255,87,.10);
+  }
+  .ppc-main{
+    font-family:'DM Sans',sans-serif;font-size:12px;
+    font-weight:600;color:#fff;line-height:1.2;
+  }
+  .ppc-price{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:900;font-size:15px;
+    color:#fff;line-height:1;letter-spacing:.02em;
+  }
+  .ppc-save{
+    font-family:'DM Sans',sans-serif;
+    font-size:10px;color:#B8FF57;
+    display:block;margin-top:2px;
+  }
+  .ppc-badge{
+    position:absolute;top:-10px;left:50%;
+    transform:translateX(-50%);
+    background:#B8FF57;color:#080808;
+    font-family:'DM Sans',sans-serif;
+    font-size:10px;font-weight:700;
+    padding:2px 8px;border-radius:20px;
+    white-space:nowrap;line-height:1.4;
+  }
+
+  /* Trust icons row */
+  .pc-trust-icons{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    gap:8px;margin-top:4px;
+    padding-top:16px;border-top:1px solid #1F1F1F;
+  }
+  .pti-item{
+    display:flex;flex-direction:column;align-items:center;gap:5px;
+  }
+  .pti-icon{
+    font-size:20px;line-height:1;
+  }
+  .pti-label{
+    font-family:'DM Sans',sans-serif;
+    font-size:11px;color:#888;
+    text-align:center;line-height:1.2;
   }
 
   @media(min-width:860px){
@@ -3080,13 +3172,20 @@
     text-transform:uppercase;
     margin:0;text-align:center;line-height:1;
   }
-  .compare-table{
+  .compare-scroll-wrap{
     width:100%;max-width:920px;
+    overflow-x:auto;-webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .compare-scroll-wrap::-webkit-scrollbar{display:none}
+  .compare-table{
+    width:100%;min-width:540px;
     display:grid;
     grid-template-columns:1.2fr 1fr 1fr 1fr;
     gap:0;
-    background:#0D0D0D;
+    background:#0f0f0f;
     border:1px solid #1F1F1F;
+    border-collapse:collapse;
     border-radius:8px;overflow:hidden;
   }
   .compare-cell{
@@ -3097,13 +3196,21 @@
     border-bottom:1px solid #1a1a1a;
     display:flex;align-items:center;
   }
+  /* Row alternating */
+  .compare-table > .compare-cell.row-h:nth-of-type(4n+5),
+  .compare-table > .compare-cell:nth-of-type(4n+6),
+  .compare-table > .compare-cell:nth-of-type(4n+7),
+  .compare-table > .compare-cell:nth-of-type(4n+8){
+    background:#141414;
+  }
   .compare-cell.row-h{
     color:#888;font-weight:600;font-size:12px;
+    background:#0f0f0f;
   }
   .compare-cell.col-h{
     font-family:'Barlow Condensed',sans-serif;font-weight:900;
-    font-size:13px;letter-spacing:.1em;text-transform:uppercase;
-    color:#fff;background:#111;
+    font-size:14px;letter-spacing:.1em;text-transform:uppercase;
+    color:#555;background:#111;
     border-bottom:1px solid #1f1f1f;
     justify-content:center;text-align:center;
     flex-direction:column;gap:6px;padding:14px 8px;
@@ -3121,43 +3228,37 @@
     box-shadow:0 0 12px rgba(184,255,87,.4);
   }
   .compare-cell.os{
-    background:rgba(184,255,87,.08);
+    background:rgba(184,255,87,.07);
     color:#fff;
   }
   .compare-cell.os.col-h{
-    color:#B8FF57;
-    border-left:2px solid #B8FF57;
+    font-size:20px;color:#B8FF57;
+    border-left:1.5px solid #B8FF57;
+    border-right:1.5px solid #B8FF57;
+    background:rgba(184,255,87,.07);
   }
   .compare-cell.os.body{
-    border-left:2px solid #B8FF57;
+    border-left:1.5px solid #B8FF57;
+    border-right:1.5px solid #B8FF57;
     font-weight:600;
+  }
+  /* Check / cross marks */
+  .compare-cell.os.body::before{
+    content:'✓ ';
+    color:#B8FF57;
+    font-weight:700;
+    flex-shrink:0;
+  }
+  .compare-cell:not(.row-h):not(.col-h):not(.os)::before{
+    content:'✗ ';
+    color:#444;
+    font-weight:700;
+    flex-shrink:0;
   }
   .compare-line{
     font-family:'DM Sans',sans-serif;font-style:italic;
     font-size:16px;color:#BBB;line-height:1.55;
     text-align:center;max-width:680px;margin:0;
-  }
-  @media(max-width:720px){
-    .compare-table{
-      grid-template-columns:1fr;
-      max-width:420px;
-    }
-    .compare-cell{padding:12px 14px}
-    .compare-cell.row-h{
-      background:#111;border-top:2px solid #1f1f1f;
-      padding-top:14px;
-    }
-    .compare-cell.col-h{display:none}
-    .compare-cell::before{
-      content:attr(data-col);
-      font-family:'Barlow Condensed',sans-serif;
-      font-weight:900;font-size:11px;letter-spacing:.1em;
-      text-transform:uppercase;color:#888;
-      min-width:90px;display:inline-block;flex-shrink:0;
-      margin-right:10px;
-    }
-    .compare-cell.row-h::before{display:none}
-    .compare-cell.os.body{border-left:none;border-top:1px solid rgba(184,255,87,.4)}
   }
 
   /* ============================= */
@@ -3737,8 +3838,8 @@
     <div class="hero-text">
       <div class="hero-wordmark">SMELLOFF</div>
       <div class="hero-category">India's first pocket fabric odor killer</div>
-      <h1 class="hero-headline">India's Pocket Fabric Odor Spray — Kills Sweat Smell on Clothes in 8 Seconds</h1>
-      <p class="hero-sub">Spray ON CLOTHES, not skin. Pocket 50ml fabric odor spray. Kills sweat smell in 8 seconds. Not perfume. Not deodorant.</p>
+      <h1 class="hero-headline">India's Pocket Fabric Odor Spray — <span class="green">Kills Sweat Smell</span> on Clothes in 8 Seconds</h1>
+      <p class="hero-sub">Not perfume. Not deodorant. Spray on clothes.</p>
       <h2 class="sr-only">"You don't fear smelling bad.<br>You fear someone noticing."</h2>
     </div>
 
@@ -3757,14 +3858,8 @@
     </div>
 
     <div class="hero-action">
-      <div class="hero-price">
-        <span class="hp-was">₹579</span>
-        <span class="hp-now">₹229</span>
-        <span class="hp-off">60% OFF</span>
-      </div>
-      <p class="hero-launch">Launch price · Limited to first 500 customers</p>
-      <a href="#buy" class="hero-cta" onclick="event.preventDefault();addToCart('solo')">BUY — ₹229</a>
-      <a href="#when-to-use" class="hero-howlink">How it works ↓</a>
+      <a href="#buy" class="hero-cta" onclick="event.preventDefault();addToCart('solo')">GET CLOTHES SPRAY — ₹229</a>
+      <p class="hero-trust-bar">Free shipping · COD · Ships 48hr · 7-day returns</p>
     </div>
   </div>
 </header>
@@ -4019,6 +4114,7 @@
 <!-- WHY NOT JUST DEODORANT? — comparison -->
 <section class="compare" id="vs-deodorant">
   <h2 class="compare-title">Why not just spray deodorant?</h2>
+  <div class="compare-scroll-wrap">
   <div class="compare-table" role="table" aria-label="Deodorant vs perfume vs ODORSTRIKE">
     <div class="compare-cell row-h"></div>
     <div class="compare-cell col-h"><img src="/assets/icon-deodorant.png" alt="" class="compare-col-icon" width="28" height="28" loading="lazy" decoding="async"><span>DEODORANT</span></div>
@@ -4050,6 +4146,7 @@
     <div class="compare-cell" data-col="Perfume">Heavy bottles</div>
     <div class="compare-cell os body" data-col="ODORSTRIKE">50ml — fits any pocket</div>
   </div>
+  </div><!-- /.compare-scroll-wrap -->
   <p class="compare-line">Deodorant covers your skin. ODORSTRIKE handles what your skin already left on your clothes.</p>
 </section>
 
@@ -4083,27 +4180,36 @@
         <span class="pc-rating-sep" aria-hidden="true">·</span>
         <span><span id="pcReviewCount">127</span> verified reviews</span>
       </a>
-      <div class="pc-price">
-        <span class="pc-was">₹579</span>
-        <span class="pc-now">₹229</span>
-        <span class="pc-off">60% OFF</span>
+      <div class="pc-price-row">
+        <span class="price-main" id="pcPriceMain">₹229</span>
+        <span class="price-label">launch price</span>
       </div>
-      <p class="pc-save">You save ₹350</p>
 
-      <div class="pc-qty-row" role="radiogroup" aria-label="Quantity">
-        <button class="pc-qty-btn active" type="button" data-qty="1" onclick="selectQty(1)">1</button>
-        <button class="pc-qty-btn" type="button" data-qty="2" onclick="selectQty(2)">2</button>
-        <button class="pc-qty-btn" type="button" data-qty="3" onclick="selectQty(3)">3</button>
+      <div class="pc-pack-selector" role="radiogroup" aria-label="Select pack">
+        <div class="pc-pack-card active" data-qty="1" tabindex="0" onclick="selectQty(1)">
+          <span class="ppc-main">1 × 50ml</span>
+          <span class="ppc-price">₹229</span>
+        </div>
+        <div class="pc-pack-card" data-qty="2" tabindex="0" onclick="selectQty(2)" style="position:relative">
+          <span class="ppc-badge">MOST POPULAR</span>
+          <span class="ppc-main">2 × 50ml</span>
+          <span class="ppc-price">₹399<span class="ppc-save">Save ₹59</span></span>
+        </div>
+        <div class="pc-pack-card" data-qty="3" tabindex="0" onclick="selectQty(3)" style="position:relative">
+          <span class="ppc-badge">BEST VALUE</span>
+          <span class="ppc-main">3 × 50ml</span>
+          <span class="ppc-price">₹549<span class="ppc-save">Save ₹138</span></span>
+        </div>
       </div>
       <p class="pc-qty-hint" id="pcQtyHint">Smart move — pick a bigger pack to save</p>
 
-      <button class="pc-cta" id="pcCta" onclick="buyBoxAdd()">BUY — ₹229</button>
+      <button class="pc-cta" id="pcCta" onclick="buyBoxAdd()">GET CLOTHES SPRAY — ₹229</button>
 
-      <div class="pc-risk">
-        <span class="pc-risk-item"><img src="/assets/icon-shield.png" alt="" class="pc-risk-icon" width="18" height="18" loading="lazy" decoding="async"> 7-day money-back</span>
-        <span class="pc-risk-item"><img src="/assets/icon-free-shipping.png" alt="" class="pc-risk-icon" width="18" height="18" loading="lazy" decoding="async"> Free shipping</span>
-        <span class="pc-risk-item"><img src="/assets/icon-cod.png" alt="" class="pc-risk-icon" width="18" height="18" loading="lazy" decoding="async"> COD available</span>
-        <span class="pc-risk-item"><img src="/assets/icon-ship.png" alt="" class="pc-risk-icon" width="18" height="18" loading="lazy" decoding="async"> Ships in 48hr</span>
+      <div class="pc-trust-icons">
+        <div class="pti-item"><span class="pti-icon">🛡️</span><span class="pti-label">7-day money-back</span></div>
+        <div class="pti-item"><span class="pti-icon">🚚</span><span class="pti-label">Free shipping</span></div>
+        <div class="pti-item"><span class="pti-icon">📞</span><span class="pti-label">COD available</span></div>
+        <div class="pti-item"><span class="pti-icon">⏱️</span><span class="pti-label">Ships 48hr</span></div>
       </div>
       <p class="pc-secure"><img src="/assets/upi.png" alt="UPI" class="pc-upi-badge" width="40" height="14" loading="lazy" decoding="async"> Secure checkout · UPI / COD · No card stored</p>
     </div>
@@ -5178,24 +5284,14 @@
   let _buyBoxQty = 1;
   window.selectQty = function(qty){
     _buyBoxQty = qty;
-    document.querySelectorAll('.pc-qty-btn').forEach(function(b){
+    document.querySelectorAll('.pc-pack-card').forEach(function(b){
       b.classList.toggle('active', parseInt(b.dataset.qty,10) === qty);
     });
     var variant = qty === 3 ? 'trio' : qty === 2 ? 'duo' : 'solo';
     var price = (window.SMELLOFF_CONFIG && window.SMELLOFF_CONFIG.PRICES[variant]) || (qty === 3 ? 549 : qty === 2 ? 399 : 229);
-    var mrp   = (window.SMELLOFF_CONFIG && window.SMELLOFF_CONFIG.MRP[variant])    || (qty === 3 ? 1399 : qty === 2 ? 999 : 579);
-    var save  = mrp - price;
-    var off   = Math.round((save / mrp) * 100);
 
-    var card = document.querySelector('.product-card') || document;
-    var was  = card.querySelector('.pc-was');
-    var now  = card.querySelector('.pc-now');
-    var offEl = card.querySelector('.pc-off');
-    var saveEl = card.querySelector('.pc-save');
-    if (was)   was.textContent   = '₹' + mrp;
-    if (now)   now.textContent   = '₹' + price;
-    if (offEl) offEl.textContent = off + '% OFF';
-    if (saveEl) saveEl.textContent = 'You save ₹' + save;
+    var priceMain = document.getElementById('pcPriceMain');
+    if (priceMain) priceMain.textContent = '₹' + price;
 
     var cta = document.getElementById('pcCta');
     var hint = document.getElementById('pcQtyHint');
