@@ -33,6 +33,12 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Blog","name":"Smelloff Blog","url":"https://www.smelloff.in/blog","description":"Real talk on fabric odor, sweat science, and what actually works.","author":{"@type":"Person","name":"Brainee"},"publisher":{"@type":"Organization","name":"Smelloff","logo":{"@type":"ImageObject","url":"https://www.smelloff.in/apple-touch-icon.png"}}}
 </script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"url":"https://www.smelloff.in/blog/best-fabric-odor-spray-india-2026-body-odor"},{"@type":"ListItem","position":2,"url":"https://www.smelloff.in/blog/odorstrike-vs-febreze-india"},{"@type":"ListItem","position":3,"url":"https://www.smelloff.in/blog/fix-shirt-odor-before-meeting"},{"@type":"ListItem","position":4,"url":"https://www.smelloff.in/blog/is-zinc-ricinoleate-safe-for-clothes"},{"@type":"ListItem","position":5,"url":"https://www.smelloff.in/blog/gym-to-office-without-showering"},{"@type":"ListItem","position":6,"url":"https://www.smelloff.in/blog/clothes-smell-after-washing"},{"@type":"ListItem","position":7,"url":"https://www.smelloff.in/blog/remove-sweat-smell-shirts-without-washing"},{"@type":"ListItem","position":8,"url":"https://www.smelloff.in/blog/keep-gym-clothes-fresh-in-bag"},{"@type":"ListItem","position":9,"url":"https://www.smelloff.in/blog/gym-clothes-smell-after-washing"},{"@type":"ListItem","position":10,"url":"https://www.smelloff.in/blog/deodorant-vs-fabric-mist"},{"@type":"ListItem","position":11,"url":"https://www.smelloff.in/blog/why-indian-men-sweat-smell-more"},{"@type":"ListItem","position":12,"url":"https://www.smelloff.in/blog/zinc-ricinoleate-fabric-odor-ingredient"},{"@type":"ListItem","position":13,"url":"https://www.smelloff.in/blog/why-i-built-odorstrike"},{"@type":"ListItem","position":14,"url":"https://www.smelloff.in/blog/confidence-spray-pre-meeting-date"},{"@type":"ListItem","position":15,"url":"https://www.smelloff.in/blog/hostel-clothes-smell-college-guide"},{"@type":"ListItem","position":16,"url":"https://www.smelloff.in/blog/indian-summer-sweat-smell-guide"},{"@type":"ListItem","position":17,"url":"https://www.smelloff.in/blog/bike-rider-sweat-smell-india"},{"@type":"ListItem","position":18,"url":"https://www.smelloff.in/blog/how-to-not-smell-sweaty-at-work"},{"@type":"ListItem","position":19,"url":"https://www.smelloff.in/blog/alternative-to-deodorant-for-clothes-smell"},{"@type":"ListItem","position":20,"url":"https://www.smelloff.in/blog/spray-to-remove-sweat-smell-from-clothes-instantly"},{"@type":"ListItem","position":21,"url":"https://www.smelloff.in/blog/best-deodorant-spray-for-clothes-not-skin"},{"@type":"ListItem","position":22,"url":"https://www.smelloff.in/blog/odorstrike-review-30-day-india-test"},{"@type":"ListItem","position":23,"url":"https://www.smelloff.in/blog/mumbai-humidity-sweat-smell-survival-guide"},{"@type":"ListItem","position":24,"url":"https://www.smelloff.in/blog/best-body-odor-remover-spray-for-men-india"},{"@type":"ListItem","position":25,"url":"https://www.smelloff.in/blog/office-ac-trap-why-rewear-shirts-smell-worse"},{"@type":"ListItem","position":26,"url":"https://www.smelloff.in/blog/perfume-plus-sweat-chemical-reaction"},{"@type":"ListItem","position":27,"url":"https://www.smelloff.in/blog/why-deodorant-stops-working-after-3-hours"},{"@type":"ListItem","position":28,"url":"https://www.smelloff.in/blog/best-fabric-odor-spray-india-2026"},{"@type":"ListItem","position":29,"url":"https://www.smelloff.in/blog/where-to-buy-odorstrike-india"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.smelloff.in/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://www.smelloff.in/blog"}]}
+</script>
 
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
@@ -463,6 +469,55 @@
   }
   @keyframes b-load-pulse{0%,100%{opacity:.3}50%{opacity:1}}
 
+  /* Hero top row: heading + search bar side-by-side on desktop */
+  .b-hero-top{display:flex;flex-direction:column;gap:24px}
+  @media(min-width:768px){
+    .b-hero-top{flex-direction:row;align-items:flex-end;gap:40px}
+    .b-hero-top>div:first-child{flex:1;min-width:0}
+    .b-search-wrap{flex:0 0 260px;padding-bottom:2px}
+  }
+  .b-search{
+    width:100%;background:#080808;
+    border:1px solid rgba(255,255,255,0.15);border-radius:8px;
+    color:#fff;font-family:'DM Sans',sans-serif;font-size:15px;
+    padding:12px;outline:none;
+    -webkit-appearance:none;appearance:none;
+  }
+  .b-search::placeholder{color:rgba(255,255,255,0.35)}
+  .b-search:focus{border-color:#B8FF57;box-shadow:0 0 0 2px rgba(184,255,87,0.2)}
+  .b-search::-webkit-search-decoration,.b-search::-webkit-search-cancel-button{-webkit-appearance:none}
+
+  /* Inline buy card in Latest grid */
+  .b-buy-card{border-color:#B8FF57 !important;cursor:default}
+  .b-buy-card:hover{transform:none}
+  .b-buy-card .b-card-thumb{
+    flex-direction:column;align-items:flex-start;justify-content:flex-end;
+    padding:18px 20px;gap:4px;border-bottom-color:rgba(184,255,87,0.3)
+  }
+  .b-buy-label{
+    font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:11px;
+    letter-spacing:.1em;text-transform:uppercase;color:#B8FF57
+  }
+  .b-buy-heading{
+    font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:24px;
+    text-transform:uppercase;color:#fff;line-height:1.05
+  }
+  .b-buy-price{
+    font-family:'DM Sans',sans-serif;font-size:14px;
+    color:rgba(255,255,255,0.7)
+  }
+  .b-buy-pitch{
+    font-family:'DM Sans',sans-serif;font-size:13px;color:#fff !important;margin:0
+  }
+  .b-buy-btn{
+    display:inline-block;background:#B8FF57;color:#080808;
+    font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:13px;
+    letter-spacing:.08em;text-transform:uppercase;padding:12px 24px;
+    border:none;border-radius:6px;cursor:pointer;
+    transition:background .15s ease;margin-top:4px
+  }
+  .b-buy-btn:hover{background:#C7FF70}
+
   /* Back-to-top floating button */
   .to-top{
     position:fixed;
@@ -495,9 +550,17 @@
 </nav>
 
 <header class="b-hero">
-  <div class="b-eyebrow">Smelloff · Blog</div>
-  <h1>No fluff. Just the <span class="acid">real</span> science of smell.</h1>
-  <p class="dek">Why your clothes still reek after washing, what deodorant can't fix, and what finally works. Written by the founder.</p>
+  <div class="b-hero-top">
+    <div>
+      <div class="b-eyebrow">Smelloff · Blog</div>
+      <h1>No fluff. Just the <span class="acid">real</span> science of smell.</h1>
+      <p class="dek">Why your clothes still reek after washing, what deodorant can't fix, and what finally works. Written by the founder.</p>
+    </div>
+    <div class="b-search-wrap">
+      <label for="blogSearch" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Search guides</label>
+      <input type="search" id="blogSearch" class="b-search" placeholder="Search 29 guides…" autocomplete="off" spellcheck="false">
+    </div>
+  </div>
 </header>
 
 <nav class="b-jumps" aria-label="Jump to section">
@@ -532,10 +595,6 @@
   <div class="b-marquee-label">Trending now</div>
   <div class="b-marquee-viewport" id="marqueeVp">
     <div class="b-marquee-track" id="marqueeTrack">
-      <a class="b-mc" href="/blog/best-fabric-odor-spray-india-2026-body-odor">
-        <div class="b-mc-thumb"><span class="b-mc-cat">Buyer's Guide</span><span class="b-mc-headline">Best fabric odor spray for body odor</span></div>
-        <div class="b-mc-meta">Read the ranking</div>
-      </a>
       <a class="b-mc" href="/blog/odorstrike-vs-febreze-india">
         <div class="b-mc-thumb"><span class="b-mc-cat">Comparison</span><span class="b-mc-headline">ODORSTRIKE vs Febreze on Indian clothes</span></div>
         <div class="b-mc-meta">Read the head-to-head</div>
@@ -544,26 +603,13 @@
         <div class="b-mc-thumb"><span class="b-mc-cat">Reviews</span><span class="b-mc-headline">ODORSTRIKE 30-day India test</span></div>
         <div class="b-mc-meta">Read the review</div>
       </a>
-      <a class="b-mc" href="/blog/fix-shirt-odor-before-meeting">
-        <div class="b-mc-thumb"><span class="b-mc-cat">Pre-Meeting</span><span class="b-mc-headline">Fix shirt odor in 60 seconds</span></div>
+      <a class="b-mc" href="/blog/gym-to-office-without-showering">
+        <div class="b-mc-thumb"><span class="b-mc-cat">Gym-to-Office</span><span class="b-mc-headline">Gym to office without showering</span></div>
         <div class="b-mc-meta">Read the fix</div>
       </a>
-      <!-- duplicates for seamless loop (mirror the 4 above) -->
-      <a class="b-mc" href="/blog/best-fabric-odor-spray-india-2026-body-odor" aria-hidden="true" tabindex="-1">
-        <div class="b-mc-thumb"><span class="b-mc-cat">Buyer's Guide</span><span class="b-mc-headline">Best fabric odor spray for body odor</span></div>
-        <div class="b-mc-meta">Read the ranking</div>
-      </a>
-      <a class="b-mc" href="/blog/odorstrike-vs-febreze-india" aria-hidden="true" tabindex="-1">
-        <div class="b-mc-thumb"><span class="b-mc-cat">Comparison</span><span class="b-mc-headline">ODORSTRIKE vs Febreze on Indian clothes</span></div>
-        <div class="b-mc-meta">Read the head-to-head</div>
-      </a>
-      <a class="b-mc" href="/blog/odorstrike-review-30-day-india-test" aria-hidden="true" tabindex="-1">
-        <div class="b-mc-thumb"><span class="b-mc-cat">Reviews</span><span class="b-mc-headline">ODORSTRIKE 30-day India test</span></div>
-        <div class="b-mc-meta">Read the review</div>
-      </a>
-      <a class="b-mc" href="/blog/fix-shirt-odor-before-meeting" aria-hidden="true" tabindex="-1">
-        <div class="b-mc-thumb"><span class="b-mc-cat">Pre-Meeting</span><span class="b-mc-headline">Fix shirt odor in 60 seconds</span></div>
-        <div class="b-mc-meta">Read the fix</div>
+      <a class="b-mc" href="/blog/keep-gym-clothes-fresh-in-bag">
+        <div class="b-mc-thumb"><span class="b-mc-cat">Gym Bag</span><span class="b-mc-headline">Keep gym clothes fresh in your bag</span></div>
+        <div class="b-mc-meta">Read the guide</div>
       </a>
     </div>
   </div>
@@ -576,7 +622,7 @@
   if(!vp || !track) return;
 
   var pos = 0;            // current translateX in px (negative = scrolled left)
-  var halfW = 0;          // width of one set (track has 2 sets)
+  var halfW = 0;          // full track width — resets scroll to start when reached
   var dragging = false;
   var dragStartX = 0;
   var dragStartPos = 0;
@@ -591,7 +637,7 @@
   var DECAY = 0.92;       // velocity decay per frame after release
 
   function measure(){
-    halfW = track.scrollWidth / 2;
+    halfW = track.scrollWidth;
   }
   measure();
   window.addEventListener('resize', measure);
@@ -837,6 +883,18 @@
         <span class="b-card-arrow">Read</span>
       </div>
     </a>
+    <!-- Inline buy card — shown between articles, hidden when search is active -->
+    <div id="blogBuyCard" class="b-card b-buy-card" aria-label="Buy ODORSTRIKE">
+      <div class="b-card-thumb">
+        <span class="b-buy-label">THE PRODUCT</span>
+        <span class="b-buy-heading">ODORSTRIKE 50ml</span>
+        <span class="b-buy-price">&#x20B9;229 &middot; Pocket fabric mist</span>
+      </div>
+      <div class="b-card-body" style="gap:8px">
+        <p class="b-buy-pitch">The product these 29 guides are about.</p>
+        <button class="b-buy-btn" type="button" onclick="window.openCheckout ? window.openCheckout() : (window.location.href='/#buy')">BUY NOW</button>
+      </div>
+    </div>
     <a href="/blog/remove-sweat-smell-shirts-without-washing" class="b-card" data-cat="fabric">
       <div class="b-card-thumb">
         <span class="b-thumb-cat">Fabric Care</span>
@@ -1152,11 +1210,36 @@
         <span class="b-card-arrow">Read</span>
       </div>
     </a>
-  </div>
-  <div class="b-pages" id="pageNav">
-    <button class="b-page-btn" id="prevBtn" type="button">&larr; Prev</button>
-    <span class="b-page-info" id="pageInfo">Page 1</span>
-    <button class="b-page-btn" id="nextBtn" type="button">Next &rarr;</button>
+    <a href="/blog/best-fabric-odor-spray-india-2026" class="b-card" data-cat="science">
+      <div class="b-card-thumb">
+        <span class="b-thumb-cat">Buyer&#x27;s Guide</span>
+      </div>
+      <div class="b-card-body">
+        <div class="b-card-meta">
+          <span class="b-card-cat">Buyer&#x27;s Guide</span>
+          <span class="b-card-sep">·</span>
+          <span>9 min</span>
+        </div>
+        <h3>Best fabric odor spray in India 2026: honest buyer&#x27;s guide</h3>
+        <p>Categories, chemistry, honest verdict. What actually works to kill odor on clothes in India — and why most sprays miss the mark.</p>
+        <span class="b-card-arrow">Read</span>
+      </div>
+    </a>
+    <a href="/blog/where-to-buy-odorstrike-india" class="b-card" data-cat="science">
+      <div class="b-card-thumb">
+        <span class="b-thumb-cat">Buying Guide</span>
+      </div>
+      <div class="b-card-body">
+        <div class="b-card-meta">
+          <span class="b-card-cat">Buying Guide</span>
+          <span class="b-card-sep">·</span>
+          <span>6 min</span>
+        </div>
+        <h3>Where to buy ODORSTRIKE in India (direct, COD, free shipping)</h3>
+        <p>Pan-India COD, free shipping, dispatched within 48 hours. Solo &#x20B9;229, Duo &#x20B9;399, Trio &#x20B9;549. Everything you need to know before ordering.</p>
+        <span class="b-card-arrow">Read</span>
+      </div>
+    </a>
   </div>
 </section>
 
@@ -1234,64 +1317,79 @@
 
 <script>
 (function(){
-  var grid = document.getElementById('latestGrid');
+  // — CURATED SLOT CONFIG — edit slugs here to change which posts appear in each section —
+  var FEATURED_SLUGS  = ['best-fabric-odor-spray-india-2026-body-odor'];
+  var TRENDING_SLUGS  = ['odorstrike-vs-febreze-india','odorstrike-review-30-day-india-test','gym-to-office-without-showering','keep-gym-clothes-fresh-in-bag'];
+  var MOST_READ_SLUGS = ['fix-shirt-odor-before-meeting','how-to-not-smell-sweaty-at-work','deodorant-vs-fabric-mist'];
+
+  var grid        = document.getElementById('latestGrid');
+  var countEl     = document.getElementById('latestCount');
+  var featuredSec = document.querySelector('.b-feature');
+  var trendingSec = document.querySelector('.b-marquee');
+  var popularSec  = document.getElementById('popularSection');
+  var randomSec   = document.querySelector('.b-random');
+  var randomGrid  = document.getElementById('randomGrid');
+  var buyCard     = document.getElementById('blogBuyCard');
+  var searchInput = document.getElementById('blogSearch');
   if(!grid) return;
-  var cards = Array.prototype.slice.call(grid.querySelectorAll('.b-card'));
-  var prevBtn = document.getElementById('prevBtn');
-  var nextBtn = document.getElementById('nextBtn');
-  var pageInfo = document.getElementById('pageInfo');
-  var countEl = document.getElementById('latestCount');
-  var pageNav = document.getElementById('pageNav');
 
-  var PAGE_SIZE = 9;
-  var page = 1;
-  var cat = 'all';
-  var emptyEl = null;
-  // Expose setter so the drawer can drive the filter
-  window.__blogSetCat = function(next){
-    cat = next || 'all';
-    page = 1;
-    render();
-    refreshRandom();
-  };
+  var allCards = Array.prototype.slice.call(grid.querySelectorAll('a.b-card'));
+  var curQuery = '';
+  var curCat   = 'all';
+  var emptyEl  = null;
+  var debounceT = null;
 
-  function visible(){
-    return cards.filter(function(c){ return cat === 'all' || c.dataset.cat === cat; });
-  }
-  function render(){
-    var vis = visible();
-    var totalPages = Math.max(1, Math.ceil(vis.length / PAGE_SIZE));
-    if(page > totalPages) page = totalPages;
-    cards.forEach(function(c){ c.style.display = 'none'; });
-    var start = (page - 1) * PAGE_SIZE;
-    vis.slice(start, start + PAGE_SIZE).forEach(function(c){ c.style.display = ''; });
-    if(pageInfo) pageInfo.textContent = 'Page ' + page + ' of ' + totalPages;
-    if(countEl) countEl.textContent = vis.length + (vis.length === 1 ? ' article' : ' articles');
-    if(prevBtn) prevBtn.disabled = page <= 1;
-    if(nextBtn) nextBtn.disabled = page >= totalPages;
-    if(pageNav) pageNav.style.display = totalPages > 1 ? '' : 'none';
+  function applyFilter(){
+    var searchActive = curQuery.length > 0;
+
+    // Hide/show curated top sections when search is active
+    if(featuredSec) featuredSec.style.display = searchActive ? 'none' : '';
+    if(trendingSec) trendingSec.style.display = searchActive ? 'none' : '';
+    if(popularSec)  popularSec.style.display  = searchActive ? 'none' : '';
+    if(buyCard)     buyCard.style.display      = searchActive ? 'none' : '';
+
+    var visible = 0;
+    allCards.forEach(function(c){
+      var catMatch = curCat === 'all' || c.dataset.cat === curCat;
+      var queryMatch = true;
+      if(curQuery){
+        var title   = (c.querySelector('h3') || {}).textContent || '';
+        var desc    = (c.querySelector('p')  || {}).textContent || '';
+        var catTxt  = (c.querySelector('.b-card-cat') || {}).textContent || '';
+        queryMatch  = (title + ' ' + desc + ' ' + catTxt).toLowerCase().indexOf(curQuery) !== -1;
+      }
+      var show = catMatch && queryMatch;
+      c.style.display = show ? '' : 'none';
+      if(show) visible++;
+    });
+
+    if(countEl) countEl.textContent = visible + (visible === 1 ? ' article' : ' articles');
+
     // Empty state
-    if(vis.length === 0){
+    if(visible === 0){
       if(!emptyEl){
         emptyEl = document.createElement('div');
         emptyEl.className = 'b-empty';
-        emptyEl.textContent = 'No articles in this category yet';
         grid.parentNode.insertBefore(emptyEl, grid.nextSibling);
       }
+      emptyEl.textContent = curQuery
+        ? 'No guides match “' + curQuery + '” yet — try monsoon, gym, office, or polyester.'
+        : 'No articles in this category yet.';
       grid.style.display = 'none';
     } else {
       if(emptyEl){ emptyEl.remove(); emptyEl = null; }
       grid.style.display = '';
     }
+
+    refreshRandom();
   }
+
   function refreshRandom(){
-    var randomGrid = document.getElementById('randomGrid');
-    var randomSection = document.querySelector('.b-random');
-    if(!randomGrid || !randomSection) return;
+    if(!randomGrid || !randomSec) return;
     randomGrid.innerHTML = '';
-    var pool = visible().slice();
-    if(pool.length === 0){ randomSection.style.display = 'none'; return; }
-    randomSection.style.display = '';
+    var pool = allCards.filter(function(c){ return c.style.display !== 'none'; });
+    if(pool.length === 0){ randomSec.style.display = 'none'; return; }
+    randomSec.style.display = '';
     for(var i = pool.length - 1; i > 0; i--){
       var j = Math.floor(Math.random() * (i + 1));
       var tmp = pool[i]; pool[i] = pool[j]; pool[j] = tmp;
@@ -1302,14 +1400,31 @@
       randomGrid.appendChild(clone);
     });
   }
-  function scrollToLatest(){
-    var s = document.getElementById('latestSection');
-    if(s) window.scrollTo({ top: s.getBoundingClientRect().top + window.pageYOffset - 70, behavior: 'smooth' });
+
+  // Expose on window — reusable from hamburger nav and any other caller
+  window.filterCards = function(query, cat){
+    if(query !== undefined) curQuery = query.trim().toLowerCase();
+    if(cat   !== undefined) curCat   = cat || 'all';
+    // Keep search input in sync if called externally with no query
+    if(searchInput && query !== undefined) searchInput.value = query;
+    applyFilter();
+  };
+
+  // Legacy alias for any existing callers
+  window.__blogSetCat = function(cat){ window.filterCards('', cat); };
+
+  // Search input — debounced 150ms
+  if(searchInput){
+    searchInput.addEventListener('input', function(){
+      clearTimeout(debounceT);
+      debounceT = setTimeout(function(){
+        curQuery = searchInput.value.trim().toLowerCase();
+        applyFilter();
+      }, 150);
+    });
   }
-  if(prevBtn) prevBtn.addEventListener('click', function(){ if(page > 1){ page--; render(); scrollToLatest(); }});
-  if(nextBtn) nextBtn.addEventListener('click', function(){ page++; render(); scrollToLatest(); });
-  render();
-  refreshRandom();
+
+  applyFilter();
 })();
 </script>
 
@@ -1348,43 +1463,41 @@
 
 <script>
 (function(){
-  var drawer = document.getElementById('blogDrawer');
+  var drawer   = document.getElementById('blogDrawer');
   var backdrop = document.getElementById('drawerBackdrop');
-  var btn = document.getElementById('blogMenuToggle');
+  var menuBtn  = document.getElementById('blogMenuToggle');
   if(!drawer) return;
+
   function closeDrawer(){
     drawer.classList.remove('open');
     if(backdrop) backdrop.classList.remove('open');
     document.body.classList.remove('drawer-open');
-    if(btn){ btn.setAttribute('aria-expanded','false'); }
+    if(menuBtn) menuBtn.setAttribute('aria-expanded','false');
     drawer.setAttribute('aria-hidden','true');
   }
-  drawer.querySelectorAll('.b-drawer-cat').forEach(function(link){
-    link.addEventListener('click', function(){
-      var cat = link.dataset.cat;
+
+  drawer.querySelectorAll('.b-drawer-cat').forEach(function(chip){
+    chip.addEventListener('click', function(){
+      var cat = chip.dataset.cat;
+
+      // Update active chip state — persists until cleared
       drawer.querySelectorAll('.b-drawer-cat').forEach(function(x){ x.classList.remove('active'); });
-      link.classList.add('active');
+      chip.classList.add('active');
+
       closeDrawer();
-      // 1-second loading state so the filter change is visible even
-      // though the palette is uniform across categories.
-      var posts = document.getElementById('latestSection');
-      var randomSec = document.querySelector('.b-random');
-      var popularSec = document.getElementById('popularSection');
-      [posts, randomSec, popularSec].forEach(function(el){
-        if(el){ el.classList.remove('b-loading'); /* re-trigger animation */ void el.offsetWidth; el.classList.add('b-loading'); }
-      });
-      setTimeout(function(){
-        if(typeof window.__blogSetCat === 'function') window.__blogSetCat(cat);
-        [posts, randomSec, popularSec].forEach(function(el){ if(el) el.classList.remove('b-loading'); });
-      }, 1000);
-      if(posts){
+
+      // Apply filter via shared function (clears any active search query)
+      if(typeof window.filterCards === 'function') window.filterCards('', cat);
+
+      // Scroll to Latest reads
+      var latestSec = document.getElementById('latestSection');
+      if(latestSec){
         setTimeout(function(){
-          window.scrollTo({ top: posts.getBoundingClientRect().top + window.pageYOffset - 70, behavior: 'smooth' });
-        }, 320);
+          window.scrollTo({ top: latestSec.getBoundingClientRect().top + window.pageYOffset - 70, behavior: 'smooth' });
+        }, 80);
       }
     });
   });
-  // (drawer 'All' is active by default; no body pills to mirror)
 })();
 </script>
 
