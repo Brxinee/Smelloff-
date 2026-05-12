@@ -1949,12 +1949,12 @@
   }
   .overlay .upi-inline-val.acid{color:#B8FF57}
   .overlay .upi-copy{
-    background:transparent;border:1px solid #2a2a2a;
+    background:transparent;border:1px solid #B8FF57;
     color:#B8FF57;cursor:pointer;
     font-family:'Barlow Condensed',sans-serif;
-    font-weight:900;font-size:11px;
+    font-weight:900;font-size:12px;
     letter-spacing:.08em;text-transform:uppercase;
-    padding:5px 9px;border-radius:3px;
+    padding:4px 10px;border-radius:4px;
     margin-left:auto;
     transition:all .15s ease;
   }
@@ -4585,7 +4585,7 @@
           <div class="upi-inline-row">
             <span class="upi-inline-lbl">UPI ID</span>
             <span class="upi-inline-val" id="upiInlineId">9392974031-3@ybl</span>
-            <button type="button" class="upi-copy" id="upiCopyBtn" onclick="copyUpiId()">Tap to copy</button>
+            <button type="button" class="upi-copy" id="upiCopyBtn" onclick="copyUpiId()">Copy</button>
           </div>
           <div class="upi-inline-row">
             <span class="upi-inline-lbl">Payee</span>
@@ -4738,13 +4738,14 @@
 <script>
   const CFG = window.SMELLOFF_CONFIG;
   const VARIANTS = {
-    solo: { title: 'Starter Strike — ODORSTRIKE', units: '1 × 50ml', amount: CFG.PRICES.solo, mrp: CFG.MRP.solo, label: 'solo' },
-    duo:  { title: 'Double Strike — ODORSTRIKE',  units: '2 × 50ml', amount: CFG.PRICES.duo,  mrp: CFG.MRP.duo,  label: 'duo'  },
-    trio: { title: 'Triple Strike — ODORSTRIKE',  units: '3 × 50ml', amount: CFG.PRICES.trio, mrp: CFG.MRP.trio, label: 'trio' }
+    solo: { title: 'Starter Strike — ODORSTRIKE', units: '1 × ODORSTRIKE 50ml', amount: CFG.PRICES.solo, mrp: CFG.MRP.solo, label: 'solo' },
+    duo:  { title: 'Double Strike — ODORSTRIKE',  units: '2 × ODORSTRIKE 50ml', amount: CFG.PRICES.duo,  mrp: CFG.MRP.duo,  label: 'duo'  },
+    trio: { title: 'Triple Strike — ODORSTRIKE',  units: '3 × ODORSTRIKE 50ml', amount: CFG.PRICES.trio, mrp: CFG.MRP.trio, label: 'trio' }
   };
 
   let currentVariant = 'solo';
   let payMethod = 'prepaid';
+  let selectedPack = { qty: 1, price: 229 };
 
   // Transactional email client (Resend via /api/send-email).
   // keepalive: true so the request survives page navigation (e.g. UPI redirect).
@@ -4785,6 +4786,8 @@
       else mrpEl.style.display = 'none';
     }
     document.getElementById('checkoutTotal').textContent = '₹' + total;
+    var upiAmtInline = document.getElementById('upiAmountInline');
+    if (upiAmtInline) upiAmtInline.textContent = '₹' + total;
     var shipEl = document.getElementById('checkoutShipping');
     if (shipEl) shipEl.textContent = 'Free ✓';
     document.getElementById('submitText').textContent = (payMethod === 'cod' ? 'PLACE COD ORDER · ₹' : 'OPEN UPI APP · ₹') + total;
@@ -4805,6 +4808,9 @@
     document.body.style.overflow = '';
     var lsEl = document.getElementById('loadingScreen');
     if (lsEl) lsEl.classList.remove('active');
+    // Clear any inline field errors left from validation
+    document.querySelectorAll('.overlay .field-error').forEach(function(e){ e.remove(); });
+    document.querySelectorAll('.overlay input, .overlay textarea').forEach(function(i){ i.style.border = ''; });
     const upiBlock = document.getElementById('upiBlock');
     if (upiBlock) upiBlock.style.display = 'none';
     // Stop UPI countdown if it was running
@@ -4850,21 +4856,42 @@
   }
 
   function validateForm() {
-    // Clear previous red borders
-    document.querySelectorAll('.overlay input, .overlay textarea').forEach(function(i){i.style.borderColor='';});
+    // Clear previous red borders and inline field errors
+    document.querySelectorAll('.overlay input, .overlay textarea').forEach(function(i){ i.style.border = ''; });
+    document.querySelectorAll('.overlay .field-error').forEach(function(e){ e.remove(); });
+
+    function markFieldError(el, msg) {
+      el.style.border = '1.5px solid #ff4444';
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      var err = document.createElement('span');
+      err.className = 'field-error';
+      err.style.cssText = 'display:block;color:#ff4444;font-size:12px;margin-top:4px';
+      err.textContent = msg || 'This field is required';
+      el.insertAdjacentElement('afterend', err);
+    }
+
     // Email is OPTIONAL — not in required list
     const fields = ['f_phone','f_name','f_addr','f_pin','f_city','f_state'];
     for (const id of fields) {
       const el = document.getElementById(id);
-      if (!el.value.trim()) { el.style.borderColor='#ff6b6b'; el.focus(); showError('Please fill all required fields.'); return false; }
+      if (!el.value.trim()) { markFieldError(el); return false; }
     }
     const phone = document.getElementById('f_phone').value.trim();
-    if (!/^[6-9]\d{9}$/.test(phone)) { document.getElementById('f_phone').style.borderColor='#ff6b6b'; showError('Enter a valid 10-digit mobile number.'); return false; }
+    if (!/^[6-9]\d{9}$/.test(phone)) {
+      markFieldError(document.getElementById('f_phone'), 'Enter a valid 10-digit mobile number.');
+      return false;
+    }
     const pin = document.getElementById('f_pin').value.trim();
-    if (!/^\d{6}$/.test(pin)) { document.getElementById('f_pin').style.borderColor='#ff6b6b'; showError('Enter a valid 6-digit pincode.'); return false; }
+    if (!/^\d{6}$/.test(pin)) {
+      markFieldError(document.getElementById('f_pin'), 'Enter a valid 6-digit pincode.');
+      return false;
+    }
     // Email is OPTIONAL — only validate if non-empty
     const email = document.getElementById('f_email').value.trim();
-    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { document.getElementById('f_email').style.borderColor='#ff6b6b'; showError('Enter a valid email or leave it blank.'); return false; }
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      markFieldError(document.getElementById('f_email'), 'Enter a valid email or leave it blank.');
+      return false;
+    }
     return true;
   }
 
@@ -5042,11 +5069,19 @@
           paymentMethod: 'Cash on Delivery'
         }).catch(console.error);
       }
-      showLoadingScreen('Placing your order…', 'Confirming with our team');
-      setTimeout(() => {
-        btn.disabled = false;
-        showSuccess(orderId, 'cod');
-      }, 2400);
+      // Build COD WhatsApp message using current form values and selectedPack
+      var codQty = (SHEET_VARIANT[currentVariant] && SHEET_VARIANT[currentVariant].bottles) || selectedPack.qty;
+      var codPrice = VARIANTS[currentVariant] ? VARIANTS[currentVariant].amount : selectedPack.price;
+      var codMsg = 'Hi Smelloff, I want to place a COD order.\n' +
+        'Product: ODORSTRIKE Fabric Spray\n' +
+        'Pack: ' + codQty + ' × 50ml\n' +
+        'Amount: ₹' + codPrice + '\n' +
+        'Name: ' + document.getElementById('f_name').value.trim() + '\n' +
+        'Address: ' + document.getElementById('f_addr').value.trim() + '\n' +
+        'Pincode: ' + document.getElementById('f_pin').value.trim();
+      window.open('https://wa.me/919392974031?text=' + encodeURIComponent(codMsg), '_blank');
+      btn.disabled = false;
+      showSuccess(orderId, 'cod');
       return;
     }
 
@@ -5093,7 +5128,7 @@
         btn.classList.add('copied');
         const orig = btn.textContent;
         btn.textContent = 'Copied ✓';
-        setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1500);
+        setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
       }
     } catch (e) { console.warn('[Smelloff] UPI copy failed:', e); }
   };
@@ -5289,6 +5324,7 @@
     });
     var variant = qty === 3 ? 'trio' : qty === 2 ? 'duo' : 'solo';
     var price = (window.SMELLOFF_CONFIG && window.SMELLOFF_CONFIG.PRICES[variant]) || (qty === 3 ? 549 : qty === 2 ? 399 : 229);
+    selectedPack = { qty: qty, price: price };
 
     var priceMain = document.getElementById('pcPriceMain');
     if (priceMain) priceMain.textContent = '₹' + price;
@@ -5304,7 +5340,7 @@
   };
   window.buyBoxAdd = function(){
     var variant = _buyBoxQty === 3 ? 'trio' : _buyBoxQty === 2 ? 'duo' : 'solo';
-    if (typeof window.addToCart === 'function') window.addToCart(variant);
+    if (typeof openCheckout === 'function') openCheckout(variant);
   };
 
 
