@@ -1,9 +1,44 @@
 # Smelloff robots.txt
-# Keep this lean to avoid crawler parsing edge cases.
+# Allow all crawlers including AI/LLM bots — critical for GEO/AEO citation
+
 User-agent: *
 Allow: /
-Disallow: /checkout
-Disallow: /thank-you
 Disallow: /api/
+Disallow: /admin/
+Disallow: /outreach/
+
+# Explicitly allow AI and search-AI bots (do NOT block these)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
 
 Sitemap: https://www.smelloff.in/sitemap.xml
