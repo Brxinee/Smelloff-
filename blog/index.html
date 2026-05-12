@@ -432,6 +432,62 @@
   .b-drawer-socials a:hover{border-color:#B8FF57;background:#0F0F0F}
   .b-drawer-socials img{width:22px;height:22px;display:block}
 
+  /* Drawer new sections: Popular Guides, Latest, Newsletter */
+  .b-drawer-new-label{
+    margin:24px 22px 0;padding-top:24px;
+    font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;
+    letter-spacing:.1em;text-transform:uppercase;color:#888;
+    border-top:1px solid #1a1a1a;
+  }
+  .b-drawer-new-label--first{margin-top:32px}
+  .b-drawer-guides{display:flex;flex-direction:column;gap:0;padding:4px 0 0}
+  .b-drawer-guide-link{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:12px 22px;
+    font-family:'DM Sans',sans-serif;font-size:15px;font-weight:400;
+    color:#fff;text-decoration:none;
+    transition:background .15s ease;
+  }
+  .b-drawer-guide-link + .b-drawer-guide-link{margin-top:0;padding-top:4px}
+  .b-drawer-guide-link:hover{background:#0F0F0F}
+  .b-drawer-guide-link:active{background:#111}
+  .b-drawer-guide-link:hover .b-drawer-guide-arrow{color:#B8FF57}
+  .b-drawer-guide-link:active .b-drawer-guide-arrow{color:#B8FF57}
+  .b-drawer-guide-arrow{
+    color:#666;flex-shrink:0;margin-left:10px;font-style:normal;
+    transition:color .15s ease;
+  }
+  .b-drawer-nl{padding:8px 22px 0}
+  .b-drawer-nl-copy{
+    font-family:'DM Sans',sans-serif;font-size:13px;color:#888;
+    margin:0 0 10px;line-height:1.4;
+  }
+  .b-drawer-nl-form{display:flex;flex-direction:column;gap:8px}
+  .b-drawer-nl-input{
+    width:100%;box-sizing:border-box;
+    background:transparent;border:1px solid #333;border-radius:6px;
+    color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;
+    padding:10px 12px;outline:none;
+    transition:border-color .15s ease;
+  }
+  .b-drawer-nl-input::placeholder{color:#555}
+  .b-drawer-nl-input:focus{border-color:#B8FF57}
+  .b-drawer-nl-btn{
+    width:100%;background:#B8FF57;color:#080808;border:none;border-radius:6px;
+    font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:15px;
+    letter-spacing:.08em;text-transform:uppercase;
+    padding:11px 0;cursor:pointer;transition:opacity .15s ease;
+  }
+  .b-drawer-nl-btn:hover{opacity:.88}
+  .b-drawer-nl-success{
+    font-family:'DM Sans',sans-serif;font-size:14px;
+    color:#B8FF57;padding:10px 0 0;
+  }
+  .b-drawer-nl-error{
+    font-family:'DM Sans',sans-serif;font-size:13px;
+    color:#f66;margin-top:6px;
+  }
+
   /* Filter loading state — gives visual feedback when category changes
      so users see something happen even though the palette is uniform. */
   .b-loading{position:relative;pointer-events:none}
@@ -1270,6 +1326,39 @@
       <button class="b-drawer-cat" data-cat="science" type="button">Science</button>
     </div>
 
+    <!-- POPULAR GUIDES -->
+    <div class="b-drawer-new-label b-drawer-new-label--first">Popular Guides</div>
+    <div class="b-drawer-guides">
+      <a href="/blog/remove-sweat-smell-shirts-without-washing" class="b-drawer-guide-link">
+        <span>How to remove sweat smell from shirts</span>
+        <span class="b-drawer-guide-arrow" aria-hidden="true">→</span>
+      </a>
+      <a href="/blog/clothes-smell-after-washing" class="b-drawer-guide-link">
+        <span>Why clothes smell even after washing</span>
+        <span class="b-drawer-guide-arrow" aria-hidden="true">→</span>
+      </a>
+      <a href="/blog/keep-gym-clothes-fresh-in-bag" class="b-drawer-guide-link">
+        <span>Keep gym clothes fresh longer</span>
+        <span class="b-drawer-guide-arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <!-- LATEST -->
+    <div class="b-drawer-new-label">Latest</div>
+    <div class="b-drawer-guides" id="drawerLatestLinks"></div>
+
+    <!-- NEWSLETTER -->
+    <div class="b-drawer-new-label">Newsletter</div>
+    <div class="b-drawer-nl">
+      <p class="b-drawer-nl-copy">One smell-science email a week. No spam.</p>
+      <div id="drawerNlForm" class="b-drawer-nl-form">
+        <input type="email" id="drawerNlEmail" class="b-drawer-nl-input" placeholder="your@email.com" autocomplete="email">
+        <button type="button" class="b-drawer-nl-btn" id="drawerNlBtn">Subscribe</button>
+      </div>
+      <div id="drawerNlSuccess" class="b-drawer-nl-success" style="display:none">&#10003; Subscribed</div>
+      <div id="drawerNlError" class="b-drawer-nl-error" style="display:none"></div>
+    </div>
+
     <div class="b-drawer-spacer"></div>
     <div class="b-drawer-socials" aria-label="Connect with us">
       <a href="https://instagram.com/smell0ff" target="_blank" rel="noopener" aria-label="Instagram">
@@ -1539,6 +1628,58 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
   update();
+})();
+</script>
+
+<script>
+/* Drawer: auto-populate Latest from last 3 cards in latestGrid */
+(function(){
+  var grid = document.getElementById('latestGrid');
+  var linksEl = document.getElementById('drawerLatestLinks');
+  if(!grid || !linksEl) return;
+  var cards = Array.prototype.slice.call(grid.querySelectorAll('a.b-card'));
+  var latest = cards.slice(Math.max(0, cards.length - 3)).reverse();
+  latest.forEach(function(card){
+    var href = card.getAttribute('href');
+    var titleEl = card.querySelector('h3');
+    var title = titleEl ? titleEl.textContent.trim() : '';
+    if(!href || !title) return;
+    var a = document.createElement('a');
+    a.href = href;
+    a.className = 'b-drawer-guide-link';
+    a.innerHTML = '<span>' + title + '</span><span class="b-drawer-guide-arrow" aria-hidden="true">→</span>';
+    linksEl.appendChild(a);
+  });
+})();
+
+/* Drawer: newsletter subscription */
+(function(){
+  var SHEETS_EP = 'https://script.google.com/macros/s/AKfycbwvZamMivX4MF_jM83VjO3f8GDYmitlOxKkkXS2mSnivZ1wzps9ZolIQG2tvKMATIoh2Q/exec';
+  var btn = document.getElementById('drawerNlBtn');
+  if(!btn) return;
+  btn.addEventListener('click', function(){
+    var input = document.getElementById('drawerNlEmail');
+    var formEl = document.getElementById('drawerNlForm');
+    var successEl = document.getElementById('drawerNlSuccess');
+    var errorEl = document.getElementById('drawerNlError');
+    var email = input ? input.value.trim() : '';
+    if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      if(input) input.style.borderColor = '#a00';
+      return;
+    }
+    input.style.borderColor = '';
+    errorEl.style.display = 'none';
+    var url = SHEETS_EP + '?email=' + encodeURIComponent(email);
+    var img = new Image();
+    img.src = url;
+    if(navigator.sendBeacon){
+      var fd = new FormData();
+      fd.append('email', email);
+      navigator.sendBeacon(SHEETS_EP, fd);
+    }
+    formEl.style.display = 'none';
+    successEl.style.display = 'block';
+  });
 })();
 </script>
 
