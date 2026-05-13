@@ -1439,8 +1439,15 @@
     color:#666;text-align:center;margin:8px 0 0;
   }
   .rv-pilot-cards{
-    display:flex;flex-direction:column;gap:14px;
-    width:100%;max-width:680px;margin:20px auto 0;
+    display:flex;flex-direction:row;gap:16px;
+    width:100%;margin:20px 0 0;
+    overflow-x:auto;scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;
+    padding-bottom:12px;
+  }
+  .rv-pilot-cards::-webkit-scrollbar{display:none}
+  .rv-pilot-cards .rv-card{
+    flex:0 0 280px;scroll-snap-align:start;
   }
   .rv-readall{
     align-self:center;margin-top:18px;
@@ -4337,7 +4344,7 @@
 
   <button class="rv-write-btn" type="button" onclick="openReviewForm()">Bought ODORSTRIKE? Write a review →</button>
 
-  <div class="rv-scroll-wrap" style="display:none">
+  <div class="rv-scroll-wrap">
     <div class="rv-scroll" id="rvScroll" role="list"></div>
   </div>
 </section>
@@ -5428,8 +5435,9 @@
       if (fired) return;
       if (entries[0].isIntersecting) {
         fired = true;
-        if (typeof fbq !== 'undefined') fbq('track', 'ViewContent', { content_name: 'ODORSTRIKE', value: 229, currency: 'INR' });
-        if (typeof gtag !== 'undefined') gtag('event', 'view_item', { currency: 'INR', value: 229, items: [{ item_id: 'OS-001-50ML', item_name: 'ODORSTRIKE Fabric Odor Mist' }] });
+        var vcPrice = (window.SMELLOFF_CONFIG && window.SMELLOFF_CONFIG.PRICES[_buyBoxQty === 3 ? 'trio' : _buyBoxQty === 2 ? 'duo' : 'solo']) || (_buyBoxQty === 3 ? 549 : _buyBoxQty === 2 ? 399 : 229);
+        if (typeof fbq !== 'undefined') fbq('track', 'ViewContent', { content_name: 'ODORSTRIKE', value: vcPrice, currency: 'INR' });
+        if (typeof gtag !== 'undefined') gtag('event', 'view_item', { currency: 'INR', value: vcPrice, items: [{ item_id: 'OS-001-50ML', item_name: 'ODORSTRIKE Fabric Odor Mist' }] });
         obs.disconnect();
       }
     }, { threshold: 0.3 });
