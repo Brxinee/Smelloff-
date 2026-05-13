@@ -111,6 +111,12 @@
       ]
     },
     {
+      "source": "/",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, no-cache, must-revalidate" }
+      ]
+    },
+    {
       "source": "/(.*\\.html)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
