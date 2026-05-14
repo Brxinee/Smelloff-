@@ -99,7 +99,7 @@
   "description":"D2C men's grooming brand from Hyderabad. Maker of ODORSTRIKE — India's first pocket-sized fabric odor remover spray.",
   "slogan":"Pocket-sized odor killer for your clothes",
   "knowsAbout":["fabric odor","sweat smell","zinc pca","men's grooming","fabric care","polyester odor","gym clothes smell"],
-  "address":{"@type":"PostalAddress","streetAddress":"Sanathnagar, Erragadda","addressLocality":"Hyderabad","addressRegion":"Telangana","postalCode":"500018","addressCountry":"IN"},
+  "address":{"@type":"PostalAddress","streetAddress":"[VIRTUAL_OFFICE_ADDRESS_PENDING]","addressLocality":"Hyderabad","addressRegion":"Telangana","postalCode":"500018","addressCountry":"IN"},
   "contactPoint":[{"@type":"ContactPoint","telephone":"+91-93929-74031","contactType":"customer service","email":"smelloffsupport@gmail.com","areaServed":"IN","availableLanguage":["English","Hindi","Telugu"]}],
   "sameAs":["https://instagram.com/smell0ff","https://wa.me/919392974031"]
 }
@@ -3849,7 +3849,7 @@
   <div class="hero-inner">
     <div class="hero-text">
       <div class="hero-wordmark">SMELLOFF</div>
-      <div class="hero-category">India's first pocket fabric odor killer</div>
+      <div class="hero-category">India's first 50ml pocket fabric mist</div>
       <h1 class="hero-headline">India's pocket fabric odor spray. <span class="green">Kills sweat smell</span> on clothes in 8 seconds.</h1>
       <p class="hero-sub">Not perfume. Not deodorant. Not body spray. Spray on clothes. Walk out clean.</p>
       <h2 class="hero-pullquote">"You don't fear smelling bad. You fear someone noticing."</h2>
@@ -4197,7 +4197,7 @@
         <span class="price-main" id="pcPriceMain">₹399</span>
         <span class="price-label">launch price</span>
       </div>
-      <p class="pc-per-use" id="pcPerUse">₹399 = ~500 sprays. Works out to ₹0.80 per spray.</p>
+      <p class="pc-per-use" id="pcPerUse">₹399 = 2 × 250 sprays = ~500 total. Works out to ₹0.80/spray.</p>
 
       <div class="pc-pack-selector" role="radiogroup" aria-label="Select pack">
         <div class="pc-pack-card" data-qty="1" tabindex="0" onclick="selectQty(1)">
@@ -4589,7 +4589,11 @@
   <!-- BOTTOM strip -->
   <div class="sf-bottom">
     <span>&copy; 2026 SMELLOFF &middot; All rights reserved &middot; Made in Hyderabad</span>
-    <span>MFG: Jogdhande Nikhil Patil, Sanathnagar, Erragadda, Hyderabad</span>
+    <!-- TODO: replace with virtual office address -->
+    <span>MFG: Smelloff, Hyderabad, Telangana, India · GSTIN [PENDING]</span>
+  </div>
+  <div class="sf-bottom" style="font-size:11px;color:#555;border-top:1px solid #111;padding-top:12px;margin-top:0;text-align:center">
+    Grievance Officer: [NAME_PENDING] &middot; <a href="mailto:grievance@smelloff.in" style="color:#666;text-decoration:none">grievance@smelloff.in</a> &middot; Response within 15 days as per Consumer Protection (E-Commerce) Rules 2020
   </div>
 </footer>
 
@@ -4804,7 +4808,8 @@
     </div>
 
     <div class="po-meta">
-      Smelloff · Sanathnagar, Erragadda, Hyderabad<br>
+      <!-- TODO: replace with virtual office address -->
+      Smelloff · Hyderabad, Telangana, India · GSTIN [PENDING]<br>
       Last updated: April 2026
     </div>
   </main>
@@ -5355,14 +5360,17 @@
     });
     var variant = qty === 3 ? 'trio' : qty === 2 ? 'duo' : 'solo';
     var price = (window.SMELLOFF_CONFIG && window.SMELLOFF_CONFIG.PRICES[variant]) || (qty === 3 ? 549 : qty === 2 ? 399 : 229);
-    var sprays = qty === 3 ? 750 : qty === 2 ? 500 : 250;
-    var perSpray = (price / sprays).toFixed(2);
+    var bottleCount = qty;
+    var perBottleSprays = 250;
+    var totalSprays = bottleCount * perBottleSprays;
+    var perSpray = (price / totalSprays).toFixed(2);
+    var sprayLabel = qty === 1 ? '~250 sprays' : qty + ' × 250 sprays = ~' + totalSprays + ' total';
 
     var priceMain = document.getElementById('pcPriceMain');
     if (priceMain) priceMain.textContent = '₹' + price;
 
     var perUse = document.getElementById('pcPerUse');
-    if (perUse) perUse.textContent = '₹' + price + ' = ~' + sprays + ' sprays. Works out to ₹' + perSpray + ' per spray.';
+    if (perUse) perUse.textContent = '₹' + price + ' = ' + sprayLabel + '. Works out to ₹' + perSpray + '/spray.';
 
     var cta = document.getElementById('pcCta');
     var codCta = document.getElementById('pcCodCta');
