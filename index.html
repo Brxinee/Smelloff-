@@ -2331,32 +2331,6 @@
     cursor:pointer;
   }
   .upi-cta:hover{background:#C7FF70}
-  .upi-timer{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:10px;
-    margin:14px 0 4px;
-    padding:10px;
-    background:#080808;
-    border:1px solid rgba(184,255,87,.18);
-  }
-  .upi-timer .t-lbl{
-    font-size:11px;
-    color:#888;
-    text-transform:uppercase;
-    letter-spacing:.12em;
-  }
-  .upi-timer .t-val{
-    font-family:'JetBrains Mono',monospace;
-    font-weight:700;
-    font-size:18px;
-    color:var(--acid);
-    letter-spacing:.05em;
-  }
-  .upi-timer.expired{border-color:#ff6b6b}
-  .upi-timer.expired .t-val{color:#ff6b6b}
-  .upi-timer.warn .t-val{color:#FFB347}
   .upi-policy-link{
     display:block;
     text-align:center;
@@ -2383,23 +2357,6 @@
   }
   .upi-help strong{color:#fff;font-weight:600}
   .upi-help a{color:var(--acid);font-weight:500;text-decoration:none}
-  .upi-retry{
-    display:none;
-    width:100%;
-    margin-top:12px;
-    padding:10px 14px;
-    background:transparent;
-    border:1px solid var(--acid);
-    color:var(--acid);
-    font-family:'Barlow Condensed',sans-serif;
-    font-weight:900;
-    text-transform:uppercase;
-    letter-spacing:.1em;
-    font-size:13px;
-    cursor:pointer;
-  }
-  .upi-retry:hover{background:rgba(184,255,87,.08)}
-  .upi-retry.show{display:block}
 
   /* ============================= */
   /* POLICY OVERLAY (full-screen)  */
@@ -4262,7 +4219,7 @@
 
       <button class="pc-cta" id="pcCta" onclick="buyBoxAdd()">BUY — ₹399</button>
       <button class="pc-cod-cta" id="pcCodCta" onclick="buyBoxCod()">Order COD — pay on delivery</button>
-      <p class="pc-risk-reversal">Doesn't kill the smell? Email us. Full refund, keep the bottle.</p>
+      <p class="pc-risk-reversal">Doesn't kill the smell? Email us. Full refund within 7 days if bottle is 80%+ full and in original packaging.</p>
 
       <div class="pc-trust-icons">
         <div class="pti-item"><span class="pti-icon">🛡️</span><span class="pti-label">7-day money-back</span></div>
@@ -4276,6 +4233,31 @@
 
   <!-- Expandable info cards below product card -->
   <div class="pc-info-accordion">
+
+    <div class="faq-item">
+      <button class="faq-q" type="button" aria-expanded="false" onclick="toggleFaqItem(this.parentElement)">
+        <span>How to pay</span>
+        <span class="faq-icon" aria-hidden="true"></span>
+      </button>
+      <div class="faq-body"><div class="faq-body-inner">
+        <p class="faq-answer" style="font-weight:600;color:#fff;margin-bottom:8px">UPI (recommended)</p>
+        <ol style="padding-left:18px;margin-bottom:14px">
+          <li style="margin-bottom:5px;color:#C5C5C5;font-size:14px">Tap BUY → enter your address.</li>
+          <li style="margin-bottom:5px;color:#C5C5C5;font-size:14px">Choose UPI. Copy our UPI ID or open your UPI app via the button.</li>
+          <li style="margin-bottom:5px;color:#C5C5C5;font-size:14px">Pay from any UPI app — GPay, PhonePe, Paytm, BHIM.</li>
+          <li style="margin-bottom:5px;color:#C5C5C5;font-size:14px">Send the payment screenshot + UTR to our WhatsApp (link shown after you tap BUY).</li>
+          <li style="color:#C5C5C5;font-size:14px">We confirm your order within 24 hours and ship within 48.</li>
+        </ol>
+        <p class="faq-answer" style="font-size:13px;color:#888;margin-bottom:14px">Manual UPI confirmation means your order is checked by a human, not a bot. Expect a 1–24 hour delay before dispatch.</p>
+        <p class="faq-answer" style="font-weight:600;color:#fff;margin-bottom:8px">Cash on Delivery</p>
+        <ol style="padding-left:18px;margin-bottom:14px">
+          <li style="margin-bottom:5px;color:#C5C5C5;font-size:14px">Tap BUY → enter your address.</li>
+          <li style="margin-bottom:5px;color:#C5C5C5;font-size:14px">Choose COD. No advance payment.</li>
+          <li style="margin-bottom:5px;color:#C5C5C5;font-size:14px">Pay cash to the delivery agent on arrival.</li>
+          <li style="color:#C5C5C5;font-size:14px">7-day return window if the bottle is 80%+ full and in original packaging.</li>
+        </ol>
+      </div></div>
+    </div>
 
     <div class="faq-item">
       <button class="faq-q" type="button" aria-expanded="false" onclick="toggleFaqItem(this.parentElement)">
@@ -4757,13 +4739,6 @@
 
         <a id="upiOpenBtn" class="upi-cta" href="#">Open UPI app</a>
 
-        <div class="upi-timer" id="upiTimer" aria-live="polite">
-          <span class="t-lbl">Time left to pay</span>
-          <span class="t-val" id="upiTimerVal">10:00</span>
-        </div>
-
-        <button type="button" id="upiRetry" class="upi-retry" onclick="resetUpiTimer()">Restart payment session</button>
-
         <div class="upi-policy-link">
           Payment issue? <a href="/payment-failed" onclick="openPaymentFailedOverlay();return false;">See our Payment Failed Policy</a>
         </div>
@@ -4909,8 +4884,6 @@
     if (lsEl) { lsEl.classList.remove('active'); lsEl.style.display = 'none'; }
     const upiBlock = document.getElementById('upiBlock');
     if (upiBlock) upiBlock.style.display = 'none';
-    // Stop UPI countdown if it was running
-    if (typeof stopUpiTimer === 'function') stopUpiTimer();
     // Re-enable sticky buy bar on mobile
     var mb = document.getElementById('mobileBar');
     if (mb) mb.style.display = '';
@@ -5014,9 +4987,9 @@
       amount: baseAmount,
       shipping: shipping,
       total: baseAmount + shipping,
-      paymentMethod: isCod ? 'COD' : 'UPI',
-      paymentStatus: isCod ? 'PENDING' : (paymentId && paymentId.indexOf('pay_') === 0 ? 'PAID' : 'PENDING'),
-      paymentId: isCod ? '' : (paymentId && paymentId.indexOf('pay_') === 0 ? paymentId : ''),
+      paymentMethod: isCod ? 'cod' : 'upi',
+      paymentStatus: isCod ? 'cod_pending_call' : 'pending',
+      paymentId: '',
       address: document.getElementById('f_addr').value.trim(),
       city: document.getElementById('f_city').value.trim(),
       state: document.getElementById('f_state').value.trim(),
@@ -5086,24 +5059,32 @@
     hideLoadingScreen();
     document.getElementById('checkoutForm').style.display = 'none';
     document.getElementById('successScreen').style.display = 'block';
-    document.getElementById('successTag').textContent = 'Order confirmed';
-    document.getElementById('successHeading').textContent = "You're done.";
     document.getElementById('upiBlock').style.display = 'none';
     document.getElementById('orderIdDisplay').textContent = orderId;
-    document.getElementById('successMsg').textContent = method === 'cod'
-      ? "Our team will call to confirm your COD order, then ship within 48 hours."
-      : "Payment received. Our team ships your ODORSTRIKE within 48 hours.";
 
-    // Inject order ID into success-screen WhatsApp templates so when the
-    // customer taps the link, the merchant knows exactly which order.
     var amount = VARIANTS[currentVariant].amount;
+    var name = (document.getElementById('f_name') ? document.getElementById('f_name').value.trim() : '') || '';
+    var phone = (document.getElementById('f_phone') ? document.getElementById('f_phone').value.trim() : '') || '';
+
+    if (method === 'cod') {
+      document.getElementById('successTag').textContent = 'Order received';
+      document.getElementById('successHeading').textContent = "COD order placed.";
+      document.getElementById('successMsg').textContent = 'Our team will call to confirm within 24 hours. Pay ₹' + amount + ' to the delivery person on arrival.';
+    } else {
+      document.getElementById('successTag').textContent = 'Order confirmed';
+      document.getElementById('successHeading').textContent = "You're done.";
+      document.getElementById('successMsg').textContent = 'Our team ships your ODORSTRIKE within 48 hours.';
+    }
+
+    // Inject order ID, name, phone into WhatsApp links so the merchant can match UTR to order.
     var utrLink = document.getElementById('waSuccessUtrLink');
     if (utrLink) {
       utrLink.href = 'https://wa.me/919392974031?text=' + encodeURIComponent(
-        'Hi Smelloff, I paid for my ODORSTRIKE order.\n' +
-        'Order ID: ' + orderId + '\n' +
+        'Order ' + orderId + '\n' +
+        'Name: ' + name + '\n' +
+        'Phone: ' + phone + '\n' +
         'Amount: ₹' + amount + '\n' +
-        'UTR: '
+        'UTR: [paste here]'
       );
     }
     var qLink = document.getElementById('waSuccessQuestionsLink');
@@ -5220,12 +5201,12 @@
     document.getElementById('checkoutForm').style.display = 'none';
     const s = document.getElementById('successScreen');
     s.style.display = 'block';
-    document.getElementById('successTag').textContent = 'Order placed';
+    document.getElementById('successTag').textContent = 'Order received';
     document.getElementById('successHeading').textContent = 'Pay ₹' + total + ' via UPI';
-    document.getElementById('successMsg').textContent = 'Scan the QR or tap "Open UPI app" — amount is pre-filled. After paying, send screenshot + UTR to WhatsApp.';
+    document.getElementById('successMsg').textContent = 'Order received. Send your UTR to WhatsApp to confirm. We\'ll ship within 48 hours of confirmation.';
     document.getElementById('orderIdDisplay').textContent = orderId;
 
-    // Populate UPI block (with QR + countdown)
+    // Populate UPI block
     document.getElementById('upiBlock').style.display = 'block';
     document.getElementById('upiIdShow').textContent = CFG.UPI_ID;
     document.getElementById('upiAmountShow').textContent = '₹' + total;
@@ -5233,6 +5214,26 @@
     const openBtn = document.getElementById('upiOpenBtn');
     openBtn.href = upiLink;
     openBtn.textContent = 'Open UPI app · ₹' + total;
+
+    // Prefill WhatsApp UTR link with order context so merchant can match UTR to order
+    const name = (document.getElementById('f_name') ? document.getElementById('f_name').value.trim() : '') || '';
+    const phone = (document.getElementById('f_phone') ? document.getElementById('f_phone').value.trim() : '') || '';
+    const utrLink = document.getElementById('waSuccessUtrLink');
+    if (utrLink) {
+      utrLink.href = 'https://wa.me/919392974031?text=' + encodeURIComponent(
+        'Order ' + orderId + '\n' +
+        'Name: ' + name + '\n' +
+        'Phone: ' + phone + '\n' +
+        'Amount: ₹' + total + '\n' +
+        'UTR: [paste here]'
+      );
+    }
+    const qLink = document.getElementById('waSuccessQuestionsLink');
+    if (qLink) {
+      qLink.href = 'https://wa.me/919392974031?text=' + encodeURIComponent(
+        'Hi Smelloff, I have a question about my order.\nOrder ID: ' + orderId
+      );
+    }
 
     // QR for the UPI deep link (any UPI app reads this)
     const qrSrc = 'https://api.qrserver.com/v1/create-qr-code/?size=400x400&margin=8&data=' + encodeURIComponent(upiLink);
@@ -5243,8 +5244,6 @@
       qrImg.onerror = function(){ qrImg.style.display = 'none'; };
     }
 
-    startUpiTimer();
-
     trackPurchase(VARIANTS[currentVariant].amount, orderId);
     try {
       const buyerEmail = (document.getElementById('f_email').value || '').trim().toLowerCase();
@@ -5254,46 +5253,7 @@
     } catch (e) {}
   }
 
-  // ==============================
-  // UPI PAYMENT TIMER (10 minutes)
-  // ==============================
-  let _upiTimerInterval = null;
-  const UPI_TIMER_SECONDS = 10 * 60;
-
-  function startUpiTimer() {
-    stopUpiTimer();
-    const el = document.getElementById('upiTimer');
-    const val = document.getElementById('upiTimerVal');
-    const retry = document.getElementById('upiRetry');
-    if (!el || !val) return;
-    el.classList.remove('expired','warn');
-    if (retry) retry.classList.remove('show');
-    let remaining = UPI_TIMER_SECONDS;
-    paintUpiTimer(remaining);
-    _upiTimerInterval = setInterval(function(){
-      remaining -= 1;
-      if (remaining <= 0) {
-        paintUpiTimer(0);
-        el.classList.add('expired');
-        val.textContent = 'EXPIRED';
-        if (retry) retry.classList.add('show');
-        stopUpiTimer();
-        return;
-      }
-      paintUpiTimer(remaining);
-      el.classList.toggle('warn', remaining <= 120);
-    }, 1000);
-  }
-  function paintUpiTimer(remaining) {
-    const m = Math.floor(remaining / 60);
-    const s = remaining % 60;
-    const t = document.getElementById('upiTimerVal');
-    if (t) t.textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
-  }
-  function stopUpiTimer() {
-    if (_upiTimerInterval) { clearInterval(_upiTimerInterval); _upiTimerInterval = null; }
-  }
-  window.resetUpiTimer = function(){ startUpiTimer(); };
+  // UPI timer removed — manual UPI does not expire.
 
   // ==============================
   // PINCODE → CITY/STATE AUTOFILL (checkout)
