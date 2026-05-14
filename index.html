@@ -1861,15 +1861,17 @@
   /* BOTTOM strip */
   .sf-bottom{
     border-top:1px solid rgba(184,255,87,.2);
-    /* Extra bottom padding on mobile so the sticky buy bar (64px,
-       position:fixed) doesn't hide the copyright. Also accounts for
-       iOS home-indicator safe area. */
-    padding:16px 20px calc(16px + 72px + env(safe-area-inset-bottom, 0px));
+    padding:16px 20px;
     max-width:1120px;margin:0 auto;
     display:flex;justify-content:space-between;gap:10px;
     font-family:'DM Sans',sans-serif;font-size:11px;
     color:#888;line-height:1.4;
     flex-wrap:wrap;
+  }
+  /* Extra bottom padding on the last strip so the sticky buy bar
+     (position:fixed) doesn't hide it. Accounts for iOS safe area. */
+  .sf-bottom:last-child{
+    padding-bottom:calc(16px + 72px + env(safe-area-inset-bottom, 0px));
   }
 
   @media(min-width:720px){
@@ -3050,116 +3052,6 @@
   }
 
   /* ============================= */
-  /* BEFORE / AFTER PROOF          */
-  /* ============================= */
-  .proof{
-    background:#080808;
-    padding:56px 20px;
-    border-bottom:none;
-    display:flex;flex-direction:column;align-items:center;gap:18px;
-  }
-  .proof .section-tag{margin:0 0 4px}
-  .proof-headline{
-    font-family:'Barlow Condensed',sans-serif;
-    font-weight:900;
-    font-size:clamp(28px,6vw,44px);
-    letter-spacing:.02em;
-    color:#fff;
-    text-transform:uppercase;
-    text-align:center;
-    margin:0;line-height:1;
-  }
-  .proof-card{
-    width:100%;max-width:620px;
-    background:#0D0D0D;
-    border:1px solid #1F1F1F;
-    border-radius:12px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    position:relative;overflow:hidden;
-    max-height:280px;
-  }
-  .proof-card::before{
-    content:'';
-    position:absolute;
-    top:14%;bottom:14%;left:50%;
-    width:1px;
-    background:rgba(184,255,87,.3);
-  }
-  .proof-half{
-    padding:18px 14px;
-    display:flex;flex-direction:column;align-items:center;gap:12px;
-    min-width:0;
-  }
-  .proof-half-label{
-    font-family:'Barlow Condensed',sans-serif;
-    font-weight:900;font-size:11px;
-    color:#B0B0B0;letter-spacing:.18em;
-    text-transform:uppercase;
-  }
-  .proof-half.after .proof-half-label{color:#B8FF57}
-  .proof-mols{
-    display:flex;flex-direction:column;gap:10px;
-    align-items:center;flex:1;justify-content:center;
-    width:100%;
-  }
-  .proof-mol{
-    display:flex;align-items:center;gap:10px;
-    position:relative;
-  }
-  .proof-hex{
-    width:30px;height:26px;flex-shrink:0;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .proof-hex svg{width:100%;height:100%;display:block}
-  .proof-mol-label{
-    font-family:'DM Sans',sans-serif;
-    font-weight:600;font-size:11px;
-    letter-spacing:.04em;
-    color:#d4c05a;
-    white-space:nowrap;
-  }
-  .proof-half.after .proof-mol-label{color:#B8FF57}
-  .proof-half.after .proof-hex{
-    animation:proof-pulse 2s ease-in-out infinite;
-  }
-  .proof-half.after .proof-mol:nth-child(2) .proof-hex{animation-delay:.3s}
-  .proof-half.after .proof-mol:nth-child(3) .proof-hex{animation-delay:.6s}
-  @keyframes proof-pulse{
-    0%,100%{filter:drop-shadow(0 0 3px #B8FF57)}
-    50%{filter:drop-shadow(0 0 6px #B8FF57) drop-shadow(0 0 10px rgba(184,255,87,.35))}
-  }
-  .proof-escape{
-    position:absolute;left:-12px;top:-10px;
-    width:10px;height:14px;
-    opacity:.6;
-    animation:proof-escape 2.2s ease-in-out infinite;
-  }
-  .proof-half.before .proof-mol:nth-child(2) .proof-escape{animation-delay:.6s}
-  .proof-half.before .proof-mol:nth-child(3) .proof-escape{animation-delay:1.2s}
-  @keyframes proof-escape{
-    0%{transform:translateY(4px);opacity:.6}
-    100%{transform:translateY(-10px);opacity:0}
-  }
-  .proof-caption{
-    font-family:'DM Sans',sans-serif;
-    font-weight:400;font-size:14px;
-    color:#A0A0A0;text-align:center;
-    margin:0;max-width:520px;line-height:1.5;
-  }
-  @media(min-width:720px){
-    .proof{padding:80px 40px;gap:26px}
-    .proof-card{max-height:260px}
-    .proof-half{padding:22px 20px;gap:14px}
-    .proof-hex{width:34px;height:30px}
-    .proof-mol-label{font-size:12px}
-  }
-  @media(prefers-reduced-motion:reduce){
-    .proof-half.after .proof-hex,
-    .proof-escape{animation:none}
-  }
-
-  /* ============================= */
   /* WHY NOT DEODORANT? — comparison*/
   /* ============================= */
   .compare{
@@ -4010,77 +3902,6 @@
   </ol>
 </section>
 
-<!-- BEFORE / AFTER PROOF — compact card -->
-<section class="proof">
-  <div class="section-tag">The proof</div>
-  <h2 class="proof-headline">The before. The after.</h2>
-
-  <div class="proof-card" aria-label="Before and after comparison">
-
-    <div class="proof-half before">
-      <span class="proof-half-label">Before</span>
-      <div class="proof-mols">
-        <div class="proof-mol">
-          <svg class="proof-escape" viewBox="0 0 10 14" aria-hidden="true">
-            <path d="M3 14 Q5 8 3 4 Q1 0 3 0" stroke="#d4c05a" stroke-width="1" fill="none" stroke-dasharray="2 2"/>
-            <path d="M7 14 Q9 8 7 4 Q5 0 7 0" stroke="#d4c05a" stroke-width="1" fill="none" stroke-dasharray="2 2"/>
-          </svg>
-          <div class="proof-hex" aria-hidden="true">
-            <svg viewBox="0 0 32 28"><polygon points="16,1 29,8 29,22 16,29 3,22 3,8" fill="none" stroke="#d4c05a" stroke-width="1.5"/></svg>
-          </div>
-          <span class="proof-mol-label">Sweat smell</span>
-        </div>
-        <div class="proof-mol">
-          <svg class="proof-escape" viewBox="0 0 10 14" aria-hidden="true">
-            <path d="M3 14 Q5 8 3 4 Q1 0 3 0" stroke="#d4c05a" stroke-width="1" fill="none" stroke-dasharray="2 2"/>
-            <path d="M7 14 Q9 8 7 4 Q5 0 7 0" stroke="#d4c05a" stroke-width="1" fill="none" stroke-dasharray="2 2"/>
-          </svg>
-          <div class="proof-hex" aria-hidden="true">
-            <svg viewBox="0 0 32 28"><polygon points="16,1 29,8 29,22 16,29 3,22 3,8" fill="none" stroke="#d4c05a" stroke-width="1.5"/></svg>
-          </div>
-          <span class="proof-mol-label">Locker-room funk</span>
-        </div>
-        <div class="proof-mol">
-          <svg class="proof-escape" viewBox="0 0 10 14" aria-hidden="true">
-            <path d="M3 14 Q5 8 3 4 Q1 0 3 0" stroke="#d4c05a" stroke-width="1" fill="none" stroke-dasharray="2 2"/>
-            <path d="M7 14 Q9 8 7 4 Q5 0 7 0" stroke="#d4c05a" stroke-width="1" fill="none" stroke-dasharray="2 2"/>
-          </svg>
-          <div class="proof-hex" aria-hidden="true">
-            <svg viewBox="0 0 32 28"><polygon points="16,1 29,8 29,22 16,29 3,22 3,8" fill="none" stroke="#d4c05a" stroke-width="1.5"/></svg>
-          </div>
-          <span class="proof-mol-label">Helmet stink</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="proof-half after">
-      <span class="proof-half-label">After</span>
-      <div class="proof-mols">
-        <div class="proof-mol">
-          <div class="proof-hex" aria-hidden="true">
-            <svg viewBox="0 0 32 28"><polygon points="16,1 29,8 29,22 16,29 3,22 3,8" fill="rgba(184,255,87,.15)" stroke="#B8FF57" stroke-width="1.5"/></svg>
-          </div>
-          <span class="proof-mol-label">Nothing.</span>
-        </div>
-        <div class="proof-mol">
-          <div class="proof-hex" aria-hidden="true">
-            <svg viewBox="0 0 32 28"><polygon points="16,1 29,8 29,22 16,29 3,22 3,8" fill="rgba(184,255,87,.15)" stroke="#B8FF57" stroke-width="1.5"/></svg>
-          </div>
-          <span class="proof-mol-label">No smell.</span>
-        </div>
-        <div class="proof-mol">
-          <div class="proof-hex" aria-hidden="true">
-            <svg viewBox="0 0 32 28"><polygon points="16,1 29,8 29,22 16,29 3,22 3,8" fill="rgba(184,255,87,.15)" stroke="#B8FF57" stroke-width="1.5"/></svg>
-          </div>
-          <span class="proof-mol-label">Just fabric.</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <p class="proof-caption">Odor molecules trapped. Neutralized. Gone.</p>
-</section>
 
 <!-- HOW TO USE -->
 <section class="ritual-section" id="how-to-use">
