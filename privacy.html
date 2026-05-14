@@ -94,7 +94,7 @@
   <h2>Information we collect</h2>
   <ul>
     <li><strong>Personal:</strong> name, email, phone number, shipping address, and pincode — collected when you place an order or sign up for updates</li>
-    <li><strong>Payment:</strong> processed securely via Razorpay. We do not store your card or UPI details on our servers</li>
+    <li><strong>Payment:</strong> accepted via UPI (manual confirmation) or Cash on Delivery. We do not store card or UPI details on our servers</li>
     <li><strong>Account:</strong> if you sign in with Google, we receive your email address and display name via Firebase Authentication</li>
     <li><strong>Usage:</strong> pages visited, device type, browser, referrer — via Google Analytics 4 and Meta Pixel, using anonymised cookies</li>
   </ul>
@@ -113,11 +113,17 @@
   <p>We share minimum necessary information with:</p>
   <ul>
     <li><strong>Courier partners</strong> (Delhivery, Blue Dart, XpressBees, India Post) for delivery</li>
-    <li><strong>Razorpay</strong> for payment processing</li>
     <li><strong>Google Firebase</strong> for authentication</li>
     <li><strong>Google Analytics and Meta</strong> for anonymised traffic analytics</li>
   </ul>
   <p>We do not sell or rent your personal information to third parties.</p>
+
+  <h2>How payment works</h2>
+  <p>Smelloff accepts payments via <strong>UPI</strong> (manual confirmation) and <strong>Cash on Delivery</strong> only. There is no automated payment gateway.</p>
+  <ul>
+    <li><strong>UPI:</strong> You pay from any UPI app (GPay, PhonePe, Paytm, BHIM) to our UPI ID. You then send the payment screenshot and UTR (transaction reference) via WhatsApp. Our team confirms your order manually within 24 hours. Manual UPI confirmation means your order is checked by a human, not a bot — expect a 1–24 hour delay before dispatch.</li>
+    <li><strong>COD:</strong> No advance payment. Pay ₹229 / ₹399 / ₹549 in cash to the delivery agent on arrival.</li>
+  </ul>
 
   <h2>Cookies</h2>
   <p>Our website uses cookies for session management, analytics (GA4), and advertising (Meta Pixel). You can disable cookies in your browser, but parts of the site may not function correctly.</p>
@@ -134,7 +140,7 @@
   </ul>
 
   <h2>Security</h2>
-  <p>Your data is stored on secure servers (Firebase, Google Sheets, Vercel). Payments are handled entirely on Razorpay's PCI-DSS compliant infrastructure. We take reasonable precautions but cannot guarantee absolute security against all threats.</p>
+  <p>Your data is stored on secure servers (Google Sheets, Vercel). UPI payments are confirmed manually by our team within 24 hours of receiving your transaction ID. We take reasonable precautions but cannot guarantee absolute security against all threats.</p>
 
   <h2>Children</h2>
   <p>Smelloff products are intended for users aged 18 and above. We do not knowingly collect data from minors.</p>
