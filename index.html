@@ -250,7 +250,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.json">
 
-<!-- Analytics (GA4 + Meta Pixel) — load only AFTER window 'load' fires. -->
+<!-- Analytics (GA4 + Meta Pixel) — loaded only after explicit consent. -->
 <script>
   function loadAnalytics(){
     if(window.__smelloffAnalyticsLoaded)return;
@@ -260,8 +260,11 @@
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
     fbq('init','1455100092891684');fbq('track','PageView');
   }
-  if(document.readyState==='complete'){loadAnalytics();}
-  else{window.addEventListener('load',loadAnalytics,{once:true});}
+  // Only auto-load analytics if user has already accepted consent
+  if(localStorage.getItem('smelloff_consent_v1')==='accepted'){
+    if(document.readyState==='complete'){loadAnalytics();}
+    else{window.addEventListener('load',loadAnalytics,{once:true});}
+  }
 </script>
 
 <style>
@@ -3759,7 +3762,6 @@
 </script>
 </head>
 <body>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1455100092891684&ev=PageView&noscript=1"/></noscript>
 <a href="#main" class="skip-link">Skip to main content</a>
 
 <nav>
@@ -6191,6 +6193,34 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
   update();
+})();
+</script>
+
+<!-- DPDP Consent Bar -->
+<div id="smelloff-consent-bar" role="dialog" aria-label="Cookie and tracking consent" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#0d0d0d;border-top:1px solid #2a2a2a;padding:14px 20px;font-family:'DM Sans',sans-serif">
+  <div style="max-width:900px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+    <p style="flex:1;font-size:13px;color:#C5C5C5;line-height:1.5;margin:0;min-width:200px">We use analytics cookies (Google Analytics, Meta Pixel) to understand how you use our site. You can opt out — core shopping functions work either way. <a href="/privacy" style="color:#B8FF57;text-decoration:none">Privacy Policy</a></p>
+    <div style="display:flex;gap:10px;flex-shrink:0">
+      <button onclick="window.smelloffSetConsent('accepted')" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:12px;letter-spacing:.1em;text-transform:uppercase;background:#B8FF57;color:#080808;border:none;padding:9px 18px;border-radius:4px;cursor:pointer">Accept all</button>
+      <button onclick="window.smelloffSetConsent('rejected')" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:12px;letter-spacing:.1em;text-transform:uppercase;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.3);padding:9px 18px;border-radius:4px;cursor:pointer">Reject non-essential</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var KEY='smelloff_consent_v1';
+  function hideBar(){var b=document.getElementById('smelloff-consent-bar');if(b)b.style.display='none';}
+  window.smelloffSetConsent=function(v){
+    try{localStorage.setItem(KEY,v);}catch(e){}
+    hideBar();
+    if(v==='accepted')loadAnalytics();
+  };
+  var existing;
+  try{existing=localStorage.getItem(KEY);}catch(e){}
+  if(!existing){
+    var bar=document.getElementById('smelloff-consent-bar');
+    if(bar)bar.style.display='block';
+  }
 })();
 </script>
 
