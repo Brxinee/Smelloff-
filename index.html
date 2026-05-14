@@ -4630,31 +4630,31 @@
 
       <!-- Details — phone first, email last/optional -->
       <label>Phone</label>
-      <input type="tel" id="f_phone" required maxlength="10" pattern="[0-9]{10}" autocomplete="tel" placeholder="10-digit mobile">
+      <input type="tel" id="f_phone" required maxlength="10" pattern="[0-9]{10}" autocomplete="tel" placeholder="10-digit mobile" inputmode="numeric" enterkeyhint="next">
 
       <label>Full name</label>
-      <input type="text" id="f_name" required autocomplete="name">
+      <input type="text" id="f_name" required autocomplete="name" autocapitalize="words" spellcheck="false" enterkeyhint="next">
 
       <label>Address</label>
-      <textarea id="f_addr" required autocomplete="street-address" rows="2" placeholder="House/flat no, street, area, landmark"></textarea>
+      <textarea id="f_addr" required autocomplete="street-address" rows="2" placeholder="House/flat no, street, area, landmark" autocapitalize="sentences" spellcheck="false" enterkeyhint="next"></textarea>
 
       <div class="row-3">
         <div>
           <label>Pincode</label>
-          <input type="text" id="f_pin" required maxlength="6" pattern="[0-9]{6}" autocomplete="postal-code" inputmode="numeric">
+          <input type="text" id="f_pin" required maxlength="6" pattern="[0-9]{6}" autocomplete="postal-code" inputmode="numeric" enterkeyhint="next">
         </div>
         <div>
-          <label>City</label>
-          <input type="text" id="f_city" required autocomplete="address-level2">
+          <label>City <span style="font-size:10px;color:#666;font-weight:400">(auto-filled)</span></label>
+          <input type="text" id="f_city" required autocomplete="address-level2" autocapitalize="words" spellcheck="false" enterkeyhint="next">
         </div>
         <div>
-          <label>State</label>
-          <input type="text" id="f_state" required autocomplete="address-level1">
+          <label>State <span style="font-size:10px;color:#666;font-weight:400">(auto-filled)</span></label>
+          <input type="text" id="f_state" required autocomplete="address-level1" autocapitalize="words" spellcheck="false" enterkeyhint="next">
         </div>
       </div>
 
       <label>Email <span class="lbl-optional">(optional — for receipt)</span></label>
-      <input type="email" id="f_email" autocomplete="email">
+      <input type="email" id="f_email" autocomplete="email" inputmode="email" enterkeyhint="done">
 
       <label>Payment method</label>
       <div class="pay-toggle">
@@ -4953,15 +4953,12 @@
   }
 
   function genOrderId() {
-    var counter = 0;
-    try {
-      counter = parseInt(localStorage.getItem('os_order_counter') || '0', 10) || 0;
-      counter++;
-      localStorage.setItem('os_order_counter', String(counter));
-    } catch (e) {
-      counter = Math.floor(Math.random() * 9000) + 1000;
-    }
-    return 'OS-' + String(counter).padStart(4, '0');
+    var d = new Date();
+    var date = d.getFullYear().toString() +
+      String(d.getMonth() + 1).padStart(2, '0') +
+      String(d.getDate()).padStart(2, '0');
+    var suffix = String(Math.floor(Math.random() * 9000) + 1000);
+    return 'SMF-' + date + '-' + suffix;
   }
 
   // Maps the in-page variant keys (solo/duo/trio + cart) to the backend schema
@@ -5271,10 +5268,12 @@
     var city = document.getElementById('f_city');
     var st   = document.getElementById('f_state');
     if (!pin || !city || !st) return;
-    var inflight = null;
+    var inflight = false;
+    var pendingPin = null;
 
     async function lookup(value){
       try{
+        city.placeholder = '…'; st.placeholder = '…';
         var res = await fetch('https://api.postalpincode.in/pincode/' + encodeURIComponent(value));
         if (!res.ok) return;
         var json = await res.json();
@@ -5285,6 +5284,10 @@
         if (po.State)    { st.value   = po.State;    flash(st);   }
       } catch(e){
         console.warn('[Smelloff] Pincode lookup failed:', e);
+      } finally {
+        city.placeholder = ''; st.placeholder = '';
+        inflight = false;
+        if (pendingPin) { var p = pendingPin; pendingPin = null; inflight = true; lookup(p); }
       }
     }
     function flash(el){
@@ -5294,9 +5297,9 @@
     pin.addEventListener('input', function(){
       var v = (pin.value || '').trim();
       if (v.length === 6 && /^\d{6}$/.test(v)) {
-        if (inflight) return;
+        if (inflight) { pendingPin = v; return; }
         inflight = true;
-        lookup(v).finally(function(){ inflight = null; });
+        lookup(v);
       }
     });
   })();
@@ -6197,7 +6200,7 @@
 </script>
 
 <!-- DPDP Consent Bar -->
-<div id="smelloff-consent-bar" role="dialog" aria-label="Cookie and tracking consent" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#0d0d0d;border-top:1px solid #2a2a2a;padding:14px 20px;font-family:'DM Sans',sans-serif">
+<div id="smelloff-consent-bar" role="dialog" aria-label="Cookie and tracking consent" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#0d0d0d;border-top:1px solid #2a2a2a;padding:14px 20px calc(14px + env(safe-area-inset-bottom,0px));font-family:'DM Sans',sans-serif">
   <div style="max-width:900px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
     <p style="flex:1;font-size:13px;color:#C5C5C5;line-height:1.5;margin:0;min-width:200px">We use analytics cookies (Google Analytics, Meta Pixel) to understand how you use our site. You can opt out — core shopping functions work either way. <a href="/privacy" style="color:#B8FF57;text-decoration:none">Privacy Policy</a></p>
     <div style="display:flex;gap:10px;flex-shrink:0">
