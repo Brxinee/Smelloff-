@@ -2097,6 +2097,9 @@
   .overlay input:focus,.overlay select:focus,.overlay textarea:focus{
     border-color:#B8FF57;
   }
+  .overlay input:focus-visible,.overlay select:focus-visible,.overlay textarea:focus-visible{
+    outline:2px solid var(--acid);outline-offset:2px;
+  }
   .overlay input::placeholder{color:#555}
   .overlay .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
   .overlay .row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
@@ -4202,16 +4205,16 @@
       <p class="pc-per-use" id="pcPerUse">₹399 = ~500 sprays. Works out to ₹0.80 per spray.</p>
 
       <div class="pc-pack-selector" role="radiogroup" aria-label="Select pack">
-        <div class="pc-pack-card" data-qty="1" tabindex="0" onclick="selectQty(1)">
+        <div class="pc-pack-card" data-qty="1" role="radio" aria-checked="false" tabindex="0" onclick="selectQty(1)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectQty(1)}">
           <span class="ppc-main">1 × 50ml</span>
           <span class="ppc-price">₹229</span>
         </div>
-        <div class="pc-pack-card active" data-qty="2" tabindex="0" onclick="selectQty(2)" style="position:relative">
+        <div class="pc-pack-card active" data-qty="2" role="radio" aria-checked="true" tabindex="0" onclick="selectQty(2)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectQty(2)}" style="position:relative">
           <span class="ppc-badge">MOST POPULAR</span>
           <span class="ppc-main">2 × 50ml</span>
           <span class="ppc-price">₹399<span class="ppc-save">Save ₹59</span></span>
         </div>
-        <div class="pc-pack-card" data-qty="3" tabindex="0" onclick="selectQty(3)" style="position:relative">
+        <div class="pc-pack-card" data-qty="3" role="radio" aria-checked="false" tabindex="0" onclick="selectQty(3)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectQty(3)}" style="position:relative">
           <span class="ppc-badge">BEST VALUE</span>
           <span class="ppc-main">3 × 50ml</span>
           <span class="ppc-price">₹549<span class="ppc-save">Save ₹138</span></span>
@@ -4602,7 +4605,7 @@
 <!-- ============================= -->
 <!-- CHECKOUT OVERLAY              -->
 <!-- ============================= -->
-<div class="overlay" id="checkoutOverlay">
+<div class="overlay" id="checkoutOverlay" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
   <div class="overlay-panel">
     <button class="overlay-close" onclick="closeCheckout()" aria-label="Close">×</button>
     <div id="checkoutForm">
@@ -4629,40 +4632,40 @@
       </div>
 
       <!-- Details — phone first, email last/optional -->
-      <label>Phone</label>
+      <label for="f_phone">Phone</label>
       <input type="tel" id="f_phone" required maxlength="10" pattern="[0-9]{10}" autocomplete="tel" placeholder="10-digit mobile" inputmode="numeric" enterkeyhint="next">
 
-      <label>Full name</label>
+      <label for="f_name">Full name</label>
       <input type="text" id="f_name" required autocomplete="name" autocapitalize="words" spellcheck="false" enterkeyhint="next">
 
-      <label>Address</label>
+      <label for="f_addr">Address</label>
       <textarea id="f_addr" required autocomplete="street-address" rows="2" placeholder="House/flat no, street, area, landmark" autocapitalize="sentences" spellcheck="false" enterkeyhint="next"></textarea>
 
       <div class="row-3">
         <div>
-          <label>Pincode</label>
+          <label for="f_pin">Pincode</label>
           <input type="text" id="f_pin" required maxlength="6" pattern="[0-9]{6}" autocomplete="postal-code" inputmode="numeric" enterkeyhint="next">
         </div>
         <div>
-          <label>City <span style="font-size:10px;color:#666;font-weight:400">(auto-filled)</span></label>
+          <label for="f_city">City <span style="font-size:10px;color:#666;font-weight:400">(auto-filled)</span></label>
           <input type="text" id="f_city" required autocomplete="address-level2" autocapitalize="words" spellcheck="false" enterkeyhint="next">
         </div>
         <div>
-          <label>State <span style="font-size:10px;color:#666;font-weight:400">(auto-filled)</span></label>
+          <label for="f_state">State <span style="font-size:10px;color:#666;font-weight:400">(auto-filled)</span></label>
           <input type="text" id="f_state" required autocomplete="address-level1" autocapitalize="words" spellcheck="false" enterkeyhint="next">
         </div>
       </div>
 
-      <label>Email <span class="lbl-optional">(optional — for receipt)</span></label>
+      <label for="f_email">Email <span class="lbl-optional">(optional — for receipt)</span></label>
       <input type="email" id="f_email" autocomplete="email" inputmode="email" enterkeyhint="done">
 
-      <label>Payment method</label>
-      <div class="pay-toggle">
-        <div class="pay-opt active" data-method="prepaid" onclick="selectPay('prepaid')" tabindex="0" role="button" onkeydown="if(event.key==='Enter')selectPay('prepaid')">
+      <label id="paymentMethodLabel">Payment method</label>
+      <div class="pay-toggle" role="radiogroup" aria-labelledby="paymentMethodLabel">
+        <div class="pay-opt active" data-method="prepaid" onclick="selectPay('prepaid')" tabindex="0" role="radio" aria-checked="true" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectPay('prepaid')}">
           <img src="/assets/upi.png" alt="UPI payment" class="pay-opt-icon pay-opt-upi" width="51" height="18" loading="lazy" decoding="async">
           <span>Pay via UPI</span>
         </div>
-        <div class="pay-opt" data-method="cod" onclick="selectPay('cod')" tabindex="0" role="button" onkeydown="if(event.key==='Enter')selectPay('cod')">
+        <div class="pay-opt" data-method="cod" onclick="selectPay('cod')" tabindex="0" role="radio" aria-checked="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectPay('cod')}">
           <img src="/assets/icon-cod.png" alt="Cash on Delivery" class="pay-opt-icon pay-opt-cod" width="22" height="22" loading="lazy" decoding="async">
           <span>Cash on Delivery</span>
         </div>
@@ -4858,7 +4861,10 @@
   // Free shipping baked in across India.
   function calcShipping(amount) { return 0; }
 
+  var _checkoutTrigger = null;
+
   function openCheckout(variant) {
+    _checkoutTrigger = document.activeElement;
     currentVariant = variant;
     const v = VARIANTS[variant];
     const total = v.amount;
@@ -4880,6 +4886,11 @@
     // Hide sticky buy bar while overlay is open
     var mb = document.getElementById('mobileBar');
     if (mb) mb.style.display = 'none';
+    // Move focus into the overlay so keyboard/AT users land in the form
+    setTimeout(function() {
+      var first = document.getElementById('f_phone');
+      if (first) first.focus();
+    }, 50);
     trackInitCheckout();
   }
 
@@ -4893,6 +4904,10 @@
     // Re-enable sticky buy bar on mobile
     var mb = document.getElementById('mobileBar');
     if (mb) mb.style.display = '';
+    // Return focus to the element that opened the overlay
+    if (_checkoutTrigger && typeof _checkoutTrigger.focus === 'function') {
+      setTimeout(function() { _checkoutTrigger.focus(); _checkoutTrigger = null; }, 50);
+    }
   }
   window.openCheckout = openCheckout;
   window.closeCheckout = closeCheckout;
@@ -4902,7 +4917,9 @@
   function selectPay(method) {
     payMethod = method;
     document.querySelectorAll('.pay-opt').forEach(el => {
-      el.classList.toggle('active', el.dataset.method === method);
+      var active = el.dataset.method === method;
+      el.classList.toggle('active', active);
+      el.setAttribute('aria-checked', active ? 'true' : 'false');
     });
     // Toggle UPI / COD detail panels
     var upiPanel = document.getElementById('upiPayPanel');
@@ -5360,7 +5377,9 @@
   window.selectQty = function(qty){
     _buyBoxQty = qty;
     document.querySelectorAll('.pc-pack-card').forEach(function(b){
-      b.classList.toggle('active', parseInt(b.dataset.qty,10) === qty);
+      var active = parseInt(b.dataset.qty,10) === qty;
+      b.classList.toggle('active', active);
+      b.setAttribute('aria-checked', active ? 'true' : 'false');
     });
     var variant = qty === 3 ? 'trio' : qty === 2 ? 'duo' : 'solo';
     var price = (window.SMELLOFF_CONFIG && window.SMELLOFF_CONFIG.PRICES[variant]) || (qty === 3 ? 549 : qty === 2 ? 399 : 229);
