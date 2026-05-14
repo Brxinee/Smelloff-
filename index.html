@@ -779,14 +779,14 @@
   }
 
   /* Section base */
-  section{padding:120px 32px;border-bottom:1px solid var(--rule)}
+  section{padding:72px 32px;border-bottom:1px solid var(--rule)}
   .section-tag{
     font-family:'JetBrains Mono',monospace;
     font-size:11px;
     letter-spacing:.2em;
     text-transform:uppercase;
     color:var(--muted);
-    margin-bottom:40px;
+    margin-bottom:24px;
     display:flex;align-items:center;gap:12px;
   }
   .section-tag::before{
@@ -862,8 +862,8 @@
   /* How it works — 4 step block */
   .how-works{
     background:#080808;
-    padding:72px 20px;
-    display:flex;flex-direction:column;align-items:center;gap:36px;
+    padding:43px 20px;
+    display:flex;flex-direction:column;align-items:center;gap:22px;
   }
   .how-works .hw-title{
     font-family:'Barlow Condensed',sans-serif;
@@ -880,7 +880,7 @@
     position:relative;
     width:100%;max-width:720px;
     list-style:none;padding:0;margin:0;
-    display:flex;flex-direction:column;gap:12px;
+    display:flex;flex-direction:column;gap:7px;
   }
   /* Mobile vertical connector — visible in gaps between cards */
   .how-works .hw-steps::before{
@@ -901,7 +901,7 @@
     background:#0D0D0D;
     border:1px solid #1F1F1F;
     border-radius:10px;
-    padding:18px 20px;
+    padding:13px 20px;
     transition:border-color .25s ease, box-shadow .25s ease;
   }
   .how-works .hw-step:hover{
@@ -911,7 +911,7 @@
   .how-works .hw-num{
     font-family:'Barlow Condensed',sans-serif;
     font-weight:900;
-    font-size:52px;line-height:1;
+    font-size:44px;line-height:1;
     color:#B8FF57;
     letter-spacing:.01em;
     text-align:center;
@@ -944,22 +944,22 @@
   }
 
   @media(min-width:860px){
-    .how-works{padding:100px 40px;gap:56px}
+    .how-works{padding:60px 40px;gap:34px}
     .how-works .hw-steps{
       flex-direction:row;
       max-width:1120px;
-      gap:16px;
+      gap:10px;
     }
     .how-works .hw-steps::before{display:none}
     .how-works .hw-step{
       flex:1;
       grid-template-columns:1fr;
       align-items:flex-start;
-      padding:28px 24px;
-      gap:14px;
+      padding:20px 24px;
+      gap:10px;
     }
     .how-works .hw-num{
-      font-size:72px;
+      font-size:61px;
       text-align:left;
     }
     .how-works .hw-step-title{font-size:17px}
@@ -968,9 +968,9 @@
   /* Pricing */
   /* The only fix — product card section */
   .only-fix{
-    padding:72px 20px;
+    padding:43px 20px;
     background:#080808;
-    display:flex;flex-direction:column;align-items:center;gap:32px;
+    display:flex;flex-direction:column;align-items:center;gap:19px;
   }
   .only-fix .of-title{
     font-family:'Barlow Condensed',sans-serif;
@@ -1002,7 +1002,7 @@
   }
   .product-card .pc-media{
     position:relative;
-    aspect-ratio:1;
+    aspect-ratio:4/3;
     background:radial-gradient(circle at center,#141414 0%,#050505 100%);
     display:flex;align-items:center;justify-content:center;
     overflow:hidden;
@@ -1035,7 +1035,7 @@
   }
 
   .product-card .pc-body{
-    padding:20px;display:flex;flex-direction:column;gap:12px;
+    padding:20px;display:flex;flex-direction:column;gap:8px;
   }
   .product-card .pc-title{
     font-family:'Barlow Condensed',sans-serif;
@@ -1155,8 +1155,8 @@
     gap:8px 14px;
     font-family:'DM Sans',sans-serif;font-size:13px;
     color:#A0A0A0;line-height:1.3;
-    margin-top:18px;
-    padding-top:16px;
+    margin-top:11px;
+    padding-top:11px;
     border-top:1px solid #1F1F1F;
   }
   .product-card .pc-risk-item{
@@ -1246,11 +1246,11 @@
   /* Trust icons row */
   .pc-trust-icons{
     display:grid;grid-template-columns:repeat(4,1fr);
-    gap:8px;margin-top:4px;
-    padding-top:16px;border-top:1px solid #1F1F1F;
+    gap:5px;margin-top:4px;
+    padding-top:11px;border-top:1px solid #1F1F1F;
   }
   .pti-item{
-    display:flex;flex-direction:column;align-items:center;gap:5px;
+    display:flex;flex-direction:column;align-items:center;gap:3px;
   }
   .pti-icon{
     font-size:20px;line-height:1;
@@ -1262,7 +1262,7 @@
   }
 
   @media(min-width:860px){
-    .only-fix{padding:100px 40px}
+    .only-fix{padding:60px 40px}
     .product-card{max-width:460px}
   }
 
@@ -1424,8 +1424,8 @@
   .reviews{
     background:#080808;
     color:#fff;
-    padding:72px 20px;
-    display:flex;flex-direction:column;align-items:center;gap:32px;
+    padding:43px 20px;
+    display:flex;flex-direction:column;align-items:center;gap:19px;
   }
   .reviews .rv-title{
     font-family:'Barlow Condensed',sans-serif;
@@ -1450,14 +1450,14 @@
     width:100%;max-width:880px;
     display:grid;
     grid-template-columns:1fr;
-    gap:28px;
+    gap:17px;
     align-items:center;
   }
   .rv-score{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px}
   .rv-score-row{display:flex;align-items:center;gap:12px}
   .rv-score-num{
     font-family:'Barlow Condensed',sans-serif;
-    font-weight:900;font-size:64px;line-height:1;
+    font-weight:900;font-size:51px;line-height:1;
     color:#B8FF57;letter-spacing:.01em;
   }
   .rv-score-stars{display:inline-flex;gap:2px;font-size:22px;line-height:1;color:#B8FF57}
@@ -1467,7 +1467,7 @@
     font-size:13px;color:#888;margin:0;
   }
   .rv-dist{
-    display:flex;flex-direction:column;gap:6px;
+    display:flex;flex-direction:column;gap:4px;
     width:100%;max-width:420px;
     margin:0 auto;
   }
@@ -1637,10 +1637,10 @@
   }
 
   @media(min-width:720px){
-    .reviews{padding:96px 40px;gap:40px}
+    .reviews{padding:58px 40px;gap:24px}
     .reviews .rv-summary{
       grid-template-columns:1fr 1.1fr;
-      gap:40px;
+      gap:24px;
     }
     .rv-score{align-items:flex-start;text-align:left}
     .rv-dist{margin:0}
@@ -2770,8 +2770,8 @@
   /* FAQ */
   .faq{
     background:#080808;
-    padding:72px 20px;
-    display:flex;flex-direction:column;align-items:center;gap:28px;
+    padding:43px 20px;
+    display:flex;flex-direction:column;align-items:center;gap:17px;
   }
   .faq-title{
     font-family:'Barlow Condensed',sans-serif;
@@ -2785,7 +2785,7 @@
   .faq-title .faq-dot{color:#B8FF57}
   .faq-list{
     width:100%;max-width:720px;
-    display:flex;flex-direction:column;gap:10px;
+    display:flex;flex-direction:column;gap:7px;
   }
   .faq-item{
     background:#0D0D0D;
@@ -2798,7 +2798,7 @@
   .faq-q{
     width:100%;
     display:flex;align-items:center;justify-content:space-between;gap:16px;
-    padding:20px;
+    padding:14px 18px;
     background:none;border:none;cursor:pointer;
     font-family:'DM Sans',sans-serif;
     font-weight:600;font-size:16px;
@@ -2828,7 +2828,7 @@
   .faq-item.open .faq-body{grid-template-rows:1fr}
   .faq-body-inner{overflow:hidden}
   .faq-answer{
-    padding:0 20px 20px;
+    padding:0 18px 14px;
     font-family:'DM Sans',sans-serif;
     font-weight:400;font-size:14px;
     line-height:1.6;
@@ -2857,14 +2857,14 @@
     .faq-founder-row{flex-direction:column;gap:10px}
   }
   @media(min-width:860px){
-    .faq{padding:96px 40px}
+    .faq{padding:58px 40px}
   }
   .pc-info-accordion{margin-top:24px;border-top:1px solid #1a1a1a}
   /* ============================= */
   /* HOW TO USE — Ritual           */
   /* ============================= */
   .ritual-section{
-    padding:64px 20px;
+    padding:38px 20px;
     max-width:1120px;
     margin:0 auto;
   }
@@ -2872,7 +2872,7 @@
     display:flex;
     align-items:center;
     gap:12px;
-    margin-bottom:24px;
+    margin-bottom:14px;
   }
   .section-eyebrow-line{
     width:18px;
@@ -2903,19 +2903,19 @@
     font-size:14px;
     color:#8a8a8a;
     max-width:460px;
-    margin-bottom:48px;
+    margin-bottom:29px;
     line-height:1.5;
   }
   .ritual-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:8px;
+    gap:5px;
   }
   .ritual-tile{
     background:#0D0D0D;
     border:1px solid #B8FF57;
     border-radius:8px;
-    padding:16px 12px;
+    padding:11px 12px;
     display:flex;flex-direction:column;gap:8px;
     min-width:0;
   }
@@ -2954,8 +2954,8 @@
     margin-top:4px;
   }
   @media(min-width:720px){
-    .ritual-grid{gap:12px}
-    .ritual-tile{padding:20px 16px}
+    .ritual-grid{gap:7px}
+    .ritual-tile{padding:14px 16px}
     .ritual-num{font-size:48px}
     .ritual-heading{font-size:18px}
     .ritual-desc{font-size:13px}
@@ -2965,7 +2965,7 @@
   /* WHEN TO USE — Trigger Points  */
   /* ============================= */
   .trigger-section{
-    padding:64px 20px;
+    padding:38px 20px;
     max-width:1120px;
     margin:0 auto;
     border-top:1px solid #1e1e1e;
@@ -2973,12 +2973,12 @@
   .trigger-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:10px;
+    gap:7px;
   }
   .trigger-card{
     background:#0f0f0f;
     border:1px solid #1e1e1e;
-    padding:28px 24px 32px;
+    padding:20px 24px 22px;
     position:relative;
     overflow:hidden;
     transition:border-color .25s ease,transform .25s ease;
@@ -2997,8 +2997,8 @@
   }
   .trigger-card:hover::after{opacity:1;}
   .trigger-icon{
-    width:38px;height:38px;display:block;
-    margin-bottom:14px;
+    width:32px;height:32px;display:block;
+    margin-bottom:10px;
     /* Tint black silhouette → acid green */
     filter:brightness(0) saturate(100%) invert(91%) sepia(58%) saturate(560%) hue-rotate(8deg) brightness(102%) contrast(101%);
     transition:transform .25s ease;
@@ -3045,7 +3045,7 @@
   }
   @media(max-width:860px){
     .trigger-grid{grid-template-columns:1fr 1fr;}
-    .ritual-section,.trigger-section{padding:48px 16px;}
+    .ritual-section,.trigger-section{padding:29px 16px;}
   }
   @media(max-width:480px){
     .trigger-grid{grid-template-columns:1fr;}
@@ -3056,8 +3056,8 @@
   /* ============================= */
   .compare{
     background:#080808;
-    padding:64px 20px;
-    display:flex;flex-direction:column;align-items:center;gap:28px;
+    padding:38px 20px;
+    display:flex;flex-direction:column;align-items:center;gap:17px;
     border-bottom:1px solid #1a1a1a;
   }
   .compare-title{
@@ -3086,7 +3086,7 @@
     border-radius:8px;overflow:hidden;
   }
   .compare-cell{
-    padding:14px 12px;
+    padding:10px 12px;
     font-family:'DM Sans',sans-serif;
     font-size:13px;color:#C5C5C5;
     line-height:1.45;
@@ -3110,10 +3110,10 @@
     color:#555;background:#111;
     border-bottom:1px solid #1f1f1f;
     justify-content:center;text-align:center;
-    flex-direction:column;gap:6px;padding:14px 8px;
+    flex-direction:column;gap:6px;padding:10px 8px;
   }
   .compare-col-icon{
-    width:28px;height:28px;display:block;margin:0 auto;
+    width:22px;height:22px;display:block;margin:0 auto;
     filter:invert(1) opacity(.78);
   }
   .compare-cell.os .compare-col-icon{
