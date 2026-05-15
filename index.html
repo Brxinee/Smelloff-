@@ -167,6 +167,27 @@
   ]
 }
 </script>
+<!-- JSON-LD FAQPage -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"Isn't ODORSTRIKE just a deodorant?","acceptedAnswer":{"@type":"Answer","text":"No. Deodorant is for skin. ODORSTRIKE is for fabric — shirt, jacket, helmet liner. Body odor sticks to clothes long after a shower. Deodorant can't reach there. ODORSTRIKE neutralizes odor molecules trapped in fabric fibers."}},
+    {"@type":"Question","name":"Will ODORSTRIKE stain my clothes, especially dark fabric?","acceptedAnswer":{"@type":"Answer","text":"No. ODORSTRIKE is water-soluble and deposits uniformly without leaving white residue on dark fabrics. Tested on black, navy, charcoal, and grey shirts across 30 cycles. No marks, no stiffness, no fading. Safe on dark cotton and polyester."}},
+    {"@type":"Question","name":"How is ODORSTRIKE different from Febreze?","acceptedAnswer":{"@type":"Answer","text":"Febreze masks odor with fragrance. ODORSTRIKE eliminates odor at the molecular level using Zinc PCA — built for elimination, not cover-up. Priced ₹229 vs Febreze ₹300+. Tested on Indian fabrics, sweat, humidity."}},
+    {"@type":"Question","name":"Can I use ODORSTRIKE on gym clothes and polyester?","acceptedAnswer":{"@type":"Answer","text":"Yes, and it's especially effective here. Polyester is hydrophobic — water-based washing can't penetrate the micro-fibers where odor compounds hide. ODORSTRIKE's alcohol carrier gets in where detergent can't. It was built for gym clothes."}},
+    {"@type":"Question","name":"Is COD available? How fast does ODORSTRIKE ship?","acceptedAnswer":{"@type":"Answer","text":"Yes, Cash on Delivery is available pan-India. Orders ship from Hyderabad within 48 hours. Metro cities: 3–5 days delivery. Tier 2 and Tier 3 cities: 5–7 days. 7-day return window applies to all orders."}},
+    {"@type":"Question","name":"How long does the effect of ODORSTRIKE last?","acceptedAnswer":{"@type":"Answer","text":"6–8 hours under normal office or commute conditions. After heavy gym or long bike rides, re-spritz worn areas. The 50ml bottle gives ~250 sprays — most users get 4–6 weeks per bottle."}},
+    {"@type":"Question","name":"Can I use ODORSTRIKE on shoes, helmets, or car seats?","acceptedAnswer":{"@type":"Answer","text":"Yes — fabric-lined shoes (not leather or suede), helmet foam liners, and car fabric seats. Avoid leather, suede, and dry-clean-only materials. When unsure, test on an inside seam first."}},
+    {"@type":"Question","name":"Does ODORSTRIKE replace washing?","acceptedAnswer":{"@type":"Answer","text":"No. ODORSTRIKE neutralizes odor molecules but doesn't clean dirt, oils, or stains. Use it to extend wear between washes — not as a substitute for regular laundering."}},
+    {"@type":"Question","name":"Is ODORSTRIKE safe to inhale?","acceptedAnswer":{"@type":"Answer","text":"Spray on fabric, not toward your face. The 5% isopropyl alcohol evaporates in under 10 seconds. Once dry, the fabric is safe to wear. ODORSTRIKE is fabric-only — not for skin or inhalation."}},
+    {"@type":"Question","name":"Does ODORSTRIKE work in monsoon humidity?","acceptedAnswer":{"@type":"Answer","text":"Yes. Monsoon humidity accelerates bacterial growth in fabric — exactly what causes musty smell. ODORSTRIKE's Zinc PCA formula is effective in high humidity. Spray before stepping out or after getting caught in rain."}},
+    {"@type":"Question","name":"What fabrics is ODORSTRIKE safe on?","acceptedAnswer":{"@type":"Answer","text":"ODORSTRIKE works on cotton, polyester, denim, nylon, and wool blends. Do not use on leather, suede, silk, or dry-clean-only garments. When unsure, test on an inside seam first."}},
+    {"@type":"Question","name":"How long does one bottle of ODORSTRIKE last?","acceptedAnswer":{"@type":"Answer","text":"One 50ml bottle gives roughly 250 sprays — about ₹0.92 per spray. Most users get 4–6 weeks per bottle with daily use."}}
+  ]
+}
+</script>
 <!-- JSON-LD HowTo -->
 <script type="application/ld+json">
 {
@@ -225,8 +246,8 @@
 <!-- Fonts: non-render-blocking -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@900&family=Fraunces:opsz,wght@9..144,900&family=JetBrains+Mono:wght@400&family=Inter+Tight:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@900&family=Fraunces:opsz,wght@9..144,900&family=JetBrains+Mono:wght@400&family=Inter+Tight:wght@400;500&display=swap"></noscript>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@900&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,900&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@900&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,900&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&display=swap"></noscript>
 
 <!-- Favicon -->
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -3598,12 +3619,12 @@
 <!-- STICKY MOBILE BAR -->
 <div class="mobile-bar" id="mobileBar" aria-hidden="true">
   <div class="mb-meta">
-    <span class="mb-label">ODORSTRIKE · 50ml</span>
+    <span class="mb-label">ODORSTRIKE · 2 × 50ml</span>
     <div class="mb-price">
-      <span class="mb-now">₹229</span>
+      <span class="mb-now">₹399</span>
     </div>
   </div>
-  <button class="mb-btn" type="button" onclick="addToCart('solo')">BUY</button>
+  <button class="mb-btn" type="button" onclick="buyBoxAdd()">BUY</button>
 </div>
 
 <!-- HERO -->
@@ -3628,7 +3649,7 @@
       <div class="hero-category">India's first pocket fabric odor killer</div>
       <h1 class="hero-headline">India's pocket fabric odor spray. <span class="green">Kills sweat smell</span> on clothes in 8 seconds.</h1>
       <p class="hero-sub">Not perfume. Not deodorant. Not body spray. Spray on clothes. Walk out clean.</p>
-      <h2 class="hero-pullquote">"You don't fear smelling bad. You fear someone noticing."</h2>
+      <p class="hero-pullquote">"You don't fear smelling bad. You fear someone noticing."</p>
     </div>
 
     <div class="hero-bottle" aria-hidden="true">
@@ -4187,7 +4208,7 @@
 <section class="final">
   <h2 class="final-title">Stop the smell. Before anyone notices.</h2>
   <p class="final-sub">Launch price ₹229. Free shipping. 7-day returns. Ships from Hyderabad in 48 hours.</p>
-  <a href="#buy" class="final-cta" onclick="event.preventDefault();addToCart('solo')">BUY — ₹229</a>
+  <a href="#buy" class="final-cta" id="finalCta" onclick="event.preventDefault();buyBoxAdd()">BUY — ₹399</a>
 </section>
 
 <footer class="site-footer">
@@ -4273,8 +4294,7 @@
   <!-- BOTTOM strip -->
   <div class="sf-bottom">
     <span>&copy; 2026 SMELLOFF &middot; All rights reserved &middot; Made in Hyderabad</span>
-    <!-- TODO: replace with virtual office address -->
-    <span>MFG: Smelloff, Hyderabad, Telangana, India · GSTIN [PENDING]</span>
+    <span>MFG: Smelloff, Hyderabad, Telangana, India</span>
   </div>
   <div class="sf-bottom" style="font-size:11px;color:#555;border-top:1px solid #111;padding-top:12px;margin-top:0;text-align:center">
     Grievance Officer: Jogdhande Nikhil Patil &middot; <a href="mailto:smelloffsupport@gmail.com" style="color:#666;text-decoration:none">smelloffsupport@gmail.com</a> &middot; Response within 15 days as per Consumer Protection (E-Commerce) Rules 2020
@@ -4383,7 +4403,7 @@
         <p class="pay-cod">₹0 advance · Pay when it arrives</p>
       </div>
 
-      <div id="checkoutError" style="display:none" class="error-msg"></div>
+      <div id="checkoutError" style="display:none" class="error-msg" role="alert" aria-live="assertive"></div>
       <a href="https://wa.me/919392974031?text=Hi%20Smelloff%2C%20I%20tried%20to%20place%20an%20order%20on%20the%20website%20but%20it%20failed.%20Can%20you%20help%3F" class="wa-fallback" id="waFallback" style="display:none" target="_blank" rel="noopener">WhatsApp us for help →</a>
 
       <button class="submit-btn" id="submitBtn" onclick="submitOrder()">
@@ -4403,9 +4423,9 @@
       <div class="overlay-tag" id="successTag">Order confirmed</div>
       <h3 id="successHeading">You're done.</h3>
       <p id="successMsg">Our team ships your ODORSTRIKE within 48 hours.</p>
-      <div class="order-id" id="orderIdDisplay"></div>
+      <div class="order-id" id="orderIdDisplay" aria-label="Order ID"></div>
 
-      <p class="success-reassure">Check your email — we just sent your order confirmation.</p>
+      <p class="success-reassure" id="successEmailNote" style="display:none">Check your email — we just sent your order confirmation.</p>
 
       <!-- Optional UPI block (shown only when UPI was the chosen method) -->
       <div id="upiBlock" class="upi-block" style="display:none;text-align:left">
@@ -4492,7 +4512,7 @@
     </div>
 
     <div class="po-meta">
-      Smelloff · Hyderabad, Telangana, India · GSTIN [PENDING]<br>
+      Smelloff · Hyderabad, Telangana, India<br>
       Last updated: April 2026
     </div>
   </main>
@@ -4565,11 +4585,12 @@
     // Hide sticky buy bar while overlay is open
     var mb = document.getElementById('mobileBar');
     if (mb) mb.style.display = 'none';
-    // Move focus into the overlay so keyboard/AT users land in the form
+    // Move focus into the overlay and trap it for keyboard/AT users
     setTimeout(function() {
       var first = document.getElementById('f_phone');
       if (first) first.focus();
-    }, 50);
+      trapFocusInOverlay();
+    }, 100);
     trackInitCheckout();
   }
 
@@ -4588,6 +4609,25 @@
       setTimeout(function() { _checkoutTrigger.focus(); _checkoutTrigger = null; }, 50);
     }
   }
+  var _overlayFocusTrapHandler = null;
+  function trapFocusInOverlay() {
+    var overlay = document.getElementById('checkoutOverlay');
+    if (!overlay) return;
+    if (_overlayFocusTrapHandler) overlay.removeEventListener('keydown', _overlayFocusTrapHandler);
+    var focusable = overlay.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])');
+    if (!focusable.length) return;
+    var first = focusable[0], last = focusable[focusable.length - 1];
+    _overlayFocusTrapHandler = function(e) {
+      if (e.key !== 'Tab') return;
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    };
+    overlay.addEventListener('keydown', _overlayFocusTrapHandler);
+  }
+
   window.openCheckout = openCheckout;
   window.closeCheckout = closeCheckout;
   window.selectPay = selectPay;
@@ -4619,14 +4659,18 @@
 
   function showError(msg) {
     const el = document.getElementById('checkoutError');
+    if (!el) return;
     el.textContent = msg;
     el.style.display = 'block';
-    document.getElementById('waFallback').style.display = 'block';
+    const wa = document.getElementById('waFallback');
+    if (wa) wa.style.display = 'block';
   }
 
   function hideError() {
-    document.getElementById('checkoutError').style.display = 'none';
-    document.getElementById('waFallback').style.display = 'none';
+    const el = document.getElementById('checkoutError');
+    if (el) el.style.display = 'none';
+    const wa = document.getElementById('waFallback');
+    if (wa) wa.style.display = 'none';
   }
 
   function validateForm() {
@@ -4636,6 +4680,7 @@
     const fields = ['f_phone','f_name','f_addr','f_pin','f_city','f_state'];
     for (const id of fields) {
       const el = document.getElementById(id);
+      if (!el) { showError('Please fill all required fields.'); return false; }
       if (!el.value.trim()) { el.style.borderColor='#ff6b6b'; el.focus(); showError('Please fill all required fields.'); return false; }
     }
     const phone = document.getElementById('f_phone').value.trim();
@@ -4643,8 +4688,9 @@
     const pin = document.getElementById('f_pin').value.trim();
     if (!/^\d{6}$/.test(pin)) { document.getElementById('f_pin').style.borderColor='#ff6b6b'; showError('Enter a valid 6-digit pincode.'); return false; }
     // Email is OPTIONAL — only validate if non-empty
-    const email = document.getElementById('f_email').value.trim();
-    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { document.getElementById('f_email').style.borderColor='#ff6b6b'; showError('Enter a valid email or leave it blank.'); return false; }
+    const emailEl = document.getElementById('f_email');
+    const email = emailEl ? emailEl.value.trim() : '';
+    if (email && !/^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(email)) { if (emailEl) emailEl.style.borderColor='#ff6b6b'; showError('Enter a valid email or leave it blank.'); return false; }
     return true;
   }
 
@@ -4669,7 +4715,7 @@
     const v = VARIANTS[currentVariant] || {};
     const baseAmount = Number(v.amount) || 0;
     const shipping = Number(calcShipping(baseAmount)) || 0;
-    const sv = SHEET_VARIANT[currentVariant] || { variant: currentVariant, label: v.title || currentVariant, bottles: 1 };
+    const sv = SHEET_VARIANT[currentVariant] || { variant: currentVariant, label: v.title || currentVariant, bottles: v.units ? (parseInt(v.units) || 1) : 1 };
     const isCod = payMethod === 'cod';
     let source = 'Direct';
     try { source = localStorage.getItem('os_source') || 'Direct'; } catch (e) {}
@@ -4739,12 +4785,16 @@
   }
 
   function showLoadingScreen(label, sub) {
-    document.getElementById('checkoutForm').style.display = 'none';
-    document.getElementById('successScreen').style.display = 'none';
+    var cf = document.getElementById('checkoutForm');
+    if (cf) cf.style.display = 'none';
+    var ss = document.getElementById('successScreen');
+    if (ss) ss.style.display = 'none';
     var ls = document.getElementById('loadingScreen');
     if (!ls) return;
-    if (label) document.getElementById('loadingLabel').textContent = label;
-    if (sub) document.getElementById('loadingSub').textContent = sub;
+    var ll = document.getElementById('loadingLabel');
+    var ls2 = document.getElementById('loadingSub');
+    if (label && ll) ll.textContent = label;
+    if (sub && ls2) ls2.textContent = sub;
     ls.style.display = '';
     ls.classList.add('active');
   }
@@ -4756,10 +4806,14 @@
 
   function showSuccess(orderId, method) {
     hideLoadingScreen();
-    document.getElementById('checkoutForm').style.display = 'none';
-    document.getElementById('successScreen').style.display = 'block';
-    document.getElementById('upiBlock').style.display = 'none';
-    document.getElementById('orderIdDisplay').textContent = orderId;
+    var cff = document.getElementById('checkoutForm');
+    if (cff) cff.style.display = 'none';
+    var ssc = document.getElementById('successScreen');
+    if (ssc) ssc.style.display = 'block';
+    var ub = document.getElementById('upiBlock');
+    if (ub) ub.style.display = 'none';
+    var oid = document.getElementById('orderIdDisplay');
+    if (oid) oid.textContent = orderId;
 
     var amount = VARIANTS[currentVariant].amount;
     var name = (document.getElementById('f_name') ? document.getElementById('f_name').value.trim() : '') || '';
@@ -4796,11 +4850,14 @@
     trackPurchase(VARIANTS[currentVariant].amount, orderId);
     // Unlock review submission (client-side gate — not tamper-proof).
     try {
-      var buyerEmail = (document.getElementById('f_email').value || '').trim().toLowerCase();
+      var buyerEmail = (document.getElementById('f_email') ? document.getElementById('f_email').value : '').trim().toLowerCase();
       localStorage.setItem('smelloff_purchased', 'true');
       if (buyerEmail) localStorage.setItem('smelloff_purchased_email', buyerEmail);
       // Clear cart after successful order so user doesn't see stale items
       if (typeof window.clearCart === 'function') window.clearCart();
+      // Show/hide email confirmation note based on whether user gave an email
+      var emailNote = document.getElementById('successEmailNote');
+      if (emailNote) emailNote.style.display = buyerEmail ? 'block' : 'none';
     } catch (e) { /* localStorage may be blocked in private mode */ }
   }
 
@@ -4945,10 +5002,12 @@
 
     trackPurchase(VARIANTS[currentVariant].amount, orderId);
     try {
-      const buyerEmail = (document.getElementById('f_email').value || '').trim().toLowerCase();
+      const buyerEmail = (document.getElementById('f_email') ? document.getElementById('f_email').value : '').trim().toLowerCase();
       localStorage.setItem('smelloff_purchased', 'true');
       if (buyerEmail) localStorage.setItem('smelloff_purchased_email', buyerEmail);
       if (typeof window.clearCart === 'function') window.clearCart();
+      var emailNote = document.getElementById('successEmailNote');
+      if (emailNote) emailNote.style.display = buyerEmail ? 'block' : 'none';
     } catch (e) {}
   }
 
@@ -5076,6 +5135,19 @@
     var hint = document.getElementById('pcQtyHint');
     if (cta) cta.textContent = 'BUY — ₹' + price;
     if (codCta) codCta.setAttribute('data-price', price);
+    // Sync mobile sticky bar
+    var mbNow = document.querySelector('.mobile-bar .mb-now');
+    var mbBtn = document.querySelector('.mobile-bar .mb-btn');
+    var mbLabel = document.querySelector('.mobile-bar .mb-label');
+    if (mbNow) mbNow.textContent = '₹' + price;
+    if (mbLabel) mbLabel.textContent = 'ODORSTRIKE · ' + qty + ' × 50ml';
+    if (mbBtn) {
+      mbBtn.textContent = 'BUY';
+      mbBtn.onclick = function(){ window.buyBoxAdd(); };
+    }
+    // Sync final CTA
+    var finalCta = document.getElementById('finalCta');
+    if (finalCta) finalCta.textContent = 'BUY — ₹' + price;
     if (hint) {
       if (qty === 1) hint.textContent = 'One bottle. ~250 sprays. Try it.';
       else if (qty === 2) hint.textContent = 'Two bottles = one for your bag, one for your desk.';
@@ -5088,6 +5160,7 @@
   };
   window.buyBoxCod = function(){
     var variant = _buyBoxQty === 3 ? 'trio' : _buyBoxQty === 2 ? 'duo' : 'solo';
+    payMethod = 'cod';
     openCheckout(variant);
     selectPay('cod');
   };
@@ -5219,7 +5292,7 @@
   window.submitWaitlist = function() {
     const input = document.getElementById('waitlistEmail');
     const email = input.value.trim();
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (!email || !/^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(email)) {
       input.style.borderColor = '#a00';
       return;
     }
@@ -5619,7 +5692,20 @@
   // FAQ: accordion toggle
   // =============================================
   window.toggleFaqItem = function(item) {
-    var isOpen = item.classList.toggle('open');
+    var parent = item.parentElement;
+    var wasOpen = item.classList.contains('open');
+    // Close all siblings first
+    if (parent) {
+      parent.querySelectorAll('.faq-item.open').forEach(function(sibling) {
+        if (sibling !== item) {
+          sibling.classList.remove('open');
+          var sb = sibling.querySelector('.faq-q');
+          if (sb) sb.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+    var isOpen = wasOpen ? false : true;
+    item.classList.toggle('open', isOpen);
     var btn = item.querySelector('.faq-q');
     if (btn) btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   };
@@ -5827,7 +5913,8 @@
             ? cart.items[0].name
             : 'ODORSTRIKE — Cart',
           units: label,
-          amount: subtotal
+          amount: subtotal,
+          mrp: Math.round(subtotal * 1.5)
         };
       }
       closeCartDrawer();
@@ -5910,7 +5997,26 @@
 <script>
 (function(){
   var KEY='smelloff_consent_v1';
-  function hideBar(){var b=document.getElementById('smelloff-consent-bar');if(b)b.style.display='none';}
+  function setBottomOffset(px){
+    // Push mobile bar and to-top button above the consent bar
+    var mb = document.getElementById('mobileBar');
+    var tb = document.getElementById('toTopBtn');
+    if (mb) mb.style.bottom = px + 'px';
+    if (tb) {
+      var isMobile = window.innerWidth <= 720;
+      tb.style.bottom = (isMobile ? 88 : 24) + px + 'px';
+    }
+  }
+  function hideBar(){
+    var b=document.getElementById('smelloff-consent-bar');
+    if(b)b.style.display='none';
+    setBottomOffset(0);
+    // Reset inline styles
+    var mb = document.getElementById('mobileBar');
+    var tb = document.getElementById('toTopBtn');
+    if (mb) mb.style.bottom = '';
+    if (tb) tb.style.bottom = '';
+  }
   window.smelloffSetConsent=function(v){
     try{localStorage.setItem(KEY,v);}catch(e){}
     hideBar();
@@ -5920,7 +6026,14 @@
   try{existing=localStorage.getItem(KEY);}catch(e){}
   if(!existing){
     var bar=document.getElementById('smelloff-consent-bar');
-    if(bar)bar.style.display='block';
+    if(bar){
+      bar.style.display='block';
+      // Measure height after render and push overlapping elements up
+      requestAnimationFrame(function(){
+        var h = bar.offsetHeight || 80;
+        setBottomOffset(h);
+      });
+    }
   }
 })();
 </script>
