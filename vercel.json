@@ -3,14 +3,6 @@
   "trailingSlash": false,
   "redirects": [
     {
-      "source": "/:path*",
-      "has": [
-        { "type": "host", "value": "www.smelloff.in" }
-      ],
-      "destination": "https://smelloff.in/:path*",
-      "permanent": true
-    },
-    {
       "source": "/policies/:slug(privacy|terms|returns|refund|shipping|payment-failed)",
       "destination": "/:slug",
       "permanent": true
