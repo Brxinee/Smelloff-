@@ -41,4 +41,4 @@ Allow: /
 User-agent: cohere-ai
 Allow: /
 
-Sitemap: https://www.smelloff.in/sitemap.xml
+Sitemap: https://smelloff.in/sitemap.xml
