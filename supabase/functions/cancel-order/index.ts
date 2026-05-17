@@ -61,8 +61,8 @@ Deno.serve(async (req: Request) => {
       );
     }
 
-    // Confirm the order belongs to the authenticated user
-    if (order.customer_email !== user.email) {
+    // Confirm the order belongs to the authenticated user (case-insensitive)
+    if (order.customer_email.toLowerCase() !== (user.email || '').toLowerCase()) {
       return new Response(
         JSON.stringify({ error: "Unauthorized" }),
         { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } }

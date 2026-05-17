@@ -6194,47 +6194,28 @@
   var SUPA_URL = CFG_S.SUPABASE_URL || '';
   var SUPA_KEY = CFG_S.SUPABASE_KEY || '';
 
-  if (!SUPA_URL || !SUPA_KEY || typeof window.supabase === 'undefined') {
-    console.warn('[Smelloff] Supabase SDK or config missing — account area disabled');
-    return;
-  }
-
-  var sb = window.supabase.createClient(SUPA_URL, SUPA_KEY);
-  window._smelloffSupabase = sb;
-
+  // sb is null until Supabase SDK is confirmed available
+  var sb = null;
   var _currentUser = null;
   var _recoveryMode = false;
 
-  // Restore session on load and listen for changes
-  sb.auth.getSession().then(function (r) {
-    _currentUser = r.data && r.data.session ? r.data.session.user : null;
-  });
-
-  sb.auth.onAuthStateChange(function (event, session) {
-    _currentUser = session ? session.user : null;
-    if (event === 'PASSWORD_RECOVERY') {
-      _recoveryMode = true;
-      openAuthOverlay();
-      _showNewPasswordForm();
-    }
-  });
-
-  // ---- Overlay helpers ----
-
+  // ---- Scroll helpers ----
   function _lockScroll()   { document.body.style.overflow = 'hidden'; }
   function _unlockScroll() { document.body.style.overflow = ''; }
 
+  // ---- Overlay open/close — always defined regardless of SDK state ----
+
   window.openAccountOverlay = function () {
-    if (_currentUser) { openOrdersOverlay(); } else { openAuthOverlay(); }
+    if (_currentUser) { _openOrdersOverlay(); } else { _openAuthOverlay(); }
   };
 
-  function openAuthOverlay() {
+  function _openAuthOverlay() {
     var el = document.getElementById('authOverlay');
     if (el) el.classList.add('active');
     _lockScroll();
     if (_recoveryMode) _showNewPasswordForm();
   }
-  window.openAuthOverlay = openAuthOverlay;
+  window.openAuthOverlay = _openAuthOverlay;
 
   window.closeAuthOverlay = function () {
     var el = document.getElementById('authOverlay');
@@ -6243,7 +6224,7 @@
     _recoveryMode = false;
   };
 
-  function openOrdersOverlay() {
+  function _openOrdersOverlay() {
     var emailEl = document.getElementById('ordersUserEmail');
     if (emailEl && _currentUser) emailEl.textContent = _currentUser.email || '';
     var el = document.getElementById('ordersOverlay');
@@ -6251,7 +6232,7 @@
     _lockScroll();
     _loadOrders();
   }
-  window.openOrdersOverlay = openOrdersOverlay;
+  window.openOrdersOverlay = _openOrdersOverlay;
 
   window.closeOrdersOverlay = function () {
     var el = document.getElementById('ordersOverlay');
@@ -6259,7 +6240,7 @@
     _unlockScroll();
   };
 
-  // ---- Tab / form switching ----
+  // ---- Tab / form switching — no SDK needed ----
 
   window.switchAuthTab = function (tab) {
     document.querySelectorAll('.auth-tab').forEach(function (el) {
@@ -6268,11 +6249,10 @@
       el.setAttribute('aria-selected', active ? 'true' : 'false');
     });
     _clearAuthMsgs();
-    var showLogin  = tab === 'login';
     var lf = document.getElementById('authLoginForm');
     var sf = document.getElementById('authSignupForm');
-    if (lf) lf.style.display = showLogin ? '' : 'none';
-    if (sf) sf.style.display = showLogin ? 'none' : '';
+    if (lf) lf.style.display = tab === 'login' ? '' : 'none';
+    if (sf) sf.style.display = tab === 'login' ? 'none' : '';
     var ff = document.getElementById('authForgotForm');
     if (ff) ff.style.display = 'none';
     var np = document.getElementById('authNewPasswordForm');
@@ -6297,7 +6277,7 @@
     _clearAuthMsgs();
   }
 
-  // ---- Messaging ----
+  // ---- Message helpers ----
 
   function _clearAuthMsgs() {
     var err = document.getElementById('authError');
@@ -6323,9 +6303,32 @@
     else { btn.textContent = btn._orig || origText || btn.textContent; }
   }
 
+  // ---- Init Supabase (only if SDK + config available) ----
+
+  if (SUPA_URL && SUPA_KEY && typeof window.supabase !== 'undefined') {
+    sb = window.supabase.createClient(SUPA_URL, SUPA_KEY);
+    window._smelloffSupabase = sb;
+
+    sb.auth.getSession().then(function (r) {
+      _currentUser = r.data && r.data.session ? r.data.session.user : null;
+    });
+
+    sb.auth.onAuthStateChange(function (event, session) {
+      _currentUser = session ? session.user : null;
+      if (event === 'PASSWORD_RECOVERY') {
+        _recoveryMode = true;
+        _openAuthOverlay();
+        _showNewPasswordForm();
+      }
+    });
+  } else {
+    console.warn('[Smelloff] Supabase SDK or config missing — auth disabled');
+  }
+
   // ---- Auth actions ----
 
   window.handleLogin = async function () {
+    if (!sb) return;
     _clearAuthMsgs();
     var email = (document.getElementById('loginEmail') || {}).value.trim();
     var pw    = (document.getElementById('loginPassword') || {}).value;
@@ -6334,14 +6337,16 @@
     try {
       var r = await sb.auth.signInWithPassword({ email: email, password: pw });
       if (r.error) throw r.error;
+      _currentUser = r.data.user; // set before opening overlay so orders load immediately
       window.closeAuthOverlay();
-      openOrdersOverlay();
+      _openOrdersOverlay();
     } catch (e) {
       _showAuthErr(e.message || 'Login failed. Please try again.');
     } finally { _setBtnLoading('loginBtn', false, 'Log In'); }
   };
 
   window.handleSignup = async function () {
+    if (!sb) return;
     _clearAuthMsgs();
     var email = (document.getElementById('signupEmail') || {}).value.trim();
     var pw    = (document.getElementById('signupPassword') || {}).value;
@@ -6360,6 +6365,7 @@
   };
 
   window.handleForgotPassword = async function () {
+    if (!sb) return;
     _clearAuthMsgs();
     var email = (document.getElementById('forgotEmail') || {}).value.trim();
     if (!email) { _showAuthErr('Please enter your email address.'); return; }
@@ -6374,6 +6380,7 @@
   };
 
   window.handleSetNewPassword = async function () {
+    if (!sb) return;
     _clearAuthMsgs();
     var p1 = (document.getElementById('newPassword') || {}).value;
     var p2 = (document.getElementById('confirmNewPassword') || {}).value;
@@ -6385,14 +6392,14 @@
       if (r.error) throw r.error;
       _recoveryMode = false;
       _showAuthOk('Password updated! Redirecting to your orders…');
-      setTimeout(function () { window.closeAuthOverlay(); openOrdersOverlay(); }, 1400);
+      setTimeout(function () { window.closeAuthOverlay(); _openOrdersOverlay(); }, 1400);
     } catch (e) {
       _showAuthErr(e.message || 'Failed to update password.');
     } finally { _setBtnLoading('setPasswordBtn', false, 'Set New Password'); }
   };
 
   window.handleSignOut = async function () {
-    try { await sb.auth.signOut(); } catch (e) { /* ignore */ }
+    if (sb) { try { await sb.auth.signOut(); } catch (e) { /* ignore */ } }
     _currentUser = null;
     window.closeOrdersOverlay();
   };
