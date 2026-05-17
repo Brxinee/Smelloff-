@@ -216,7 +216,9 @@
     UPI_ID: "9392974031-3@ybl",
     UPI_NAME: "Smelloff",
     PRICES: { solo: 229, duo: 399, trio: 549 },
-    MRP:    { solo: 579, duo: 999, trio: 1399 }
+    MRP:    { solo: 579, duo: 999, trio: 1399 },
+    SUPABASE_URL: 'https://tnuqjydmoxczdjnsgpci.supabase.co',
+    SUPABASE_KEY: 'sb_publishable_A2utDcKfxoVhJbbIPcr38Q_e2fmhq_f'
   };
 </script>
 
@@ -3615,6 +3617,166 @@
   .skip-link:focus{top:0}
   *:focus-visible{outline:2px solid var(--acid);outline-offset:2px}
   .pay-opt:focus-visible{outline:2px solid var(--acid);outline-offset:2px}
+
+  /* ============================= */
+  /* ACCOUNT: AUTH TABS            */
+  /* ============================= */
+  .auth-tabs{
+    display:flex;gap:0;
+    margin-bottom:20px;
+    border-bottom:1px solid #1F1F1F;
+  }
+  .auth-tab{
+    flex:1;padding:10px;
+    background:transparent;border:none;
+    border-bottom:2px solid transparent;
+    color:#888;
+    font-family:'Barlow Condensed',sans-serif;font-weight:900;
+    font-size:14px;letter-spacing:.1em;text-transform:uppercase;
+    cursor:pointer;margin-bottom:-1px;
+    transition:color .15s,border-color .15s;
+  }
+  .auth-tab.active{color:#B8FF57;border-bottom-color:#B8FF57}
+  .auth-tab:hover:not(.active){color:#fff}
+  .auth-success{
+    background:rgba(184,255,87,.08);
+    border:1px solid rgba(184,255,87,.3);
+    border-radius:4px;padding:12px 14px;
+    font-family:'DM Sans',sans-serif;font-size:13px;
+    color:#B8FF57;margin-top:12px;
+  }
+  .auth-link{
+    background:none;border:none;
+    color:#B8FF57;font-family:'DM Sans',sans-serif;font-size:13px;
+    cursor:pointer;padding:0;
+    text-decoration:underline;text-underline-offset:2px;
+  }
+  .auth-link:hover{color:#C7FF70}
+  .auth-user-bar{
+    display:flex;align-items:center;justify-content:space-between;
+    margin-bottom:16px;padding-bottom:16px;
+    border-bottom:1px solid #1F1F1F;
+  }
+  .auth-user-email{
+    font-family:'DM Sans',sans-serif;font-size:13px;color:#888;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:70%;
+  }
+  .auth-signout-btn{
+    background:transparent;border:1px solid #333;color:#888;
+    font-family:'DM Sans',sans-serif;font-size:12px;
+    padding:6px 12px;border-radius:4px;cursor:pointer;
+    transition:border-color .15s,color .15s;flex-shrink:0;
+  }
+  .auth-signout-btn:hover{border-color:#B8FF57;color:#B8FF57}
+
+  /* ============================= */
+  /* ACCOUNT: MY ORDERS            */
+  /* ============================= */
+  .orders-list{display:flex;flex-direction:column;gap:14px}
+  .order-card{
+    border:1px solid #1F1F1F;border-radius:8px;
+    padding:16px;background:#0D0D0D;
+  }
+  .order-card-head{
+    display:flex;align-items:flex-start;justify-content:space-between;
+    gap:8px;margin-bottom:10px;
+  }
+  .order-id-short{
+    font-family:'JetBrains Mono',monospace;font-size:11px;
+    color:#888;letter-spacing:.04em;
+  }
+  .order-date{font-family:'DM Sans',sans-serif;font-size:11px;color:#555;margin-top:2px}
+  .order-status-badge{
+    font-family:'Barlow Condensed',sans-serif;font-weight:900;
+    font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+    padding:3px 8px;border-radius:3px;flex-shrink:0;
+  }
+  .order-status-badge.neutral{background:#1a1a1a;color:#888}
+  .order-status-badge.dispatched{background:rgba(184,255,87,.15);color:#B8FF57}
+  .order-status-badge.delivered{background:rgba(34,197,94,.15);color:#22c55e}
+  .order-status-badge.cancelled{background:rgba(239,68,68,.1);color:#ef4444}
+  .order-items{
+    font-family:'DM Sans',sans-serif;font-size:13px;color:#aaa;margin-bottom:6px;
+  }
+  .order-amount{
+    font-family:'Barlow Condensed',sans-serif;font-weight:900;
+    font-size:20px;color:#B8FF57;letter-spacing:.01em;
+  }
+
+  /* Step tracker */
+  .order-tracker{display:flex;align-items:flex-start;margin:14px 0 8px}
+  .tracker-step{
+    flex:1;display:flex;flex-direction:column;align-items:center;
+    position:relative;
+  }
+  .tracker-step:not(:last-child)::after{
+    content:'';position:absolute;
+    top:9px;left:50%;width:100%;height:2px;
+    background:#1F1F1F;z-index:0;
+  }
+  .tracker-step.step-done:not(:last-child)::after{background:#B8FF57}
+  .tracker-dot{
+    width:20px;height:20px;border-radius:50%;
+    background:#1a1a1a;border:2px solid #333;
+    z-index:1;position:relative;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .tracker-dot.done{background:#B8FF57;border-color:#B8FF57}
+  .tracker-dot.current{
+    background:#080808;border-color:#B8FF57;
+    box-shadow:0 0 0 3px rgba(184,255,87,.2);
+  }
+  .tracker-label{
+    font-family:'DM Sans',sans-serif;font-size:9px;color:#444;
+    margin-top:4px;text-align:center;
+    letter-spacing:.04em;text-transform:uppercase;font-weight:500;
+    line-height:1.2;
+  }
+  .tracker-label.lbl-done{color:#888}
+  .tracker-label.lbl-current{color:#B8FF57}
+  .order-cancelled-strip{
+    text-align:center;padding:8px 12px;
+    background:rgba(239,68,68,.07);
+    border:1px solid rgba(239,68,68,.2);border-radius:6px;
+    font-family:'DM Sans',sans-serif;font-size:12px;color:#ef4444;margin:10px 0;
+  }
+  .order-tracking{
+    margin-top:8px;font-family:'DM Sans',sans-serif;font-size:12px;color:#888;
+  }
+  .order-tracking a{color:#B8FF57;text-decoration:none}
+  .order-tracking a:hover{text-decoration:underline}
+  .order-cancel-btn{
+    margin-top:12px;padding:7px 14px;
+    background:transparent;border:1px solid #2a2a2a;color:#666;
+    font-family:'DM Sans',sans-serif;font-size:12px;
+    border-radius:4px;cursor:pointer;
+    transition:border-color .15s,color .15s;display:block;
+  }
+  .order-cancel-btn:hover{border-color:#ef4444;color:#ef4444}
+  .order-cancel-btn:disabled{opacity:.45;cursor:not-allowed}
+  .orders-empty{text-align:center;padding:40px 20px}
+  .orders-empty h4{
+    font-family:'Barlow Condensed',sans-serif;font-weight:900;
+    font-size:22px;text-transform:uppercase;color:#fff;margin-bottom:10px;
+  }
+  .orders-empty p{font-family:'DM Sans',sans-serif;color:#888;font-size:14px}
+  .orders-empty a{color:#B8FF57;text-decoration:none}
+  .orders-empty a:hover{text-decoration:underline}
+
+  /* Orders skeleton */
+  .orders-skel-card{
+    border:1px solid #1F1F1F;border-radius:8px;
+    padding:16px;background:#0D0D0D;
+    display:flex;flex-direction:column;gap:10px;margin-bottom:14px;
+  }
+  .orders-skel-line{
+    background:#1a1a1a;border-radius:4px;position:relative;overflow:hidden;
+  }
+  .orders-skel-line::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(90deg,transparent,rgba(184,255,87,.06),transparent);
+    animation:hs-shimmer 1.5s linear infinite;
+  }
 </style>
 </head>
 <body>
@@ -3659,6 +3821,7 @@
     <a href="#reviews"     class="menu-item" data-num="04" style="--i:3" onclick="closeNav()">Reviews<span class="mi-arrow" aria-hidden="true">→</span></a>
     <a href="#faq"         class="menu-item" data-num="05" style="--i:4" onclick="closeNav()">FAQ<span class="mi-arrow" aria-hidden="true">→</span></a>
     <a href="/blog"        class="menu-item" data-num="06" style="--i:5" onclick="closeNav()">Blogs<span class="mi-arrow" aria-hidden="true">→</span></a>
+    <a href="#account"     class="menu-item" data-num="07" style="--i:6" id="navAccountItem" onclick="event.preventDefault();closeNav();openAccountOverlay()">My Orders<span class="mi-arrow" aria-hidden="true">→</span></a>
   </div>
   <div class="menu-utility" aria-label="Social links">
     <a href="https://instagram.com/smell0ff" target="_blank" rel="noopener" aria-label="Instagram @smell0ff">
@@ -4543,6 +4706,109 @@
   </main>
 </div>
 
+<!-- ============================= -->
+<!-- AUTH OVERLAY                  -->
+<!-- ============================= -->
+<div class="overlay" id="authOverlay" role="dialog" aria-modal="true" aria-label="Account" onclick="if(event.target===this)closeAuthOverlay()">
+  <div class="overlay-panel">
+    <button class="overlay-close" onclick="closeAuthOverlay()" aria-label="Close">×</button>
+    <div class="overlay-tag">Account</div>
+
+    <div class="auth-tabs" role="tablist">
+      <button class="auth-tab active" data-tab="login" role="tab" aria-selected="true" onclick="switchAuthTab('login')">Log In</button>
+      <button class="auth-tab" data-tab="signup" role="tab" aria-selected="false" onclick="switchAuthTab('signup')">Sign Up</button>
+    </div>
+
+    <!-- Log in form -->
+    <div id="authLoginForm">
+      <label for="loginEmail">Email</label>
+      <input type="email" id="loginEmail" autocomplete="email" placeholder="you@example.com" inputmode="email" enterkeyhint="next">
+      <label for="loginPassword" style="margin-top:10px">Password</label>
+      <input type="password" id="loginPassword" autocomplete="current-password" placeholder="••••••••" enterkeyhint="go" onkeydown="if(event.key==='Enter')handleLogin()">
+      <p style="margin:8px 0 14px;text-align:right">
+        <button class="auth-link" onclick="showForgotForm()">Forgot password?</button>
+      </p>
+      <button class="submit-btn" id="loginBtn" onclick="handleLogin()">Log In</button>
+    </div>
+
+    <!-- Sign up form -->
+    <div id="authSignupForm" style="display:none">
+      <label for="signupEmail">Email</label>
+      <input type="email" id="signupEmail" autocomplete="email" placeholder="you@example.com" inputmode="email" enterkeyhint="next">
+      <label for="signupPassword" style="margin-top:10px">Password <span class="lbl-optional">(min 8 characters)</span></label>
+      <input type="password" id="signupPassword" autocomplete="new-password" placeholder="At least 8 characters" enterkeyhint="go" onkeydown="if(event.key==='Enter')handleSignup()">
+      <button class="submit-btn" id="signupBtn" onclick="handleSignup()" style="margin-top:16px">Create Account</button>
+    </div>
+
+    <!-- Forgot password form -->
+    <div id="authForgotForm" style="display:none">
+      <p style="font-family:'DM Sans',sans-serif;font-size:14px;color:#888;margin-bottom:16px">Enter your email and we'll send a password reset link.</p>
+      <label for="forgotEmail">Email</label>
+      <input type="email" id="forgotEmail" autocomplete="email" placeholder="you@example.com" inputmode="email" enterkeyhint="go" onkeydown="if(event.key==='Enter')handleForgotPassword()">
+      <button class="submit-btn" id="forgotBtn" onclick="handleForgotPassword()" style="margin-top:14px">Send Reset Link</button>
+      <p style="margin-top:14px;text-align:center">
+        <button class="auth-link" onclick="switchAuthTab('login')">← Back to log in</button>
+      </p>
+    </div>
+
+    <!-- Set new password (recovery callback flow) -->
+    <div id="authNewPasswordForm" style="display:none">
+      <div class="overlay-tag" style="margin-bottom:16px">Set new password</div>
+      <label for="newPassword">New password <span class="lbl-optional">(min 8 characters)</span></label>
+      <input type="password" id="newPassword" autocomplete="new-password" placeholder="At least 8 characters" enterkeyhint="next">
+      <label for="confirmNewPassword" style="margin-top:10px">Confirm password</label>
+      <input type="password" id="confirmNewPassword" autocomplete="new-password" placeholder="Repeat password" enterkeyhint="go" onkeydown="if(event.key==='Enter')handleSetNewPassword()">
+      <button class="submit-btn" id="setPasswordBtn" onclick="handleSetNewPassword()" style="margin-top:16px">Set New Password</button>
+    </div>
+
+    <div id="authError" class="error-msg" style="display:none" role="alert"></div>
+    <div id="authSuccess" class="auth-success" style="display:none" role="status"></div>
+  </div>
+</div>
+
+<!-- ============================= -->
+<!-- MY ORDERS OVERLAY             -->
+<!-- ============================= -->
+<div class="overlay" id="ordersOverlay" role="dialog" aria-modal="true" aria-label="My Orders" onclick="if(event.target===this)closeOrdersOverlay()">
+  <div class="overlay-panel">
+    <button class="overlay-close" onclick="closeOrdersOverlay()" aria-label="Close">×</button>
+    <div class="overlay-tag">Account</div>
+    <h3>My Orders</h3>
+
+    <div class="auth-user-bar">
+      <span class="auth-user-email" id="ordersUserEmail"></span>
+      <button class="auth-signout-btn" onclick="handleSignOut()">Log out</button>
+    </div>
+
+    <!-- Loading skeleton -->
+    <div id="ordersSkeleton">
+      <div class="orders-skel-card">
+        <div class="orders-skel-line" style="height:11px;width:38%"></div>
+        <div class="orders-skel-line" style="height:15px;width:65%"></div>
+        <div class="orders-skel-line" style="height:28px;width:100%"></div>
+      </div>
+      <div class="orders-skel-card">
+        <div class="orders-skel-line" style="height:11px;width:38%"></div>
+        <div class="orders-skel-line" style="height:15px;width:65%"></div>
+        <div class="orders-skel-line" style="height:28px;width:100%"></div>
+      </div>
+    </div>
+
+    <!-- Injected by JS -->
+    <div class="orders-list" id="ordersList"></div>
+
+    <!-- Empty state -->
+    <div id="ordersEmpty" class="orders-empty" style="display:none">
+      <h4>No orders yet</h4>
+      <p>Your orders appear here after checkout.<br>
+        <a href="#buy" onclick="closeOrdersOverlay()">Shop ODORSTRIKE →</a>
+      </p>
+    </div>
+
+    <div id="ordersError" class="error-msg" style="display:none;margin-top:12px" role="alert"></div>
+  </div>
+</div>
+
 <!-- (Firebase removed — checkout is guest-only, reviews are unlocked by purchase flag) -->
 
 <!-- ============================= -->
@@ -4901,6 +5167,15 @@
     if (payMethod === 'cod') {
       const order = collectOrder(orderId, 'COD');
       logOrderToSheets(order);
+      if (typeof window.createSupabaseOrder === 'function') {
+        window.createSupabaseOrder({
+          email: order.email, phone: order.phone,
+          items: [{ name: 'ODORSTRIKE Fabric Mist', variant: order.variant, label: order.variantLabel, quantity: order.units, price: order.amount }],
+          amountRupees: order.total, paymentMethod: 'cod',
+          address: { name: order.name, line: order.address, city: order.city, state: order.state, pincode: order.pincode },
+          upiRef: null
+        });
+      }
       if (order.email) {
         SmelloffEmail.send('orderConfirmation', order.email, {
           orderId: order.orderId,
@@ -4921,6 +5196,15 @@
     // UPI — no timer; order persists. User pays whenever.
     const order = collectOrder(orderId, 'UPI_PENDING');
     logOrderToSheets(order);
+    if (typeof window.createSupabaseOrder === 'function') {
+      window.createSupabaseOrder({
+        email: order.email, phone: order.phone,
+        items: [{ name: 'ODORSTRIKE Fabric Mist', variant: order.variant, label: order.variantLabel, quantity: order.units, price: order.amount }],
+        amountRupees: order.total, paymentMethod: 'upi',
+        address: { name: order.name, line: order.address, city: order.city, state: order.state, pincode: order.pincode },
+        upiRef: null // UTR is shared by customer via WhatsApp; matched manually
+      });
+    }
     if (order.email) {
       SmelloffEmail.send('orderConfirmation', order.email, {
         orderId: order.orderId,
@@ -5897,6 +6181,410 @@
     </div>
   </div>
 </div>
+<!-- Supabase JS SDK — loaded at end of body so it doesn't block hero render -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// =============================================
+// ACCOUNT: AUTH + MY ORDERS
+// =============================================
+(function () {
+  'use strict';
+
+  var CFG_S = window.SMELLOFF_CONFIG || {};
+  var SUPA_URL = CFG_S.SUPABASE_URL || '';
+  var SUPA_KEY = CFG_S.SUPABASE_KEY || '';
+
+  if (!SUPA_URL || !SUPA_KEY || typeof window.supabase === 'undefined') {
+    console.warn('[Smelloff] Supabase SDK or config missing — account area disabled');
+    return;
+  }
+
+  var sb = window.supabase.createClient(SUPA_URL, SUPA_KEY);
+  window._smelloffSupabase = sb;
+
+  var _currentUser = null;
+  var _recoveryMode = false;
+
+  // Restore session on load and listen for changes
+  sb.auth.getSession().then(function (r) {
+    _currentUser = r.data && r.data.session ? r.data.session.user : null;
+  });
+
+  sb.auth.onAuthStateChange(function (event, session) {
+    _currentUser = session ? session.user : null;
+    if (event === 'PASSWORD_RECOVERY') {
+      _recoveryMode = true;
+      openAuthOverlay();
+      _showNewPasswordForm();
+    }
+  });
+
+  // ---- Overlay helpers ----
+
+  function _lockScroll()   { document.body.style.overflow = 'hidden'; }
+  function _unlockScroll() { document.body.style.overflow = ''; }
+
+  window.openAccountOverlay = function () {
+    if (_currentUser) { openOrdersOverlay(); } else { openAuthOverlay(); }
+  };
+
+  function openAuthOverlay() {
+    var el = document.getElementById('authOverlay');
+    if (el) el.classList.add('active');
+    _lockScroll();
+    if (_recoveryMode) _showNewPasswordForm();
+  }
+  window.openAuthOverlay = openAuthOverlay;
+
+  window.closeAuthOverlay = function () {
+    var el = document.getElementById('authOverlay');
+    if (el) el.classList.remove('active');
+    _unlockScroll();
+    _recoveryMode = false;
+  };
+
+  function openOrdersOverlay() {
+    var emailEl = document.getElementById('ordersUserEmail');
+    if (emailEl && _currentUser) emailEl.textContent = _currentUser.email || '';
+    var el = document.getElementById('ordersOverlay');
+    if (el) el.classList.add('active');
+    _lockScroll();
+    _loadOrders();
+  }
+  window.openOrdersOverlay = openOrdersOverlay;
+
+  window.closeOrdersOverlay = function () {
+    var el = document.getElementById('ordersOverlay');
+    if (el) el.classList.remove('active');
+    _unlockScroll();
+  };
+
+  // ---- Tab / form switching ----
+
+  window.switchAuthTab = function (tab) {
+    document.querySelectorAll('.auth-tab').forEach(function (el) {
+      var active = el.dataset.tab === tab;
+      el.classList.toggle('active', active);
+      el.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+    _clearAuthMsgs();
+    var showLogin  = tab === 'login';
+    var lf = document.getElementById('authLoginForm');
+    var sf = document.getElementById('authSignupForm');
+    if (lf) lf.style.display = showLogin ? '' : 'none';
+    if (sf) sf.style.display = showLogin ? 'none' : '';
+    var ff = document.getElementById('authForgotForm');
+    if (ff) ff.style.display = 'none';
+    var np = document.getElementById('authNewPasswordForm');
+    if (np) np.style.display = 'none';
+  };
+
+  window.showForgotForm = function () {
+    ['authLoginForm','authSignupForm','authNewPasswordForm'].forEach(function (id) {
+      var el = document.getElementById(id); if (el) el.style.display = 'none';
+    });
+    var ff = document.getElementById('authForgotForm');
+    if (ff) ff.style.display = '';
+    _clearAuthMsgs();
+  };
+
+  function _showNewPasswordForm() {
+    ['authLoginForm','authSignupForm','authForgotForm'].forEach(function (id) {
+      var el = document.getElementById(id); if (el) el.style.display = 'none';
+    });
+    var np = document.getElementById('authNewPasswordForm');
+    if (np) np.style.display = '';
+    _clearAuthMsgs();
+  }
+
+  // ---- Messaging ----
+
+  function _clearAuthMsgs() {
+    var err = document.getElementById('authError');
+    var suc = document.getElementById('authSuccess');
+    if (err) { err.textContent = ''; err.style.display = 'none'; }
+    if (suc) { suc.textContent = ''; suc.style.display = 'none'; }
+  }
+  function _showAuthErr(msg) {
+    var el = document.getElementById('authError');
+    if (el) { el.textContent = msg; el.style.display = 'block'; }
+  }
+  function _showAuthOk(msg) {
+    var err = document.getElementById('authError');
+    if (err) err.style.display = 'none';
+    var el = document.getElementById('authSuccess');
+    if (el) { el.textContent = msg; el.style.display = 'block'; }
+  }
+  function _setBtnLoading(id, on, origText) {
+    var btn = document.getElementById(id);
+    if (!btn) return;
+    btn.disabled = on;
+    if (on) { btn._orig = btn.textContent; btn.innerHTML = '<span class="loader"></span>Please wait…'; }
+    else { btn.textContent = btn._orig || origText || btn.textContent; }
+  }
+
+  // ---- Auth actions ----
+
+  window.handleLogin = async function () {
+    _clearAuthMsgs();
+    var email = (document.getElementById('loginEmail') || {}).value.trim();
+    var pw    = (document.getElementById('loginPassword') || {}).value;
+    if (!email || !pw) { _showAuthErr('Please enter your email and password.'); return; }
+    _setBtnLoading('loginBtn', true);
+    try {
+      var r = await sb.auth.signInWithPassword({ email: email, password: pw });
+      if (r.error) throw r.error;
+      window.closeAuthOverlay();
+      openOrdersOverlay();
+    } catch (e) {
+      _showAuthErr(e.message || 'Login failed. Please try again.');
+    } finally { _setBtnLoading('loginBtn', false, 'Log In'); }
+  };
+
+  window.handleSignup = async function () {
+    _clearAuthMsgs();
+    var email = (document.getElementById('signupEmail') || {}).value.trim();
+    var pw    = (document.getElementById('signupPassword') || {}).value;
+    if (!email) { _showAuthErr('Please enter your email address.'); return; }
+    if (!pw || pw.length < 8) { _showAuthErr('Password must be at least 8 characters.'); return; }
+    _setBtnLoading('signupBtn', true);
+    try {
+      var r = await sb.auth.signUp({ email: email, password: pw });
+      if (r.error) throw r.error;
+      document.getElementById('signupEmail').value = '';
+      document.getElementById('signupPassword').value = '';
+      _showAuthOk('Account created! Check your email to confirm it, then log in.');
+    } catch (e) {
+      _showAuthErr(e.message || 'Sign up failed. Please try again.');
+    } finally { _setBtnLoading('signupBtn', false, 'Create Account'); }
+  };
+
+  window.handleForgotPassword = async function () {
+    _clearAuthMsgs();
+    var email = (document.getElementById('forgotEmail') || {}).value.trim();
+    if (!email) { _showAuthErr('Please enter your email address.'); return; }
+    _setBtnLoading('forgotBtn', true);
+    try {
+      var r = await sb.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin });
+      if (r.error) throw r.error;
+      _showAuthOk('Password reset link sent — check your inbox.');
+    } catch (e) {
+      _showAuthErr(e.message || 'Failed to send reset email.');
+    } finally { _setBtnLoading('forgotBtn', false, 'Send Reset Link'); }
+  };
+
+  window.handleSetNewPassword = async function () {
+    _clearAuthMsgs();
+    var p1 = (document.getElementById('newPassword') || {}).value;
+    var p2 = (document.getElementById('confirmNewPassword') || {}).value;
+    if (!p1 || p1.length < 8) { _showAuthErr('Password must be at least 8 characters.'); return; }
+    if (p1 !== p2) { _showAuthErr('Passwords do not match.'); return; }
+    _setBtnLoading('setPasswordBtn', true);
+    try {
+      var r = await sb.auth.updateUser({ password: p1 });
+      if (r.error) throw r.error;
+      _recoveryMode = false;
+      _showAuthOk('Password updated! Redirecting to your orders…');
+      setTimeout(function () { window.closeAuthOverlay(); openOrdersOverlay(); }, 1400);
+    } catch (e) {
+      _showAuthErr(e.message || 'Failed to update password.');
+    } finally { _setBtnLoading('setPasswordBtn', false, 'Set New Password'); }
+  };
+
+  window.handleSignOut = async function () {
+    try { await sb.auth.signOut(); } catch (e) { /* ignore */ }
+    _currentUser = null;
+    window.closeOrdersOverlay();
+  };
+
+  // ---- Orders helpers ----
+
+  var STATUS_LABEL = {
+    placed: 'Placed', upi_pending: 'Awaiting Payment',
+    confirmed: 'Confirmed', dispatched: 'Dispatched',
+    delivered: 'Delivered', cancelled: 'Cancelled'
+  };
+  var TRACKER_STEPS  = ['placed','confirmed','dispatched','delivered'];
+  var TRACKER_LABELS = ['Placed','Confirmed','Dispatched','Delivered'];
+
+  function _stepIdx(status) {
+    if (status === 'upi_pending') return 0;
+    var i = TRACKER_STEPS.indexOf(status);
+    return i >= 0 ? i : 0;
+  }
+
+  function _buildTracker(status) {
+    var idx = _stepIdx(status);
+    var html = '<div class="order-tracker">';
+    TRACKER_STEPS.forEach(function (s, i) {
+      var isDone    = i < idx;
+      var isCurrent = i === idx;
+      var stepCls  = isDone ? 'step-done' : '';
+      var dotCls   = isDone ? 'done' : (isCurrent ? 'current' : '');
+      var lblCls   = isDone ? 'lbl-done' : (isCurrent ? 'lbl-current' : '');
+      html += '<div class="tracker-step ' + stepCls + '">' +
+        '<div class="tracker-dot ' + dotCls + '"></div>' +
+        '<span class="tracker-label ' + lblCls + '">' + TRACKER_LABELS[i] + '</span>' +
+        '</div>';
+    });
+    return html + '</div>';
+  }
+
+  function _esc(s) {
+    return String(s || '').replace(/[&<>"']/g, function (c) {
+      return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c];
+    });
+  }
+  function _fmtDate(iso) {
+    try { return new Date(iso).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' }); }
+    catch (e) { return iso; }
+  }
+  function _shortId(id) { return id ? ('#' + id.slice(0,8).toUpperCase()) : ''; }
+  function _badgeCls(status) {
+    if (status === 'dispatched') return 'dispatched';
+    if (status === 'delivered')  return 'delivered';
+    if (status === 'cancelled')  return 'cancelled';
+    return 'neutral';
+  }
+
+  function _buildCard(o) {
+    var isCancelled = o.status === 'cancelled';
+    var canCancel   = ['placed','upi_pending','confirmed'].indexOf(o.status) >= 0;
+    var rupees      = Math.round((o.amount || 0) / 100);
+
+    var itemText = 'ODORSTRIKE';
+    if (Array.isArray(o.items) && o.items.length) {
+      itemText = o.items.map(function (it) { return _esc(it.label || it.name || 'ODORSTRIKE'); }).join(', ');
+    }
+
+    var trackerHtml = isCancelled
+      ? '<div class="order-cancelled-strip">Order cancelled</div>'
+      : _buildTracker(o.status);
+
+    var trackingHtml = '';
+    if (o.tracking_id) {
+      trackingHtml = '<div class="order-tracking">' +
+        _esc(o.courier || 'Courier') + ' &middot; ' + _esc(o.tracking_id);
+      if (o.tracking_url) {
+        trackingHtml += ' &middot; <a href="' + _esc(o.tracking_url) + '" target="_blank" rel="noopener">Track shipment →</a>';
+      }
+      trackingHtml += '</div>';
+    }
+
+    var cancelHtml = canCancel
+      ? '<button class="order-cancel-btn" id="ccbtn-' + _esc(o.id) + '" onclick="requestCancelOrder(\'' + _esc(o.id) + '\')">Cancel order</button>'
+      : '';
+
+    return '<div class="order-card" id="oc-' + _esc(o.id) + '">' +
+      '<div class="order-card-head">' +
+        '<div>' +
+          '<div class="order-id-short">' + _shortId(o.id) + '</div>' +
+          '<div class="order-date">'     + _esc(_fmtDate(o.created_at)) + '</div>' +
+        '</div>' +
+        '<span class="order-status-badge ' + _badgeCls(o.status) + '">' + _esc(STATUS_LABEL[o.status] || o.status) + '</span>' +
+      '</div>' +
+      '<div class="order-items">' + itemText + '</div>' +
+      '<div class="order-amount">₹' + rupees + '</div>' +
+      trackerHtml + trackingHtml + cancelHtml +
+    '</div>';
+  }
+
+  function _showSkeleton() {
+    var sk = document.getElementById('ordersSkeleton');
+    if (sk) sk.style.display = '';
+    var li = document.getElementById('ordersList');
+    if (li) li.innerHTML = '';
+    var em = document.getElementById('ordersEmpty');
+    if (em) em.style.display = 'none';
+    var er = document.getElementById('ordersError');
+    if (er) er.style.display = 'none';
+  }
+  function _hideSkeleton() {
+    var sk = document.getElementById('ordersSkeleton');
+    if (sk) sk.style.display = 'none';
+  }
+
+  async function _loadOrders() {
+    if (!_currentUser) return;
+    _showSkeleton();
+    try {
+      var res = await sb.from('orders').select('*').order('created_at', { ascending: false });
+      _hideSkeleton();
+      if (res.error) throw res.error;
+      var orders = res.data || [];
+      if (orders.length === 0) {
+        var em = document.getElementById('ordersEmpty');
+        if (em) em.style.display = '';
+        return;
+      }
+      var li = document.getElementById('ordersList');
+      if (li) li.innerHTML = orders.map(_buildCard).join('');
+    } catch (e) {
+      _hideSkeleton();
+      var er = document.getElementById('ordersError');
+      if (er) { er.textContent = 'Could not load orders: ' + (e.message || 'unknown error'); er.style.display = 'block'; }
+    }
+  }
+
+  window.requestCancelOrder = async function (orderId) {
+    if (!_currentUser) return;
+    if (!confirm('Cancel this order? This cannot be undone.')) return;
+    var btn = document.getElementById('ccbtn-' + orderId);
+    if (btn) { btn.disabled = true; btn.textContent = 'Cancelling…'; }
+    var er = document.getElementById('ordersError');
+    if (er) er.style.display = 'none';
+    try {
+      var sess = await sb.auth.getSession();
+      var token = sess.data && sess.data.session && sess.data.session.access_token;
+      var resp = await fetch(SUPA_URL + '/functions/v1/cancel-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+        body: JSON.stringify({ order_id: orderId })
+      });
+      var result = await resp.json();
+      if (!resp.ok) throw new Error(result.error || 'Failed to cancel order');
+      await _loadOrders();
+    } catch (e) {
+      if (btn) { btn.disabled = false; btn.textContent = 'Cancel order'; }
+      if (er) { er.textContent = e.message || 'Failed to cancel. Please try again.'; er.style.display = 'block'; }
+    }
+  };
+
+  // ---- Called from checkout to mirror order into Supabase ----
+
+  window.createSupabaseOrder = function (opts) {
+    // opts: { email, phone, items, amountRupees, paymentMethod, address, upiRef }
+    if (!opts.email) return; // guest checkout without email — skip
+    fetch(SUPA_URL + '/functions/v1/create-order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email:          opts.email,
+        phone:          opts.phone,
+        items:          opts.items,
+        amount:         Math.round(opts.amountRupees * 100), // rupees → paise
+        payment_method: opts.paymentMethod,
+        address:        opts.address,
+        upi_ref:        opts.upiRef || null
+      }),
+      keepalive: true
+    }).catch(function (e) {
+      console.warn('[Smelloff] Supabase order mirror failed:', e);
+    });
+  };
+
+  // Escape closes overlays
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    var ao = document.getElementById('authOverlay');
+    if (ao && ao.classList.contains('active')) { window.closeAuthOverlay(); return; }
+    var oo = document.getElementById('ordersOverlay');
+    if (oo && oo.classList.contains('active')) { window.closeOrdersOverlay(); }
+  });
+
+})();
+</script>
+
 <script>
 (function(){
   var KEY='smelloff_consent_v1';
