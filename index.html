@@ -218,7 +218,7 @@
     PRICES: { solo: 229, duo: 399, trio: 549 },
     MRP:    { solo: 579, duo: 999, trio: 1399 },
     SUPABASE_URL: 'https://tnuqjydmoxczdjnsgpci.supabase.co',
-    SUPABASE_KEY: 'sb_publishable_A2utDcKfxoVhJbbIPcr38Q_e2fmhq_f'
+    SUPABASE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRudXFqeWRtb3hjemRqbnNncGNpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc1MzI2NDgsImV4cCI6MjA5MzEwODY0OH0.6qyyo-1lpntK7FC3H9j_oqWp0W_R1XydVG_IxVUd6F4'
   };
 </script>
 
@@ -3668,6 +3668,12 @@
     transition:border-color .15s,color .15s;flex-shrink:0;
   }
   .auth-signout-btn:hover{border-color:#B8FF57;color:#B8FF57}
+  .co-auth-bar{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-radius:6px;margin:6px 0 14px;font-family:'DM Sans',sans-serif;font-size:13px;width:100%;box-sizing:border-box}
+  button.co-auth-bar{background:transparent;border:1px solid #333;color:#888;cursor:pointer;text-align:left}
+  button.co-auth-bar:hover{border-color:#B8FF57;color:#B8FF57}
+  .co-auth-loggedin{background:rgba(184,255,87,.08);border:1px solid rgba(184,255,87,.25)}
+  .co-auth-email{color:#B8FF57;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:72%}
+  .co-auth-tick{color:#888;font-size:12px;white-space:nowrap}
 
   /* ============================= */
   /* ACCOUNT: MY ORDERS            */
@@ -4545,6 +4551,7 @@
 
       <label for="f_email">Email <span class="lbl-optional">(optional — for receipt)</span></label>
       <input type="email" id="f_email" autocomplete="email" inputmode="email" enterkeyhint="done">
+      <div id="checkoutAuthBridge"></div>
 
       <label id="paymentMethodLabel">Payment method</label>
       <div class="pay-toggle" role="radiogroup" aria-labelledby="paymentMethodLabel">
@@ -4882,6 +4889,7 @@
       if (first) first.focus();
       trapFocusInOverlay();
     }, 100);
+    if (typeof window._refreshCheckoutBridge === 'function') window._refreshCheckoutBridge();
     trackInitCheckout();
   }
 
@@ -6198,6 +6206,9 @@
   var sb = null;
   var _currentUser = null;
   var _recoveryMode = false;
+  var _pendingCheckoutReturn = false;
+
+  window._smelloffGetUser = function () { return _currentUser; };
 
   // ---- Scroll helpers ----
   function _lockScroll()   { document.body.style.overflow = 'hidden'; }
@@ -6220,9 +6231,45 @@
   window.closeAuthOverlay = function () {
     var el = document.getElementById('authOverlay');
     if (el) el.classList.remove('active');
-    _unlockScroll();
     _recoveryMode = false;
+    _pendingCheckoutReturn = false;
+    // Keep scroll locked if checkout is still open
+    var co = document.getElementById('checkoutOverlay');
+    if (co && co.classList.contains('active')) return;
+    _unlockScroll();
   };
+
+  // Opens auth overlay from checkout; on success returns user to checkout
+  window.openAuthForCheckout = function () {
+    if (_currentUser) {
+      _fillCheckoutEmail(_currentUser.email);
+      _refreshCheckoutBridge();
+      return;
+    }
+    _pendingCheckoutReturn = true;
+    // Keep checkout overlay open beneath auth overlay
+    _openAuthOverlay();
+  };
+
+  function _fillCheckoutEmail(email) {
+    var ef = document.getElementById('f_email');
+    if (ef) ef.value = email || '';
+  }
+
+  function _refreshCheckoutBridge() {
+    var bridge = document.getElementById('checkoutAuthBridge');
+    if (!bridge) return;
+    if (_currentUser) {
+      bridge.innerHTML = '<div class="co-auth-bar co-auth-loggedin">' +
+        '<span class="co-auth-email">' + _esc(_currentUser.email || '') + '</span>' +
+        '<span class="co-auth-tick">✓ Logged in</span></div>';
+      _fillCheckoutEmail(_currentUser.email);
+    } else {
+      bridge.innerHTML = '<button type="button" class="co-auth-bar" onclick="openAuthForCheckout()">' +
+        'Log in to track your order →</button>';
+    }
+  }
+  window._refreshCheckoutBridge = _refreshCheckoutBridge;
 
   function _openOrdersOverlay() {
     var emailEl = document.getElementById('ordersUserEmail');
@@ -6337,9 +6384,22 @@
     try {
       var r = await sb.auth.signInWithPassword({ email: email, password: pw });
       if (r.error) throw r.error;
-      _currentUser = r.data.user; // set before opening overlay so orders load immediately
-      window.closeAuthOverlay();
-      _openOrdersOverlay();
+      _currentUser = r.data.user;
+      if (_pendingCheckoutReturn) {
+        _pendingCheckoutReturn = false;
+        var el = document.getElementById('authOverlay');
+        if (el) el.classList.remove('active');
+        _unlockScroll();
+        _recoveryMode = false;
+        _fillCheckoutEmail(_currentUser.email);
+        _refreshCheckoutBridge();
+        // Re-show checkout overlay (it was still in DOM, just behind auth)
+        var co = document.getElementById('checkoutOverlay');
+        if (co) { co.classList.add('active'); document.body.style.overflow = 'hidden'; }
+      } else {
+        window.closeAuthOverlay();
+        _openOrdersOverlay();
+      }
     } catch (e) {
       _showAuthErr(e.message || 'Login failed. Please try again.');
     } finally { _setBtnLoading('loginBtn', false, 'Log In'); }
