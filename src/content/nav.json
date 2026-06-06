@@ -1,0 +1,8 @@
+[
+  { "name": "Shop", "path": "shop" },
+  { "name": "How It Works", "path": "how-it-works" },
+  { "name": "Our Science", "path": "science" },
+  { "name": "About Story", "path": "about" },
+  { "name": "Blog & Mag", "path": "blog" },
+  { "name": "Contact Support", "path": "contact" }
+]

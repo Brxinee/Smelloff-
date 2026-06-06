@@ -1,0 +1,38 @@
+[
+  {
+    "id": "rev-1",
+    "name": "Satish Kumar",
+    "location": "Ameerpet, Hyderabad",
+    "age": 24,
+    "situation": "Ameerpet Metro Commute",
+    "rating": 5,
+    "heading": "Perfume hybrid odors are finally gone!",
+    "content": "I take the LB Nagar rush hour metro line daily. Changing lines at Ameerpet means I'm soaking in sweat. Standard colognes mix with sweat to create a heavy sweet chemical musk. But 3 sprays of ODORSTRIKE caved the scent instantly. Dries completely flat and clear.",
+    "date": "May 2026",
+    "helpfulCount": 24
+  },
+  {
+    "id": "rev-2",
+    "name": "Varun Nair",
+    "location": "Koramangala, Bengaluru",
+    "age": 21,
+    "situation": "Hostel / College Sports",
+    "rating": 5,
+    "heading": "Saves my repeat-wear garments",
+    "content": "Laundry in a hostel feels like an impossible chore. I have sports polyester shirts that look completely clean but carry stale locker smells. A quick mist of Smelloff's formula traps the odour particles from textile fibers instantly. Genuinely brilliant stuff.",
+    "date": "Jun 2026",
+    "helpfulCount": 18
+  },
+  {
+    "id": "rev-3",
+    "name": "Prashanth Reddy",
+    "location": "Jubilee Hills, Hyderabad",
+    "age": 29,
+    "situation": "Motorbike Road Commuter",
+    "rating": 5,
+    "heading": "Essential for 38°C city smog and soot",
+    "content": "Riding my Pulsar bike through dense Secunderabad traffic means soot, engine oil, and sweat bake into my heavy riding jacket. 4 quick sprays of Odorstrike cages the pungent sweat odorants. Dries in under 10 seconds leaving a fresh, clean neutral background.",
+    "date": "May 2026",
+    "helpfulCount": 42
+  }
+]

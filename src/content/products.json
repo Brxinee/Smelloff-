@@ -1,0 +1,72 @@
+[
+  {
+    "id": "pack-1",
+    "handle": "solo",
+    "name": "ODORSTRIKE Solo Guard — 50ml",
+    "quantity": 1,
+    "price": 229,
+    "originalPrice": 229,
+    "savings": 0,
+    "badge": null,
+    "description": "Single 50ml pocket card spray. Yields over 320 precision-targeted microfine active sprays. Perfect trial unit.",
+    "sizeMl": 50,
+    "isWedge": false,
+    "isScaffold": false
+  },
+  {
+    "id": "pack-2",
+    "handle": "twin",
+    "name": "ODORSTRIKE Twin Pack — 2x 50ml",
+    "quantity": 2,
+    "price": 399,
+    "originalPrice": 458,
+    "savings": 59,
+    "badge": "🔥 MOST POPULAR",
+    "description": "Two 50ml pocket cards. One for your work desk, one for your bike kit or gym bag. Qualifies for Free Delivery.",
+    "sizeMl": 50,
+    "isWedge": false,
+    "isScaffold": false
+  },
+  {
+    "id": "pack-3",
+    "handle": "triple",
+    "name": "ODORSTRIKE Tri-Premium Bundle — 3x 50ml",
+    "quantity": 3,
+    "price": 549,
+    "originalPrice": 687,
+    "savings": 138,
+    "badge": "⚡ BEST VALUE",
+    "description": "Three pocket cards plus a complimentary waterproof canvas zippered sleeve. Complete scent security for long travel.",
+    "sizeMl": 50,
+    "isWedge": false,
+    "isScaffold": false
+  },
+  {
+    "id": "pack-trial",
+    "handle": "trial-wedge",
+    "name": "First-Time Buyer Trial — 50ml",
+    "quantity": 1,
+    "price": 179,
+    "originalPrice": 229,
+    "savings": 50,
+    "badge": "🎁 TRIAL OFFER",
+    "description": "Introductory one-off unit to lower the barrier. Limit one per address, only for new customers.",
+    "sizeMl": 50,
+    "isWedge": true,
+    "isScaffold": false
+  },
+  {
+    "id": "pack-100ml",
+    "handle": "pro-upgrade",
+    "name": "ODORSTRIKE Pro Edition — 100ml Cylinder",
+    "quantity": 1,
+    "price": 379,
+    "originalPrice": 449,
+    "savings": 70,
+    "badge": "✨ REPEAT CUSTOMER ONLY",
+    "description": "High-capacity 100ml cylindrical spray with aluminum atomizer. Designed for high-frequency or daily field commuters.",
+    "sizeMl": 100,
+    "isWedge": false,
+    "isScaffold": true
+  }
+]

@@ -1,0 +1,6 @@
+{
+  "name": "Smelloff - ODORSTRIKE Fabric Mist",
+  "description": "Premium e-commerce landing page for Smelloff's ODORSTRIKE Fabric Mist, a 50ml pocket spray engineered to trap and neutralize odors on men's garments.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
